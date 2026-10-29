@@ -1,0 +1,25 @@
+{
+  "name": "@arnaud-zg/skills",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Arnaud Zheng's Claude Code plugin marketplace: Agent Skills, agents, hooks and MCP servers.",
+  "homepage": "https://github.com/arnaud-zg/skills#readme",
+  "bugs": {
+    "url": "https://github.com/arnaud-zg/skills/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/arnaud-zg/skills.git"
+  },
+  "license": "MIT",
+  "author": "Arnaud Zheng <arnaud.zg@gmail.com>",
+  "type": "module",
+  "devDependencies": {
+    "@arnaud-zg/configs": "^0.3.1"
+  },
+  "packageManager": "pnpm@10.10.0",
+  "engines": {
+    "node": ">=22",
+    "pnpm": ">=10.10.0"
+  }
+}
