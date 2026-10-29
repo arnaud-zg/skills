@@ -1,5 +1,39 @@
 # @arnaud-zg/plugin-arnaud-zg
 
+## 0.2.0
+
+### Minor Changes
+
+- ad109f9: The plugin is now `arnaud-zg`, so its skill reads `/arnaud-zg:hexagonal-skill-builder`
+  instead of `/hexagonal-skill-builder:hexagonal-skill-builder`, and later skills from this
+  marketplace join it under the same name. The skill itself is unchanged, and so is
+  `npx skills add`.
+
+  If you installed 0.1.0 in Claude Code, swap the plugin:
+
+  ```sh
+  /plugin uninstall hexagonal-skill-builder@arnaud-zg
+  /plugin install arnaud-zg@arnaud-zg
+  ```
+
+  and in a team's `.claude/settings.json`, replace `"hexagonal-skill-builder@arnaud-zg"` with
+  `"arnaud-zg@arnaud-zg"` under `enabledPlugins`.
+
+### Patch Changes
+
+- ad109f9: The plugin has an icon, and its tests no longer pass the whole environment to the check
+  they run.
+- 2fc882d: The plugin now lives in [arnaud-zg/skills](https://github.com/arnaud-zg/skills). Install
+  it from there:
+
+  ```sh
+  /plugin install arnaud-zg --marketplace arnaud-zg/skills
+  npx skills add arnaud-zg/skills --skill hexagonal-skill-builder
+  ```
+
+  If you added the marketplace from `arnaud-zg/configs`, it keeps working for one more release, then
+  stops: run `/plugin marketplace remove arnaud-zg` and `/plugin marketplace add arnaud-zg/skills`.
+
 ## 0.1.0
 
 ### Minor Changes
