@@ -134,7 +134,7 @@ by hand in the same release.
 ```sh
 claude plugin validate . --strict            # marketplace + every listed plugin
 claude plugin marketplace add ./             # from the repo root
-claude plugin install <plugin>@arnaud-zg
+claude plugin install <plugin>@arnaud-zg-skills
 claude plugin details <plugin>               # inventory + projected token cost
 ```
 
@@ -144,7 +144,7 @@ Undo:
 
 ```sh
 claude plugin uninstall <plugin>
-claude plugin marketplace remove arnaud-zg
+claude plugin marketplace remove arnaud-zg-skills
 ```
 
 ## Draft a skill without packaging it

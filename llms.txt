@@ -1,6 +1,6 @@
 # arnaud-zg/skills
 
-> A Claude Code plugin marketplace named arnaud-zg: Agent Skills, subagents, hooks and MCP servers,
+> A Claude Code plugin marketplace named arnaud-zg-skills: Agent Skills, subagents, hooks and MCP servers,
 > each linted, tested and versioned. Its first plugin, arnaud-zg, ships hexagonal-skill-builder, a
 > linter for Agent Skills (SKILL.md).
 

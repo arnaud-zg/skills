@@ -1,6 +1,6 @@
 {
   "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
-  "name": "arnaud-zg",
+  "name": "arnaud-zg-skills",
   "description": "Arnaud Zheng's Claude Code plugins: skills, agents, hooks and MCP servers for day-to-day development.",
   "owner": {
     "name": "Arnaud Zheng",

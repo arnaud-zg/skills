@@ -118,7 +118,7 @@ A marketplace source can be a local path, so you can test the real install path 
 
 ```sh
 claude plugin marketplace add ./          # run from the repo root
-claude plugin install hello-tools@arnaud-zg
+claude plugin install hello-tools@arnaud-zg-skills
 ```
 
 `arnaud-zg` is the `name` field in `marketplace.json`, not the repository name.
@@ -142,7 +142,7 @@ To undo everything:
 
 ```sh
 claude plugin uninstall hello-tools
-claude plugin marketplace remove arnaud-zg
+claude plugin marketplace remove arnaud-zg-skills
 ```
 
 To publish instead, record a changeset, commit the plugin, and open a pull request:
@@ -158,7 +158,7 @@ Anyone can then run:
 
 ```sh
 /plugin marketplace add arnaud-zg/skills
-/plugin install hello-tools@arnaud-zg
+/plugin install hello-tools@arnaud-zg-skills
 ```
 
 ## Where to go next
