@@ -85,7 +85,7 @@ A marketplace is a git repository with `.claude-plugin/marketplace.json` at its 
 plugins. It is the thing a user adds once:
 
 ```sh
-/plugin marketplace add arnaud-zg/configs
+/plugin marketplace add arnaud-zg/skills
 ```
 
 From then on they can install any plugin it lists; `claude plugin marketplace update` refreshes the

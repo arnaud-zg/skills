@@ -9,7 +9,7 @@
     "url": "https://github.com/arnaud-zg"
   },
   "license": "MIT",
-  "repository": "https://github.com/arnaud-zg/configs",
+  "repository": "https://github.com/arnaud-zg/skills",
   "keywords": ["skills", "agent-skills", "skill-md", "claude-code", "lint", "linter", "authoring"],
   "dependencies": []
 }
