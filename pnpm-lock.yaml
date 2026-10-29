@@ -9,8 +9,8 @@ importers:
   .:
     devDependencies:
       '@arnaud-zg/configs':
-        specifier: ^0.3.1
-        version: 0.3.1(@commitlint/cli@21.2.4(conventional-commits-parser@7.1.3)(typescript@6.0.3))(@commitlint/config-conventional@21.2.4)(@eslint/js@9.39.5)(@ianvs/prettier-plugin-sort-imports@4.7.1(prettier@3.9.10))(eslint-config-prettier@10.1.8(eslint@9.39.5(jiti@2.7.0)))(eslint@9.39.5(jiti@2.7.0))(lefthook@2.2.2)(prettier-plugin-packagejson@3.0.3(prettier@3.9.10))(prettier@3.9.10)(remark-cli@12.0.1)(remark-frontmatter@5.0.0)(remark-gfm@4.0.1)(remark-preset-lint-recommended@7.0.1)(typescript-eslint@8.72.1(eslint@9.39.5(jiti@2.7.0))(typescript@6.0.3))(typescript@6.0.3)
+        specifier: ^0.3.2
+        version: 0.3.2(@commitlint/cli@21.2.4(conventional-commits-parser@7.1.3)(typescript@6.0.3))(@commitlint/config-conventional@21.2.4)(@eslint/js@9.39.5)(@ianvs/prettier-plugin-sort-imports@4.7.1(prettier@3.9.10))(eslint-config-prettier@10.1.8(eslint@9.39.5(jiti@2.7.0)))(eslint@9.39.5(jiti@2.7.0))(lefthook@2.2.2)(prettier-plugin-packagejson@3.0.3(prettier@3.9.10))(prettier@3.9.10)(remark-cli@12.0.1)(remark-frontmatter@5.0.0)(remark-gfm@4.0.1)(remark-preset-lint-recommended@7.0.1)(typescript-eslint@8.72.1(eslint@9.39.5(jiti@2.7.0))(typescript@6.0.3))(typescript@6.0.3)
       '@changesets/cli':
         specifier: ^3.0.3
         version: 3.0.3
@@ -70,8 +70,8 @@ importers:
 
 packages:
 
-  '@arnaud-zg/configs@0.3.1':
-    resolution: {integrity: sha512-796x83+UQw9c0Q+6AD8PoXaaj0J4JPRe+dVBnQpupjHb/fIDttKYAIbifInp/ELaNXGeuJuXUNPWmdhZIl92hA==}
+  '@arnaud-zg/configs@0.3.2':
+    resolution: {integrity: sha512-EB/Qj67FaFqSzRa+FMm38gFVM3YopXvuHelXFsPzqySiMrxuYnLnGt1NS8AHWe/KpxTb+D7ly0FozqTME3uoWw==}
     engines: {node: '>=22', pnpm: '>=10.10.0'}
     peerDependencies:
       '@commitlint/cli': ^21.2.1
@@ -2351,7 +2351,7 @@ packages:
 
 snapshots:
 
-  '@arnaud-zg/configs@0.3.1(@commitlint/cli@21.2.4(conventional-commits-parser@7.1.3)(typescript@6.0.3))(@commitlint/config-conventional@21.2.4)(@eslint/js@9.39.5)(@ianvs/prettier-plugin-sort-imports@4.7.1(prettier@3.9.10))(eslint-config-prettier@10.1.8(eslint@9.39.5(jiti@2.7.0)))(eslint@9.39.5(jiti@2.7.0))(lefthook@2.2.2)(prettier-plugin-packagejson@3.0.3(prettier@3.9.10))(prettier@3.9.10)(remark-cli@12.0.1)(remark-frontmatter@5.0.0)(remark-gfm@4.0.1)(remark-preset-lint-recommended@7.0.1)(typescript-eslint@8.72.1(eslint@9.39.5(jiti@2.7.0))(typescript@6.0.3))(typescript@6.0.3)':
+  '@arnaud-zg/configs@0.3.2(@commitlint/cli@21.2.4(conventional-commits-parser@7.1.3)(typescript@6.0.3))(@commitlint/config-conventional@21.2.4)(@eslint/js@9.39.5)(@ianvs/prettier-plugin-sort-imports@4.7.1(prettier@3.9.10))(eslint-config-prettier@10.1.8(eslint@9.39.5(jiti@2.7.0)))(eslint@9.39.5(jiti@2.7.0))(lefthook@2.2.2)(prettier-plugin-packagejson@3.0.3(prettier@3.9.10))(prettier@3.9.10)(remark-cli@12.0.1)(remark-frontmatter@5.0.0)(remark-gfm@4.0.1)(remark-preset-lint-recommended@7.0.1)(typescript-eslint@8.72.1(eslint@9.39.5(jiti@2.7.0))(typescript@6.0.3))(typescript@6.0.3)':
     optionalDependencies:
       '@commitlint/cli': 21.2.4(conventional-commits-parser@7.1.3)(typescript@6.0.3)
       '@commitlint/config-conventional': 21.2.4
