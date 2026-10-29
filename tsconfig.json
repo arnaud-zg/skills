@@ -1,4 +1,6 @@
 {
+  // eslint.config.mjs is left out until @arnaud-zg/configs ships type declarations for its
+  // subpaths: TypeScript sees @arnaud-zg/configs/eslint as an untyped module and fails strict mode.
   "extends": "@arnaud-zg/configs/tsconfig/base.json",
   "compilerOptions": {
     "types": ["node"]
@@ -9,5 +11,6 @@
     ".remarkrc.mjs",
     "plugins/*/skills/*/scripts/*.mjs",
     "scripts/*.mjs"
-  ]
+  ],
+  "exclude": ["eslint.config.mjs"]
 }
