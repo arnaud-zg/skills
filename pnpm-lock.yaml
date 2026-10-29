@@ -66,6 +66,8 @@ importers:
         specifier: ^3.2.7
         version: 3.2.7(@types/debug@4.1.13)(@types/node@22.20.5)(jiti@2.7.0)(yaml@2.9.1)
 
+  plugins/arnaud-zg: {}
+
 packages:
 
   '@arnaud-zg/configs@0.3.1':

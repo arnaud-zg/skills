@@ -9,7 +9,7 @@ You need the `claude` CLI and a clone of this repository.
 ## 1. Copy the template
 
 ```sh
-cd configs
+cd skills
 cp -R templates/plugin-template plugins/hello-tools
 ```
 
@@ -157,7 +157,7 @@ After it merges, the release flow versions and tags it along with everything els
 Anyone can then run:
 
 ```sh
-/plugin marketplace add arnaud-zg/configs
+/plugin marketplace add arnaud-zg/skills
 /plugin install hello-tools@arnaud-zg
 ```
 
