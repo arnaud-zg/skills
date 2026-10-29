@@ -6,7 +6,7 @@ re-check after a major CLI upgrade.
 ## Repository layout
 
 ```
-configs/
+skills/
 ├── .claude-plugin/
 │   └── marketplace.json          # the catalogue — this file makes the repo a marketplace
 ├── plugins/                      # plugins hosted here (metadata.pluginRoot)
@@ -19,14 +19,14 @@ configs/
 │       ├── hooks/hooks.json
 │       └── .mcp.json
 ├── templates/plugin-template/    # not listed in the catalogue; copy to start
-├── docs/plugins/                 # this documentation
-└── …                             # the @arnaud-zg/configs package itself
+├── docs/                         # this documentation
+├── scripts/                      # pnpm release:version and pnpm release
+└── …                             # tooling, all from @arnaud-zg/configs
 ```
 
-The marketplace shares this repository with the `@arnaud-zg/configs` npm package. The two do not
-overlap: `.claude-plugin/`, `plugins/` and `templates/` are absent from the package's `files` list,
-and `docs/plugins/` is excluded from it, so none of this ships in the npm tarball. The package is
-consumed with `pnpm add`, the marketplace with `git clone` — same repository, different door.
+The repository is the marketplace and nothing else: it is consumed with `git clone`, never from npm.
+Its tooling (Prettier, ESLint, TypeScript, remark, commitlint, Lefthook) comes from the
+[`@arnaud-zg/configs`](https://github.com/arnaud-zg/configs) package.
 
 ## `marketplace.json`
 

@@ -38,8 +38,8 @@ Then set the matching name in `plugins/hello-tools/package.json`:
 { "name": "@arnaud-zg/plugin-hello-tools", "version": "0.1.0", "private": true }
 ```
 
-That file is private and never published. It exists so changesets can version the plugin alongside
-the npm package — see [why](../how-to.md#why-plugins-carry-a-packagejson).
+That file is private and never published. It exists so changesets can version the plugin — see
+[why](./how-to.md#why-plugins-carry-a-packagejson).
 
 ## 3. Write one skill
 
@@ -151,8 +151,8 @@ To publish instead, record a changeset, commit the plugin, and open a pull reque
 pnpm changeset       # pick @arnaud-zg/plugin-hello-tools
 ```
 
-After it merges, the release flow versions and tags it along with everything else — see
-[the release how-to](../how-to.md#release-a-new-version).
+After it merges, the release flow versions and tags it — see
+[the release how-to](./how-to.md#release-a-version).
 
 Anyone can then run:
 

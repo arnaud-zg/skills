@@ -7,7 +7,7 @@ Starting point for a new plugin in this marketplace. It is **not** listed in
 cp -R templates/plugin-template plugins/my-plugin
 ```
 
-Then work through [docs/plugins/tutorial.md](../../docs/plugins/tutorial.md).
+Then work through [docs/tutorial.md](../../docs/tutorial.md).
 
 ## What is here
 
@@ -21,4 +21,4 @@ Then work through [docs/plugins/tutorial.md](../../docs/plugins/tutorial.md).
 | `.mcp.json`                  | MCP    | the plugin ships no MCP servers      |
 
 Every one of these directories is discovered by name. You do not list them in `plugin.json` — see
-[docs/plugins/reference.md](../../docs/plugins/reference.md#component-discovery).
+[docs/reference.md](../../docs/reference.md#component-discovery).

@@ -130,6 +130,18 @@ So composition happens twice, and it is worth being deliberate about which one y
 Prefer the first. A dependency is a constraint you impose on every consumer; splitting into
 independent plugins leaves the choice with them.
 
+## Why the docs follow Diataxis
+
+A reader arrives with one of four needs: to learn, to get a task done, to look something up, or to
+understand. A page that tries to serve two of them serves neither: a tutorial that stops to explain
+loses the learner, a reference full of advice is slow to scan, a how-to that teaches from zero
+wastes the expert's time. [Diataxis](https://diataxis.fr/) names the four needs and gives each its
+own page, so a reader knows where to look and a writer knows where a paragraph belongs.
+
+This repository applies it twice: `docs/` documents the marketplace itself (writing and shipping
+plugins), and each `plugins/<name>/docs/` documents one plugin for the people who use it. Both have
+the same four pages, so moving between them costs nothing.
+
 ## What this is not
 
 - **Not a package manager for code.** Plugins are prompts and configuration. There is no build step,
