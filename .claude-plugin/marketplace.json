@@ -1,0 +1,21 @@
+{
+  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
+  "name": "arnaud-zg",
+  "description": "Arnaud Zheng's Claude Code plugins: skills, agents, hooks and MCP servers for day-to-day development.",
+  "owner": {
+    "name": "Arnaud Zheng",
+    "url": "https://github.com/arnaud-zg"
+  },
+  "metadata": {
+    "pluginRoot": "./plugins"
+  },
+  "plugins": [
+    {
+      "name": "arnaud-zg",
+      "source": "arnaud-zg",
+      "description": "Arnaud Zheng's Agent Skills. hexagonal-skill-builder writes Agent Skills and checks them against four rules a script can hold: named, small, resolves, tested. Every finding comes with its file, line and fix.",
+      "category": "development",
+      "tags": ["skills", "agent-skills", "skill-md", "lint", "authoring"]
+    }
+  ]
+}
