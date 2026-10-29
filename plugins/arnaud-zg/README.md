@@ -20,7 +20,7 @@ script nobody tests was only ever watched.
 | How do I call it?      | Ask Claude to _check the skills_, or type `/arnaud-zg:hexagonal-skill-builder`  |
 | How do I run it in CI? | `node <skill folder>/scripts/check.mjs`, which exits `1` on a finding           |
 | What does it need?     | Node. No dependencies, no network, and it never writes a file                   |
-| Which plugin ships it? | `arnaud-zg`, from the `arnaud-zg` marketplace in `arnaud-zg/skills`             |
+| Which plugin ships it? | `arnaud-zg`, from the `arnaud-zg-skills` marketplace in `arnaud-zg/skills`      |
 | What is the license?   | MIT                                                                             |
 
 ## 📚 Documentation
@@ -51,8 +51,8 @@ flowchart LR
 or in two, pinned to the version you reviewed:
 
 ```sh
-/plugin marketplace add arnaud-zg/skills#arnaud-zg--v0.2.0
-/plugin install arnaud-zg@arnaud-zg
+/plugin marketplace add arnaud-zg/skills#arnaud-zg--v0.2.1
+/plugin install arnaud-zg@arnaud-zg-skills
 ```
 
 **Any agent**, with the [skills CLI](https://github.com/vercel-labs/skills):
@@ -64,7 +64,7 @@ npx skills add arnaud-zg/skills --skill hexagonal-skill-builder
 or pinned, through the release's tag:
 
 ```sh
-npx skills add https://github.com/arnaud-zg/skills/tree/arnaud-zg--v0.2.0 --skill hexagonal-skill-builder
+npx skills add https://github.com/arnaud-zg/skills/tree/arnaud-zg--v0.2.1 --skill hexagonal-skill-builder
 ```
 
 **A whole team**, from the project's `.claude/settings.json`. Everyone who trusts the folder gets
@@ -73,15 +73,15 @@ the marketplace, and the plugin turns on at their next session:
 ```json
 {
   "extraKnownMarketplaces": {
-    "arnaud-zg": {
+    "arnaud-zg-skills": {
       "source": {
         "source": "github",
         "repo": "arnaud-zg/skills",
-        "ref": "arnaud-zg--v0.2.0"
+        "ref": "arnaud-zg--v0.2.1"
       }
     }
   },
-  "enabledPlugins": { "arnaud-zg@arnaud-zg": true }
+  "enabledPlugins": { "arnaud-zg@arnaud-zg-skills": true }
 }
 ```
 
