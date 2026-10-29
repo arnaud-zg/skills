@@ -14,8 +14,16 @@
   "license": "MIT",
   "author": "Arnaud Zheng <arnaud.zg@gmail.com>",
   "type": "module",
+  "scripts": {
+    "format": "prettier --write .",
+    "format:check": "prettier --check ."
+  },
+  "prettier": "@arnaud-zg/configs/prettier",
   "devDependencies": {
-    "@arnaud-zg/configs": "^0.3.1"
+    "@arnaud-zg/configs": "^0.3.1",
+    "@ianvs/prettier-plugin-sort-imports": "^4.7.1",
+    "prettier": "^3.9.10",
+    "prettier-plugin-packagejson": "^3.0.3"
   },
   "packageManager": "pnpm@10.10.0",
   "engines": {
