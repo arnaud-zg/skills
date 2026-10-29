@@ -22,6 +22,8 @@
     "lint:fix": "eslint . --fix",
     "lint:md": "remark . --frail --quiet",
     "prepare": "lefthook install",
+    "release": "node scripts/release.mjs",
+    "release:version": "node scripts/release-version.mjs",
     "test": "vitest run",
     "typecheck": "tsc --noEmit && tsc -p tsconfig.vitest.json --noEmit"
   },

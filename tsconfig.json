@@ -6,5 +6,5 @@
   "compilerOptions": {
     "types": ["node"]
   },
-  "include": ["vitest.config.ts", "plugins/*/skills/*/scripts/*.mjs", "scripts/*.mjs"]
+  "include": ["vitest.config.ts", "plugins/*/skills/*/scripts/*.mjs"]
 }
