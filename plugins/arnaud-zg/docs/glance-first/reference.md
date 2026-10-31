@@ -46,3 +46,9 @@ Every finding prints its field, the problem and the fix.
 | [`SKILL.md`](../../skills/glance-first/SKILL.md)                           | the entry Claude reads                       |
 | [`scripts/brief.mjs`](../../skills/glance-first/scripts/brief.mjs)         | the limits, as pure functions                |
 | [`evals/presents-in-a-minute`](../../evals/presents-in-a-minute/prompt.md) | fires, runs the check, leads with the answer |
+
+## Example
+
+[`examples/glance-first/brief.json`](../../examples/glance-first/brief.json): a brief the check
+prints `BRIEF OK` for. [`examples.integration.test.ts`](../../examples/examples.integration.test.ts)
+runs it.

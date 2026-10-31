@@ -28,8 +28,8 @@ ${CONFIG}, beside package.json:
   { "ban": ["—"], "docs": ["docs", { "folder": "packages/cli/docs", "index": "../README.md" }],
     "examples": "examples" }
 
-"examples" turns on the examples rule: the folder, from the project root, that holds example
-files. A test runs an example when a test file names its path from that folder.
+"examples" is the folder, from the project root, that holds example files: examples/ when left
+out. A test runs an example when a test file names its path from that folder.
 
 Exit 0 when the docs hold, 1 on a finding, 2 when there is nothing to check.`;
 
@@ -198,7 +198,7 @@ function exampleOptions(
   return {
     isExample: (/** @type {string} */ path) => {
       const inside = fromRoot(path);
-      return inside !== "" && !inside.startsWith("..");
+      return inside !== "" && !inside.startsWith("..") && !TEST_FILE.test(inside);
     },
     isTested: (/** @type {string} */ path) => {
       tests ??= testTexts(cwd);
@@ -270,7 +270,7 @@ const sets =
     : (config?.sets ?? [{ folder: "docs", index: "README.md" }]);
 const ban = [...new Set([...(config?.ban ?? []), ...args.ban])];
 
-const results = sets.map((set) => check(cwd, set, ban, config?.examples ?? null));
+const results = sets.map((set) => check(cwd, set, ban, config?.examples ?? "examples"));
 const findings = results.flatMap((result) => result.findings);
 
 if (args.json) {

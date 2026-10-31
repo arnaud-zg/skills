@@ -29,3 +29,8 @@ Source of truth: `{path/to/schema}`.
 | Key     | Type     | Default     | Meaning   |
 | ------- | -------- | ----------- | --------- |
 | `{key}` | `{type}` | `{default}` | {meaning} |
+
+## Example
+
+{a link to the example file}: {what the example shows}. A test runs it, so it breaks when the code
+does.

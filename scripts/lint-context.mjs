@@ -10,7 +10,7 @@ import { join, relative } from "node:path";
 const ROOT = process.cwd();
 const BIN = join(ROOT, "node_modules", ".bin", "context-budget");
 const CONFIG = "context-budget.config.json";
-const SKIP = new Set(["node_modules", "dist", ".git", "templates"]);
+const SKIP = new Set(["node_modules", "dist", ".git", "templates", "examples"]);
 
 function folders(dir, out = []) {
   out.push(dir);

@@ -95,3 +95,9 @@ reached script names is reached too.
 - `scripts/rules.mjs`: the four rules, pure functions (read by: Node)
 - `scripts/shelf.mjs`: finds and reads skills on disk (read by: Node)
 - `docs/`, `README.md`: these pages (read by: people)
+
+## Example
+
+[`examples/hexagonal-skill-builder/release-notes/`](../../examples/hexagonal-skill-builder/release-notes/):
+a skill that holds all four rules.
+[`examples.integration.test.ts`](../../examples/examples.integration.test.ts) runs it.

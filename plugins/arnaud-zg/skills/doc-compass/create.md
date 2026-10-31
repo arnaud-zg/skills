@@ -34,7 +34,7 @@
 11. **Link the set from the project's README**, one emoji and one line per quadrant, so a reader
     finds the docs from the front door.
 12. **Wire the check where it runs.** List the docs folders and banned strings in
-    `doc-compass.json`, with `"examples": "<folder>"` when the code has an API a reader calls, then
+    `doc-compass.json`, with `"examples": "<folder>"` when examples do not live in `examples/`, then
     call the check with no arguments from a commit hook or the project's verify script, not only
     from CI nobody triggers (why: E-07). Run it, and stop at exit 0.
 

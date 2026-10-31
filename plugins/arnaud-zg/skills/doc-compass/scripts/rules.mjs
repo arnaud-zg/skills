@@ -9,7 +9,6 @@
 //   small       every page fits in 300 lines
 //   banned      no page holds a string the project bans (only when some are given)
 //   examples    every reference and how-to page links an example file, and a test runs each one
-//               (only when an examples folder is given)
 //
 // A docs set is a map of each Markdown page's path inside the docs folder to its text. Nothing
 // here reads the disk: `check-docs.mjs` does, and calls `inspectDocs`.

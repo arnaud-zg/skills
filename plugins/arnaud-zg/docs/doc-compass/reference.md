@@ -42,8 +42,8 @@ says what is wrong.
 - `docs`: the docs sets to check, in order, at least one; each a folder, or a
   `{ "folder", "index" }` object
 - `ban`: optional; strings no page may hold outside code, each non-empty
-- `examples`: optional; the folder, from the project root, that holds example files. Turns on the
-  `examples` rule
+- `examples`: optional; the folder, from the project root, that holds example files, `examples` when
+  left out
 
 ## Exit codes
 
@@ -82,3 +82,8 @@ Source of truth: [`templates/`](../../skills/doc-compass/templates/README.md). T
 - `adr/README.md`: the list of decision records
 - `adr/ADR-001-record-architecture-decisions.md`: the first record, and the shape of every other
 - `gravestone.md`: the page left at an old path
+
+## Example
+
+[`examples/doc-compass/docs/`](../../examples/doc-compass/docs/): a two-page docs set the check
+passes. [`examples.integration.test.ts`](../../examples/examples.integration.test.ts) runs it.

@@ -54,3 +54,9 @@ gh pr list --state open --limit 200 --json number,headRefName,baseRefName,isDraf
 ```
 
 It prints one branch and exits 0, or a `REFUSE` line and exits 1.
+
+## Example
+
+[`examples/skill-retro/session.jsonl`](../../examples/skill-retro/session.jsonl): a transcript with
+one 45 minute silence, read by `gaps.mjs`.
+[`examples.integration.test.ts`](../../examples/examples.integration.test.ts) runs it.

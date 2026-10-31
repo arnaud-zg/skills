@@ -28,3 +28,8 @@ in the [Reference](reference.md).
 ## Do the second task
 
 {Same shape. No teaching, no history: link to the Explanation for why.}
+
+## Example
+
+{a link to the example file}: {what the example shows}. A test runs it, so it breaks when the code
+does.

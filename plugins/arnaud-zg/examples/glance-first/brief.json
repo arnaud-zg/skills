@@ -1,0 +1,21 @@
+{
+  "title": "Release gate moves",
+  "target": "markdown",
+  "tldr": "The release check now runs before the build ships, so a broken build never reaches users.",
+  "numbers": [{ "value": "1 step", "label": "moved, nothing else" }],
+  "blocks": [
+    {
+      "heading": "The check runs earlier",
+      "line": "One step moved; nothing else in the release changed.",
+      "picture": {
+        "kind": "mermaid",
+        "source": "flowchart LR\n  a[Build] --> b[\"NEW: Check\"] --> c[Ship]"
+      }
+    }
+  ],
+  "sources": {
+    "read": ["the diff"],
+    "notRead": [],
+    "notTested": "The release was not run end to end."
+  }
+}

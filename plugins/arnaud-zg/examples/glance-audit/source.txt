@@ -1,0 +1,4 @@
+# Release gate
+
+The build check makes a breaking change between the two apps impossible, because it compares
+their schemas before merge. Both incidents last quarter would have been stopped.

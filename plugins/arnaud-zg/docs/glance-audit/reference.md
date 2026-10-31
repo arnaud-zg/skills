@@ -52,3 +52,9 @@ the problem and the fix.
 | [`domain/lenses.md`](../../skills/glance-audit/domain/lenses.md)               | 7 lenses, 3 tests, severity, keep |
 | [`domain/result.md`](../../skills/glance-audit/domain/result.md)               | the result's shape and comments   |
 | [`scripts/check-audit.mjs`](../../skills/glance-audit/scripts/check-audit.mjs) | the rules as code, 49 tests       |
+
+## Example
+
+[`examples/glance-audit/audit.json`](../../examples/glance-audit/audit.json): an audit the check
+passes against [its source](../../examples/glance-audit/source.txt).
+[`examples.integration.test.ts`](../../examples/examples.integration.test.ts) runs it.
