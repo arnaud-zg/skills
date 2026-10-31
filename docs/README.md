@@ -24,6 +24,7 @@ need, so you can go straight to the kind of page you want.
 | [`hexagonal-skill-builder`](../plugins/arnaud-zg/docs/hexagonal-skill-builder/README.md) | `arnaud-zg` | Lint and write Agent Skills (`SKILL.md`) against four rules: named, small, resolves, tested   | _create a skill_, _check the skills_, _lint my skills_, edit a `SKILL.md` |
 | [`doc-compass`](../plugins/arnaud-zg/docs/doc-compass/README.md)                         | `arnaud-zg` | Write and check Diataxis docs: orphan pages, broken links, stale decisions                    | _document this feature_, _check the docs_, _where should this doc go_     |
 | [`radical-simplify`](../plugins/arnaud-zg/docs/radical-simplify/README.md)               | `arnaud-zg` | Rebuild a process, product or UI: Question, Remove, Simplify, Reimagine, Accelerate, Automate | _make this radically simpler_, _streamline this flow_, _cut the steps_    |
+| [`glance-first`](../plugins/arnaud-zg/docs/glance-first/README.md)                       | `arnaud-zg` | Present any work in under a minute: the answer, the key numbers, then a diagram per block     | _TLDR_, _write the PR description_, _present this_, _one-minute read_     |
 
 ## Docs for each skill
 

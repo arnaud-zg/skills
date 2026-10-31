@@ -20,8 +20,9 @@ allowed-tools: Bash(node ${CLAUDE_SKILL_DIR}/scripts/check-docs.mjs *)
 | **Doing**   | 🚀 Tutorial: learn     | 🛠️ How-to: get it done |
 | **Knowing** | 💡 Explanation: why    | 📖 Reference: look up  |
 
-A page that serves two needs serves neither (why: E-04). Decisions get their own records, linked
-from the explanation.
+A page that serves two needs serves neither (why: E-04). Every page opens glance-first: the answer
+line, the key numbers, then a picture before the prose, as [create.md](create.md) says. Decisions
+get their own records, linked from the explanation.
 
 ## Pick the verb
 

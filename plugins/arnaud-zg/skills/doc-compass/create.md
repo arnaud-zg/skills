@@ -25,9 +25,13 @@
    design choice also gets a record in `adr/`, linked from there.
 8. **Replace every `{placeholder}`.** A page still holding one is not done. Find them with
    `grep -rn '{[A-Za-z]' docs`.
-9. **Link the set from the project's README**, one emoji and one line per quadrant, so a reader
-   finds the docs from the front door.
-10. **Wire the check where it runs.** List the docs folders and banned strings in
+9. **Open every page glance-first.** Under the title, one line that answers the reader's question,
+   then the page's key numbers (steps, minutes, limits, defaults) when it has any, then a diagram or
+   table before the prose it proves. A reader should know what the page gives them in under one
+   minute. When the `glance-first` skill is installed, write that opening with it.
+10. **Link the set from the project's README**, one emoji and one line per quadrant, so a reader
+    finds the docs from the front door.
+11. **Wire the check where it runs.** List the docs folders and banned strings in
     `doc-compass.json`, then call the check with no arguments from a commit hook or the project's
     verify script, not only from CI nobody triggers (why: E-07). Run it, and stop at exit 0.
 
