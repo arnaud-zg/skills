@@ -76,10 +76,10 @@ describe("given a docs folder with breaks", () => {
     const cwd = projectWith({ "docs/README.md": "# Docs\n", "docs/lost.md": home("Lost") });
     const { status, stdout } = check(cwd, "--json");
     const report = JSON.parse(stdout) as {
-      pages: number;
+      sets: { docs: string; pages: number }[];
       findings: { rule: string; path: string }[];
     };
-    expect(report.pages).toBe(2);
+    expect(report.sets).toEqual([{ docs: "docs", pages: 2 }]);
     expect(report.findings.map(({ rule, path: where }) => [rule, where])).toEqual([
       ["indexed", "docs/lost.md"],
     ]);
@@ -118,6 +118,68 @@ describe("given an index above the docs folder", () => {
   });
 });
 
+describe("given a doc-compass.json", () => {
+  const config = (value: unknown) => JSON.stringify(value);
+
+  test("when the check runs with no folder, then it checks every listed set with the bans", () => {
+    const cwd = projectWith({
+      "doc-compass.json": config({
+        ban: ["—"],
+        docs: ["docs", { folder: "tool/docs", index: "../README.md" }],
+      }),
+      "docs/README.md": "# Docs\n",
+      "README.md": "# Repo\n",
+      "tool/README.md": "# Tool — home\n\n[Guide](docs/guide.md)\n",
+      "tool/docs/guide.md": "# Guide\n\n[Tool](../README.md)\n",
+    });
+    const { status, stdout } = check(cwd);
+    expect(stdout).toContain("✓ 1 page in docs holds.");
+    expect(stdout).toContain("tool/README.md:1  banned");
+    expect(status).toBe(1);
+  });
+
+  test("when a folder is named, then only it is checked, and the config's bans still apply", () => {
+    const cwd = projectWith({
+      "doc-compass.json": config({ ban: ["—"], docs: ["docs", "gone"] }),
+      "docs/README.md": "# Docs — home\n",
+    });
+    const { status, stdout } = check(cwd, "docs");
+    expect(stdout).toContain("docs/README.md:1  banned");
+    expect(status).toBe(1);
+  });
+
+  test.each([
+    [{ docs: ["docs"], bann: [] }, "unknown key bann"],
+    [{ docs: [] }, '"docs" must list at least one folder'],
+    [{ docs: [{ folder: "docs", idx: "x" }] }, 'each "docs" entry is a folder'],
+    [{ docs: ["docs"], ban: [""] }, '"ban" must be a list of non-empty strings'],
+  ])("when it says %j, then it says what is wrong and exits 2", (value, message) => {
+    const cwd = projectWith({ "doc-compass.json": config(value), "docs/README.md": "# Docs\n" });
+    const { status, stderr } = check(cwd);
+    expect(stderr).toContain(message);
+    expect(status).toBe(2);
+  });
+
+  test("when it is not JSON, then it says so and exits 2", () => {
+    const cwd = projectWith({ "doc-compass.json": "{ docs: [", "docs/README.md": "# Docs\n" });
+    const { status, stderr } = check(cwd);
+    expect(stderr).toContain("doc-compass.json is not valid JSON");
+    expect(status).toBe(2);
+  });
+});
+
+describe("given a link whose case differs from the file on disk", () => {
+  test("when the check runs, then it is reported on every system, case-insensitive disks too", () => {
+    const cwd = projectWith({
+      "CONTRIBUTING.md": "# Contributing\n",
+      "docs/README.md": "# Docs\n\n[Contributing](../contributing.md)\n",
+    });
+    const { status, stdout } = check(cwd);
+    expect(stdout).toContain("docs/README.md:3  resolves");
+    expect(status).toBe(1);
+  });
+});
+
 describe("given nothing to check", () => {
   test("when the folder is missing, then it says so and exits 2", () => {
     const { status, stderr } = check(projectWith({ "a.txt": "" }), "nowhere");
@@ -128,6 +190,16 @@ describe("given nothing to check", () => {
   test("when the folder holds no page, then it says so and exits 2", () => {
     const { status, stderr } = check(projectWith({ "docs/a.txt": "" }));
     expect(stderr).toContain("docs holds no Markdown page.");
+    expect(status).toBe(2);
+  });
+
+  test("when --index is given without a folder, then it says so and exits 2", () => {
+    const { status, stderr } = check(
+      projectWith({ "docs/README.md": "# Docs\n" }),
+      "--index",
+      "x.md",
+    );
+    expect(stderr).toContain("--index needs a <folder>.");
     expect(status).toBe(2);
   });
 

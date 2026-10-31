@@ -11,26 +11,46 @@ Everything to look up. For the reasons behind it, see the [Explanation](explanat
 Source of truth: [`scripts/check-docs.mjs`](../../skills/doc-compass/scripts/check-docs.mjs).
 
 ```text
-node scripts/check-docs.mjs [docs folder] [--index <page>] [--ban <text>]... [--json]
+node scripts/check-docs.mjs [<folder> [--index <page>]] [--ban <text>]... [--json]
 ```
 
-| Option           | Default     | Effect                                                               |
-| ---------------- | ----------- | -------------------------------------------------------------------- |
-| `docs folder`    | `docs`      | the folder whose Markdown pages are checked, read recursively        |
-| `--index <page>` | `README.md` | the index, from the docs folder; may sit above it, as `../README.md` |
-| `--ban <text>`   | none        | a string no page may hold outside code; repeat for several           |
-| `--json`         | off         | print `{ docs, pages, findings }` as JSON instead of text            |
-| `-h`, `--help`   |             | print the usage                                                      |
+| Option           | Default                                     | Effect                                                                   |
+| ---------------- | ------------------------------------------- | ------------------------------------------------------------------------ |
+| `<folder>`       | the sets in `doc-compass.json`, else `docs` | one folder to check, read recursively, instead of the config's sets      |
+| `--index <page>` | `README.md`                                 | that folder's index, from inside it; may sit above it, as `../README.md` |
+| `--ban <text>`   | none                                        | a string no page may hold outside code; adds to the config's             |
+| `--json`         | off                                         | print `{ sets: [{ docs, pages }], findings }` instead of text            |
+| `-h`, `--help`   |                                             | print the usage                                                          |
 
-It skips `node_modules`, `.git`, `dist` and `.cache`.
+It skips `node_modules`, `.git`, `dist` and `.cache`. It gives the same report on every machine for
+the same files: pages are read in sorted order, findings are sorted by rule, file and line without
+the locale, and a path only exists when every name in it matches the disk's spelling exactly, even
+on a case-insensitive disk.
+
+## `doc-compass.json`
+
+Read from the folder the check runs in. Any other key, or a value of the wrong type, exits `2` and
+says what is wrong.
+
+```json
+{
+  "ban": ["—"],
+  "docs": ["docs", { "folder": "plugins/arnaud-zg/docs", "index": "../README.md" }]
+}
+```
+
+| Key    | Type                                                | Meaning                                        |
+| ------ | --------------------------------------------------- | ---------------------------------------------- |
+| `docs` | list of folders, or `{ "folder", "index" }` objects | the docs sets to check, in order; at least one |
+| `ban`  | list of non-empty strings, optional                 | strings no page may hold outside code          |
 
 ## Exit codes
 
-| Code | Means                                                               |
-| ---- | ------------------------------------------------------------------- |
-| `0`  | every page holds every rule                                         |
-| `1`  | at least one finding                                                |
-| `2`  | nothing to check: no such folder, no Markdown page, or a bad option |
+| Code | Means                                                                                         |
+| ---- | --------------------------------------------------------------------------------------------- |
+| `0`  | every page holds every rule                                                                   |
+| `1`  | at least one finding                                                                          |
+| `2`  | nothing to check: no such folder, no Markdown page, a bad option, or a bad `doc-compass.json` |
 
 ## Rules
 

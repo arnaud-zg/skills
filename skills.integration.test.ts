@@ -23,20 +23,16 @@ function filesUnder(dir: string): string[] {
 const docsCheck = path.join(root, "plugins/arnaud-zg/skills/doc-compass/scripts/check-docs.mjs");
 
 describe("the docs this marketplace ships", () => {
-  // Held to the rules of its own doc-compass skill, with the house style's ban on em dashes.
-  test.each([["docs"], ["plugins/arnaud-zg/docs", "--index", "../README.md"]])(
-    "%s holds every doc-compass rule",
-    (...args) => {
-      const { status, stdout } = spawnSync(
-        process.execPath,
-        [docsCheck, ...args, "--ban", "—", "--json"],
-        { cwd: root, encoding: "utf8" },
-      );
-      const report = JSON.parse(stdout) as { findings: unknown[] };
-      expect(report.findings).toEqual([]);
-      expect(status).toBe(0);
-    },
-  );
+  test("every set in doc-compass.json holds its own doc-compass rules", () => {
+    const { status, stdout } = spawnSync(process.execPath, [docsCheck, "--json"], {
+      cwd: root,
+      encoding: "utf8",
+    });
+    const report = JSON.parse(stdout) as { sets: unknown[]; findings: unknown[] };
+    expect(report.sets.length).toBeGreaterThan(0);
+    expect(report.findings).toEqual([]);
+    expect(status).toBe(0);
+  });
 });
 
 describe("the skills this marketplace ships", () => {

@@ -310,10 +310,10 @@ export function inspectDocs(docs, options = {}) {
   generated(docs, add, options);
   small(docs, add);
   banned(docs, add, options.banned ?? []);
+  // Plain code-unit order, never the locale's, so every machine prints the same report.
+  const order = (/** @type {string} */ x, /** @type {string} */ y) => (x < y ? -1 : x > y ? 1 : 0);
   return findings.sort(
     (a, b) =>
-      RULES.indexOf(a.rule) - RULES.indexOf(b.rule) ||
-      a.file.localeCompare(b.file) ||
-      a.line - b.line,
+      RULES.indexOf(a.rule) - RULES.indexOf(b.rule) || order(a.file, b.file) || a.line - b.line,
   );
 }

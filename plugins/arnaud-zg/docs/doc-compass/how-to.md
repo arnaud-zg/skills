@@ -15,23 +15,29 @@ in the [Reference](reference.md).
 
 ## Fail a build when the docs break
 
-Copy the skill into the project with the skills CLI, then run the check where it always runs: a
-commit hook, and the verify script CI calls. A check only CI runs by hand never fails.
+Copy the skill into the project with the skills CLI, list the docs in `doc-compass.json` at the
+project root, then run the check with no arguments where it always runs: a commit hook, and the
+verify script CI calls. A check only CI runs by hand never fails.
+
+```json
+{ "ban": ["—"], "docs": ["docs"] }
+```
 
 ```yaml
 # lefthook.yml
 pre-commit:
   commands:
     docs:
-      glob: "docs/**/*.md"
-      run: node .claude/skills/doc-compass/scripts/check-docs.mjs docs
+      glob: "**/*.md"
+      run: node .claude/skills/doc-compass/scripts/check-docs.mjs
 ```
 
 **Check it worked:** break a link in `docs/`, commit, and the hook prints the finding and exits `1`.
 
 ## Ban a house-style string
 
-Pass each string the project's style rules forbid in prose. Code blocks and inline code are skipped.
+List each string the project's style rules forbid in prose under `"ban"` in `doc-compass.json`. Code
+blocks, inline code and comments are skipped. For a one-off run, pass `--ban` instead:
 
 ```sh
 node scripts/check-docs.mjs docs --ban "—" --ban "claude.ai/chat"
@@ -41,7 +47,9 @@ node scripts/check-docs.mjs docs --ban "—" --ban "claude.ai/chat"
 
 ## Check docs whose home is the project README
 
-When the landing page sits above `docs/`, name it as the index. Links then resolve from its folder.
+When the landing page sits above `docs/`, name it as the index:
+`{ "folder": "docs", "index": "../README.md" }` in `doc-compass.json`, or on the command line. Links
+then resolve from its folder.
 
 ```sh
 node scripts/check-docs.mjs docs --index ../README.md

@@ -1,13 +1,14 @@
 # Audit a docs set
 
-1. **Find the docs and their index.** Usually `docs/README.md`. When the docs home is the project's
-   README above the folder, pass it with `--index ../README.md`.
+1. **Find every docs folder and its index.** Usually `docs/README.md`. When a folder's home is a
+   README above it, its index is `../README.md`.
 2. **Find the house style.** Read the project's agent instructions (`CLAUDE.md`, `AGENTS.md`) for
-   anything banned in prose, and pass each with `--ban` (why: E-09).
-3. **Run the check**, and keep its output:
+   anything banned in prose (why: E-09).
+3. **Write both into `doc-compass.json`** at the project root, unless it has one, then run the check
+   with no folder and keep its output:
 
    ```sh
-   node ${CLAUDE_SKILL_DIR}/scripts/check-docs.mjs docs --ban "—"
+   node ${CLAUDE_SKILL_DIR}/scripts/check-docs.mjs
    ```
 
 4. **Report the counts the check printed, per rule**, and the first few findings of each, as
