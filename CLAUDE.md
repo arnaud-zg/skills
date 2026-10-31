@@ -12,11 +12,12 @@ To add or change a plugin or skill, follow [docs/how-to.md](./docs/how-to.md). D
 
 ## Releasing
 
-See [docs/how-to.md#release-a-version](./docs/how-to.md#release-a-version). `main` is protected by a
-Lefthook hook, so the version bump goes through the PR that `pnpm release:version` opens, then
-`pnpm release` tags. Don't bump, commit or tag directly on `main`.
+See [docs/release.md](./docs/release.md). `main` is protected by a Lefthook hook, so the version
+bump goes through the PR that `pnpm release:version` opens, then `pnpm release` tags. Don't bump,
+commit or tag directly on `main`.
 
 ## Before committing
 
-Run `pnpm typecheck && pnpm lint && pnpm lint:md && pnpm format:check && pnpm test` and
-`claude plugin validate . --strict`. All must pass.
+Run
+`pnpm typecheck && pnpm lint && pnpm lint:md && pnpm lint:context && pnpm format:check && pnpm test`
+and `claude plugin validate . --strict`. All must pass.

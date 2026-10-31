@@ -21,6 +21,7 @@ jobs:
       - run: pnpm typecheck
       - run: pnpm lint
       - run: pnpm lint:md
+      - run: pnpm lint:context
       - run: pnpm format:check
       - run: pnpm test
       - run: npx --yes @anthropic-ai/claude-code plugin validate . --strict
