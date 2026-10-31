@@ -176,6 +176,13 @@ from templates and keeps it true, with a check for orphan pages, broken links an
 decisions superseded one way only. Its own four pages start at
 [docs/doc-compass](docs/doc-compass/README.md).
 
+## Also in this plugin: radical-simplify
+
+[`radical-simplify`](docs/radical-simplify/README.md) rebuilds a process, product or UI into its
+simplest, fastest version, in six strict steps: Question, Remove, Simplify, Reimagine, Accelerate,
+Automate. Type `/arnaud-zg:radical-simplify <target>`. Its own four pages start at
+[docs/radical-simplify](docs/radical-simplify/README.md).
+
 ## 🔒 Know what you're installing
 
 - **It reads, and never writes.** The check reads the files under your skills folders and

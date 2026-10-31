@@ -10,6 +10,12 @@ To add or change a plugin or skill, follow [docs/how-to.md](./docs/how-to.md). D
 `~/.claude/skills/<name>/`, evaluate, then move it into `plugins/`. Document each plugin in its own
 `docs/` with the four Diataxis pages ([how](./docs/test-and-document.md#document-a-plugin)).
 
+## Subagents and handoffs
+
+Load the `agent-context-budget` skill before launching any subagent, workflow or background lane,
+and whenever a handoff or result would be more than a short summary. Every brief carries a return
+cap, long output goes to a file returned by path, and mechanical lanes use a cheaper model tier.
+
 ## Releasing
 
 See [docs/release.md](./docs/release.md). `main` is protected by a Lefthook hook, so the version

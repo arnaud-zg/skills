@@ -2,7 +2,8 @@
 
 > A Claude Code plugin marketplace named arnaud-zg-skills: Agent Skills, subagents, hooks and MCP servers,
 > each linted, tested and versioned. Its first plugin, arnaud-zg, ships hexagonal-skill-builder, a
-> linter for Agent Skills (SKILL.md), and doc-compass, which writes and checks Diataxis docs.
+> linter for Agent Skills (SKILL.md), doc-compass, which writes and checks Diataxis docs, and
+> radical-simplify, which rebuilds a process, product or UI into its simplest version.
 
 - [Documentation home](https://github.com/arnaud-zg/skills/blob/main/docs/README.md): skills catalogue, purpose and how each skill works, and a map of every page
 
@@ -42,6 +43,23 @@ and fix for each finding. Node only, no dependencies, no network, read-only. MIT
 - [Reference](https://github.com/arnaud-zg/skills/blob/main/plugins/arnaud-zg/docs/doc-compass/reference.md): command, exit codes, rules, templates
 - [Explanation](https://github.com/arnaud-zg/skills/blob/main/plugins/arnaud-zg/docs/doc-compass/explanation.md): why Diataxis, and why these rules
 - [SKILL.md](https://github.com/arnaud-zg/skills/blob/main/plugins/arnaud-zg/skills/doc-compass/SKILL.md): the instructions the agent follows
+
+## radical-simplify: the simplest, fastest version of a process, product or UI
+
+A first-principles method the agent follows in six strict steps: Question, Remove, Simplify,
+Reimagine, Accelerate, Automate. It ends with a counted before and after, and the first change to
+make. Instructions only, no script, no network. MIT.
+
+- Install in Claude Code: `/plugin install arnaud-zg --marketplace arnaud-zg/skills`
+- Install in any agent: `npx skills add arnaud-zg/skills --skill radical-simplify`
+- Call it: `/arnaud-zg:radical-simplify <target>`, or ask the agent to "make this radically simpler"
+
+- [README](https://github.com/arnaud-zg/skills/blob/main/plugins/arnaud-zg/docs/radical-simplify/README.md): what it is, install, what it reads
+- [Tutorial](https://github.com/arnaud-zg/skills/blob/main/plugins/arnaud-zg/docs/radical-simplify/tutorial.md): a refund flow cut down in one run
+- [How-to guides](https://github.com/arnaud-zg/skills/blob/main/plugins/arnaud-zg/docs/radical-simplify/how-to.md): screens, code, docs, kept constraints
+- [Reference](https://github.com/arnaud-zg/skills/blob/main/plugins/arnaud-zg/docs/radical-simplify/reference.md): call, steps, rules, output
+- [Explanation](https://github.com/arnaud-zg/skills/blob/main/plugins/arnaud-zg/docs/radical-simplify/explanation.md): why removing comes before automating
+- [SKILL.md](https://github.com/arnaud-zg/skills/blob/main/plugins/arnaud-zg/skills/radical-simplify/SKILL.md): the instructions the agent follows
 
 ## Writing a Claude Code plugin in this repository
 
