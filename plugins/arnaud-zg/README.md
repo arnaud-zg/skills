@@ -15,6 +15,7 @@ own four [Diataxis](https://diataxis.fr/) pages. MIT.
 | [🔍 `glance-audit`](docs/glance-audit/README.md)                      | Challenges a doc, plan, PR or status report: one-line verdict, proof, comments ready to paste    | _audit this_, _poke holes_, `/arnaud-zg:glance-audit`                 | Node, never posts          |
 | [🔁 `skill-retro`](docs/skill-retro/README.md)                        | Finds what made a session's skills slow, wrong or costly and books each fix as a draft PR        | _retro_, _improve the skills_, `/arnaud-zg:skill-retro`               | Node, `gh` for the stack   |
 | [⏳ `usage-runway`](docs/usage-runway/README.md)                      | Says how much usage window is left and whether the next job fits: GO or PARK                     | _do we have enough credit_, `/arnaud-zg:usage-runway`                 | Node, read-only            |
+| [🏆 `testing-trophy`](docs/testing-trophy/README.md)                  | Plans, writes and audits tests by the testing trophy: mostly integration, behaviour names        | _audit the tests_, `/arnaud-zg:testing-trophy`                        | Node, read-only            |
 
 The checkers print every finding with its file, line and fix, and exit `1` on a finding, so they
 gate CI and commit hooks as they are.
