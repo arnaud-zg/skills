@@ -14,8 +14,8 @@ const linked = (text: string, pattern: RegExp) =>
   [...text.matchAll(pattern)].map((match) => match[1]).sort();
 
 describe("the skill list in the READMEs", () => {
-  it("given the root README, then its use cases link every skill on disk, and only those", () => {
-    expect(linked(rootReadme, /^- \*\*.+\*\*: use\s+\[`([a-z0-9-]+)`\]/gm)).toEqual(skills);
+  it("given the root README, then its use-case table links every skill on disk, and only those", () => {
+    expect(linked(rootReadme, /^\| .+ \| \[`([a-z0-9-]+)`\]\(/gm)).toEqual(skills);
   });
 
   it("given the plugin README, then its table has one row per skill on disk, and only those", () => {

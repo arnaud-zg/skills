@@ -10,22 +10,16 @@ and MCP servers that install with a version and uninstall cleanly, instead of be
 Eight Agent Skills ship in the `arnaud-zg` plugin. Pick one by what you want to do; what each needs
 and how to call it are in the [plugin's skills table](./plugins/arnaud-zg/README.md#skills).
 
-- **Write or lint an Agent Skill**: use
-  [`hexagonal-skill-builder`](./plugins/arnaud-zg/docs/hexagonal-skill-builder/README.md)
-- **Write, sort or check documentation**: use
-  [`doc-compass`](./plugins/arnaud-zg/docs/doc-compass/README.md)
-- **Plan, write or audit tests**: use
-  [`testing-trophy`](./plugins/arnaud-zg/docs/testing-trophy/README.md)
-- **Make a process, product or UI simpler**: use
-  [`radical-simplify`](./plugins/arnaud-zg/docs/radical-simplify/README.md)
-- **Present work in under a minute (TLDR, PR description)**: use
-  [`glance-first`](./plugins/arnaud-zg/docs/glance-first/README.md)
-- **Challenge a doc, plan or pull request**: use
-  [`glance-audit`](./plugins/arnaud-zg/docs/glance-audit/README.md)
-- **Find what made a session's skills slow or costly**: use
-  [`skill-retro`](./plugins/arnaud-zg/docs/skill-retro/README.md)
-- **Know if the next job fits the usage window**: use
-  [`usage-runway`](./plugins/arnaud-zg/docs/usage-runway/README.md)
+| When you want to…                                     | Use                                                                                     |
+| ----------------------------------------------------- | --------------------------------------------------------------------------------------- |
+| Write or lint an Agent Skill                          | [`hexagonal-skill-builder`](./plugins/arnaud-zg/docs/hexagonal-skill-builder/README.md) |
+| Write, sort or check documentation                    | [`doc-compass`](./plugins/arnaud-zg/docs/doc-compass/README.md)                         |
+| Plan, write or audit tests                            | [`testing-trophy`](./plugins/arnaud-zg/docs/testing-trophy/README.md)                   |
+| Make a process, product or UI simpler                 | [`radical-simplify`](./plugins/arnaud-zg/docs/radical-simplify/README.md)               |
+| Present work in under a minute (TLDR, PR description) | [`glance-first`](./plugins/arnaud-zg/docs/glance-first/README.md)                       |
+| Challenge a doc, plan or pull request                 | [`glance-audit`](./plugins/arnaud-zg/docs/glance-audit/README.md)                       |
+| Find what made a session's skills slow or costly      | [`skill-retro`](./plugins/arnaud-zg/docs/skill-retro/README.md)                         |
+| Know if the next job fits the usage window            | [`usage-runway`](./plugins/arnaud-zg/docs/usage-runway/README.md)                       |
 
 ## Install
 
