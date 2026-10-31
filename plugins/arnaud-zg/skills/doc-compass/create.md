@@ -14,26 +14,29 @@
    cp -R ${CLAUDE_SKILL_DIR}/templates docs && rm -f docs/gravestone.md
    ```
 
-4. **Fill from the code, not from memory.** Every command, flag, field and default in the Reference
+4. **Show real examples.** Each reference and how-to links an example file the project's own tests
+   run, never a pasted snippet. How those tests are written is the project's choice (why: E-12).
+5. **Fill from the code, not from memory.** Every command, flag, field and default in the Reference
    is read from its source, and the table names that source. Every "You should see" in the Tutorial
    is copied from a real run (why: E-08).
-5. **Write the Tutorial first, with one path.** It is the page that proves the product works, and
+6. **Write the Tutorial first, with one path.** It is the page that proves the product works, and
    writing it finds what the other pages must cover.
-6. **Title every how-to as a task** ("Rotate the API key"), and keep the list at the top in the
+7. **Title every how-to as a task** ("Rotate the API key"), and keep the list at the top in the
    order of the sections.
-7. **Every "why" goes in the Explanation**, each heading a principle stated as a sentence. A real
+8. **Every "why" goes in the Explanation**, each heading a principle stated as a sentence. A real
    design choice also gets a record in `adr/`, linked from there.
-8. **Replace every `{placeholder}`.** A page still holding one is not done. Find them with
+9. **Replace every `{placeholder}`.** A page still holding one is not done. Find them with
    `grep -rn '{[A-Za-z]' docs`.
-9. **Open every page glance-first.** Under the title, one line that answers the reader's question,
-   then the page's key numbers (steps, minutes, limits, defaults) when it has any, then a diagram or
-   table before the prose it proves. A reader should know what the page gives them in under one
-   minute. When the `glance-first` skill is installed, write that opening with it.
-10. **Link the set from the project's README**, one emoji and one line per quadrant, so a reader
+10. **Open every page glance-first.** Under the title, one line that answers the reader's question,
+    then the page's key numbers (steps, minutes, limits, defaults) when it has any, then a diagram
+    or table before the prose it proves. A reader should know what the page gives them in under one
+    minute. When the `glance-first` skill is installed, write that opening with it.
+11. **Link the set from the project's README**, one emoji and one line per quadrant, so a reader
     finds the docs from the front door.
-11. **Wire the check where it runs.** List the docs folders and banned strings in
-    `doc-compass.json`, then call the check with no arguments from a commit hook or the project's
-    verify script, not only from CI nobody triggers (why: E-07). Run it, and stop at exit 0.
+12. **Wire the check where it runs.** List the docs folders and banned strings in
+    `doc-compass.json`, with `"examples": "<folder>"` when the code has an API a reader calls, then
+    call the check with no arguments from a commit hook or the project's verify script, not only
+    from CI nobody triggers (why: E-07). Run it, and stop at exit 0.
 
 ## Rebuild a messy set
 

@@ -218,3 +218,42 @@ describe("isGravestone", () => {
     expect(isGravestone("# Screens\n\nIt moved.\n")).toBe(false);
   });
 });
+
+describe("examples", () => {
+  const options = (tested: string[] = []) => ({
+    exists: (target: string) => target.startsWith("../examples/"),
+    isExample: (target: string) => target.startsWith("../examples/"),
+    isTested: (target: string) => tested.includes(target),
+  });
+
+  test("given a reference page with no example file, then it is reported on its first line", () => {
+    const pages = { "README.md": indexOf("reference.md"), "reference.md": page("Reference") };
+    expect(findingsOf(pages, options())).toEqual([
+      { rule: "examples", file: "reference.md", line: 1 },
+    ]);
+  });
+
+  test("given an example file no test runs, then the link is reported on its line", () => {
+    const pages = {
+      "README.md": indexOf("how-to.md"),
+      "how-to.md": page("How-to", "[Basic](../examples/basic.ts)"),
+    };
+    expect(findingsOf(pages, options())).toEqual([
+      { rule: "examples", file: "how-to.md", line: 5 },
+    ]);
+  });
+
+  test("given a tested example on each working page, then nothing is found", () => {
+    const pages = {
+      "README.md": indexOf("reference.md", "tutorial.md"),
+      "reference.md": page("Reference", "[Basic](../examples/basic.ts)"),
+      "tutorial.md": page("Tutorial"),
+    };
+    expect(findingsOf(pages, options(["../examples/basic.ts"]))).toEqual([]);
+  });
+
+  test("given no examples folder, then the rule stays off", () => {
+    const pages = { "README.md": indexOf("reference.md"), "reference.md": page("Reference") };
+    expect(findingsOf(pages)).toEqual([]);
+  });
+});

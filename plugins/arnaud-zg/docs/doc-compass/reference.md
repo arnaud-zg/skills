@@ -42,6 +42,8 @@ says what is wrong.
 - `docs`: the docs sets to check, in order, at least one; each a folder, or a
   `{ "folder", "index" }` object
 - `ban`: optional; strings no page may hold outside code, each non-empty
+- `examples`: optional; the folder, from the project root, that holds example files. Turns on the
+  `examples` rule
 
 ## Exit codes
 
@@ -62,6 +64,7 @@ Source of truth: [`scripts/rules.mjs`](../../skills/doc-compass/scripts/rules.mj
 | `generated`  | a "Generated … from \`source\`" line whose source does not exist, from the current folder           |
 | `small`      | a page over 300 lines                                                                               |
 | `banned`     | each `--ban` string found outside code blocks, inline code and comments                             |
+| `examples`   | a `reference` or `how-to` page linking no example file, or an example no test file names by path    |
 
 Links inside code, HTML comments, URLs with a scheme and absolute paths are never checked. A page
 whose title ends with `(moved)` is a gravestone, exempt from `indexed` and `framed`.

@@ -209,3 +209,28 @@ describe("given nothing to check", () => {
     expect(status).toBe(2);
   });
 });
+
+describe("given an examples folder in doc-compass.json", () => {
+  const docs = {
+    "doc-compass.json": JSON.stringify({ docs: ["docs"], examples: "examples" }),
+    "docs/README.md": "# Docs\n\n[Reference](reference.md)\n",
+    "docs/reference.md": `${home("Reference")}\n[Basic](../examples/basic.ts)\n`,
+    "examples/basic.ts": "export const basic = 1;\n",
+  };
+
+  test("when no test runs the example, then the check names it and exits 1", () => {
+    const { status, stdout } = check(projectWith(docs));
+    expect(stdout).toContain("../examples/basic.ts is not run by any test");
+    expect(status).toBe(1);
+  });
+
+  test("when a test imports the example, then the docs hold", () => {
+    const cwd = projectWith({
+      ...docs,
+      "examples/basic.test.ts": 'import { basic } from "./basic";\n',
+    });
+    const { status, stdout } = check(cwd);
+    expect(stdout).toContain("hold.");
+    expect(status).toBe(0);
+  });
+});

@@ -25,7 +25,11 @@ const USAGE = `Usage: node check-docs.mjs [<folder> [--index <page>]] [--ban <te
 
 ${CONFIG}, beside package.json:
 
-  { "ban": ["—"], "docs": ["docs", { "folder": "packages/cli/docs", "index": "../README.md" }] }
+  { "ban": ["—"], "docs": ["docs", { "folder": "packages/cli/docs", "index": "../README.md" }],
+    "examples": "examples" }
+
+"examples" turns on the examples rule: the folder, from the project root, that holds example
+files. A test runs an example when a test file names its path from that folder.
 
 Exit 0 when the docs hold, 1 on a finding, 2 when there is nothing to check.`;
 
@@ -89,9 +93,18 @@ function readConfig(/** @type {string} */ path) {
   const bad = (/** @type {string} */ why) => stop(`${CONFIG}: ${why}.\n\n${USAGE}`);
   if (typeof config !== "object" || config === null || Array.isArray(config))
     bad("expected an object");
-  const { docs, ban = [], ...rest } = /** @type {Record<string, unknown>} */ (config);
+  const {
+    docs,
+    ban = [],
+    examples = null,
+    ...rest
+  } = /** @type {Record<string, unknown>} */ (config);
   const unknown = Object.keys(rest);
-  if (unknown.length > 0) bad(`unknown key ${unknown.join(", ")}; the keys are "docs" and "ban"`);
+  if (unknown.length > 0)
+    bad(`unknown key ${unknown.join(", ")}; the keys are "docs", "ban" and "examples"`);
+  if (examples !== null && (typeof examples !== "string" || examples === "")) {
+    bad('"examples" must be a folder name');
+  }
   if (!Array.isArray(ban) || !ban.every((word) => typeof word === "string" && word !== "")) {
     bad('"ban" must be a list of non-empty strings');
   }
@@ -110,7 +123,11 @@ function readConfig(/** @type {string} */ path) {
     }
     return { folder, index };
   });
-  return { sets: /** @type {DocsSet[]} */ (sets), ban: /** @type {string[]} */ (ban) };
+  return {
+    sets: /** @type {DocsSet[]} */ (sets),
+    ban: /** @type {string[]} */ (ban),
+    examples: /** @type {string | null} */ (examples),
+  };
 }
 
 // Whether a path exists with exactly this spelling. existsSync alone says yes to README.MD on a
@@ -148,8 +165,51 @@ function pagesUnder(/** @type {string} */ folder, /** @type {string} */ base) {
   return pages;
 }
 
-/** One docs set's pages and findings. @param {string} cwd @param {DocsSet} set @param {string[]} ban */
-function check(cwd, set, ban) {
+const TEST_FILE = /\.(test|spec)\.[cm]?[jt]sx?$/;
+
+/** Every test file's text under the project, read once. @param {string} cwd */
+function testTexts(cwd) {
+  /** @type {string[]} */
+  const texts = [];
+  /** @param {string} dir */
+  const walk = (dir) => {
+    for (const name of readdirSync(dir).sort()) {
+      if (SKIP.has(name)) continue;
+      const full = join(dir, name);
+      if (statSync(full).isDirectory()) walk(full);
+      else if (TEST_FILE.test(name)) texts.push(readFileSync(full, "utf8"));
+    }
+  };
+  walk(cwd);
+  return texts;
+}
+
+/** The example options for one docs set, or none when no examples folder is set. */
+function exampleOptions(
+  /** @type {string} */ cwd,
+  /** @type {string} */ base,
+  /** @type {string | null} */ examples,
+) {
+  if (examples === null) return {};
+  const root = resolve(cwd, examples);
+  /** @type {string[] | null} */
+  let tests = null;
+  const fromRoot = (/** @type {string} */ path) => posixOf(relative(root, join(base, path)));
+  return {
+    isExample: (/** @type {string} */ path) => {
+      const inside = fromRoot(path);
+      return inside !== "" && !inside.startsWith("..");
+    },
+    isTested: (/** @type {string} */ path) => {
+      tests ??= testTexts(cwd);
+      const named = fromRoot(path).replace(/\.[^./]+$/, "");
+      return tests.some((text) => text.includes(named));
+    },
+  };
+}
+
+/** One docs set's pages and findings. @param {string} cwd @param {DocsSet} set @param {string[]} ban @param {string | null} examples */
+function check(cwd, set, ban, examples) {
   const folder = resolve(cwd, set.folder);
   const shown = posixOf(relative(cwd, folder)) || ".";
   if (!existsExactly(folder) || !statSync(folder).isDirectory()) stop(`${shown} is not a folder.`);
@@ -176,6 +236,7 @@ function check(cwd, set, ban) {
       return existsExactly(full) && statSync(full).isFile() ? readFileSync(full, "utf8") : null;
     },
     sourceExists: (source) => existsExactly(resolve(cwd, source)),
+    ...exampleOptions(cwd, base, examples),
   }).map((finding) => ({ ...finding, path: posixOf(join(relative(cwd, base), finding.file)) }));
   return { docs: shown, pages: pages.size, findings };
 }
@@ -209,7 +270,7 @@ const sets =
     : (config?.sets ?? [{ folder: "docs", index: "README.md" }]);
 const ban = [...new Set([...(config?.ban ?? []), ...args.ban])];
 
-const results = sets.map((set) => check(cwd, set, ban));
+const results = sets.map((set) => check(cwd, set, ban, config?.examples ?? null));
 const findings = results.flatMap((result) => result.findings);
 
 if (args.json) {

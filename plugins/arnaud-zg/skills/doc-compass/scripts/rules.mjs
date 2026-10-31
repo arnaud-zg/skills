@@ -8,6 +8,8 @@
 //   generated   a "Generated from `source`" header names a source that exists
 //   small       every page fits in 300 lines
 //   banned      no page holds a string the project bans (only when some are given)
+//   examples    every reference and how-to page links an example file, and a test runs each one
+//               (only when an examples folder is given)
 //
 // A docs set is a map of each Markdown page's path inside the docs folder to its text. Nothing
 // here reads the disk: `check-docs.mjs` does, and calls `inspectDocs`.
@@ -15,7 +17,7 @@
 import { posix } from "node:path";
 
 /** @typedef {Map<string, string>} Docs */
-/** @typedef {"indexed" | "resolves" | "framed" | "superseded" | "generated" | "small" | "banned"} Rule */
+/** @typedef {"indexed" | "resolves" | "framed" | "superseded" | "generated" | "small" | "banned" | "examples"} Rule */
 /**
  * @typedef {object} Finding
  * @property {Rule} rule
@@ -34,6 +36,10 @@ import { posix } from "node:path";
  * @property {(source: string) => boolean} [sourceExists] whether a generated page's source
  *   exists, as written in its header (from the project root)
  * @property {string[]} [banned] strings no page may hold outside code
+ * @property {(path: string) => boolean} [isExample] whether a linked path is inside the
+ *   project's examples folder; the examples rule runs only when this is given
+ * @property {(path: string) => boolean} [isTested] whether some test of the project names the
+ *   example at that path; which tests, and how, is the project's choice
  */
 /** @typedef {(rule: Rule, file: string, line: number, message: string, fix: string) => void} Add */
 
@@ -45,6 +51,7 @@ export const RULES = /** @type {const} */ ([
   "generated",
   "small",
   "banned",
+  "examples",
 ]);
 export const LIMITS = { page: 300, frame: 10 };
 
@@ -285,6 +292,39 @@ function banned(docs, add, words) {
   }
 }
 
+/** A page a reader works from: a reference or a how-to, by its file name. */
+const needsExample = (/** @type {string} */ file) =>
+  /(^|[/-])(reference|how-to)[^/]*\.md$/.test(file);
+
+/** @param {Docs} docs @param {Add} add @param {Options} options */
+function examples(docs, add, options) {
+  const { isExample, isTested = () => false } = options;
+  if (!isExample) return;
+  for (const [file, text] of docs) {
+    if (isGravestone(text)) continue;
+    const linked = linksOf(file, text).filter((link) => isExample(link.target));
+    if (needsExample(file) && linked.length === 0) {
+      add(
+        "examples",
+        file,
+        1,
+        `${file} shows no example file`,
+        "link an example from the examples folder that a test runs, instead of a pasted snippet",
+      );
+    }
+    for (const link of linked) {
+      if (isTested(link.target)) continue;
+      add(
+        "examples",
+        file,
+        lineOf(text, link.index),
+        `${link.written} is not run by any test`,
+        "import or run it from a test, so the example breaks when the code does",
+      );
+    }
+  }
+}
+
 /**
  * Every finding in the docs set, rule by rule, then by page and line.
  * @param {Docs} docs
@@ -310,6 +350,7 @@ export function inspectDocs(docs, options = {}) {
   generated(docs, add, options);
   small(docs, add);
   banned(docs, add, options.banned ?? []);
+  examples(docs, add, options);
   // Plain code-unit order, never the locale's, so every machine prints the same report.
   const order = (/** @type {string} */ x, /** @type {string} */ y) => (x < y ? -1 : x > y ? 1 : 0);
   return findings.sort(
