@@ -1,2 +1,10 @@
 extends:
   - node_modules/@arnaud-zg/configs/lefthook/lefthook.yml
+
+# The docs are checked by the repo's own doc-compass skill whenever a page changes, because CI only
+# runs by hand: a check that only CI runs never fails.
+pre-commit:
+  commands:
+    docs:
+      glob: "{docs,plugins/*/docs}/**/*.md"
+      run: pnpm lint:docs

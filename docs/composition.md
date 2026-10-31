@@ -4,7 +4,7 @@
 
 ## Composition: base plugins and dependencies
 
-`plugin.json` has a `dependencies` array — _"plugins that must be enabled for this plugin to
+`plugin.json` has a `dependencies` array: _"plugins that must be enabled for this plugin to
 function"_. This is the mechanism for a shared base:
 
 ```jsonc
@@ -29,7 +29,7 @@ So composition happens twice, and it is worth being deliberate about which one y
 - **The user composes** by installing several small plugins. Best when the pieces are genuinely
   independent and someone might want one without the others.
 - **You compose** by declaring `dependencies` on a base. Best when a plugin is meaningless without
-  the base — shared conventions, a shared reference document, a shared hook.
+  the base: shared conventions, a shared reference document, a shared hook.
 
 Prefer the first. A dependency is a constraint you impose on every consumer; splitting into
 independent plugins leaves the choice with them.

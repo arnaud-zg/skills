@@ -37,12 +37,16 @@ With no verb, ask which one, or infer it from the request. Every verb ends with 
 ## Check
 
 ```sh
-node ${CLAUDE_SKILL_DIR}/scripts/check-docs.mjs [docs folder] [--index <page>] [--ban <text>]... [--json]
+node ${CLAUDE_SKILL_DIR}/scripts/check-docs.mjs [<folder> [--index <page>]] [--ban <text>]... [--json]
 ```
 
-- The folder defaults to `docs/`, the index to `README.md` inside it. An index above the folder,
-  such as a landing README, is passed as `--index ../README.md`.
-- `--ban` adds a string no page may hold outside code, such as the project's banned punctuation.
+- With no folder it checks what `doc-compass.json` lists, or `docs/` when there is none:
+
+  ```json
+  { "ban": ["—"], "docs": ["docs", { "folder": "packages/cli/docs", "index": "../README.md" }] }
+  ```
+
+- A project that will run the check again gets that file, so every run checks the same sets.
 - It exits 0 when the docs hold, 1 on a finding, and 2 when there is nothing to check.
 
 Seven rules: `indexed`, `resolves`, `framed`, `superseded`, `generated`, `small` and `banned`. What

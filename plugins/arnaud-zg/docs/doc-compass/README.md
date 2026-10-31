@@ -1,6 +1,6 @@
 # 🧭 doc-compass
 
-[📚 Docs home](../../../../docs/README.md) › **🧭 doc-compass**
+[📚 Docs home](../../../../docs/README.md) › [arnaud-zg](../../README.md) › **🧭 doc-compass**
 
 A skill that writes [Diataxis](https://diataxis.fr/) documentation and keeps it true. It starts a
 docs set from templates, sorts content into the right quadrant, says what to update after a code

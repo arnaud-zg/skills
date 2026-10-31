@@ -13,17 +13,17 @@ cp -R templates/plugin-template plugins/<name>
 
 1. Set `name` in `plugins/<name>/.claude-plugin/plugin.json` to match the directory.
 2. Set `name` in `plugins/<name>/package.json` to `@arnaud-zg/plugin-<name>`. That file is private
-   and never published — it exists so changesets can version the plugin. See
+   and never published. It exists so changesets can version the plugin. See
    [why](release.md#why-plugins-carry-a-packagejson).
 3. Delete the component directories the plugin does not use.
 4. Delete the two `metadata: internal: true` lines from each copied `SKILL.md`. They keep the
    template out of `npx skills add` listings, and would hide your skill the same way.
-5. Add an entry to `.claude-plugin/marketplace.json` with `"source": "<name>"` and no `version` —
+5. Add an entry to `.claude-plugin/marketplace.json` with `"source": "<name>"` and no `version`:
    `plugin.json` carries it.
 6. `pnpm changeset`: pick `@arnaud-zg/plugin-<name>`, `minor`, and say what the plugin does. The
    plugin stays at `0.0.0` until the next release PR gives it `0.1.0` and its first changelog entry.
 7. `claude plugin validate . --strict`
-8. `pnpm test` — `marketplace.unit.test.ts` fails if the package name, the manifest name and the
+8. `pnpm test`: `marketplace.unit.test.ts` fails if the package name, the manifest name and the
    directory disagree, if the versions drift apart, if the catalogue entry carries a version, if the
    plugin is missing from the catalogue, or if it has no changelog and no pending changeset. Those
    are the steps that are easy to skip when copying the template.
@@ -34,7 +34,7 @@ cp -R templates/plugin-template plugins/<name>
 mkdir -p plugins/<plugin>/skills/<skill>
 ```
 
-Write `SKILL.md` with `name` and `description` frontmatter. Nothing to register — `skills/` is
+Write `SKILL.md` with `name` and `description` frontmatter. Nothing to register: `skills/` is
 scanned by name.
 
 Make it a slash command instead of a model-invoked skill by adding `argument-hint` and
@@ -128,7 +128,7 @@ that marketplace at the root:
 To constrain the version, append a range: `"ts-base@^1.2.0"`. It resolves against the dependency's
 git tags, so the dependency must be tagged (see below).
 
-Changesets does not see these ranges — they live in `plugin.json`, not `package.json` — so a major
+Changesets does not see these ranges (they live in `plugin.json`, not `package.json`), so a major
 bump of `ts-base` neither updates nor warns the plugins that depend on `^1.x`. Update their ranges
 by hand in the same release.
 
@@ -159,7 +159,7 @@ to `null` instead of a name when a plugin is removed for good.
 
 Delete the directory and its marketplace entry, and add `"<name>": null` to `renames`. If you want
 existing installs cleaned up rather than left orphaned, set `forceRemoveDeletedPlugins: true` at the
-marketplace root — removed plugins are then uninstalled automatically and flagged for users.
+marketplace root. Removed plugins are then uninstalled automatically and flagged for users.
 
 ## Review a plugin before installing one you did not write
 
@@ -167,6 +167,6 @@ Plugins execute code on your machine through hooks and MCP servers, and there is
 installing:
 
 - Read `hooks/hooks.json` and every script it points at.
-- Read `.mcp.json` — check where a remote server sends data, and what a local one runs.
+- Read `.mcp.json`: check where a remote server sends data, and what a local one runs.
 - Check `dependencies` for plugins from marketplaces you have not vetted.
 - Pin: install from a tag, and read the diff before `claude plugin update`.

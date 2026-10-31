@@ -41,8 +41,8 @@ Then set the matching name in `plugins/hello-tools/package.json`:
 { "name": "@arnaud-zg/plugin-hello-tools", "version": "0.1.0", "private": true }
 ```
 
-That file is private and never published. It exists so changesets can version the plugin — see
-[why](./release.md#why-plugins-carry-a-packagejson).
+That file is private and never published. It exists so changesets can version the plugin (see
+[why](./release.md#why-plugins-carry-a-packagejson)).
 
 ## 3. Write one skill
 
@@ -88,8 +88,8 @@ rm -f plugins/hello-tools/.mcp.json plugins/hello-tools/README.md
 claude plugin validate plugins/hello-tools --strict
 ```
 
-`--strict` also fails on things the runtime would tolerate — unrecognised fields, missing metadata.
-Fix anything it reports before continuing.
+`--strict` also fails on things the runtime would tolerate, such as unrecognised fields or missing
+metadata. Fix anything it reports before continuing.
 
 ## 5. List it in the marketplace
 
@@ -133,7 +133,7 @@ claude plugin list
 claude plugin details hello-tools
 ```
 
-`details` shows the component inventory and the projected token cost — how much context this plugin
+`details` shows the component inventory and the projected token cost: how much context this plugin
 occupies in every conversation. Watch that number; it is the running cost of the skill descriptions.
 
 Start a new session and ask for a repo tour. The skill should fire on its own. If it does not, the
@@ -154,7 +154,7 @@ To publish instead, record a changeset, commit the plugin, and open a pull reque
 pnpm changeset       # pick @arnaud-zg/plugin-hello-tools
 ```
 
-After it merges, the release flow versions and tags it — see [the release how-to](./release.md).
+After it merges, the release flow versions and tags it (see [the release how-to](./release.md)).
 
 Anyone can then run:
 
@@ -165,6 +165,6 @@ Anyone can then run:
 
 ## Where to go next
 
-- [how-to.md](./how-to.md) — adding agents, hooks, MCP servers, dependencies and versions
-- [explanation.md](./explanation.md) — why the layers are shaped this way
-- [reference.md](./reference.md) — every manifest field and CLI command
+- [how-to.md](./how-to.md): adding agents, hooks, MCP servers, dependencies and versions
+- [explanation.md](./explanation.md): why the layers are shaped this way
+- [reference.md](./reference.md): every manifest field and CLI command

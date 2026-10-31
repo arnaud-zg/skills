@@ -20,6 +20,7 @@
     "format:check": "prettier --check .",
     "lint": "eslint .",
     "lint:context": "node scripts/lint-context.mjs",
+    "lint:docs": "node plugins/arnaud-zg/skills/doc-compass/scripts/check-docs.mjs",
     "lint:fix": "eslint . --fix",
     "lint:md": "remark . --frail --quiet",
     "prepare": "lefthook install",

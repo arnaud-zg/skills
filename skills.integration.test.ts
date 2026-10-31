@@ -20,6 +20,21 @@ function filesUnder(dir: string): string[] {
   });
 }
 
+const docsCheck = path.join(root, "plugins/arnaud-zg/skills/doc-compass/scripts/check-docs.mjs");
+
+describe("the docs this marketplace ships", () => {
+  test("every set in doc-compass.json holds its own doc-compass rules", () => {
+    const { status, stdout } = spawnSync(process.execPath, [docsCheck, "--json"], {
+      cwd: root,
+      encoding: "utf8",
+    });
+    const report = JSON.parse(stdout) as { sets: unknown[]; findings: unknown[] };
+    expect(report.sets.length).toBeGreaterThan(0);
+    expect(report.findings).toEqual([]);
+    expect(status).toBe(0);
+  });
+});
+
 describe("the skills this marketplace ships", () => {
   test("every one holds the four rules: named, small, resolves, tested", () => {
     const { status, stdout } = run("--json");

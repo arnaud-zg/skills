@@ -27,8 +27,9 @@
    `grep -rn '{[A-Za-z]' docs`.
 9. **Link the set from the project's README**, one emoji and one line per quadrant, so a reader
    finds the docs from the front door.
-10. **Wire the check where it runs**: a commit hook or the project's verify script, not only CI that
-    nobody triggers (why: E-07). Then run it, and stop at exit 0.
+10. **Wire the check where it runs.** List the docs folders and banned strings in
+    `doc-compass.json`, then call the check with no arguments from a commit hook or the project's
+    verify script, not only from CI nobody triggers (why: E-07). Run it, and stop at exit 0.
 
 ## Rebuild a messy set
 

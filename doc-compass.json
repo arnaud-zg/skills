@@ -1,0 +1,4 @@
+{
+  "ban": ["—"],
+  "docs": ["docs", { "folder": "plugins/arnaud-zg/docs", "index": "../README.md" }]
+}

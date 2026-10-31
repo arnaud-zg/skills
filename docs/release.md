@@ -24,8 +24,8 @@ pnpm changeset
 
 It asks which plugins changed and how much to bump them, then writes a Markdown file into
 `.changeset/`. Commit that file with your work. Plugins appear in the list as
-`@arnaud-zg/plugin-<name>`, because each one has a private `package.json` beside its `plugin.json` —
-see [why](#why-plugins-carry-a-packagejson). To skip the prompts:
+`@arnaud-zg/plugin-<name>`, because each one has a private `package.json` beside its `plugin.json`
+(see [why](#why-plugins-carry-a-packagejson)). To skip the prompts:
 
 ```sh
 pnpm changeset add --minor @arnaud-zg/plugin-hello-tools -m "Add the audit-deps skill"
@@ -77,7 +77,7 @@ It needs `gh auth login` and the `claude` CLI on your `PATH`. Nothing goes to np
 
 ## What a plugin release actually ships
 
-Nothing is uploaded anywhere — the marketplace _is_ this git repository — but merging a plugin
+Nothing is uploaded anywhere, because the marketplace _is_ this git repository. But merging a plugin
 change to `main` does not ship it. Claude Code decides whether an installed plugin has an update by
 comparing versions, and it reads the version from `plugin.json` first. Until that string changes,
 `claude plugin update` reports the plugin as already at the latest version, however many commits
@@ -85,7 +85,7 @@ land.
 
 The release PR from step 2 is what ships a plugin: merging it changes the version in `plugin.json`.
 Users then get the new code with `claude plugin update <name>`, or on their next auto-update if they
-turned it on for this marketplace — it is off by default for marketplaces not run by Anthropic.
+turned it on for this marketplace. It is off by default for marketplaces not run by Anthropic.
 Updates apply on restart or `/reload-plugins`.
 
 Two consequences:
@@ -94,8 +94,8 @@ Two consequences:
 - Someone who installs the plugin in that window gets the new code under the old version number.
   Keep the window short.
 
-Catalogue edits in `marketplace.json` — descriptions, categories — carry no version and reach users
-on their next `claude plugin marketplace update`.
+Catalogue edits in `marketplace.json` (descriptions, categories) carry no version and reach users on
+their next `claude plugin marketplace update`.
 
 The tag from step 3 does a narrower job: it makes the plugin resolvable by a dependency range like
 `ts-base@^1.2.0`, and gives a `git-subdir` entry something to pin.
@@ -105,4 +105,4 @@ The tag from step 3 does a narrower job: it makes the plugin resolvable by a dep
 A plugin's real manifest is `.claude-plugin/plugin.json`. The `package.json` beside it is private,
 never published, and exists only so changesets can see the plugin as a workspace package and version
 it; `scripts/sync-versions.mjs` copies the result across. Keeping two files in step is the price of
-one release flow — the alternative was versioning every plugin by hand.
+one release flow; the alternative was versioning every plugin by hand.

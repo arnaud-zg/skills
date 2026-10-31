@@ -20,7 +20,7 @@ At the repository root, in `.claude-plugin/`.
   instead.
 - `metadata.description` (string): Alternate description slot
 - `allowCrossMarketplaceDependenciesOn` (string[]): Marketplace names whose plugins may be
-  auto-installed as dependencies. Only the root marketplace's allowlist applies — no transitive
+  auto-installed as dependencies. Only the root marketplace's allowlist applies, with no transitive
   trust.
 - `forceRemoveDeletedPlugins` (boolean): When true, plugins removed from the catalogue are
   uninstalled from users and flagged
@@ -31,7 +31,7 @@ At the repository root, in `.claude-plugin/`.
 
 - `name`: Required. Must match the plugin's own `name`.
 - `source`: Required. See below.
-- `description`: Shown in `/plugin` browse and search. This is the discovery text — write it for a
+- `description`: Shown in `/plugin` browse and search. This is the discovery text: write it for a
   human deciding whether to install.
 - `author`: `{ name, email?, url? }`
 - `category`: e.g. `development`, `security`, `productivity`

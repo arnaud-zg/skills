@@ -19,5 +19,5 @@ commit or tag directly on `main`.
 ## Before committing
 
 Run
-`pnpm typecheck && pnpm lint && pnpm lint:md && pnpm lint:context && pnpm format:check && pnpm test`
+`pnpm typecheck && pnpm lint && pnpm lint:md && pnpm lint:context && pnpm lint:docs && pnpm format:check && pnpm test`
 and `claude plugin validate . --strict`. All must pass.
