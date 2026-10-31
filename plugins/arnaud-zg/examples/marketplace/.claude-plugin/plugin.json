@@ -1,0 +1,7 @@
+{
+  "name": "hello-tools",
+  "version": "0.1.0",
+  "description": "Says hello. A plugin with one skill, as small as a plugin gets.",
+  "author": { "name": "Your Name" },
+  "license": "MIT"
+}

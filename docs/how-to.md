@@ -170,3 +170,10 @@ installing:
 - Read `.mcp.json`: check where a remote server sends data, and what a local one runs.
 - Check `dependencies` for plugins from marketplaces you have not vetted.
 - Pin: install from a tag, and read the diff before `claude plugin update`.
+
+## Example
+
+[`plugin.json`](../plugins/arnaud-zg/examples/marketplace/.claude-plugin/plugin.json): the smallest
+plugin manifest.
+[`examples.integration.test.ts`](../plugins/arnaud-zg/examples/examples.integration.test.ts) reads
+it.

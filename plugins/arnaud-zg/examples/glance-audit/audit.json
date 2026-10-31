@@ -1,0 +1,28 @@
+{
+  "subject": "Release gate",
+  "verdict": "Good idea. One thing to fix.",
+  "good": ["It names the two incidents it answers."],
+  "findings": [
+    {
+      "title": "The check runs too early",
+      "severity": "critical",
+      "evidence": "Both incidents broke at release, after the merge check had passed.",
+      "tests": { "real": true, "covered": false, "raised": false },
+      "kept": true
+    }
+  ],
+  "comments": [
+    {
+      "type": "Challenge",
+      "group": "post first",
+      "quote": "makes a breaking change between the two apps impossible",
+      "text": "Does this hold when the two apps are released on different days?"
+    }
+  ],
+  "questions": [],
+  "sources": {
+    "read": ["the proposal"],
+    "notRead": [],
+    "notTested": "My judgement, nothing was run."
+  }
+}

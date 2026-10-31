@@ -44,14 +44,14 @@ node ${CLAUDE_SKILL_DIR}/scripts/check-docs.mjs [<folder> [--index <page>]] [--b
 - With no folder it checks what `doc-compass.json` lists, or `docs/` when there is none:
 
   ```json
-  { "ban": ["—"], "docs": ["docs", { "folder": "packages/cli/docs", "index": "../README.md" }] }
+  { "ban": ["—"], "docs": ["docs"], "examples": "examples" }
   ```
 
 - A project that will run the check again gets that file, so every run checks the same sets.
 - It exits 0 when the docs hold, 1 on a finding, and 2 when there is nothing to check.
 
-Seven rules: `indexed`, `resolves`, `framed`, `superseded`, `generated`, `small` and `banned`. What
-each says and how to fix it is in [audit.md](audit.md#the-rules).
+Eight rules: `indexed`, `resolves`, `framed`, `superseded`, `generated`, `small`, `banned` and
+`examples`. What each says and how to fix it is in [audit.md](audit.md#the-rules).
 
 Show the findings as printed: each has a file, a line and its fix. Fix them, run the check again,
 and stop at exit 0. **Never relax a rule or drop a page from the check to make the docs pass.** A

@@ -56,3 +56,9 @@ Branch on `verdict`. The script exits 0 for both GO and PARK, so read the word, 
 
 [skill-retro](../skill-retro/README.md) asks this skill for GO or PARK before a long retro, when it
 is installed.
+
+## Example
+
+[`examples/usage-runway/decide.mjs`](../../examples/usage-runway/decide.mjs): two hours of work
+against forty minutes of window: PARK.
+[`examples.integration.test.ts`](../../examples/examples.integration.test.ts) runs it.

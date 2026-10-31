@@ -67,3 +67,10 @@ A repository listed its skills in four places: the root README, the docs index, 
 `llms.txt`. Three skills were added to two of them; the root README and the docs index missed them
 until a reader noticed. Keeping one list, in the plugin README, and linking it from the other three
 cut 177 lines and left one table to edit per new skill.
+
+## E-12 · The docs that drifted from the code
+
+A monorepo's packages each shipped a reference page with pasted snippets. Rewriting them as example
+files run by the tests came with four bug fixes in the same changes, among them a zero limit and a
+failing drain nobody had reported. A snippet rots quietly; an example file a test runs breaks the
+build.

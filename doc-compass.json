@@ -1,4 +1,5 @@
 {
   "ban": ["—"],
-  "docs": ["docs", { "folder": "plugins/arnaud-zg/docs", "index": "../README.md" }]
+  "docs": ["docs", { "folder": "plugins/arnaud-zg/docs", "index": "../README.md" }],
+  "examples": "plugins/arnaud-zg/examples"
 }

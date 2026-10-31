@@ -42,3 +42,9 @@ it kept and names who owns it, instead of removing it.
 
 Ask in words it listens for: _make this radically simpler_, _streamline this flow_, _cut the steps_,
 _make it 10x simpler_, _rethink this from first principles_.
+
+## Example
+
+[`examples/radical-simplify/onboarding.md`](../../examples/radical-simplify/onboarding.md): an
+onboarding flow walked through the six steps.
+[`examples.integration.test.ts`](../../examples/examples.integration.test.ts) runs it.

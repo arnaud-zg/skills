@@ -53,3 +53,9 @@ hit is a line carrying `quotaLimits`, `five_hour` or `seven_day`.
 | [`SKILL.md`](../../skills/usage-runway/SKILL.md)                     | the entry Claude reads                 |
 | [`scripts/credit.mjs`](../../skills/usage-runway/scripts/credit.mjs) | the window and the verdict             |
 | [`domain/rules.md`](../../skills/usage-runway/domain/rules.md)       | what is measured, what each word means |
+
+## Example
+
+[`examples/usage-runway/decide.mjs`](../../examples/usage-runway/decide.mjs): two hours of work
+against forty minutes of window: PARK.
+[`examples.integration.test.ts`](../../examples/examples.integration.test.ts) runs it.

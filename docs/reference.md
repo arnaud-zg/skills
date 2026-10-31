@@ -110,3 +110,10 @@ restarting.
 
 Installed plugin directories are recorded per-install; `claude plugin list` and
 `claude plugin details <name>` report the resolved paths.
+
+## Example
+
+[`plugin.json`](../plugins/arnaud-zg/examples/marketplace/.claude-plugin/plugin.json): the smallest
+plugin manifest.
+[`examples.integration.test.ts`](../plugins/arnaud-zg/examples/examples.integration.test.ts) reads
+it.

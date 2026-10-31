@@ -115,3 +115,9 @@ Keep the entry short (why: E-01).
 
 `resolves` fails on a citation with no story. Skills that share stories set
 `metadata.family: <skill>` and cite that skill's `evidence.md`.
+
+## Example
+
+[`examples/hexagonal-skill-builder/release-notes/`](../../examples/hexagonal-skill-builder/release-notes/):
+a skill that holds all four rules.
+[`examples.integration.test.ts`](../../examples/examples.integration.test.ts) runs it.

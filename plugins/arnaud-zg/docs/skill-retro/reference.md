@@ -56,3 +56,9 @@ DROPPED <skill> <why>
 | [`verbs/retro.md`](../../skills/skill-retro/verbs/retro.md)   | the five steps           |
 | [`domain/rules.md`](../../skills/skill-retro/domain/rules.md) | the four rules           |
 | [`ports/PORTS.md`](../../skills/skill-retro/ports/PORTS.md)   | ports, adapters, binding |
+
+## Example
+
+[`examples/skill-retro/session.jsonl`](../../examples/skill-retro/session.jsonl): a transcript with
+one 45 minute silence, read by `gaps.mjs`.
+[`examples.integration.test.ts`](../../examples/examples.integration.test.ts) runs it.

@@ -1,5 +1,5 @@
 import { spawnSync } from "node:child_process";
-import { cpSync, mkdirSync, mkdtempSync, rmSync, writeFileSync } from "node:fs";
+import { cpSync, mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from "node:fs";
 import os from "node:os";
 import path from "node:path";
 import { afterEach, describe, expect, test } from "vitest";
@@ -49,8 +49,21 @@ describe("given a docs folder that holds", () => {
   });
 
   test("when the templates are copied as they ship, then they hold too", () => {
-    const cwd = projectWith({});
+    const cwd = projectWith({
+      "examples/example.md": "# Example\n",
+      "examples/example.test.ts": 'readFileSync("example.md");\n',
+    });
     cpSync(TEMPLATES, path.join(cwd, "docs"), { recursive: true });
+    for (const page of ["how-to.md", "reference.md"]) {
+      const file = path.join(cwd, "docs", page);
+      writeFileSync(
+        file,
+        readFileSync(file, "utf8").replace(
+          "{a link to the example file}",
+          "[Example](../examples/example.md)",
+        ),
+      );
+    }
     const { status, stdout } = check(cwd);
     expect(stdout).toContain("hold.");
     expect(status).toBe(0);
@@ -60,13 +73,13 @@ describe("given a docs folder that holds", () => {
 describe("given a docs folder with breaks", () => {
   test("when the check runs, then each break is printed with its file, line and fix, and it exits 1", () => {
     const cwd = projectWith({
-      "docs/README.md": "# Docs\n\n[How-to](how-to.md)\n",
-      "docs/how-to.md": `${home("How-to")}\n[Install](#install-it)\n`,
+      "docs/README.md": "# Docs\n\n[Install](install.md)\n",
+      "docs/install.md": `${home("Install")}\n[Install](#install-it)\n`,
       "docs/lost.md": home("Lost"),
     });
     const { status, stdout } = check(cwd);
     expect(stdout).toContain("docs/lost.md:1  indexed");
-    expect(stdout).toContain("docs/how-to.md:5  resolves");
+    expect(stdout).toContain("docs/install.md:5  resolves");
     expect(stdout).toContain("→ point at where it lives now, or remove the link");
     expect(stdout).toContain("✗ 2 findings in 2 of 3 pages.");
     expect(status).toBe(1);
@@ -207,5 +220,30 @@ describe("given nothing to check", () => {
     const { status, stderr } = check(projectWith({ "docs/README.md": "# Docs\n" }), "--nope");
     expect(stderr).toContain("Usage: node check-docs.mjs");
     expect(status).toBe(2);
+  });
+});
+
+describe("given an examples folder in doc-compass.json", () => {
+  const docs = {
+    "doc-compass.json": JSON.stringify({ docs: ["docs"], examples: "examples" }),
+    "docs/README.md": "# Docs\n\n[Reference](reference.md)\n",
+    "docs/reference.md": `${home("Reference")}\n[Basic](../examples/basic.ts)\n`,
+    "examples/basic.ts": "export const basic = 1;\n",
+  };
+
+  test("when no test runs the example, then the check names it and exits 1", () => {
+    const { status, stdout } = check(projectWith(docs));
+    expect(stdout).toContain("../examples/basic.ts is not run by any test");
+    expect(status).toBe(1);
+  });
+
+  test("when a test imports the example, then the docs hold", () => {
+    const cwd = projectWith({
+      ...docs,
+      "examples/basic.test.ts": 'import { basic } from "./basic";\n',
+    });
+    const { status, stdout } = check(cwd);
+    expect(stdout).toContain("hold.");
+    expect(status).toBe(0);
   });
 });

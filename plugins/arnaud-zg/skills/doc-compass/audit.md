@@ -32,6 +32,7 @@
 | `generated`  | a "Generated … from \`source\`" header names a source that exists   | fix the header, then regenerate                 | (why: E-06) |
 | `small`      | every page fits in 300 lines                                        | split it by quadrant, see [place.md](place.md)  | (why: E-04) |
 | `banned`     | no page holds a string passed with `--ban`                          | rewrite the sentence                            | (why: E-09) |
+| `examples`   | each reference and how-to links an example file a test runs         | link a real example, and run it from a test     | (why: E-12) |
 
 A clean check is the start of an audit, not its end.
 

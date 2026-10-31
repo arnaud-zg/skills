@@ -46,3 +46,9 @@ node plugins/arnaud-zg/skills/glance-first/scripts/check-brief.mjs brief.json
 ```
 
 It exits 0 on `BRIEF OK`, 1 on a finding, 2 when no path is given.
+
+## Example
+
+[`examples/glance-first/brief.json`](../../examples/glance-first/brief.json): a brief the check
+prints `BRIEF OK` for. [`examples.integration.test.ts`](../../examples/examples.integration.test.ts)
+runs it.

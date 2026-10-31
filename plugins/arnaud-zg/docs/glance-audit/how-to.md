@@ -43,3 +43,9 @@ node plugins/arnaud-zg/skills/glance-audit/scripts/check-audit.mjs audit.json so
 ```
 
 It exits 0 on `AUDIT OK`, 1 on anything to fix, 2 when a path is missing.
+
+## Example
+
+[`examples/glance-audit/audit.json`](../../examples/glance-audit/audit.json): an audit the check
+passes against [its source](../../examples/glance-audit/source.txt).
+[`examples.integration.test.ts`](../../examples/examples.integration.test.ts) runs it.

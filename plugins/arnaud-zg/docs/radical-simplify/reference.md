@@ -51,3 +51,9 @@ Strictly in this order. Each step works only on what survived the one before.
 | -------------------------------------------------------------------- | ------------------------------ |
 | [`SKILL.md`](../../skills/radical-simplify/SKILL.md)                 | the method Claude follows      |
 | [`evals/simplifies-a-flow`](../../evals/simplifies-a-flow/prompt.md) | fires, keeps the order, counts |
+
+## Example
+
+[`examples/radical-simplify/onboarding.md`](../../examples/radical-simplify/onboarding.md): an
+onboarding flow walked through the six steps.
+[`examples.integration.test.ts`](../../examples/examples.integration.test.ts) runs it.

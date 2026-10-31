@@ -77,3 +77,8 @@ node scripts/check-docs.mjs docs --json > docs-audit.json
 
 Too many findings to fix in one change? Fix every `resolves` finding first, then record the
 remaining count as a baseline that each later change lowers.
+
+## Example
+
+[`examples/doc-compass/docs/`](../../examples/doc-compass/docs/): a two-page docs set the check
+passes. [`examples.integration.test.ts`](../../examples/examples.integration.test.ts) runs it.
