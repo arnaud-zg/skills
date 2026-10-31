@@ -2,7 +2,7 @@
   "$schema": "https://anthropic.com/claude-code/plugin.schema.json",
   "name": "arnaud-zg",
   "displayName": "Arnaud Zheng's skills",
-  "version": "0.5.0",
+  "version": "0.5.1",
   "description": "Arnaud Zheng's Agent Skills. hexagonal-skill-builder writes Agent Skills and checks them against four rules a script can hold: named, small, resolves, tested. doc-compass writes Diataxis documentation from templates and keeps it true, with a check for orphan pages, broken links and anchors, and stale decision records. radical-simplify rebuilds a process, product or UI into its simplest version: Question, Remove, Simplify, Reimagine, Accelerate, Automate. glance-first presents any work so a reader gets it in under a minute: the answer, the key numbers, then a diagram per block, checked by a script. Every finding comes with its file, line and fix.",
   "author": {
     "name": "Arnaud Zheng",
