@@ -46,4 +46,4 @@ All must pass; CI runs the same checks.
 
 ## Releasing
 
-See [docs/how-to.md#release-a-version](./docs/how-to.md#release-a-version).
+See [docs/release.md](./docs/release.md).

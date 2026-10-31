@@ -48,10 +48,10 @@ need, so you can go straight to the kind of page you want.
 
 These pages cover building and shipping plugins here, not using them.
 
-| 🚀 Tutorial                            | 🛠️ How-to guides                          | 📖 Reference                           | 💡 Explanation                                  |
-| -------------------------------------- | ----------------------------------------- | -------------------------------------- | ----------------------------------------------- |
-| [Build your first plugin](tutorial.md) | [Add, document, test, release](how-to.md) | [Manifests, layout, CLI](reference.md) | [Skills, plugins, marketplaces](explanation.md) |
+| 🚀 Tutorial                            | 🛠️ How-to guides                                                                | 📖 Reference                                           | 💡 Explanation                                                                 |
+| -------------------------------------- | ------------------------------------------------------------------------------- | ------------------------------------------------------ | ------------------------------------------------------------------------------ |
+| [Build your first plugin](tutorial.md) | [Add](how-to.md), [test, document](test-and-document.md), [release](release.md) | [Layout, CLI](reference.md), [manifests](manifests.md) | [Skills, plugins, marketplaces](explanation.md), [composition](composition.md) |
 
 A new skill gets a row in the [catalogue](#skills-catalogue), a summary under it, and a row in
-[Docs for each skill](#docs-for-each-skill). [Document a plugin](how-to.md#document-a-plugin) says
-how.
+[Docs for each skill](#docs-for-each-skill).
+[Document a plugin](test-and-document.md#document-a-plugin) says how.

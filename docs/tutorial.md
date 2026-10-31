@@ -42,7 +42,7 @@ Then set the matching name in `plugins/hello-tools/package.json`:
 ```
 
 That file is private and never published. It exists so changesets can version the plugin — see
-[why](./how-to.md#why-plugins-carry-a-packagejson).
+[why](./release.md#why-plugins-carry-a-packagejson).
 
 ## 3. Write one skill
 
@@ -154,8 +154,7 @@ To publish instead, record a changeset, commit the plugin, and open a pull reque
 pnpm changeset       # pick @arnaud-zg/plugin-hello-tools
 ```
 
-After it merges, the release flow versions and tags it — see
-[the release how-to](./how-to.md#release-a-version).
+After it merges, the release flow versions and tags it — see [the release how-to](./release.md).
 
 Anyone can then run:
 
