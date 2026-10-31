@@ -4,6 +4,8 @@
 [🚀 Tutorial](tutorial.md) · [🛠️ How-to](how-to.md) · **📖 Reference** ·
 [💡 Explanation](explanation.md)
 
+**Every limit the check holds, in one page.** 25-word TLDR · 4 figures · 4 blocks · 200 words.
+
 ## Reading order
 
 1. the TLDR, 25 words

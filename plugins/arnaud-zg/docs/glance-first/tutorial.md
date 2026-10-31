@@ -3,6 +3,8 @@
 [📚 Docs home](../../../../docs/README.md) › [👁️ glance-first](README.md) › **🚀 Tutorial** ·
 [🛠️ How-to](how-to.md) · [📖 Reference](reference.md) · [💡 Explanation](explanation.md)
 
+**5 minutes, 4 steps: install, ask, check, read.**
+
 Five minutes. You will hand the skill a change, read the brief it checks, and see the page it draws.
 
 ## 1. Install the plugin

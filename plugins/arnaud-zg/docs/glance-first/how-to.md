@@ -4,6 +4,15 @@
 [🚀 Tutorial](tutorial.md) · **🛠️ How-to** · [📖 Reference](reference.md) ·
 [💡 Explanation](explanation.md)
 
+**4 targets, one brief, the same check.**
+
+| Ask for…               | Target           | Pictures         |
+| ---------------------- | ---------------- | ---------------- |
+| _the PR description_   | `pr-description` | Mermaid, tables  |
+| _an artifact page_     | `artifact`       | Mermaid, tables  |
+| _it in the terminal_   | `terminal`       | tables, 100 cols |
+| _a Markdown file at …_ | `markdown`       | Mermaid, tables  |
+
 ## Write a pull request description
 
 Ask _write the PR description for this branch_. The skill reads the repository's pull request

@@ -6,6 +6,14 @@ Explanation**
 
 Why the skill works the way it does. To get something done, see the [How-to guides](how-to.md).
 
+**The page is built in the order the eye moves: answer, figure, picture, words.**
+
+```mermaid
+flowchart TB
+  a["Answer: decide in 1 line"] --> b["Numbers: how much, in 1 glance"]
+  b --> c["Picture: what changed, marked NEW:"] --> d["Line: what the picture proves"]
+```
+
 ## A reader decides in the first line whether to keep going
 
 Most readers of a summary stop early. So the first line is the answer, not a lead-in, and everything

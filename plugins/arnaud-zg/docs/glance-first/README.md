@@ -6,6 +6,13 @@ A skill that presents any piece of work so a reader gets the key information in 
 The answer comes first, then the key numbers, then at most four blocks that each open on a diagram,
 chart, table or screenshot marking what changed. A script checks the brief before anything is drawn.
 
+**Under 1 minute** · **200 words max** · **4 blocks max** · **4 targets**
+
+```mermaid
+flowchart LR
+  a["1. Answer: the TLDR"] --> b["2. Key numbers"] --> c["3. Picture"] --> d["4. Line it proves"]
+```
+
 ## At a glance
 
 - **What is it?** A one-minute format Claude writes as a JSON brief, checks with a script, then
