@@ -6,6 +6,7 @@ writing a page, because a clean check says nothing about any of them.
 | Guard                          | Says                                                                                                                 | Why         |
 | ------------------------------ | -------------------------------------------------------------------------------------------------------------------- | ----------- |
 | **one reader per page**        | A page serves one quadrant. Content for another reader moves to that reader's page, and the two link                 | (why: E-04) |
+| **say it once, link the rest** | A list or fact that several pages need lives on one page. The others link to it, never copy it                       | (why: E-11) |
 | **one path in a tutorial**     | A tutorial never offers a choice. "Or you could" belongs in a how-to                                                 | (why: E-04) |
 | **tasks, not topics**          | A how-to heading is a task as an imperative verb: "Rotate the API key", never "API keys"                             | (why: E-04) |
 | **rewrite, never annotate**    | A page says what is true now. History goes to the CHANGELOG and the ADRs, never into callouts or asides              | (why: E-03) |

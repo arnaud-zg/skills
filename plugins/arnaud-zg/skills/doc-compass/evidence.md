@@ -60,3 +60,10 @@ where someone remembers it.
 A decision record's status said it superseded parts of an earlier one, and the earlier record
 pointed forward to it. A reader landing on either found the other. Records elsewhere that said
 "superseded" one way only left the older one looking current.
+
+## E-11 · One skill list, four copies
+
+A repository listed its skills in four places: the root README, the docs index, a plugin README and
+`llms.txt`. Three skills were added to two of them; the root README and the docs index missed them
+until a reader noticed. Keeping one list, in the plugin README, and linking it from the other three
+cut 177 lines and left one table to edit per new skill.
