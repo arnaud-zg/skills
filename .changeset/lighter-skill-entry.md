@@ -1,5 +1,5 @@
 ---
-"arnaud-zg": patch
+"@arnaud-zg/plugin-arnaud-zg": patch
 ---
 
 hexagonal-skill-builder: the entry now routes to a new `create.md` for creating or editing a skill,
