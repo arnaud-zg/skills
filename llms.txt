@@ -2,8 +2,9 @@
 
 > A Claude Code plugin marketplace named arnaud-zg-skills: Agent Skills, subagents, hooks and MCP servers,
 > each linted, tested and versioned. Its first plugin, arnaud-zg, ships hexagonal-skill-builder, a
-> linter for Agent Skills (SKILL.md), doc-compass, which writes and checks Diataxis docs, and
-> radical-simplify, which rebuilds a process, product or UI into its simplest version.
+> linter for Agent Skills (SKILL.md), doc-compass, which writes and checks Diataxis docs,
+> radical-simplify, which rebuilds a process, product or UI into its simplest version, and
+> glance-first, which presents any work so it reads in under a minute.
 
 - [Documentation home](https://github.com/arnaud-zg/skills/blob/main/docs/README.md): skills catalogue, purpose and how each skill works, and a map of every page
 
@@ -60,6 +61,24 @@ make. Instructions only, no script, no network. MIT.
 - [Reference](https://github.com/arnaud-zg/skills/blob/main/plugins/arnaud-zg/docs/radical-simplify/reference.md): call, steps, rules, output
 - [Explanation](https://github.com/arnaud-zg/skills/blob/main/plugins/arnaud-zg/docs/radical-simplify/explanation.md): why removing comes before automating
 - [SKILL.md](https://github.com/arnaud-zg/skills/blob/main/plugins/arnaud-zg/skills/radical-simplify/SKILL.md): the instructions the agent follows
+
+## glance-first: any piece of work, read in under a minute
+
+A one-minute format: the answer first, the key numbers next, then at most four blocks that each open
+on a diagram, chart, table or screenshot marking what changed. A Node script checks the brief before
+it is drawn as an artifact page, a pull request body, terminal text or a Markdown file. No network,
+no dependency. MIT.
+
+- Install in Claude Code: `/plugin install arnaud-zg --marketplace arnaud-zg/skills`
+- Install in any agent: `npx skills add arnaud-zg/skills --skill glance-first`
+- Call it: ask the agent for a "TLDR", to "write the PR description", or to "present this"
+
+- [README](https://github.com/arnaud-zg/skills/blob/main/plugins/arnaud-zg/docs/glance-first/README.md): what it is, install, what it reads
+- [Tutorial](https://github.com/arnaud-zg/skills/blob/main/plugins/arnaud-zg/docs/glance-first/tutorial.md): a change presented in one minute
+- [How-to guides](https://github.com/arnaud-zg/skills/blob/main/plugins/arnaud-zg/docs/glance-first/how-to.md): PR body, page, terminal, file
+- [Reference](https://github.com/arnaud-zg/skills/blob/main/plugins/arnaud-zg/docs/glance-first/reference.md): fields, limits, check
+- [Explanation](https://github.com/arnaud-zg/skills/blob/main/plugins/arnaud-zg/docs/glance-first/explanation.md): why the answer, then numbers, then pictures
+- [SKILL.md](https://github.com/arnaud-zg/skills/blob/main/plugins/arnaud-zg/skills/glance-first/SKILL.md): the instructions the agent follows
 
 ## Writing a Claude Code plugin in this repository
 
