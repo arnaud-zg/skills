@@ -1,5 +1,11 @@
 # @arnaud-zg/plugin-arnaud-zg
 
+## 0.5.1
+
+### Patch Changes
+
+- f5f29f5: doc-compass: add the "say it once, link the rest" guard.
+
 ## 0.5.0
 
 ### Minor Changes
