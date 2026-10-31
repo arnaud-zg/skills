@@ -94,4 +94,13 @@ describe("the examples the docs show", () => {
     expect(stdout).toContain("PARK: the window resets in 40m, under the 3h00 this needs");
     expect(status).toBe(0);
   });
+
+  test("given testing-trophy/suite, then the suite holds the trophy", () => {
+    const { status, stdout } = run(
+      skill("testing-trophy", "check-trophy.mjs"),
+      "testing-trophy/suite",
+    );
+    expect(stdout).toContain("TROPHY unit 0 · integration 1 · e2e 0 · static yes");
+    expect(status).toBe(0);
+  });
 });
