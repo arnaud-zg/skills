@@ -6,13 +6,14 @@ instead of being copy-pasted into `~/.claude/`. Every skill here is linted, test
 
 ## Available skills
 
-| Skill                                                           | Plugin      | Purpose                                                                  | How it works                                                                               | Docs                                                                                                                                                                                                                                                          |
-| --------------------------------------------------------------- | ----------- | ------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [`hexagonal-skill-builder`](./plugins/arnaud-zg/README.md)      | `arnaud-zg` | Lint and write Agent Skills (`SKILL.md`): named, small, resolves, tested | Ask Claude to _check the skills_; a Node script prints file, line and fix                  | [Tutorial](./plugins/arnaud-zg/docs/tutorial.md) · [How-to](./plugins/arnaud-zg/docs/how-to.md) · [Reference](./plugins/arnaud-zg/docs/reference.md) · [Explanation](./plugins/arnaud-zg/docs/explanation.md)                                                 |
-| [`doc-compass`](./plugins/arnaud-zg/docs/doc-compass/README.md) | `arnaud-zg` | Write Diataxis docs from templates and keep them true                    | Ask Claude to _document this_ or _check the docs_; a Node script prints file, line and fix | [Tutorial](./plugins/arnaud-zg/docs/doc-compass/tutorial.md) · [How-to](./plugins/arnaud-zg/docs/doc-compass/how-to.md) · [Reference](./plugins/arnaud-zg/docs/doc-compass/reference.md) · [Explanation](./plugins/arnaud-zg/docs/doc-compass/explanation.md) |
+| Skill                                                                     | Plugin      | Purpose                                                                  | How it works                                                                                  | Docs                                                                                                                                                                                                                                                                              |
+| ------------------------------------------------------------------------- | ----------- | ------------------------------------------------------------------------ | --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [`hexagonal-skill-builder`](./plugins/arnaud-zg/README.md)                | `arnaud-zg` | Lint and write Agent Skills (`SKILL.md`): named, small, resolves, tested | Ask Claude to _check the skills_; a Node script prints file, line and fix                     | [Tutorial](./plugins/arnaud-zg/docs/tutorial.md) · [How-to](./plugins/arnaud-zg/docs/how-to.md) · [Reference](./plugins/arnaud-zg/docs/reference.md) · [Explanation](./plugins/arnaud-zg/docs/explanation.md)                                                                     |
+| [`doc-compass`](./plugins/arnaud-zg/docs/doc-compass/README.md)           | `arnaud-zg` | Write Diataxis docs from templates and keep them true                    | Ask Claude to _document this_ or _check the docs_; a Node script prints file, line and fix    | [Tutorial](./plugins/arnaud-zg/docs/doc-compass/tutorial.md) · [How-to](./plugins/arnaud-zg/docs/doc-compass/how-to.md) · [Reference](./plugins/arnaud-zg/docs/doc-compass/reference.md) · [Explanation](./plugins/arnaud-zg/docs/doc-compass/explanation.md)                     |
+| [`radical-simplify`](./plugins/arnaud-zg/docs/radical-simplify/README.md) | `arnaud-zg` | Rebuild a process, product or UI into its simplest, fastest version      | Type `/arnaud-zg:radical-simplify <target>`; six steps, Question to Automate, in strict order | [Tutorial](./plugins/arnaud-zg/docs/radical-simplify/tutorial.md) · [How-to](./plugins/arnaud-zg/docs/radical-simplify/how-to.md) · [Reference](./plugins/arnaud-zg/docs/radical-simplify/reference.md) · [Explanation](./plugins/arnaud-zg/docs/radical-simplify/explanation.md) |
 
-The [skills catalogue](./docs/README.md#skills-catalogue) says what each skill is for, when it fires
-and how it works.
+The [skills catalogue](./docs/README.md#skills-catalogue) says what each skill is for and when it
+fires; each skill's README says how it works.
 
 Install one in Claude Code, or in any agent through the
 [skills CLI](https://github.com/vercel-labs/skills):
@@ -21,6 +22,7 @@ Install one in Claude Code, or in any agent through the
 /plugin install arnaud-zg --marketplace arnaud-zg/skills
 npx skills add arnaud-zg/skills --skill hexagonal-skill-builder
 npx skills add arnaud-zg/skills --skill doc-compass
+npx skills add arnaud-zg/skills --skill radical-simplify
 ```
 
 Each plugin's README shows how to pin the version you reviewed, and how to give it to a whole team
