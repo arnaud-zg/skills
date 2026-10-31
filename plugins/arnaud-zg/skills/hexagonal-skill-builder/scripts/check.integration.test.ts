@@ -135,6 +135,13 @@ describe("given a path", () => {
     expect(check(cwd, "kit").stdout).toContain("2 skills hold all four rules.");
   });
 
+  test("when it is an absolute path, then that folder is checked", () => {
+    const cwd = projectWith({ "kit/a/SKILL.md": entry("a") });
+    const { status, stdout } = check(cwd, path.join(cwd, "kit"));
+    expect(stdout).toContain("1 skill holds all four rules.");
+    expect(status).toBe(0);
+  });
+
   test("when it does not exist, then it says so and exits 2", () => {
     const { status, stderr } = check(projectWith({}), "nowhere");
     expect(status).toBe(2);

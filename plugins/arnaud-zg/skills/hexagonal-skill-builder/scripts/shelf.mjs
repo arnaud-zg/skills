@@ -5,7 +5,7 @@
 // often link a skill into place rather than copy it.
 
 import { existsSync, readdirSync, readFileSync, statSync } from "node:fs";
-import { join, relative, sep } from "node:path";
+import { join, relative, resolve, sep } from "node:path";
 
 /** Where skills live by convention, from a project's root. */
 export const PLACES = [".claude/skills", ".agents/skills", "skills", "plugins/*/skills"];
@@ -55,7 +55,7 @@ export function placesFor(root, path) {
       : `No skills found. Looked in ${PLACES.join(", ")} under ${root}.\n` +
           "Pass the path of a skills folder, or of one skill.";
   }
-  const dir = join(root, path);
+  const dir = resolve(root, path);
   if (!existsSync(dir)) return `${path} does not exist.`;
   if (isSkill(dir)) {
     const shelf = join(dir, "..");
