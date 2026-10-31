@@ -1,6 +1,6 @@
 # 📖 Reference: hexagonal-skill-builder command, exit codes and rules
 
-[📚 Docs home](../../../docs/README.md) › [hexagonal-skill-builder](../README.md) ›
+[📚 Docs home](../../../../docs/README.md) › [⬡ hexagonal-skill-builder](README.md) ›
 [🚀 Tutorial](tutorial.md) · [🛠️ How-to](how-to.md) · **📖 Reference** ·
 [💡 Explanation](explanation.md)
 

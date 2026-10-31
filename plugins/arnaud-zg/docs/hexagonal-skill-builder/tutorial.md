@@ -1,7 +1,8 @@
 # 🚀 Tutorial: write and lint your first Agent Skill
 
-[📚 Docs home](../../../docs/README.md) › [hexagonal-skill-builder](../README.md) › **🚀 Tutorial**
-· [🛠️ How-to](how-to.md) · [📖 Reference](reference.md) · [💡 Explanation](explanation.md)
+[📚 Docs home](../../../../docs/README.md) › [⬡ hexagonal-skill-builder](README.md) › **🚀
+Tutorial** · [🛠️ How-to](how-to.md) · [📖 Reference](reference.md) ·
+[💡 Explanation](explanation.md)
 
 Ten minutes. You will write a skill with two mistakes in it, watch the check find both, fix them,
 and get a clean result.
@@ -14,7 +15,7 @@ flowchart LR
   C -->|"✓ exit 0"| D["done"]
 ```
 
-You need Node 22 or later, and the plugin installed (see [Install](../README.md#install)).
+You need Node 22 or later, and the plugin installed (see [Install](../../README.md#install)).
 
 ## 1. Write a skill
 

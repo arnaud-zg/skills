@@ -54,4 +54,4 @@ default whenever something cites the old path.
 
 The skill folder is loaded by the model on every call; these pages are read by people. Keeping them
 apart means neither pays for the other's text, the same choice
-[hexagonal-skill-builder](../explanation.md) makes.
+[hexagonal-skill-builder](../hexagonal-skill-builder/explanation.md) makes.
