@@ -1,5 +1,32 @@
 # @arnaud-zg/plugin-arnaud-zg
 
+## 0.3.0
+
+### Minor Changes
+
+- 679b4f5: doc-compass: a new skill that writes Diataxis documentation and keeps it true. It ships
+  templates that form a whole `docs/` folder (index, tutorial, how-to, reference, explanation,
+  decision records, gravestone), four verbs (create, place, maintain, audit), and
+  `scripts/check-docs.mjs`, which checks a docs folder for pages no index reaches, broken links and
+  anchors, missing breadcrumbs, decisions superseded one way only, stale "generated from" headers,
+  long pages and banned strings.
+- ab48cf4: radical-simplify: a new skill that rebuilds a process, product or UI into its simplest,
+  fastest version, working strictly through Question, Remove, Simplify, Reimagine, Accelerate,
+  Automate, and ending with a counted before and after. Instructions only, with its four Diataxis
+  pages and an eval.
+
+### Patch Changes
+
+- d7366c5: doc-compass: `framed` accepts a link to the `README.md` of a folder above the page, so a
+  docs set nested inside another (a plugin's docs holding one folder per skill) passes with its own
+  section index in the breadcrumb.
+- 4743bf5: hexagonal-skill-builder: the entry now routes to a new `create.md` for creating or
+  editing a skill, and its map is a list, cutting `SKILL.md` from about 1,435 to 845 tokens. The
+  plugin README and reference turn their wide tables into lists to fit the context budget.
+- 52c12cd: The plugin README now presents all three skills, hexagonal-skill-builder, doc-compass and
+  radical-simplify, with one install section and a docs table. hexagonal-skill-builder's own README
+  and its four pages move to `docs/hexagonal-skill-builder/`, like the other two skills.
+
 ## 0.2.1
 
 ### Patch Changes
