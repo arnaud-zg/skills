@@ -19,19 +19,19 @@ need, so you can go straight to the kind of page you want.
 
 ## Skills catalogue
 
-| Skill                                                                      | Plugin      | Purpose                                                                                       | Fires when you ask to…                                                    |
-| -------------------------------------------------------------------------- | ----------- | --------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------- |
-| [`hexagonal-skill-builder`](../plugins/arnaud-zg/README.md)                | `arnaud-zg` | Lint and write Agent Skills (`SKILL.md`) against four rules: named, small, resolves, tested   | _create a skill_, _check the skills_, _lint my skills_, edit a `SKILL.md` |
-| [`doc-compass`](../plugins/arnaud-zg/docs/doc-compass/README.md)           | `arnaud-zg` | Write and check Diataxis docs: orphan pages, broken links, stale decisions                    | _document this feature_, _check the docs_, _where should this doc go_     |
-| [`radical-simplify`](../plugins/arnaud-zg/docs/radical-simplify/README.md) | `arnaud-zg` | Rebuild a process, product or UI: Question, Remove, Simplify, Reimagine, Accelerate, Automate | _make this radically simpler_, _streamline this flow_, _cut the steps_    |
+| Skill                                                                                    | Plugin      | Purpose                                                                                       | Fires when you ask to…                                                    |
+| ---------------------------------------------------------------------------------------- | ----------- | --------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------- |
+| [`hexagonal-skill-builder`](../plugins/arnaud-zg/docs/hexagonal-skill-builder/README.md) | `arnaud-zg` | Lint and write Agent Skills (`SKILL.md`) against four rules: named, small, resolves, tested   | _create a skill_, _check the skills_, _lint my skills_, edit a `SKILL.md` |
+| [`doc-compass`](../plugins/arnaud-zg/docs/doc-compass/README.md)                         | `arnaud-zg` | Write and check Diataxis docs: orphan pages, broken links, stale decisions                    | _document this feature_, _check the docs_, _where should this doc go_     |
+| [`radical-simplify`](../plugins/arnaud-zg/docs/radical-simplify/README.md)               | `arnaud-zg` | Rebuild a process, product or UI: Question, Remove, Simplify, Reimagine, Accelerate, Automate | _make this radically simpler_, _streamline this flow_, _cut the steps_    |
 
 ## Docs for each skill
 
-- **[`hexagonal-skill-builder`](../plugins/arnaud-zg/README.md)**: 🚀
-  [Your first skill, checked](../plugins/arnaud-zg/docs/tutorial.md) · 🛠️
-  [CI, hooks, JSON](../plugins/arnaud-zg/docs/how-to.md) · 📖
-  [Command and rules](../plugins/arnaud-zg/docs/reference.md) · 💡
-  [Why four rules](../plugins/arnaud-zg/docs/explanation.md)
+- **[`hexagonal-skill-builder`](../plugins/arnaud-zg/docs/hexagonal-skill-builder/README.md)**: 🚀
+  [Your first skill, checked](../plugins/arnaud-zg/docs/hexagonal-skill-builder/tutorial.md) · 🛠️
+  [CI, hooks, JSON](../plugins/arnaud-zg/docs/hexagonal-skill-builder/how-to.md) · 📖
+  [Command and rules](../plugins/arnaud-zg/docs/hexagonal-skill-builder/reference.md) · 💡
+  [Why four rules](../plugins/arnaud-zg/docs/hexagonal-skill-builder/explanation.md)
 - **[`doc-compass`](../plugins/arnaud-zg/docs/doc-compass/README.md)**: 🚀
   [A checked docs set](../plugins/arnaud-zg/docs/doc-compass/tutorial.md) · 🛠️
   [CI, style, audits](../plugins/arnaud-zg/docs/doc-compass/how-to.md) · 📖

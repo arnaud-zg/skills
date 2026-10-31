@@ -39,18 +39,15 @@ says what is wrong.
 }
 ```
 
-| Key    | Type                                                | Meaning                                        |
-| ------ | --------------------------------------------------- | ---------------------------------------------- |
-| `docs` | list of folders, or `{ "folder", "index" }` objects | the docs sets to check, in order; at least one |
-| `ban`  | list of non-empty strings, optional                 | strings no page may hold outside code          |
+- `docs`: the docs sets to check, in order, at least one; each a folder, or a
+  `{ "folder", "index" }` object
+- `ban`: optional; strings no page may hold outside code, each non-empty
 
 ## Exit codes
 
-| Code | Means                                                                                         |
-| ---- | --------------------------------------------------------------------------------------------- |
-| `0`  | every page holds every rule                                                                   |
-| `1`  | at least one finding                                                                          |
-| `2`  | nothing to check: no such folder, no Markdown page, a bad option, or a bad `doc-compass.json` |
+- `0`: every page holds every rule
+- `1`: at least one finding
+- `2`: nothing to check: no such folder, no Markdown page, a bad option, or a bad `doc-compass.json`
 
 ## Rules
 
@@ -74,13 +71,11 @@ whose title ends with `(moved)` is a gravestone, exempt from `indexed` and `fram
 Source of truth: [`templates/`](../../skills/doc-compass/templates/README.md). They form a whole
 `docs/` folder, and hold as copied.
 
-| File                                           | Is                                                       |
-| ---------------------------------------------- | -------------------------------------------------------- |
-| `README.md`                                    | the index: a routing table, and every page with its time |
-| `tutorial.md`                                  | one path, each step with "You should see"                |
-| `how-to.md`                                    | one task per section, titled as an imperative            |
-| `reference.md`                                 | tables, each naming its source in code                   |
-| `explanation.md`                               | one principle per heading, and the rules dropped         |
-| `adr/README.md`                                | the list of decision records                             |
-| `adr/ADR-001-record-architecture-decisions.md` | the first record, and the shape of every other           |
-| `gravestone.md`                                | the page left at an old path                             |
+- `README.md`: the index, a routing table, and every page with its time
+- `tutorial.md`: one path, each step with "You should see"
+- `how-to.md`: one task per section, titled as an imperative
+- `reference.md`: tables, each naming its source in code
+- `explanation.md`: one principle per heading, and the rules dropped
+- `adr/README.md`: the list of decision records
+- `adr/ADR-001-record-architecture-decisions.md`: the first record, and the shape of every other
+- `gravestone.md`: the page left at an old path

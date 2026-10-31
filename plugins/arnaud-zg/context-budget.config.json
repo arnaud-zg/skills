@@ -1,7 +1,7 @@
 {
   "root": {
     "file": "README.md",
-    "referencePattern": "\\]\\((docs/[a-z-]+\\.md)(?:#[^)]*)?\\)",
+    "referencePattern": "\\]\\((docs/[a-z-]+/[A-Za-z-]+\\.md)(?:#[^)]*)?\\)",
     "threshold": 2500
   },
   "references": { "threshold": 2000, "failOnExceed": true },
