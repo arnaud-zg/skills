@@ -7,18 +7,25 @@ and MCP servers that install with a version and uninstall cleanly, instead of be
 
 ## Available skills
 
-Eight Agent Skills ship in the `arnaud-zg` plugin. What each does, when it triggers, how to call it
-and what it needs are described once, in the
-**[`arnaud-zg` plugin README](./plugins/arnaud-zg/README.md#skills)**:
+Eight Agent Skills ship in the `arnaud-zg` plugin. Pick one by what you want to do; what each needs
+and how to call it are in the [plugin's skills table](./plugins/arnaud-zg/README.md#skills).
 
-- [hexagonal-skill-builder](./plugins/arnaud-zg/README.md#hexagonal-skill-builder)
-- [doc-compass](./plugins/arnaud-zg/README.md#doc-compass)
-- [radical-simplify](./plugins/arnaud-zg/README.md#radical-simplify)
-- [glance-first](./plugins/arnaud-zg/README.md#glance-first)
-- [glance-audit](./plugins/arnaud-zg/README.md#glance-audit)
-- [skill-retro](./plugins/arnaud-zg/README.md#skill-retro)
-- [usage-runway](./plugins/arnaud-zg/README.md#usage-runway)
-- [testing-trophy](./plugins/arnaud-zg/README.md#testing-trophy)
+- **Write or lint an Agent Skill**: use
+  [`hexagonal-skill-builder`](./plugins/arnaud-zg/docs/hexagonal-skill-builder/README.md)
+- **Write, sort or check documentation**: use
+  [`doc-compass`](./plugins/arnaud-zg/docs/doc-compass/README.md)
+- **Plan, write or audit tests**: use
+  [`testing-trophy`](./plugins/arnaud-zg/docs/testing-trophy/README.md)
+- **Make a process, product or UI simpler**: use
+  [`radical-simplify`](./plugins/arnaud-zg/docs/radical-simplify/README.md)
+- **Present work in under a minute (TLDR, PR description)**: use
+  [`glance-first`](./plugins/arnaud-zg/docs/glance-first/README.md)
+- **Challenge a doc, plan or pull request**: use
+  [`glance-audit`](./plugins/arnaud-zg/docs/glance-audit/README.md)
+- **Find what made a session's skills slow or costly**: use
+  [`skill-retro`](./plugins/arnaud-zg/docs/skill-retro/README.md)
+- **Know if the next job fits the usage window**: use
+  [`usage-runway`](./plugins/arnaud-zg/docs/usage-runway/README.md)
 
 ## Install
 
