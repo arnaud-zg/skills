@@ -1,12 +1,11 @@
 ---
 name: glance-first
 description:
-  Presents any piece of work so a reader gets the key information in under one minute: the answer
-  in one line, the key numbers in a strip, then at most four blocks that each open on a picture (a
+  Presents any piece of work so a reader gets the key information in under one minute, the answer in
+  one line, the key numbers in a strip, then at most four blocks that each open on a picture (a
   diagram, a chart, a table or a screenshot) marking what changed, checked by a script before it is
-  shown. Use when asked for a "TLDR", to "explain
-  this change", to "write the PR description", to "make it quick to read", for a "one-minute read",
-  to "summarise for a PM", or to "present this".
+  shown. Use when asked for a "TLDR", to "explain this change", to "write the PR description", to
+  "make it quick to read", for a "one-minute read", to "summarise for a PM", or to "present this".
 allowed-tools: Bash(node ${CLAUDE_SKILL_DIR}/scripts/check-brief.mjs *)
 ---
 
