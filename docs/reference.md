@@ -1,4 +1,7 @@
-# Reference
+# 📖 Reference: Claude Code plugin manifests, layout and CLI
+
+[📚 Docs home](README.md) › Writing plugins › [🚀 Tutorial](tutorial.md) · [🛠️ How-to](how-to.md) ·
+**📖 Reference** · [💡 Explanation](explanation.md)
 
 Field-by-field. Verified against Claude Code `2.1.263` manifest schemas and `claude plugin --help`;
 re-check after a major CLI upgrade.

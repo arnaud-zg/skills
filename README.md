@@ -1,14 +1,17 @@
-# 🧰 skills
+# 🧰 skills: Claude Code plugins and Agent Skills, linted and versioned
 
 Arnaud Zheng's [Claude Code](https://claude.com/claude-code) plugin marketplace: a growing shelf of
 Agent Skills, subagents, hooks and MCP servers that install with a version and uninstall cleanly,
 instead of being copy-pasted into `~/.claude/`. Every skill here is linted, tested and versioned.
 
-## Plugins
+## Available skills
 
-| Plugin                                     | What it does                                                                                                                                           |
-| ------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| [arnaud-zg](./plugins/arnaud-zg/README.md) | `hexagonal-skill-builder`: write Agent Skills, and check them against four rules: named, small, resolves, tested. File, line and fix for each finding. |
+| Skill                                                      | Plugin      | Purpose                                                                  | How it works                                                              | Docs                                                                                                                                                                                                          |
+| ---------------------------------------------------------- | ----------- | ------------------------------------------------------------------------ | ------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [`hexagonal-skill-builder`](./plugins/arnaud-zg/README.md) | `arnaud-zg` | Lint and write Agent Skills (`SKILL.md`): named, small, resolves, tested | Ask Claude to _check the skills_; a Node script prints file, line and fix | [Tutorial](./plugins/arnaud-zg/docs/tutorial.md) · [How-to](./plugins/arnaud-zg/docs/how-to.md) · [Reference](./plugins/arnaud-zg/docs/reference.md) · [Explanation](./plugins/arnaud-zg/docs/explanation.md) |
+
+The [skills catalogue](./docs/README.md#skills-catalogue) says what each skill is for, when it fires
+and how it works.
 
 Install one in Claude Code, or in any agent through the
 [skills CLI](https://github.com/vercel-labs/skills):
@@ -29,8 +32,9 @@ anywhere else.
 
 ## 📚 Documentation
 
-The docs follow [Diataxis](https://diataxis.fr/): one page per reader need. These cover writing and
-shipping plugins in this repository; each plugin's own `docs/` covers using it.
+Start at the **[documentation home](./docs/README.md)**: the skills catalogue, and a map of every
+page. The docs follow [Diataxis](https://diataxis.fr/): one page per reader need. The pages below
+cover writing and shipping plugins in this repository; each plugin's own `docs/` covers using it.
 
 - 🚀 **[Tutorial](./docs/tutorial.md)**: build and install your first plugin, end to end.
 - 🛠️ **[How-to guides](./docs/how-to.md)**: add a skill, agent, hook, MCP server or dependency;

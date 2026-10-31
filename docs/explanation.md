@@ -1,4 +1,7 @@
-# Explanation — what skills, plugins and marketplaces actually are
+# 💡 Explanation: what Agent Skills, plugins and marketplaces are
+
+[📚 Docs home](README.md) › Writing plugins › [🚀 Tutorial](tutorial.md) · [🛠️ How-to](how-to.md) ·
+[📖 Reference](reference.md) · **💡 Explanation**
 
 This page is about the model. If you want commands, read [how-to.md](./how-to.md).
 

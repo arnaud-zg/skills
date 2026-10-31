@@ -1,4 +1,7 @@
-# How-to
+# 🛠️ How-to guides: add, document, test and release a Claude Code plugin
+
+[📚 Docs home](README.md) › Writing plugins › [🚀 Tutorial](tutorial.md) · **🛠️ How-to** ·
+[📖 Reference](reference.md) · [💡 Explanation](explanation.md)
 
 Task-oriented recipes. For the guided first run, use [tutorial.md](./tutorial.md).
 
