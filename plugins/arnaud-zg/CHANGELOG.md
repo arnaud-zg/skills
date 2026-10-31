@@ -1,5 +1,12 @@
 # @arnaud-zg/plugin-arnaud-zg
 
+## 0.5.0
+
+### Minor Changes
+
+- 4cb221f: Add glance-audit, skill-retro and usage-runway skills, extracted from a project and made
+  generic.
+
 ## 0.4.0
 
 ### Minor Changes
