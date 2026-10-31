@@ -1,0 +1,10 @@
+{
+  "root": {
+    "file": "README.md",
+    "referencePattern": "\\]\\(([a-z-]+\\.md)(?:#[^)]*)?\\)",
+    "threshold": 2000
+  },
+  "references": { "threshold": 2000, "failOnExceed": true },
+  "subdir": { "dirs": [] },
+  "planningDir": ".none"
+}

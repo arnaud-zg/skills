@@ -12,18 +12,14 @@ What the check reads, what it looks for, and what it prints.
 node scripts/check.mjs [path ...] [--suite <script>] [--json]
 ```
 
-| Option           | Does                                                              |
-| ---------------- | ----------------------------------------------------------------- |
-| `path`           | a folder of skills, or one skill's folder; several are allowed    |
-| `--suite <name>` | also require every test to be named in that `package.json` script |
-| `--json`         | print the result as JSON instead of text                          |
-| `-h`, `--help`   | print the usage                                                   |
+- `path`: a folder of skills, or one skill's folder; several are allowed
+- `--suite <name>`: also require every test to be named in that `package.json` script
+- `--json`: print the result as JSON instead of text
+- `-h`, `--help`: print the usage
 
-| Exit | Means                                                                 |
-| ---- | --------------------------------------------------------------------- |
-| `0`  | every skill holds all four rules                                      |
-| `1`  | at least one finding                                                  |
-| `2`  | nothing to check: no skills, a path that does not exist, a bad option |
+- `0`: every skill holds all four rules
+- `1`: at least one finding
+- `2`: nothing to check: no skills, a path that does not exist, a bad option
 
 Colour is on in a terminal, and off in a pipe or when `NO_COLOR` is set. `FORCE_COLOR=1` turns it
 on.
@@ -42,35 +38,31 @@ MB are skipped.
 
 ## The rules
 
-| Rule       | Finds                                                                           | Limit           |
-| ---------- | ------------------------------------------------------------------------------- | --------------- |
-| `named`    | no frontmatter; `name` not the folder's; a name not lowercase-hyphen words      | 64 characters   |
-|            | no `description`; a description without "use" or "when"; a description too long | 1024 characters |
-| `small`    | a `SKILL.md` body (frontmatter not counted) over the limit                      | 150 lines       |
-|            | any other `.md` page over the limit                                             | 300 lines       |
-| `resolves` | a pointer to a file or heading that does not exist (see below)                  |                 |
-|            | a cited story `E-NN` with no `## E-NN` heading or `**E-NN**` in `evidence.md`   |                 |
-| `tested`   | a script under `scripts/` that no test names                                    |                 |
-|            | with `--suite`: a test the suite script does not name                           |                 |
+- `named`: no frontmatter; `name` not the folder's; a name not lowercase-hyphen words (limit: 64
+  characters)
+- : no `description`; a description without "use" or "when"; a description too long (limit: 1024
+  characters)
+- `small`: a `SKILL.md` body (frontmatter not counted) over the limit (limit: 150 lines)
+- : any other `.md` page over the limit (limit: 300 lines)
+- `resolves`: a pointer to a file or heading that does not exist (see below) (limit: )
+- : a cited story `E-NN` with no `## E-NN` heading or `**E-NN**` in `evidence.md` (limit: )
+- `tested`: a script under `scripts/` that no test names (limit: )
+- : with `--suite`: a test the suite script does not name (limit: )
 
 ### What counts as a pointer
 
-| Written as                                            | Checked                                         |
-| ----------------------------------------------------- | ----------------------------------------------- |
-| `[text](page.md)`, `[text](dir/)`                     | from the page's own folder                      |
-| `[text](page.md#heading)`, `[text](#heading)`         | the heading, by its GitHub anchor               |
-| `[text](../other-skill/page.md)`                      | in the neighbouring skill                       |
-| `${CLAUDE_SKILL_DIR}/scripts/run.mjs`                 | from the skill's root, even inside a code block |
-| `scripts/run.mjs` in prose                            | only when the skill has a `scripts/` folder     |
-| a URL, `mailto:`, `/absolute`, `../../…`              | never: it belongs to the web or to the project  |
-| anything in a code block or in `` `[inline](code)` `` | never: it is an example                         |
+- `[text](page.md)`, `[text](dir/)`: from the page's own folder
+- `[text](page.md#heading)`, `[text](#heading)`: the heading, by its GitHub anchor
+- `[text](../other-skill/page.md)`: in the neighbouring skill
+- `${CLAUDE_SKILL_DIR}/scripts/run.mjs`: from the skill's root, even inside a code block
+- `scripts/run.mjs` in prose: only when the skill has a `scripts/` folder
+- a URL, `mailto:`, `/absolute`, `../../…`: never: it belongs to the web or to the project
+- anything in a code block or in `` `[inline](code)` ``: never: it is an example
 
 ### What counts as a script and a test
 
-| Kind   | Matches                                                                        |
-| ------ | ------------------------------------------------------------------------------ |
-| script | `scripts/**` ending `.js`, `.mjs`, `.cjs`, `.ts`, `.mts`, `.cts`, `.py`, `.sh` |
-| test   | `*.test.*`, `*.spec.*` (JS or TS), `test_*.py`, `*_test.py`                    |
+- script: `scripts/**` ending `.js`, `.mjs`, `.cjs`, `.ts`, `.mts`, `.cts`, `.py`, `.sh`
+- test: `*.test.*`, `*.spec.*` (JS or TS), `test_*.py`, `*_test.py`
 
 A test reaches a script when it names its file, its quoted name, or imports it in Python. A script a
 reached script names is reached too.
@@ -96,12 +88,10 @@ reached script names is reached too.
 
 ## Files
 
-| File                 | Is                                                     | Read by |
-| -------------------- | ------------------------------------------------------ | ------- |
-| `SKILL.md`           | the entry: the rules, the check, how to create a skill | Claude  |
-| `guards.md`          | seven mistakes no script can see                       | Claude  |
-| `evidence.md`        | the story behind each rule and guard                   | Claude  |
-| `scripts/check.mjs`  | the command line                                       | Node    |
-| `scripts/rules.mjs`  | the four rules, pure functions                         | Node    |
-| `scripts/shelf.mjs`  | finds and reads skills on disk                         | Node    |
-| `docs/`, `README.md` | these pages                                            | people  |
+- `SKILL.md`: the entry: the rules, the check, how to create a skill (read by: Claude)
+- `guards.md`: seven mistakes no script can see (read by: Claude)
+- `evidence.md`: the story behind each rule and guard (read by: Claude)
+- `scripts/check.mjs`: the command line (read by: Node)
+- `scripts/rules.mjs`: the four rules, pure functions (read by: Node)
+- `scripts/shelf.mjs`: finds and reads skills on disk (read by: Node)
+- `docs/`, `README.md`: these pages (read by: people)

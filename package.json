@@ -19,7 +19,7 @@
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "lint": "eslint .",
-    "lint:context": "context-budget check && cd plugins/arnaud-zg/skills/hexagonal-skill-builder && context-budget check",
+    "lint:context": "node scripts/lint-context.mjs",
     "lint:fix": "eslint . --fix",
     "lint:md": "remark . --frail --quiet",
     "prepare": "lefthook install",

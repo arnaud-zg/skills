@@ -11,17 +11,17 @@ script nobody tests was only ever watched.
 
 ## At a glance
 
-| Question               | Answer                                                                          |
-| ---------------------- | ------------------------------------------------------------------------------- |
-| What is it?            | A linter for Agent Skills (`SKILL.md`), and a guide Claude follows to write one |
-| What does it check?    | Four rules: `named`, `small`, `resolves`, `tested`                              |
-| Where does it run?     | Claude Code, any agent the skills CLI supports, CI, and commit hooks            |
-| How do I install it?   | `/plugin install arnaud-zg --marketplace arnaud-zg/skills`                      |
-| How do I call it?      | Ask Claude to _check the skills_, or type `/arnaud-zg:hexagonal-skill-builder`  |
-| How do I run it in CI? | `node <skill folder>/scripts/check.mjs`, which exits `1` on a finding           |
-| What does it need?     | Node. No dependencies, no network, and it never writes a file                   |
-| Which plugin ships it? | `arnaud-zg`, from the `arnaud-zg-skills` marketplace in `arnaud-zg/skills`      |
-| What is the license?   | MIT                                                                             |
+- **What is it?** A linter for Agent Skills (`SKILL.md`), and a guide Claude follows to write one
+- **What does it check?** Four rules: `named`, `small`, `resolves`, `tested`
+- **Where does it run?** Claude Code, any agent the skills CLI supports, CI, and commit hooks
+- **How do I install it?** `/plugin install arnaud-zg --marketplace arnaud-zg/skills`
+- **How do I call it?** Ask Claude to _check the skills_, or type
+  `/arnaud-zg:hexagonal-skill-builder`
+- **How do I run it in CI?** `node <skill folder>/scripts/check.mjs`, which exits `1` on a finding
+- **What does it need?** Node. No dependencies, no network, and it never writes a file
+- **Which plugin ships it?** `arnaud-zg`, from the `arnaud-zg-skills` marketplace in
+  `arnaud-zg/skills`
+- **What is the license?** MIT
 
 ## 📚 Documentation
 

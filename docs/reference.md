@@ -40,15 +40,18 @@ Field-by-field tables for `marketplace.json` and `plugin.json` live in [manifest
 You normally write none of these keys — the directories are found by name. The manifest keys exist
 only to point somewhere non-standard, and **their override semantics differ**:
 
-| Component     | Found automatically at   | Manifest key   | When the key is set                           |
-| ------------- | ------------------------ | -------------- | --------------------------------------------- |
-| Skills        | `skills/<name>/SKILL.md` | `skills`       | loaded **in addition** to `skills/`           |
-| Subagents     | `agents/*.md`            | `agents`       | `agents/` is **no longer** auto-loaded        |
-| Commands      | `commands/*.md` (legacy) | `commands`     | `commands/` is **no longer** auto-loaded      |
-| Hooks         | `hooks/hooks.json`       | `hooks`        | loaded **in addition** to `hooks/hooks.json`  |
-| MCP servers   | `.mcp.json`              | `mcpServers`   | loaded **in addition** to `.mcp.json`         |
-| Output styles | `output-styles/`         | `outputStyles` | `output-styles/` is **no longer** auto-loaded |
-| LSP servers   | —                        | `lspServers`   | declaration only                              |
+- Skills: at `skills/<name>/SKILL.md`; key `skills`; when the key is set loaded **in addition** to
+  `skills/`
+- Subagents: at `agents/*.md`; key `agents`; when the key is set `agents/` is **no longer**
+  auto-loaded
+- Commands: at `commands/*.md` (legacy); key `commands`; when the key is set `commands/` is **no
+  longer** auto-loaded
+- Hooks: at `hooks/hooks.json`; key `hooks`; if set, loaded **in addition** to `hooks/hooks.json`
+- MCP servers: at `.mcp.json`; key `mcpServers`; when the key is set loaded **in addition** to
+  `.mcp.json`
+- Output styles: at `output-styles/`; key `outputStyles`; when the key is set `output-styles/` is
+  **no longer** auto-loaded
+- LSP servers: manifest key `lspServers`; if set, declaration only
 
 `skills` accepts `"."` or `"./"` to mean the plugin root itself, which is how a plugin can be a
 single skill with `SKILL.md` at its top level.
@@ -67,47 +70,43 @@ description: When Claude should use this, in the words a user would type.
 ---
 ```
 
-| Field           | Notes                                                               |
-| --------------- | ------------------------------------------------------------------- |
-| `name`          | Required. Becomes `/<plugin>:<name>` for user-invoked skills.       |
-| `description`   | Required. The trigger. Always resident in context; the body is not. |
-| `argument-hint` | Makes it a slash command; shown in `/help`, e.g. `<file> [--fix]`   |
-| `allowed-tools` | Restricts tools while the skill runs, e.g. `[Read, Glob, Grep]`     |
-| `version`       | Optional                                                            |
+- `name`: Required. Becomes `/<plugin>:<name>` for user-invoked skills.
+- `description`: Required. The trigger. Always resident in context; the body is not.
+- `argument-hint`: Makes it a slash command; shown in `/help`, e.g. `<file> [--fix]`
+- `allowed-tools`: Restricts tools while the skill runs, e.g. `[Read, Glob, Grep]`
+- `version`: Optional
 
 Model-invoked and user-invoked are the same file format. Adding `argument-hint` / `allowed-tools` is
 what surfaces it as a slash command.
 
 ## CLI
 
-| Command                                    | Purpose                                                                                                  |
-| ------------------------------------------ | -------------------------------------------------------------------------------------------------------- |
-| `claude plugin marketplace add <source>`   | Add a marketplace: `owner/repo`, a URL, or a local path                                                  |
-| `claude plugin marketplace list`           | List configured marketplaces                                                                             |
-| `claude plugin marketplace update [name]`  | Pull latest; all marketplaces if no name                                                                 |
-| `claude plugin marketplace remove <name>`  | Remove a marketplace                                                                                     |
-| `claude plugin install <plugin>[@market]`  | Install                                                                                                  |
-| `claude plugin list`                       | List installed plugins                                                                                   |
-| `claude plugin details <name>`             | Component inventory and projected token cost                                                             |
-| `claude plugin enable` / `disable`         | Toggle without uninstalling                                                                              |
-| `claude plugin update <name>`              | Update (applies on restart)                                                                              |
-| `claude plugin uninstall <name>`           | Remove                                                                                                   |
-| `claude plugin prune`                      | Remove auto-installed dependencies nothing needs                                                         |
-| `claude plugin validate <path> [--strict]` | Validate a plugin or marketplace; `--strict` fails on warnings — use in CI                               |
-| `claude plugin init <name> [--with …]`     | Scaffold into `~/.claude/skills/<name>/`; components: `skills agents hooks mcp lsp output-style channel` |
-| `claude plugin tag [path]`                 | Create `<name>--v<version>` git tag, checking manifests agree                                            |
-| `claude plugin eval [target]`              | Run eval cases against a plugin                                                                          |
+- `claude plugin marketplace add <source>`: Add a marketplace: `owner/repo`, a URL, or a local path
+- `claude plugin marketplace list`: List configured marketplaces
+- `claude plugin marketplace update [name]`: Pull latest; all marketplaces if no name
+- `claude plugin marketplace remove <name>`: Remove a marketplace
+- `claude plugin install <plugin>[@market]`: Install
+- `claude plugin list`: List installed plugins
+- `claude plugin details <name>`: Component inventory and projected token cost
+- `claude plugin enable` / `disable`: Toggle without uninstalling
+- `claude plugin update <name>`: Update (applies on restart)
+- `claude plugin uninstall <name>`: Remove
+- `claude plugin prune`: Remove auto-installed dependencies nothing needs
+- `claude plugin validate <path> [--strict]`: Validate a plugin or marketplace; `--strict` fails on
+  warnings — use in CI
+- `claude plugin init <name> [--with …]`: Scaffold into `~/.claude/skills/<name>/`; components:
+  `skills agents hooks mcp lsp output-style channel`
+- `claude plugin tag [path]`: Create `<name>--v<version>` git tag, checking manifests agree
+- `claude plugin eval [target]`: Run eval cases against a plugin
 
 In-session equivalents: `/plugin` for the browser, `/reload-plugins` to pick up local edits without
 restarting.
 
 ## On disk
 
-| Path                                        | Contents                                                |
-| ------------------------------------------- | ------------------------------------------------------- |
-| `~/.claude/plugins/known_marketplaces.json` | Registered marketplaces and their cache paths           |
-| `~/.claude/plugins/marketplaces/<name>/`    | Cloned marketplace repository                           |
-| `~/.claude/skills/<name>/`                  | Unpackaged local plugins, loaded as `<name>@skills-dir` |
+- `~/.claude/plugins/known_marketplaces.json`: Registered marketplaces and their cache paths
+- `~/.claude/plugins/marketplaces/<name>/`: Cloned marketplace repository
+- `~/.claude/skills/<name>/`: Unpackaged local plugins, loaded as `<name>@skills-dir`
 
 Installed plugin directories are recorded per-install; `claude plugin list` and
 `claude plugin details <name>` report the resolved paths.

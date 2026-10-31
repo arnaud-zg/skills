@@ -1,0 +1,10 @@
+{
+  "root": {
+    "file": "CLAUDE.md",
+    "referencePattern": "\\]\\(\\.?/?((?:docs/)?[a-z-]+\\.md)(?:#[^)]*)?\\)",
+    "threshold": 1000
+  },
+  "references": { "threshold": 2000, "failOnExceed": true },
+  "subdir": { "dirs": [] },
+  "planningDir": ".none"
+}

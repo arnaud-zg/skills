@@ -8,7 +8,7 @@ published to npm. Tooling comes from `@arnaud-zg/configs`. Full docs: [README.md
 
 To add or change a plugin or skill, follow [docs/how-to.md](./docs/how-to.md). Draft in
 `~/.claude/skills/<name>/`, evaluate, then move it into `plugins/`. Document each plugin in its own
-`docs/` with the four Diataxis pages ([how](./docs/how-to.md#document-a-plugin)).
+`docs/` with the four Diataxis pages ([how](./docs/test-and-document.md#document-a-plugin)).
 
 ## Releasing
 
