@@ -1,5 +1,20 @@
 # @arnaud-zg/plugin-arnaud-zg
 
+## 0.6.0
+
+### Minor Changes
+
+- b6049c5: Add the testing-trophy skill: plan, write and audit tests by the testing trophy, with a
+  check for the suite's shape
+- ecfbc8b: doc-compass: add the examples rule, always on. Every reference and how-to page links an
+  example file from `examples/` (or the `examples` folder in doc-compass.json), and a test of the
+  project names it. Ships a tested example for every skill.
+
+### Patch Changes
+
+- a5330bf: hexagonal-skill-builder: an absolute path passed to the check is checked, no longer
+  reported missing
+
 ## 0.5.1
 
 ### Patch Changes
