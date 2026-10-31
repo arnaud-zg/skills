@@ -1,4 +1,7 @@
-# Tutorial — your first plugin, end to end
+# 🚀 Tutorial: build your first Claude Code plugin
+
+[📚 Docs home](README.md) › Writing plugins › **🚀 Tutorial** · [🛠️ How-to](how-to.md) ·
+[📖 Reference](reference.md) · [💡 Explanation](explanation.md)
 
 Goal: go from an empty catalogue to a plugin you installed on your own machine from this
 marketplace. Roughly ten minutes. Nothing here is published or pushed until the last step, and that

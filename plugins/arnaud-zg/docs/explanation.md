@@ -1,4 +1,8 @@
-# 💡 Explanation
+# 💡 Explanation: why a skill's shape is its behaviour
+
+[📚 Docs home](../../../docs/README.md) › [hexagonal-skill-builder](../README.md) ›
+[🚀 Tutorial](tutorial.md) · [🛠️ How-to](how-to.md) · [📖 Reference](reference.md) · **💡
+Explanation**
 
 Why the skill works the way it does. For commands, read the [how-to](how-to.md).
 

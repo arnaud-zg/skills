@@ -1,4 +1,7 @@
-# 🚀 Tutorial: your first skill, checked
+# 🚀 Tutorial: write and lint your first Agent Skill
+
+[📚 Docs home](../../../docs/README.md) › [hexagonal-skill-builder](../README.md) › **🚀 Tutorial**
+· [🛠️ How-to](how-to.md) · [📖 Reference](reference.md) · [💡 Explanation](explanation.md)
 
 Ten minutes. You will write a skill with two mistakes in it, watch the check find both, fix them,
 and get a clean result.

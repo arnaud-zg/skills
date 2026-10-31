@@ -4,6 +4,8 @@
 > each linted, tested and versioned. Its first plugin, arnaud-zg, ships hexagonal-skill-builder, a
 > linter for Agent Skills (SKILL.md).
 
+- [Documentation home](https://github.com/arnaud-zg/skills/blob/main/docs/README.md): skills catalogue, purpose and how each skill works, and a map of every page
+
 ## hexagonal-skill-builder: a linter for Agent Skills
 
 A linter and writing guide for Agent Skills (SKILL.md folders loaded by Claude Code and other coding
