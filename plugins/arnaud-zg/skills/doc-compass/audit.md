@@ -34,3 +34,6 @@
 | `banned`     | no page holds a string passed with `--ban`                          | rewrite the sentence                            | (why: E-09) |
 
 A clean check is the start of an audit, not its end.
+
+It checks the docs' shape, not whether their claims hold; for that, use a `glance-audit` skill when
+one is installed.
