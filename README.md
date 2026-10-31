@@ -1,14 +1,29 @@
-# 🧰 skills: Claude Code plugins and Agent Skills, linted and versioned
+# 🧰 skills: Claude Code plugin marketplace of Agent Skills, linted and versioned
 
 Arnaud Zheng's [Claude Code](https://claude.com/claude-code) plugin marketplace: a growing shelf of
-Agent Skills, subagents, hooks and MCP servers that install with a version and uninstall cleanly,
-instead of being copy-pasted into `~/.claude/`. Every skill here is linted, tested and versioned.
+Agent Skills (`SKILL.md`) for Diataxis documentation, skill linting and reviews, subagents, hooks
+and MCP servers that install with a version and uninstall cleanly, instead of being copy-pasted into
+`~/.claude/`. Every skill here is linted, tested and versioned.
 
 ## Available skills
 
-The skills, what each does and how to call it, are listed once, in the
-**[`arnaud-zg` plugin README](./plugins/arnaud-zg/README.md#skills)**. Install them in Claude Code,
-or one at a time in any agent through the [skills CLI](https://github.com/vercel-labs/skills):
+Eight Agent Skills ship in the `arnaud-zg` plugin. What each does, when it triggers, how to call it
+and what it needs are described once, in the
+**[`arnaud-zg` plugin README](./plugins/arnaud-zg/README.md#skills)**:
+
+- [hexagonal-skill-builder](./plugins/arnaud-zg/README.md#hexagonal-skill-builder)
+- [doc-compass](./plugins/arnaud-zg/README.md#doc-compass)
+- [radical-simplify](./plugins/arnaud-zg/README.md#radical-simplify)
+- [glance-first](./plugins/arnaud-zg/README.md#glance-first)
+- [glance-audit](./plugins/arnaud-zg/README.md#glance-audit)
+- [skill-retro](./plugins/arnaud-zg/README.md#skill-retro)
+- [usage-runway](./plugins/arnaud-zg/README.md#usage-runway)
+- [testing-trophy](./plugins/arnaud-zg/README.md#testing-trophy)
+
+## Install
+
+In Claude Code, or one skill at a time in any agent through the
+[skills CLI](https://github.com/vercel-labs/skills):
 
 ```sh
 /plugin install arnaud-zg --marketplace arnaud-zg/skills
