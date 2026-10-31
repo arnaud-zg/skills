@@ -3,8 +3,10 @@
 > A Claude Code plugin marketplace named arnaud-zg-skills: Agent Skills, subagents, hooks and MCP servers,
 > each linted, tested and versioned. Its first plugin, arnaud-zg, ships hexagonal-skill-builder, a
 > linter for Agent Skills (SKILL.md), doc-compass, which writes and checks Diataxis docs,
-> radical-simplify, which rebuilds a process, product or UI into its simplest version, and
-> glance-first, which presents any work so it reads in under a minute.
+> radical-simplify, which rebuilds a process, product or UI into its simplest version, 
+> glance-first, which presents any work so it reads in under a minute, glance-audit, which challenges a
+> doc, plan or PR, skill-retro, which turns session friction into skill fixes, and usage-runway,
+> which says whether the next job fits the usage window.
 
 - [Documentation home](https://github.com/arnaud-zg/skills/blob/main/docs/README.md): skills catalogue, purpose and how each skill works, and a map of every page
 
@@ -79,6 +81,54 @@ no dependency. MIT.
 - [Reference](https://github.com/arnaud-zg/skills/blob/main/plugins/arnaud-zg/docs/glance-first/reference.md): fields, limits, check
 - [Explanation](https://github.com/arnaud-zg/skills/blob/main/plugins/arnaud-zg/docs/glance-first/explanation.md): why the answer, then numbers, then pictures
 - [SKILL.md](https://github.com/arnaud-zg/skills/blob/main/plugins/arnaud-zg/skills/glance-first/SKILL.md): the instructions the agent follows
+
+## glance-audit: challenge a doc, plan or pull request
+
+Reads like a careful sceptic and hands back a one-line verdict, the critical finding with its proof,
+and comments anchored on exact quotes, ready to paste. It never posts. glance-first renders it.
+
+- Install in Claude Code: `/plugin install arnaud-zg --marketplace arnaud-zg/skills`
+- Install in any agent: `npx skills add arnaud-zg/skills --skill glance-audit`
+- Call it: ask the agent to "audit this", "poke holes" or "challenge this plan"
+
+- [README](https://github.com/arnaud-zg/skills/blob/main/plugins/arnaud-zg/docs/glance-audit/README.md): what it is, install, what it reads
+- [Tutorial](https://github.com/arnaud-zg/skills/blob/main/plugins/arnaud-zg/docs/glance-audit/tutorial.md): a first run
+- [How-to guides](https://github.com/arnaud-zg/skills/blob/main/plugins/arnaud-zg/docs/glance-audit/how-to.md): one recipe per task
+- [Reference](https://github.com/arnaud-zg/skills/blob/main/plugins/arnaud-zg/docs/glance-audit/reference.md): fields, flags, check
+- [Explanation](https://github.com/arnaud-zg/skills/blob/main/plugins/arnaud-zg/docs/glance-audit/explanation.md): why it works this way
+- [SKILL.md](https://github.com/arnaud-zg/skills/blob/main/plugins/arnaud-zg/skills/glance-audit/SKILL.md): the instructions the agent follows
+
+## skill-retro: turn session friction into skill fixes
+
+Finds what made a session's skills slow, wrong or expensive in tokens, ranks it by cost, and books
+each fix as its own draft pull request in a skills stack.
+
+- Install in Claude Code: `/plugin install arnaud-zg --marketplace arnaud-zg/skills`
+- Install in any agent: `npx skills add arnaud-zg/skills --skill skill-retro`
+- Call it: ask for a "retro" or to "improve the skills" at the end of a session
+
+- [README](https://github.com/arnaud-zg/skills/blob/main/plugins/arnaud-zg/docs/skill-retro/README.md): what it is, install, what it reads
+- [Tutorial](https://github.com/arnaud-zg/skills/blob/main/plugins/arnaud-zg/docs/skill-retro/tutorial.md): a first run
+- [How-to guides](https://github.com/arnaud-zg/skills/blob/main/plugins/arnaud-zg/docs/skill-retro/how-to.md): one recipe per task
+- [Reference](https://github.com/arnaud-zg/skills/blob/main/plugins/arnaud-zg/docs/skill-retro/reference.md): fields, flags, check
+- [Explanation](https://github.com/arnaud-zg/skills/blob/main/plugins/arnaud-zg/docs/skill-retro/explanation.md): why it works this way
+- [SKILL.md](https://github.com/arnaud-zg/skills/blob/main/plugins/arnaud-zg/skills/skill-retro/SKILL.md): the instructions the agent follows
+
+## usage-runway: does the next job fit the usage window
+
+Reads Claude Code's session records and answers GO or PARK from the clock and any limit already hit.
+Read-only, no network.
+
+- Install in Claude Code: `/plugin install arnaud-zg --marketplace arnaud-zg/skills`
+- Install in any agent: `npx skills add arnaud-zg/skills --skill usage-runway`
+- Call it: ask "do we have enough credit?" before long work
+
+- [README](https://github.com/arnaud-zg/skills/blob/main/plugins/arnaud-zg/docs/usage-runway/README.md): what it is, install, what it reads
+- [Tutorial](https://github.com/arnaud-zg/skills/blob/main/plugins/arnaud-zg/docs/usage-runway/tutorial.md): a first run
+- [How-to guides](https://github.com/arnaud-zg/skills/blob/main/plugins/arnaud-zg/docs/usage-runway/how-to.md): one recipe per task
+- [Reference](https://github.com/arnaud-zg/skills/blob/main/plugins/arnaud-zg/docs/usage-runway/reference.md): fields, flags, check
+- [Explanation](https://github.com/arnaud-zg/skills/blob/main/plugins/arnaud-zg/docs/usage-runway/explanation.md): why it works this way
+- [SKILL.md](https://github.com/arnaud-zg/skills/blob/main/plugins/arnaud-zg/skills/usage-runway/SKILL.md): the instructions the agent follows
 
 ## Writing a Claude Code plugin in this repository
 

@@ -12,18 +12,17 @@ own four [Diataxis](https://diataxis.fr/) pages. MIT.
 | [🧭 `doc-compass`](docs/doc-compass/README.md)                        | Writes Diataxis docs from templates and checks them: orphan pages, broken links, stale decisions | _check the docs_, `/arnaud-zg:doc-compass audit docs`                 | Node, read-only            |
 | [✂️ `radical-simplify`](docs/radical-simplify/README.md)              | Rebuilds a process, product or UI: Question, Remove, Simplify, Reimagine, Accelerate, Automate   | _make this radically simpler_, `/arnaud-zg:radical-simplify <target>` | Nothing, instructions only |
 | [👁️ `glance-first`](docs/glance-first/README.md)                      | Presents any work in under a minute: the answer, the key numbers, then a diagram per block       | _give me a TLDR_, _write the PR description_                          | Node, reads one file       |
+| [🔍 `glance-audit`](docs/glance-audit/README.md)                      | Challenges a doc, plan, PR or status report: one-line verdict, proof, comments ready to paste    | _audit this_, _poke holes_, `/arnaud-zg:glance-audit`                 | Node, never posts          |
+| [🔁 `skill-retro`](docs/skill-retro/README.md)                        | Finds what made a session's skills slow, wrong or costly and books each fix as a draft PR        | _retro_, _improve the skills_, `/arnaud-zg:skill-retro`               | Node, `gh` for the stack   |
+| [⏳ `usage-runway`](docs/usage-runway/README.md)                      | Says how much usage window is left and whether the next job fits: GO or PARK                     | _do we have enough credit_, `/arnaud-zg:usage-runway`                 | Node, read-only            |
 
 The checkers print every finding with its file, line and fix, and exit `1` on a finding, so they
 gate CI and commit hooks as they are.
 
 ## 📚 Documentation
 
-| Skill                     | 🚀 Tutorial                                                        | 🛠️ How-to                                                 | 📖 Reference                                                   | 💡 Explanation                                                  |
-| ------------------------- | ------------------------------------------------------------------ | --------------------------------------------------------- | -------------------------------------------------------------- | --------------------------------------------------------------- |
-| `hexagonal-skill-builder` | [A first skill, checked](docs/hexagonal-skill-builder/tutorial.md) | [CI, hooks, JSON](docs/hexagonal-skill-builder/how-to.md) | [Command and rules](docs/hexagonal-skill-builder/reference.md) | [Why four rules](docs/hexagonal-skill-builder/explanation.md)   |
-| `doc-compass`             | [A checked docs set](docs/doc-compass/tutorial.md)                 | [CI, style, audits](docs/doc-compass/how-to.md)           | [Command and rules](docs/doc-compass/reference.md)             | [Why a compass](docs/doc-compass/explanation.md)                |
-| `radical-simplify`        | [A refund flow, cut down](docs/radical-simplify/tutorial.md)       | [Screens, code, docs](docs/radical-simplify/how-to.md)    | [Steps and output](docs/radical-simplify/reference.md)         | [Why the order is strict](docs/radical-simplify/explanation.md) |
-| `glance-first`            | [A change in one minute](docs/glance-first/tutorial.md)            | [PR, page, terminal, file](docs/glance-first/how-to.md)   | [Fields and limits](docs/glance-first/reference.md)            | [Why numbers come second](docs/glance-first/explanation.md)     |
+Each skill's page in the table above links its 🚀 tutorial, 🛠️ how-to guides, 📖 reference and 💡
+explanation.
 
 ## Install
 
