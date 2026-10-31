@@ -26,9 +26,9 @@ claude plugin marketplace remove arnaud-zg-skills
 claude plugin init <name> --with skills agents hooks mcp
 ```
 
-This scaffolds `~/.claude/skills/<name>/`, which auto-loads next session as `<name>@skills-dir` — no
-marketplace, no install, no version. Iterate there, then move the directory into `plugins/` when it
-is worth publishing.
+This scaffolds `~/.claude/skills/<name>/`, which auto-loads next session as `<name>@skills-dir`,
+with no marketplace, no install and no version. Iterate there, then move the directory into
+`plugins/` when it is worth publishing.
 
 ## Evaluate a skill
 
@@ -75,4 +75,6 @@ plugins/<name>/
    sibling page a reader probably wanted instead.
 6. Keep `README.md` and `docs/` outside the skill folder: the agent loads the skill, people read the
    docs, and neither should pay for the other's text.
-7. `pnpm lint:md` checks the Markdown and every relative link.
+7. `pnpm lint:md` checks the Markdown, and `pnpm lint:docs` runs this repo's own
+   [doc-compass](../plugins/arnaud-zg/docs/doc-compass/README.md) check: every page reachable from
+   its index, every link and anchor resolving, a breadcrumb on every page, and no em dash.

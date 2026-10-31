@@ -2,7 +2,8 @@
 //
 //   indexed     every page can be reached from the index by following links
 //   resolves    every relative link and heading anchor a page points at exists
-//   framed      every page but the index links back to the index near its top
+//   framed      every page but the index links back to the index, or to its section's README,
+//               near its top
 //   superseded  an ADR that says "Superseded by X" is pointed back at by X
 //   generated   a "Generated from `source`" header names a source that exists
 //   small       every page fits in 300 lines
@@ -186,18 +187,28 @@ function indexed(docs, index, add) {
   }
 }
 
+/** Whether `page` is the README.md of a folder holding `file`: a nested docs set's own index. */
+function isSectionIndexOf(/** @type {string} */ page, /** @type {string} */ file) {
+  if (page === file || posix.basename(page) !== "README.md") return false;
+  const folder = posix.dirname(page);
+  return folder === "." || file.startsWith(`${folder}/`);
+}
+
 /** @param {Docs} docs @param {string} index @param {Add} add */
 function framed(docs, index, add) {
   for (const [file, text] of docs) {
     if (file === index || isGravestone(text)) continue;
     const top = text.split("\n").slice(0, LIMITS.frame).join("\n");
-    const home = linksOf(file, top).some((link) => link.target === index);
+    const home = linksOf(file, top).some((link) => {
+      const target = pageAt(docs, link.target);
+      return target === index || (target !== null && isSectionIndexOf(target, file));
+    });
     if (home) continue;
     add(
       "framed",
       file,
       1,
-      `${file} has no link to ${index} in its first ${String(LIMITS.frame)} lines`,
+      `${file} has no link to ${index}, or to a README.md above it, in its first ${String(LIMITS.frame)} lines`,
       "open the page with the breadcrumb from the templates, current page in bold",
     );
   }

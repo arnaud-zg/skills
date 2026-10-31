@@ -36,15 +36,15 @@ It skips `node_modules`, `.git`, `dist` and `.cache`.
 
 Source of truth: [`scripts/rules.mjs`](../../skills/doc-compass/scripts/rules.mjs).
 
-| Rule         | Reports                                                                                     |
-| ------------ | ------------------------------------------------------------------------------------------- |
-| `indexed`    | a page no chain of links reaches from the index; a link to a folder reaches its `README.md` |
-| `resolves`   | a relative link to nothing, or an anchor no heading makes, with GitHub's slugs              |
-| `framed`     | a page with no link to the index in its first 10 lines                                      |
-| `superseded` | a line with "Superseded by" and a link, whose target never links back                       |
-| `generated`  | a "Generated … from \`source\`" line whose source does not exist, from the current folder   |
-| `small`      | a page over 300 lines                                                                       |
-| `banned`     | each `--ban` string found outside code blocks, inline code and comments                     |
+| Rule         | Reports                                                                                             |
+| ------------ | --------------------------------------------------------------------------------------------------- |
+| `indexed`    | a page no chain of links reaches from the index; a link to a folder reaches its `README.md`         |
+| `resolves`   | a relative link to nothing, or an anchor no heading makes, with GitHub's slugs                      |
+| `framed`     | a page with no link to the index, or to the `README.md` of a folder above it, in its first 10 lines |
+| `superseded` | a line with "Superseded by" and a link, whose target never links back                               |
+| `generated`  | a "Generated … from \`source\`" line whose source does not exist, from the current folder           |
+| `small`      | a page over 300 lines                                                                               |
+| `banned`     | each `--ban` string found outside code blocks, inline code and comments                             |
 
 Links inside code, HTML comments, URLs with a scheme and absolute paths are never checked. A page
 whose title ends with `(moved)` is a gravestone, exempt from `indexed` and `framed`.

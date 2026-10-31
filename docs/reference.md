@@ -37,7 +37,7 @@ Field-by-field tables for `marketplace.json` and `plugin.json` live in [manifest
 
 ## Component discovery
 
-You normally write none of these keys — the directories are found by name. The manifest keys exist
+You normally write none of these keys: the directories are found by name. The manifest keys exist
 only to point somewhere non-standard, and **their override semantics differ**:
 
 - Skills: at `skills/<name>/SKILL.md`; key `skills`; when the key is set loaded **in addition** to
@@ -57,8 +57,8 @@ only to point somewhere non-standard, and **their override semantics differ**:
 single skill with `SKILL.md` at its top level.
 
 `${CLAUDE_PLUGIN_ROOT}` expands to the installed plugin directory. Use it in every hook command and
-script path — never a relative or hard-coded path — and quote it, since the expanded path can
-contain spaces: `"command": "\"${CLAUDE_PLUGIN_ROOT}/hooks-handlers/x.sh\""`.
+script path, never a relative or hard-coded path, and quote it, since the expanded path can contain
+spaces: `"command": "\"${CLAUDE_PLUGIN_ROOT}/hooks-handlers/x.sh\""`.
 `claude plugin validate --strict` fails on an unquoted one.
 
 ## `SKILL.md` frontmatter
@@ -93,7 +93,7 @@ what surfaces it as a slash command.
 - `claude plugin uninstall <name>`: Remove
 - `claude plugin prune`: Remove auto-installed dependencies nothing needs
 - `claude plugin validate <path> [--strict]`: Validate a plugin or marketplace; `--strict` fails on
-  warnings — use in CI
+  warnings. Use it in CI
 - `claude plugin init <name> [--with …]`: Scaffold into `~/.claude/skills/<name>/`; components:
   `skills agents hooks mcp lsp output-style channel`
 - `claude plugin tag [path]`: Create `<name>--v<version>` git tag, checking manifests agree

@@ -9,7 +9,7 @@ This page is about the model. If you want commands, read [how-to.md](./how-to.md
 
 Claude Code can be extended with prompts (skills), subagents, slash commands, lifecycle hooks and
 MCP servers. Historically each tool shipped its own installer script that copied files into
-`~/.claude/` — into `~/.claude/skills/`, `~/.claude/commands/`, `~/.claude/hooks/`, plus edits to
+`~/.claude/`: into `~/.claude/skills/`, `~/.claude/commands/`, `~/.claude/hooks/`, plus edits to
 `~/.claude/settings.json`. That works exactly once. It gives you no version, no uninstall, no way to
 see what you have, and no way to know which file came from which tool.
 
@@ -28,7 +28,7 @@ marketplace          "where do I get things, and do I trust the source?"
         MCP server
 ```
 
-### Skill — the unit of behaviour
+### Skill: the unit of behaviour
 
 A skill is a Markdown file, `SKILL.md`, with YAML frontmatter:
 
@@ -46,21 +46,21 @@ description: Use when the user asks to review, check or sanity-check a database 
 
 The body is a prompt addressed to Claude. The `description` is the trigger: Claude reads every
 installed skill's `name` and `description` at all times, and loads the body only when a request
-matches. That asymmetry is the whole design — descriptions are cheap and always resident, bodies are
+matches. That asymmetry is the whole design: descriptions are cheap and always resident, bodies are
 expensive and loaded on demand. A vague description means the skill never fires; a body stuffed with
 reference material means every firing costs you context.
 
 Two flavours, distinguished only by frontmatter:
 
-- **Model-invoked** — `name` + `description`. Claude decides when to use it.
-- **User-invoked** — add `argument-hint` and/or `allowed-tools`, and it also becomes the slash
+- **Model-invoked**: `name` + `description`. Claude decides when to use it.
+- **User-invoked**: add `argument-hint` and/or `allowed-tools`, and it also becomes the slash
   command `/name`. The user decides when to use it.
 
 A skill directory can hold more than `SKILL.md`: reference documents, scripts, templates. Claude
 reads those only if the skill body tells it to, which is how you ship a large capability without
 paying for it in every conversation.
 
-### Plugin — the unit of distribution
+### Plugin: the unit of distribution
 
 A plugin is a directory with `.claude-plugin/plugin.json` and, next to it, whichever component
 directories it needs:
@@ -80,9 +80,9 @@ namespace: a skill named `review` inside plugin `db-tools` is `/db-tools:review`
 both ship a `review` without colliding.
 
 The directories above are discovered **by name**. You do not list them in `plugin.json`. The
-manifest is metadata — identity, version, author, dependencies — not a file index.
+manifest is metadata (identity, version, author, dependencies), not a file index.
 
-### Marketplace — the unit of discovery and trust
+### Marketplace: the unit of discovery and trust
 
 A marketplace is a git repository with `.claude-plugin/marketplace.json` at its root, listing
 plugins. It is the thing a user adds once:
@@ -93,7 +93,7 @@ plugins. It is the thing a user adds once:
 
 From then on they can install any plugin it lists; `claude plugin marketplace update` refreshes the
 list, and `claude plugin update` installs a plugin's newer version. Trust is granted at this level,
-not per plugin — adding a marketplace means accepting whatever its maintainer lists, now and later.
+not per plugin: adding a marketplace means accepting whatever its maintainer lists, now and later.
 That is why cross-marketplace dependencies require an explicit allowlist (see below): adding one
 marketplace must not silently pull code from another.
 
@@ -135,6 +135,6 @@ the same four pages, so moving between them costs nothing.
 | Project `.claude/skills/`  | via git   | via repo  | conventions for one codebase    |
 | Plugin in a marketplace    | yes       | yes       | anything you want others to use |
 
-The first is not a lesser version of the third — it is where you draft. A directory under
+The first is not a lesser version of the third: it is where you draft. A directory under
 `~/.claude/skills/` auto-loads as its own plugin (`<name>@skills-dir`) with no manifest and no
 install step, so you can iterate on a skill in a live session and only package it once it earns it.

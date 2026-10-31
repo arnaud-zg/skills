@@ -133,6 +133,34 @@ describe("framed", () => {
   });
 });
 
+describe("framed, in a nested docs set", () => {
+  test("given pages that link their section's README, then they count as framed", () => {
+    const pages = {
+      "README.md": indexOf("tool/README.md"),
+      "tool/README.md": page("Tool", "- [Guide](guide.md)", "[Home](../README.md)"),
+      "tool/guide.md": page("Guide", "", "[Tool](README.md)"),
+    };
+    expect(findingsOf(pages)).toEqual([]);
+  });
+
+  test("given a section README that links only itself, then it is not framed", () => {
+    const pages = {
+      "README.md": indexOf("tool/README.md"),
+      "tool/README.md": page("Tool", "", "[Tool](README.md)"),
+    };
+    expect(findingsOf(pages)).toEqual([{ rule: "framed", file: "tool/README.md", line: 1 }]);
+  });
+
+  test("given a README in a sibling folder, then it does not frame the page", () => {
+    const pages = {
+      "README.md": indexOf("a/README.md", "b/page.md"),
+      "a/README.md": page("A", "", "[Home](../README.md)"),
+      "b/page.md": page("Page", "", "[A](../a/README.md)"),
+    };
+    expect(findingsOf(pages)).toEqual([{ rule: "framed", file: "b/page.md", line: 1 }]);
+  });
+});
+
 describe("superseded", () => {
   test("given an ADR superseded by one that never links back, then the status line is reported", () => {
     const pages = {

@@ -22,14 +22,14 @@
 
 ## The rules
 
-| Rule         | Says                                                              | Usual fix                                       | Why         |
-| ------------ | ----------------------------------------------------------------- | ----------------------------------------------- | ----------- |
-| `indexed`    | every page can be reached from the index (gravestones excepted)   | a row in the index, or in a page it links       | (why: E-01) |
-| `resolves`   | every relative link and heading anchor exists                     | point at the new name, or leave a gravestone    | (why: E-02) |
-| `framed`     | every page links to the index in its first 10 lines               | copy the breadcrumb from its template           | (why: E-01) |
-| `superseded` | a record "superseded by" another is linked back from it           | add "Supersedes" and a link to the newer record | (why: E-10) |
-| `generated`  | a "Generated … from \`source\`" header names a source that exists | fix the header, then regenerate                 | (why: E-06) |
-| `small`      | every page fits in 300 lines                                      | split it by quadrant, see [place.md](place.md)  | (why: E-04) |
-| `banned`     | no page holds a string passed with `--ban`                        | rewrite the sentence                            | (why: E-09) |
+| Rule         | Says                                                                | Usual fix                                       | Why         |
+| ------------ | ------------------------------------------------------------------- | ----------------------------------------------- | ----------- |
+| `indexed`    | every page can be reached from the index (gravestones excepted)     | a row in the index, or in a page it links       | (why: E-01) |
+| `resolves`   | every relative link and heading anchor exists                       | point at the new name, or leave a gravestone    | (why: E-02) |
+| `framed`     | every page links to the index, or its section's README, in 10 lines | copy the breadcrumb from its template           | (why: E-01) |
+| `superseded` | a record "superseded by" another is linked back from it             | add "Supersedes" and a link to the newer record | (why: E-10) |
+| `generated`  | a "Generated … from \`source\`" header names a source that exists   | fix the header, then regenerate                 | (why: E-06) |
+| `small`      | every page fits in 300 lines                                        | split it by quadrant, see [place.md](place.md)  | (why: E-04) |
+| `banned`     | no page holds a string passed with `--ban`                          | rewrite the sentence                            | (why: E-09) |
 
 A clean check is the start of an audit, not its end.
