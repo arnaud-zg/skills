@@ -169,6 +169,13 @@ CLI, it is `/hexagonal-skill-builder`.
 The entry, `SKILL.md`, is the one port a model reads, and every other page sits behind it by layer,
 as in hexagonal architecture. [Why "hexagonal"](docs/explanation.md#why-hexagonal) says more.
 
+## Also in this plugin: doc-compass
+
+[`doc-compass`](docs/doc-compass/README.md) writes [Diataxis](https://diataxis.fr/) documentation
+from templates and keeps it true, with a check for orphan pages, broken links and anchors, and
+decisions superseded one way only. Its own four pages start at
+[docs/doc-compass](docs/doc-compass/README.md).
+
 ## 🔒 Know what you're installing
 
 - **It reads, and never writes.** The check reads the files under your skills folders and

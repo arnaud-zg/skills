@@ -19,9 +19,10 @@ need, so you can go straight to the kind of page you want.
 
 ## Skills catalogue
 
-| Skill                                                       | Plugin      | Purpose                                                                                     | Fires when you ask to…                                                    |
-| ----------------------------------------------------------- | ----------- | ------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------- |
-| [`hexagonal-skill-builder`](../plugins/arnaud-zg/README.md) | `arnaud-zg` | Lint and write Agent Skills (`SKILL.md`) against four rules: named, small, resolves, tested | _create a skill_, _check the skills_, _lint my skills_, edit a `SKILL.md` |
+| Skill                                                            | Plugin      | Purpose                                                                                     | Fires when you ask to…                                                    |
+| ---------------------------------------------------------------- | ----------- | ------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------- |
+| [`hexagonal-skill-builder`](../plugins/arnaud-zg/README.md)      | `arnaud-zg` | Lint and write Agent Skills (`SKILL.md`) against four rules: named, small, resolves, tested | _create a skill_, _check the skills_, _lint my skills_, edit a `SKILL.md` |
+| [`doc-compass`](../plugins/arnaud-zg/docs/doc-compass/README.md) | `arnaud-zg` | Write and check Diataxis docs: orphan pages, broken links, stale decisions                  | _document this feature_, _check the docs_, _where should this doc go_     |
 
 ### hexagonal-skill-builder: a linter for Agent Skills
 
@@ -38,11 +39,29 @@ need, so you can go straight to the kind of page you want.
 - **Install**: `/plugin install arnaud-zg --marketplace arnaud-zg/skills`, or
   `npx skills add arnaud-zg/skills --skill hexagonal-skill-builder` for any agent.
 
+### doc-compass: Diataxis docs that stay true
+
+- **What it is**: a guide for writing [Diataxis](https://diataxis.fr/) docs, page templates, and a
+  docs checker.
+- **Purpose**: stop docs going stale by omission: a page the index forgot, a link to a renamed
+  heading.
+- **How it works**: a Node script checks a docs folder against seven rules and prints each finding
+  with its file, line and fix. Exit `1` on a finding. It only reads.
+- **Call it**: ask Claude to _check the docs_, or run `node <skill folder>/scripts/check-docs.mjs`.
+- **Install**: as above, with `--skill doc-compass` for the skills CLI.
+
 ## Docs for each skill
 
-| Skill                                                       | 🚀 Tutorial                                                        | 🛠️ How-to guides                                       | 📖 Reference                                                | 💡 Explanation                                             |
-| ----------------------------------------------------------- | ------------------------------------------------------------------ | ------------------------------------------------------ | ----------------------------------------------------------- | ---------------------------------------------------------- |
-| [`hexagonal-skill-builder`](../plugins/arnaud-zg/README.md) | [Your first skill, checked](../plugins/arnaud-zg/docs/tutorial.md) | [CI, hooks, JSON](../plugins/arnaud-zg/docs/how-to.md) | [Command and rules](../plugins/arnaud-zg/docs/reference.md) | [Why four rules](../plugins/arnaud-zg/docs/explanation.md) |
+- **[`hexagonal-skill-builder`](../plugins/arnaud-zg/README.md)**: 🚀
+  [Your first skill, checked](../plugins/arnaud-zg/docs/tutorial.md) · 🛠️
+  [CI, hooks, JSON](../plugins/arnaud-zg/docs/how-to.md) · 📖
+  [Command and rules](../plugins/arnaud-zg/docs/reference.md) · 💡
+  [Why four rules](../plugins/arnaud-zg/docs/explanation.md)
+- **[`doc-compass`](../plugins/arnaud-zg/docs/doc-compass/README.md)**: 🚀
+  [A checked docs set](../plugins/arnaud-zg/docs/doc-compass/tutorial.md) · 🛠️
+  [CI, style, audits](../plugins/arnaud-zg/docs/doc-compass/how-to.md) · 📖
+  [Command and rules](../plugins/arnaud-zg/docs/doc-compass/reference.md) · 💡
+  [Why a compass](../plugins/arnaud-zg/docs/doc-compass/explanation.md)
 
 ## Write a plugin in this repository
 
@@ -52,6 +71,6 @@ These pages cover building and shipping plugins here, not using them.
 | -------------------------------------- | ------------------------------------------------------------------------------- | ------------------------------------------------------ | ------------------------------------------------------------------------------ |
 | [Build your first plugin](tutorial.md) | [Add](how-to.md), [test, document](test-and-document.md), [release](release.md) | [Layout, CLI](reference.md), [manifests](manifests.md) | [Skills, plugins, marketplaces](explanation.md), [composition](composition.md) |
 
-A new skill gets a row in the [catalogue](#skills-catalogue), a summary under it, and a row in
+A new skill gets a row in the [catalogue](#skills-catalogue), a summary under it, and a line in
 [Docs for each skill](#docs-for-each-skill).
 [Document a plugin](test-and-document.md#document-a-plugin) says how.
