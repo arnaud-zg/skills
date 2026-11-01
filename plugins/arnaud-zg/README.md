@@ -30,10 +30,6 @@ See [Install](#install) to pin a version or enable the plugin for a whole team.
 The checkers print every finding with its file, line and fix, and exit `1` on a finding, so they
 gate CI and commit hooks as they are.
 
-## 📚 Documentation
-
-Each skill's guide above links its 🚀 tutorial, 🛠️ how-to guides, 📖 reference and 💡 explanation.
-
 ## Install
 
 **Claude Code**, in one step (Claude Code 2.1.275 or later). This installs all eight skills:
@@ -45,27 +41,20 @@ Each skill's guide above links its 🚀 tutorial, 🛠️ how-to guides, 📖 re
 or in two, pinned to the version you reviewed:
 
 ```sh
-/plugin marketplace add arnaud-zg/skills#arnaud-zg--v0.2.1
+/plugin marketplace add arnaud-zg/skills#arnaud-zg--v0.6.1
 /plugin install arnaud-zg@arnaud-zg-skills
 ```
 
 **Any agent**, one skill at a time, with the [skills CLI](https://github.com/vercel-labs/skills):
 
 ```sh
-npx skills add arnaud-zg/skills --skill hexagonal-skill-builder
-npx skills add arnaud-zg/skills --skill doc-compass
-npx skills add arnaud-zg/skills --skill radical-simplify
-npx skills add arnaud-zg/skills --skill glance-first
-npx skills add arnaud-zg/skills --skill glance-audit
-npx skills add arnaud-zg/skills --skill skill-retro
-npx skills add arnaud-zg/skills --skill usage-runway
-npx skills add arnaud-zg/skills --skill testing-trophy
+npx skills add arnaud-zg/skills --skill <skill>
 ```
 
 or pinned, through the release's tag:
 
 ```sh
-npx skills add https://github.com/arnaud-zg/skills/tree/arnaud-zg--v0.2.1 --skill <skill>
+npx skills add https://github.com/arnaud-zg/skills/tree/arnaud-zg--v0.6.1 --skill <skill>
 ```
 
 **A whole team**, from the project's `.claude/settings.json`. Everyone who trusts the folder gets
@@ -78,7 +67,7 @@ the marketplace, and the plugin turns on at their next session:
       "source": {
         "source": "github",
         "repo": "arnaud-zg/skills",
-        "ref": "arnaud-zg--v0.2.1"
+        "ref": "arnaud-zg--v0.6.1"
       }
     }
   },
@@ -94,8 +83,8 @@ skill from this marketplace. Installed with the skills CLI, a skill is just `/<s
 ## 🔒 Know what you're installing
 
 - **No hooks, no MCP server, no network.** Nothing runs unless a skill is called.
-- **Each script-backed skill pre-approves only its own scripts** through `allowed-tools`, listed per
-  skill under [Skills](#skills). Everything else asks.
+- **Each script-backed skill pre-approves only its own scripts** through `allowed-tools`. Everything
+  else asks.
 - **`radical-simplify` is instructions only.** It proposes a redesign and edits nothing.
 
 Read each skill's `SKILL.md` under [`skills/`](skills/) before you install, as you would any
