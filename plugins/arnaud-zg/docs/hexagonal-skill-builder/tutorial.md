@@ -1,6 +1,6 @@
 # 🚀 Tutorial: write and lint your first Agent Skill
 
-[📚 Docs home](../../../../docs/README.md) › [⬡ hexagonal-skill-builder](README.md) › **🚀
+[📚 Docs home](../../../../docs/README.md) › [🧩 hexagonal-skill-builder](README.md) › **🚀
 Tutorial** · [🛠️ How-to](how-to.md) · [📖 Reference](reference.md) ·
 [💡 Explanation](explanation.md)
 
