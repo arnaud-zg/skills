@@ -1,11 +1,11 @@
 ---
 name: testing-trophy
 description:
-  Plans, writes and audits tests by the testing trophy (Kent C. Dodds): static checks, a few unit
-  tests, mostly integration tests, a few end to end, each named by the behaviour it proves. A script
-  counts the tests per layer and flags an inverted trophy, mocks of the project's own modules and
-  tests named after functions. Use when asked to "write the tests", "test this package", "use the
-  testing trophy", "is our test suite shaped right", "audit the tests", or when a bug needs a
+  Plans, writes and audits tests by the testing trophy (Kent C. Dodds), with static checks, a few
+  unit tests, mostly integration tests, a few end to end, each named by the behaviour it proves. A
+  script counts the tests per layer and flags an inverted trophy, mocks of the project's own modules
+  and tests named after functions. Use when asked to "write the tests", "test this package", "use
+  the testing trophy", "is our test suite shaped right", "audit the tests", or when a bug needs a
   failing test before its fix.
 argument-hint: "[plan|write|audit] [<folder>]"
 allowed-tools: Bash(node ${CLAUDE_SKILL_DIR}/scripts/check-trophy.mjs *)
