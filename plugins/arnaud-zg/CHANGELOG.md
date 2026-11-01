@@ -1,5 +1,13 @@
 # @arnaud-zg/plugin-arnaud-zg
 
+## 0.6.1
+
+### Patch Changes
+
+- f8de7e6: testing-trophy: its SKILL.md frontmatter parses, so the skill loads with its description
+- 9ffdb7a: doc-compass: each docs set reads the examples/ folder beside it, and the test scan steps
+  over broken links and build output. testing-trophy: the same scan fix.
+
 ## 0.6.0
 
 ### Minor Changes
