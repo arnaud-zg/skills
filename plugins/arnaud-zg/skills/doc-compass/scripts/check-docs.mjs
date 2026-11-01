@@ -28,14 +28,14 @@ ${CONFIG}, beside package.json:
   { "ban": ["—"], "docs": ["docs", { "folder": "packages/cli/docs", "index": "../README.md" }],
     "examples": "examples" }
 
-"examples" is the folder, from the project root, that holds example files: examples/ when left
-out. A test runs an example when a test file names its path from that folder.
+"examples" is the folder, from the project root, that holds example files, for every docs set or
+in one "docs" entry. Left out, each docs set reads the examples/ folder beside it. A test runs an example when a test file names its path from that folder.
 
 Exit 0 when the docs hold, 1 on a finding, 2 when there is nothing to check.`;
 
 const SKIP = new Set(["node_modules", ".git", "dist", ".cache"]);
 
-/** @typedef {{ folder: string, index: string }} DocsSet */
+/** @typedef {{ folder: string, index: string, examples?: string | null }} DocsSet */
 
 const colour =
   (process.env.FORCE_COLOR ?? "") !== "" && process.env.FORCE_COLOR !== "0"
@@ -114,14 +114,22 @@ function readConfig(/** @type {string} */ path) {
     const {
       folder,
       index = "README.md",
+      examples: own = null,
       ...extra
     } = /** @type {Record<string, unknown>} */ (
       typeof entry === "object" && entry !== null ? entry : {}
     );
-    if (typeof folder !== "string" || typeof index !== "string" || Object.keys(extra).length > 0) {
-      bad(`each "docs" entry is a folder, or { "folder": "...", "index": "..." }`);
+    if (
+      typeof folder !== "string" ||
+      typeof index !== "string" ||
+      (own !== null && (typeof own !== "string" || own === "")) ||
+      Object.keys(extra).length > 0
+    ) {
+      bad(
+        `each "docs" entry is a folder, or { "folder": "...", "index": "...", "examples": "..." }`,
+      );
     }
-    return { folder, index };
+    return { folder, index, examples: /** @type {string | null} */ (own) };
   });
   return {
     sets: /** @type {DocsSet[]} */ (sets),
@@ -165,6 +173,18 @@ function pagesUnder(/** @type {string} */ folder, /** @type {string} */ base) {
   return pages;
 }
 
+// Build output and vendored code hold no test of the project, and can hold broken links.
+const BUILT = new Set(["build", "coverage", "Pods", ".next", ".turbo", ".expo", "out"]);
+
+/** A path's stat, or null when it cannot be read, such as a link to nothing. */
+const statOrNull = (/** @type {string} */ full) => {
+  try {
+    return statSync(full);
+  } catch {
+    return null;
+  }
+};
+
 const TEST_FILE = /\.(test|spec)\.[cm]?[jt]sx?$/;
 
 /** Every test file's text under the project, read once. @param {string} cwd */
@@ -174,10 +194,11 @@ function testTexts(cwd) {
   /** @param {string} dir */
   const walk = (dir) => {
     for (const name of readdirSync(dir).sort()) {
-      if (SKIP.has(name)) continue;
+      if (SKIP.has(name) || BUILT.has(name)) continue;
       const full = join(dir, name);
-      if (statSync(full).isDirectory()) walk(full);
-      else if (TEST_FILE.test(name)) texts.push(readFileSync(full, "utf8"));
+      const stat = statOrNull(full);
+      if (stat?.isDirectory()) walk(full);
+      else if (stat?.isFile() && TEST_FILE.test(name)) texts.push(readFileSync(full, "utf8"));
     }
   };
   walk(cwd);
@@ -270,7 +291,11 @@ const sets =
     : (config?.sets ?? [{ folder: "docs", index: "README.md" }]);
 const ban = [...new Set([...(config?.ban ?? []), ...args.ban])];
 
-const results = sets.map((set) => check(cwd, set, ban, config?.examples ?? "examples"));
+/** The examples folder a docs set reads: its own, the project's, or examples/ beside it. */
+const examplesOf = (/** @type {DocsSet} */ set) =>
+  set.examples ?? config?.examples ?? posixOf(join(dirname(set.folder), "examples"));
+
+const results = sets.map((set) => check(cwd, set, ban, examplesOf(set)));
 const findings = results.flatMap((result) => result.findings);
 
 if (args.json) {

@@ -1,5 +1,13 @@
 import { spawnSync } from "node:child_process";
-import { cpSync, mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from "node:fs";
+import {
+  cpSync,
+  mkdirSync,
+  mkdtempSync,
+  readFileSync,
+  rmSync,
+  symlinkSync,
+  writeFileSync,
+} from "node:fs";
 import os from "node:os";
 import path from "node:path";
 import { afterEach, describe, expect, test } from "vitest";
@@ -245,5 +253,33 @@ describe("given an examples folder in doc-compass.json", () => {
     const { status, stdout } = check(cwd);
     expect(stdout).toContain("hold.");
     expect(status).toBe(0);
+  });
+});
+
+describe("given packages that each keep examples beside their docs", () => {
+  test("when no examples folder is named, then each docs set reads its own", () => {
+    const cwd = projectWith({
+      "doc-compass.json": JSON.stringify({ docs: [{ folder: "packages/a/docs" }] }),
+      "packages/a/docs/README.md": "# A\n\n[Reference](reference.md)\n",
+      "packages/a/docs/reference.md": `${home("Reference")}\n[Basic](../examples/basic.ts)\n`,
+      "packages/a/examples/basic.ts": "export const basic = 1;\n",
+      "packages/a/src/basic.test.ts": 'import "../examples/basic";\n',
+    });
+    const { status, stdout } = check(cwd);
+    expect(stdout).toContain("hold.");
+    expect(status).toBe(0);
+  });
+});
+
+describe("given a project holding a link to nothing", () => {
+  test("when the check looks for tests, then it steps over the link", () => {
+    const cwd = projectWith({
+      "docs/README.md": "# Docs\n\n[Reference](reference.md)\n",
+      "docs/reference.md": `${home("Reference")}\n[Basic](../examples/basic.ts)\n`,
+      "examples/basic.ts": "export const basic = 1;\n",
+      "examples/basic.test.ts": 'import "./basic";\n',
+    });
+    symlinkSync(path.join(cwd, "nowhere"), path.join(cwd, "broken"));
+    expect(check(cwd).status).toBe(0);
   });
 });

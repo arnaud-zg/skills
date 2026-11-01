@@ -10,7 +10,27 @@ import { join, relative, resolve, sep } from "node:path";
 
 import { inspectTrophy } from "./trophy.mjs";
 
-const SKIP = new Set(["node_modules", ".git", "dist", "build", "coverage", ".cache"]);
+const SKIP = new Set([
+  "node_modules",
+  ".git",
+  "dist",
+  "build",
+  "coverage",
+  ".cache",
+  "Pods",
+  ".next",
+  ".turbo",
+  ".expo",
+]);
+
+/** A path's stat, or null when it cannot be read, such as a link to nothing. */
+const statOrNull = (/** @type {string} */ full) => {
+  try {
+    return statSync(full);
+  } catch {
+    return null;
+  }
+};
 const TEST = /\.(test|spec)\.[cm]?[jt]sx?$/;
 const STATIC = /^(tsconfig\.json|\.?eslint\.config\.[cm]?[jt]s|\.eslintrc(\.\w+)?)$/;
 
@@ -30,7 +50,9 @@ const walk = (dir) => {
   for (const name of readdirSync(dir).sort()) {
     if (SKIP.has(name)) continue;
     const full = join(dir, name);
-    if (statSync(full).isDirectory()) walk(full);
+    const stat = statOrNull(full);
+    if (stat?.isDirectory()) walk(full);
+    else if (!stat?.isFile()) continue;
     else if (TEST.test(name))
       tests.set(relative(folder, full).split(sep).join("/"), readFileSync(full, "utf8"));
     else if (STATIC.test(name)) hasStatic = true;
