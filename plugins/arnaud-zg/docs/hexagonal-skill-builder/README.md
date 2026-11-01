@@ -1,6 +1,6 @@
-# ⬡ hexagonal-skill-builder
+# 🧩 hexagonal-skill-builder
 
-[📚 Docs home](../../../../docs/README.md) › [arnaud-zg](../../README.md) › **⬡
+[📚 Docs home](../../../../docs/README.md) › [arnaud-zg](../../README.md) › **🧩
 hexagonal-skill-builder**
 
 A linter and writing guide for [Agent Skills](https://code.claude.com/docs/en/skills), the

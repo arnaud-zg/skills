@@ -1,6 +1,6 @@
 # 🛠️ How-to guides: lint Agent Skills in CI, hooks and JSON
 
-[📚 Docs home](../../../../docs/README.md) › [⬡ hexagonal-skill-builder](README.md) ›
+[📚 Docs home](../../../../docs/README.md) › [🧩 hexagonal-skill-builder](README.md) ›
 [🚀 Tutorial](tutorial.md) · **🛠️ How-to** · [📖 Reference](reference.md) ·
 [💡 Explanation](explanation.md)
 
