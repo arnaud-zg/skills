@@ -1,5 +1,5 @@
 import { spawnSync } from "node:child_process";
-import { mkdirSync, mkdtempSync, rmSync, writeFileSync } from "node:fs";
+import { mkdirSync, mkdtempSync, rmSync, symlinkSync, writeFileSync } from "node:fs";
 import os from "node:os";
 import path from "node:path";
 import { afterEach, describe, expect, test } from "vitest";
@@ -38,6 +38,12 @@ describe("given a project", () => {
     const { status, stdout } = run(cwd);
     expect(stdout).toContain("src/a.integration.test.ts:2  own-mock");
     expect(status).toBe(1);
+  });
+
+  test("when it holds a link to nothing, then the link is stepped over", () => {
+    const cwd = projectWith({ "tsconfig.json": "{}", "a.integration.test.ts": "" });
+    symlinkSync(path.join(cwd, "nowhere"), path.join(cwd, "broken"));
+    expect(run(cwd).status).toBe(0);
   });
 
   test("when it holds no test file, then it says so and exits 2", () => {
