@@ -1,4 +1,4 @@
-# 🧰 skills: Claude Code plugin marketplace of Agent Skills, linted and versioned
+<h1 align="center">🧰 skills</h1>
 
 Arnaud Zheng's [Claude Code](https://claude.com/claude-code) plugin marketplace: a growing shelf of
 Agent Skills (`SKILL.md`) for Diataxis documentation, skill linting and reviews, subagents, hooks
