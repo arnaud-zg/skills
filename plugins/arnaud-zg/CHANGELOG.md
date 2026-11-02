@@ -1,5 +1,12 @@
 # @arnaud-zg/plugin-arnaud-zg
 
+## 0.6.2
+
+### Patch Changes
+
+- 1125598: testing-trophy: write tests as Given / When / Then and plan from acceptance criteria as
+  scenarios
+
 ## 0.6.1
 
 ### Patch Changes
