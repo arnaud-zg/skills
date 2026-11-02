@@ -18,6 +18,11 @@ Tests: we follow the testing trophy, use `testing-trophy`.
 
 Ask _plan the tests for `<package>`_. You get a table: behaviour, layer, file, real or mocked.
 
+## Plan from a user story
+
+Paste the story or its acceptance criteria and ask _plan the tests_. Each criterion becomes a given
+/ when / then scenario, placed on a layer: most land in integration, one or two in end to end.
+
 ## Write a failing test for a bug
 
 Ask _write a failing test for this bug_. It lands at the lowest layer that reproduces it; the fix

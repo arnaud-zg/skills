@@ -1,7 +1,8 @@
 # Plan the tests for a package
 
 1. **List what a user of the package does with it**: the public API, the commands, the config keys.
-   Each is a behaviour to prove.
+   Each is a behaviour to prove. Given a story or acceptance criteria, turn each criterion into a
+   scenario (given, when, then) first; each scenario is a behaviour.
 2. **Run the check** on the package to see the suite's shape today.
 3. **Place each behaviour on a layer** by [domain/trophy.md](../domain/trophy.md): integration by
    default, unit only for pure logic with many cases, end to end for the one or two paths a user
