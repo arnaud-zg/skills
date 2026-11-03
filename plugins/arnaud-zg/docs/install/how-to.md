@@ -11,7 +11,7 @@
 or in two, pinned to the version you reviewed:
 
 ```sh
-/plugin marketplace add arnaud-zg/skills#arnaud-zg--v0.6.1
+/plugin marketplace add arnaud-zg/skills#arnaud-zg--v0.7.0
 /plugin install arnaud-zg@arnaud-zg-skills
 ```
 
@@ -19,7 +19,7 @@ or in two, pinned to the version you reviewed:
 
 | Agent       | Install                                                                                                                       |
 | ----------- | ----------------------------------------------------------------------------------------------------------------------------- |
-| Codex       | `codex plugin marketplace add arnaud-zg/skills`, then install `arnaud-zg` from `/plugins`. Pin with `--ref arnaud-zg--v0.6.1` |
+| Codex       | `codex plugin marketplace add arnaud-zg/skills`, then install `arnaud-zg` from `/plugins`. Pin with `--ref arnaud-zg--v0.7.0` |
 | Copilot CLI | `copilot plugin marketplace add arnaud-zg/skills`, then `copilot plugin install arnaud-zg@arnaud-zg-skills`                   |
 | Cursor      | add `arnaud-zg/skills` as a plugin marketplace in Cursor's settings                                                           |
 
@@ -33,7 +33,7 @@ npx skills add arnaud-zg/skills --skill <skill>
 or pinned, through the release's tag:
 
 ```sh
-npx skills add https://github.com/arnaud-zg/skills/tree/arnaud-zg--v0.6.1 --skill <skill>
+npx skills add https://github.com/arnaud-zg/skills/tree/arnaud-zg--v0.7.0 --skill <skill>
 ```
 
 **A whole Claude Code team**, from the project's `.claude/settings.json`. Everyone who trusts the
