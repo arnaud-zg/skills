@@ -16,7 +16,8 @@ cp -R templates/plugin-template plugins/<name>
    `.cursor-plugin/plugin.json`. No `--` in the name: it would make the release tag ambiguous.
 2. Set `name` in `plugins/<name>/package.json` to `@arnaud-zg/plugin-<name>`. That file is private
    and never published. It exists so changesets can version the plugin. See
-   [why](release.md#why-plugins-carry-a-packagejson).
+   [why](release.md#why-plugins-carry-a-packagejson). Keep `shiplane.unit.yml` as it is: it is what
+   makes shiplane tag and release the plugin.
 3. Delete the component directories the plugin does not use.
 4. Delete the two `metadata: internal: true` lines from each copied `SKILL.md`. They keep the
    template out of `npx skills add` listings, and would hide your skill the same way.
@@ -28,11 +29,12 @@ cp -R templates/plugin-template plugins/<name>
    plugin stays at `0.0.0` until the next release PR gives it `0.1.0` and its first changelog entry.
 7. `claude plugin validate . --strict`
 8. `pnpm test`: `marketplace.unit.test.ts` fails if the package name, the manifest name and the
-   directory disagree, if the versions drift apart, if the catalogue entry carries a version, if the
-   plugin is missing from the catalogue, or if it has no changelog and no pending changeset. Those
-   are the steps that are easy to skip when copying the template. `manifests.unit.test.ts` and
-   `agents.integration.test.ts` fail if an agent's manifest disagrees with the Claude one or does
-   not reach the skills. `pnpm test:e2e` installs every skill through the real skills CLI.
+   directory disagree, if the versions drift apart, if `shiplane.unit.yml` is missing, if the
+   catalogue entry carries a version, if the plugin is missing from the catalogue, or if it has no
+   changelog and no pending changeset. Those are the steps that are easy to skip when copying the
+   template. `manifests.unit.test.ts` and `agents.integration.test.ts` fail if an agent's manifest
+   disagrees with the Claude one or does not reach the skills. `pnpm test:e2e` installs every skill
+   through the real skills CLI.
 
 ## Add a skill to an existing plugin
 
