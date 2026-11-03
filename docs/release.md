@@ -14,45 +14,33 @@ configured in `shiplane.config.ts`. Each plugin has its own version, changelog
 
 ## 1. Write the commit subject
 
-Pull requests are squash merged, so a PR's title is its commit subject, and that subject sets the
-release. Only commits touching `plugins/<name>/` count.
+Pull requests are squash merged, so a PR's title is its commit subject. Without its type and PR
+number, that subject is what users read. Only commits touching `plugins/<name>/` count.
 
-| Subject                              | Moves the plugin | Changelog line                          |
-| ------------------------------------ | ---------------- | --------------------------------------- |
-| `fix(scope): …`, `perf(scope): …`    | patch            | yes                                     |
-| `feat(scope): …`                     | minor            | yes                                     |
-| `feat(scope)!: …`, any type with `!` | major            | yes                                     |
-| `docs`, `test`, `chore`, `refactor`… | patch            | the latest one, if nothing else has one |
+| Subject                              | In the changelog                        |
+| ------------------------------------ | --------------------------------------- |
+| `feat`, `fix`, `perf`                | one line each                           |
+| `docs`, `test`, `chore`, `refactor`… | the latest one, if nothing else has one |
 
-The biggest move wins. Write the subject for users: without its type and PR number, it is what they
-read. Mark a breaking change with `!`, because a `BREAKING CHANGE:` footer is not read.
+Every release is a patch. `pnpm release` writes a changeset from these commits and
+`changeset version` consumes it in the release PR, so there is never one to create, commit or
+delete.
 
-When a release needs better words or another bump, add a changeset. It takes over for the plugins it
-names: their commits are skipped.
-
-```sh
-pnpm changeset add --minor @arnaud-zg/plugin-hello-tools -m "Add the audit-deps skill"
-```
-
-Plugins appear as `@arnaud-zg/plugin-<name>`, because each one has a private `package.json` beside
-its `plugin.json` (see [why](#why-plugins-carry-a-packagejson)).
-
-A new plugin is the exception: it starts at `0.0.0` and needs a changeset for its first version, so
-it has a changelog from day one and its first GitHub release has real notes. Add the changeset in
-the PR that adds the plugin (`minor` for `0.1.0`). shiplane never tags a `0.0.0`, and
-`marketplace.unit.test.ts` fails on a plugin with no changelog and no pending changeset.
+A new plugin has no commits to read. It starts at `0.1.0` from the template, with a `CHANGELOG.md`
+holding that version's notes, and `marketplace.unit.test.ts` fails on a plugin with no section for
+its version. Once it merges, `pnpm release` tags it.
 
 ## 2. Release
 
 Run `pnpm release` from an up-to-date `main` with a clean working tree; it refuses anything else. It
 reads where things stand first, so each run picks up where the last one stopped:
 
-| Where things stand                           | What `pnpm release` does                                                            |
-| -------------------------------------------- | ----------------------------------------------------------------------------------- |
-| commits or changesets pending, no release PR | shows each plugin's bump, asks which to release, then opens the release PR          |
-| a release PR is open                         | waits for its merge: merge it on GitHub, or press `m` to merge it from the terminal |
-| merged, not tagged yet                       | tags each plugin `<name>--v<version>` and creates its GitHub release                |
-| nothing pending                              | says so and stops                                                                   |
+| Where things stand             | What `pnpm release` does                                                            |
+| ------------------------------ | ----------------------------------------------------------------------------------- |
+| commits pending, no release PR | shows each plugin's next version, asks which to release, then opens the release PR  |
+| a release PR is open           | waits for its merge: merge it on GitHub, or press `m` to merge it from the terminal |
+| merged or new, not tagged yet  | tags each plugin `<name>--v<version>` and creates its GitHub release                |
+| nothing pending                | says so and stops                                                                   |
 
 To hold a plugin back, untick it at that first question: its commits wait for the next release.
 

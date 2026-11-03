@@ -1,6 +1,6 @@
 {
   "name": "plugin-template",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "Copy this directory into plugins/ to start a new plugin. Replace every TODO before listing it in the marketplace.",
   "author": {
     "name": "Arnaud Zheng",

@@ -23,8 +23,8 @@ cap, long output goes to a file returned by path, and mechanical lanes use a che
 
 See [docs/release.md](./docs/release.md). `main` is protected by a Lefthook hook, so the version
 bump goes through the release PR that `pnpm release` (shiplane) opens; after the merge, it tags.
-Commit subjects set each release's bump and changelog line, so write them for users. Don't bump,
-commit or tag directly on `main`.
+Commit subjects become each release's changelog lines, so write them for users. Don't bump, commit
+or tag directly on `main`.
 
 ## Before committing
 

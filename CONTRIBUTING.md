@@ -26,9 +26,8 @@ gh pr create --fill
 ```
 
 Commit messages follow Conventional Commits with a mandatory scope: `type(scope): description`.
-Enforced by the `commit-msg` hook. The subject also sets the release and its changelog line: `feat`
-moves a minor, `fix` a patch, and `!` a major ([how](./docs/release.md#1-write-the-commit-subject)).
-A new plugin also needs a changeset for its first version.
+Enforced by the `commit-msg` hook. The subject is also the changelog line users read, so write it
+for them ([how](./docs/release.md#1-write-the-commit-subject)).
 
 To add a plugin or a skill, follow [docs/how-to.md](./docs/how-to.md).
 

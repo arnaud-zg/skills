@@ -19,7 +19,7 @@ the ones in [CLAUDE.md](./CLAUDE.md), which Claude Code reads: follow both the s
 
 See [docs/release.md](./docs/release.md). Never bump a version, commit or tag on `main` directly:
 `pnpm release` (shiplane) opens the release PR and writes the version into every manifest. Commit
-subjects set each release's bump and changelog line, so write them for users.
+subjects become each release's changelog lines, so write them for users.
 
 ## Before committing
 

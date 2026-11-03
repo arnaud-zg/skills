@@ -15,7 +15,6 @@
   "author": "Arnaud Zheng <arnaud.zg@gmail.com>",
   "type": "module",
   "scripts": {
-    "changeset": "changeset",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "lint": "eslint .",
