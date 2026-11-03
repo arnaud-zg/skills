@@ -1,0 +1,14 @@
+{
+  "name": "plugin-template",
+  "version": "0.0.0",
+  "description": "Copy this directory into plugins/ to start a new plugin. Replace every TODO before listing it in the marketplace.",
+  "author": {
+    "name": "Arnaud Zheng",
+    "url": "https://github.com/arnaud-zg"
+  },
+  "repository": "https://github.com/arnaud-zg/skills",
+  "license": "MIT",
+  "keywords": ["template"],
+  "skills": "./skills/",
+  "displayName": "Plugin Template"
+}
