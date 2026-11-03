@@ -10,11 +10,11 @@ git ref:
 
 | Agent       | Pin a release                                                                   |
 | ----------- | ------------------------------------------------------------------------------- |
-| Claude Code | `/plugin marketplace add arnaud-zg/skills#arnaud-zg--v0.6.2`                    |
-| Codex       | `codex plugin marketplace add arnaud-zg/skills --ref arnaud-zg--v0.6.2`         |
-| Copilot CLI | `copilot plugin marketplace add arnaud-zg/skills#arnaud-zg--v0.6.2`             |
+| Claude Code | `/plugin marketplace add arnaud-zg/skills#arnaud-zg--v0.7.0`                    |
+| Codex       | `codex plugin marketplace add arnaud-zg/skills --ref arnaud-zg--v0.7.0`         |
+| Copilot CLI | `copilot plugin marketplace add arnaud-zg/skills#arnaud-zg--v0.7.0`             |
 | Cursor      | no pinning in its marketplace; `/add-plugin` from the git repository with a ref |
-| skills CLI  | `npx skills add https://github.com/arnaud-zg/skills/tree/arnaud-zg--v0.6.2`     |
+| skills CLI  | `npx skills add https://github.com/arnaud-zg/skills/tree/arnaud-zg--v0.7.0`     |
 
 A native Gemini CLI extension would be different: Gemini finds updates through the repository's
 GitHub release marked Latest, which in a repository of several plugins is whichever released last.
