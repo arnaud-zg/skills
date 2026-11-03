@@ -117,6 +117,11 @@ This repository applies it twice: `docs/` documents the marketplace itself (writ
 plugins), and each `plugins/<name>/docs/` documents one plugin for the people who use it. Both have
 the same four pages, so moving between them costs nothing.
 
+## One plugin, many agents
+
+Codex, Cursor and Copilot CLI read the same skills through their own manifests.
+[agents.md](agents.md) explains why the skills live once and the manifests sit beside them.
+
 ## What this is not
 
 - **Not a package manager for code.** Plugins are prompts and configuration. There is no build step,

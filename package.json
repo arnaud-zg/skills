@@ -2,7 +2,7 @@
   "name": "@arnaud-zg/skills",
   "version": "0.0.0",
   "private": true,
-  "description": "Arnaud Zheng's Claude Code plugin marketplace: Agent Skills, agents, hooks and MCP servers.",
+  "description": "Arnaud Zheng's Agent Skills marketplace for Claude Code, Codex, Cursor, Copilot CLI and any SKILL.md agent.",
   "homepage": "https://github.com/arnaud-zg/skills#readme",
   "bugs": {
     "url": "https://github.com/arnaud-zg/skills/issues"
@@ -27,6 +27,7 @@
     "release": "node scripts/release.mjs",
     "release:version": "node scripts/release-version.mjs",
     "test": "vitest run",
+    "test:e2e": "E2E=1 vitest run install.e2e",
     "typecheck": "tsc --noEmit && tsc -p tsconfig.vitest.json --noEmit"
   },
   "prettier": "@arnaud-zg/configs/prettier",

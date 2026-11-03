@@ -24,6 +24,9 @@ A page that serves two needs serves neither (why: E-04). Every page opens glance
 line, the key numbers, then a picture before the prose, as [create.md](create.md) says. Decisions
 get their own records, linked from the explanation.
 
+`${CLAUDE_SKILL_DIR}` is this skill's folder. Claude Code sets it; in another agent, use the folder
+that holds this file.
+
 ## Pick the verb
 
 | The person wants to…                            | Read                       |

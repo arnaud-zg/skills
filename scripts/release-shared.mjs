@@ -5,7 +5,8 @@ import { execFileSync } from "node:child_process";
 import { existsSync, readdirSync, readFileSync } from "node:fs";
 import path from "node:path";
 
-export const root = path.resolve(import.meta.dirname, "..");
+// RELEASE_ROOT lets a test run a release step on a temporary copy of the repository.
+export const root = process.env.RELEASE_ROOT ?? path.resolve(import.meta.dirname, "..");
 
 export const readJson = (file) => JSON.parse(readFileSync(path.join(root, file), "utf8"));
 
@@ -44,6 +45,18 @@ export const succeeds = (file, args) => {
     return false;
   }
 };
+
+// Every manifest an agent reads a plugin's version from. sync-versions writes them all, and
+// `pnpm release` refuses to tag while any of them disagrees with `.claude-plugin/plugin.json`.
+export const MANIFEST_DIRS = [".claude-plugin", ".codex-plugin", ".cursor-plugin"];
+
+// The manifests of a plugin whose version is not `version`, as `<dir>/<manifest>: <found>` lines.
+export const versionDrift = (dir, version) =>
+  MANIFEST_DIRS.map((manifestDir) => `${dir}/${manifestDir}/plugin.json`)
+    .filter((file) => existsSync(path.join(root, file)))
+    .map((file) => [file, readJson(file).version])
+    .filter(([, found]) => found !== version)
+    .map(([file, found]) => `${file}: ${found}`);
 
 // Every plugin in the changesets flow: a directory under plugins/ with a package.json.
 export const plugins = () =>

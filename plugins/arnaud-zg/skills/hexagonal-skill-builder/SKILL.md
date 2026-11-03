@@ -15,6 +15,9 @@ allowed-tools: Bash(node ${CLAUDE_SKILL_DIR}/scripts/check.mjs *)
 Four rules hold that shape, and a script checks them. Everything else is the author's judgement, and
 [guards.md](guards.md) is where that judgement is written down.
 
+`${CLAUDE_SKILL_DIR}` is this skill's folder. Claude Code sets it; in another agent, use the folder
+that holds this file.
+
 ## The four rules
 
 | Rule       | Says                                                                                        | Why           |

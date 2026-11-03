@@ -51,6 +51,10 @@ describe("a plugin added to the marketplace", () => {
     }
   });
 
+  test("has a name without `--`, so its `<name>--v<version>` tag reads one way only", () => {
+    for (const name of pluginDirs) expect(name, `plugins/${name}`).not.toContain("--");
+  });
+
   test("is listed in the marketplace catalogue, and nothing is listed that isn't there", () => {
     expect([...pluginDirs].sort()).toEqual([...marketplace.plugins.map((p) => p.name)].sort());
   });

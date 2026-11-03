@@ -1,4 +1,4 @@
-# 🛠️ How-to guides: add, document, test and release a Claude Code plugin
+# 🛠️ How-to guides: add, document, test and release a plugin for every agent
 
 [📚 Docs home](README.md) › Writing plugins › [🚀 Tutorial](tutorial.md) · **🛠️ How-to** ·
 [📖 Reference](reference.md) · [💡 Explanation](explanation.md)
@@ -11,7 +11,9 @@ Task-oriented recipes. For the guided first run, use [tutorial.md](./tutorial.md
 cp -R templates/plugin-template plugins/<name>
 ```
 
-1. Set `name` in `plugins/<name>/.claude-plugin/plugin.json` to match the directory.
+1. Set `name` in `plugins/<name>/.claude-plugin/plugin.json` to match the directory, and set the
+   same `name`, `description` and `keywords` in `.codex-plugin/plugin.json` and
+   `.cursor-plugin/plugin.json`. No `--` in the name: it would make the release tag ambiguous.
 2. Set `name` in `plugins/<name>/package.json` to `@arnaud-zg/plugin-<name>`. That file is private
    and never published. It exists so changesets can version the plugin. See
    [why](release.md#why-plugins-carry-a-packagejson).
@@ -19,14 +21,18 @@ cp -R templates/plugin-template plugins/<name>
 4. Delete the two `metadata: internal: true` lines from each copied `SKILL.md`. They keep the
    template out of `npx skills add` listings, and would hide your skill the same way.
 5. Add an entry to `.claude-plugin/marketplace.json` with `"source": "<name>"` and no `version`:
-   `plugin.json` carries it.
+   `plugin.json` carries it. Add the same plugin to `.agents/plugins/marketplace.json` (Codex,
+   `"source": { "source": "local", "path": "./plugins/<name>" }`) and to
+   `.cursor-plugin/marketplace.json` (Cursor, `"source": "<name>"`).
 6. `pnpm changeset`: pick `@arnaud-zg/plugin-<name>`, `minor`, and say what the plugin does. The
    plugin stays at `0.0.0` until the next release PR gives it `0.1.0` and its first changelog entry.
 7. `claude plugin validate . --strict`
 8. `pnpm test`: `marketplace.unit.test.ts` fails if the package name, the manifest name and the
    directory disagree, if the versions drift apart, if the catalogue entry carries a version, if the
    plugin is missing from the catalogue, or if it has no changelog and no pending changeset. Those
-   are the steps that are easy to skip when copying the template.
+   are the steps that are easy to skip when copying the template. `manifests.unit.test.ts` and
+   `agents.integration.test.ts` fail if an agent's manifest disagrees with the Claude one or does
+   not reach the skills. `pnpm test:e2e` installs every skill through the real skills CLI.
 
 ## Add a skill to an existing plugin
 

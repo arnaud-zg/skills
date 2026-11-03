@@ -2,6 +2,8 @@
 name: release-notes
 description:
   Drafts release notes from the merged pull requests. Use when asked to write the release notes.
+metadata:
+  internal: true
 ---
 
 # Release notes

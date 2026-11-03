@@ -25,6 +25,9 @@ The trophy has four layers, bottom to top:
 
 Why each layer and what counts as which: [domain/trophy.md](domain/trophy.md).
 
+`${CLAUDE_SKILL_DIR}` is this skill's folder. Claude Code sets it; in another agent, use the folder
+that holds this file.
+
 ## Pick the verb
 
 | The person wants to…                        | Read                             |

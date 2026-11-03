@@ -1,9 +1,11 @@
 <h1 align="center">🧰 skills</h1>
 
-Arnaud Zheng's [Claude Code](https://claude.com/claude-code) plugin marketplace: a growing shelf of
-Agent Skills (`SKILL.md`) for Diataxis documentation, skill linting and reviews, subagents, hooks
-and MCP servers that install with a version and uninstall cleanly, instead of being copy-pasted into
-`~/.claude/`. Every skill here is linted, tested and versioned.
+Arnaud Zheng's Agent Skills (`SKILL.md`) for Diataxis documentation, tests, skill linting and
+reviews. They install with a version and uninstall cleanly in
+[Claude Code](https://claude.com/claude-code), [Codex](https://developers.openai.com/codex),
+[Cursor](https://cursor.com), [GitHub Copilot CLI](https://docs.github.com/copilot) and any other
+agent that reads `SKILL.md`, instead of being copy-pasted into each agent's folder. Every skill here
+is linted, tested and versioned.
 
 ## Available skills
 
@@ -23,16 +25,17 @@ and how to call it are in the [plugin's skills table](./plugins/arnaud-zg/README
 
 ## Install
 
-In Claude Code, or one skill at a time in any agent through the
-[skills CLI](https://github.com/vercel-labs/skills):
+One repository, one manifest per agent, the same skills behind each:
 
-```sh
-/plugin install arnaud-zg --marketplace arnaud-zg/skills
-npx skills add arnaud-zg/skills --skill <name>
-```
+| Agent                        | Install                                                                                                     | Reads                                |
+| ---------------------------- | ----------------------------------------------------------------------------------------------------------- | ------------------------------------ |
+| Claude Code                  | `/plugin install arnaud-zg --marketplace arnaud-zg/skills`                                                  | `.claude-plugin/`                    |
+| Codex                        | `codex plugin marketplace add arnaud-zg/skills`, then install `arnaud-zg` from `/plugins`                   | `.agents/plugins/`, `.codex-plugin/` |
+| GitHub Copilot CLI           | `copilot plugin marketplace add arnaud-zg/skills`, then `copilot plugin install arnaud-zg@arnaud-zg-skills` | `.claude-plugin/`                    |
+| Cursor                       | add `arnaud-zg/skills` as a plugin marketplace in Cursor's settings                                         | `.cursor-plugin/`                    |
+| Gemini CLI, OpenCode, others | `npx skills add arnaud-zg/skills --skill <name>`                                                            | `SKILL.md` folders                   |
 
-Each plugin's README shows how to pin the version you reviewed, and how to give it to a whole team
-from `.claude/settings.json`.
+Each plugin's README shows how to pin the version you reviewed, and how to give it to a whole team.
 
 ## ⚠️ Read before installing
 

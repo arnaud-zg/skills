@@ -1,11 +1,13 @@
-# arnaud-zg: Claude Code plugin with 8 Agent Skills for docs, tests, skills and reviews
+# arnaud-zg: 8 Agent Skills for docs, tests, skills and reviews, in any coding agent
 
-`arnaud-zg` is a [Claude Code](https://claude.com/claude-code) plugin that bundles eight
-[Agent Skills](https://code.claude.com/docs/en/skills) (`SKILL.md` folders): a skill linter, a
-[Diataxis](https://diataxis.fr/) documentation writer and checker, a first-principles simplifier,
-one-minute briefs, sceptical audits, testing-trophy tests, session retros and a usage-window check.
-They also install in any agent the [skills CLI](https://github.com/vercel-labs/skills) supports.
-Each skill has its own tutorial, how-to guides, reference and explanation. MIT.
+`arnaud-zg` is a plugin for [Claude Code](https://claude.com/claude-code),
+[Codex](https://developers.openai.com/codex), [Cursor](https://cursor.com) and GitHub Copilot CLI
+that bundles eight [Agent Skills](https://code.claude.com/docs/en/skills) (`SKILL.md` folders): a
+skill linter, a [Diataxis](https://diataxis.fr/) documentation writer and checker, a
+first-principles simplifier, one-minute briefs, sceptical audits, testing-trophy tests, session
+retros and a usage-window check. They also install in any other agent the
+[skills CLI](https://github.com/vercel-labs/skills) supports, such as Gemini CLI and OpenCode. Each
+skill has its own tutorial, how-to guides, reference and explanation. MIT.
 
 ```sh
 /plugin install arnaud-zg --marketplace arnaud-zg/skills
@@ -32,53 +34,15 @@ gate CI and commit hooks as they are.
 
 ## Install
 
-**Claude Code**, in one step (Claude Code 2.1.275 or later). This installs all eight skills:
+| Agent                        | Install                                                                                   |
+| ---------------------------- | ----------------------------------------------------------------------------------------- |
+| Claude Code                  | `/plugin install arnaud-zg --marketplace arnaud-zg/skills`                                |
+| Codex                        | `codex plugin marketplace add arnaud-zg/skills`, then install `arnaud-zg` from `/plugins` |
+| Copilot CLI                  | `copilot plugin marketplace add arnaud-zg/skills`                                         |
+| Cursor                       | add `arnaud-zg/skills` as a plugin marketplace in Cursor's settings                       |
+| Gemini CLI, OpenCode, others | `npx skills add arnaud-zg/skills --skill <skill>`                                         |
 
-```sh
-/plugin install arnaud-zg --marketplace arnaud-zg/skills
-```
-
-or in two, pinned to the version you reviewed:
-
-```sh
-/plugin marketplace add arnaud-zg/skills#arnaud-zg--v0.6.1
-/plugin install arnaud-zg@arnaud-zg-skills
-```
-
-**Any agent**, one skill at a time, with the [skills CLI](https://github.com/vercel-labs/skills):
-
-```sh
-npx skills add arnaud-zg/skills --skill <skill>
-```
-
-or pinned, through the release's tag:
-
-```sh
-npx skills add https://github.com/arnaud-zg/skills/tree/arnaud-zg--v0.6.1 --skill <skill>
-```
-
-**A whole team**, from the project's `.claude/settings.json`. Everyone who trusts the folder gets
-the marketplace, and the plugin turns on at their next session:
-
-```json
-{
-  "extraKnownMarketplaces": {
-    "arnaud-zg-skills": {
-      "source": {
-        "source": "github",
-        "repo": "arnaud-zg/skills",
-        "ref": "arnaud-zg--v0.6.1"
-      }
-    }
-  },
-  "enabledPlugins": { "arnaud-zg@arnaud-zg-skills": true }
-}
-```
-
-### Why are the skills called `/arnaud-zg:<skill>`?
-
-Claude Code names a plugin's skills `<plugin>:<skill>`. The plugin is `arnaud-zg`, which holds every
-skill from this marketplace. Installed with the skills CLI, a skill is just `/<skill>`.
+[Install](docs/install/how-to.md) pins a version, sets up a whole team, and covers each agent.
 
 ## 🔒 Know what you're installing
 
@@ -88,4 +52,9 @@ skill from this marketplace. Installed with the skills CLI, a skill is just `/<s
 - **`radical-simplify` is instructions only.** It proposes a redesign and edits nothing.
 
 Read each skill's `SKILL.md` under [`skills/`](skills/) before you install, as you would any
-dependency. Claude reads `SKILL.md`, not this page.
+dependency. The agent reads `SKILL.md`, not this page.
+
+### In an agent other than Claude Code
+
+`${CLAUDE_SKILL_DIR}` means the skill's own folder; each `SKILL.md` that uses it says so.
+`usage-runway` reads Claude Code's transcripts only, so elsewhere it has nothing to measure yet.

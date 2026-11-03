@@ -19,6 +19,9 @@ The skill owns the judgement: what is wrong, what is good, what to say about it.
 to another skill, through the `present` port, so the audit reads like every other one-minute read.
 It belongs to no project: what is read and where the result lands come from the caller.
 
+`${CLAUDE_SKILL_DIR}` is this skill's folder. Claude Code sets it; in another agent, use the folder
+that holds this file.
+
 ## Verbs
 
 | Verb      | Does                                                                         | File                             |

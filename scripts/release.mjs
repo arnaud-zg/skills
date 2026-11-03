@@ -12,7 +12,15 @@
 import { existsSync, readFileSync } from "node:fs";
 import path from "node:path";
 
-import { fail, plugins, root, run, startFromMain, succeeds } from "./release-shared.mjs";
+import {
+  fail,
+  plugins,
+  root,
+  run,
+  startFromMain,
+  succeeds,
+  versionDrift,
+} from "./release-shared.mjs";
 
 startFromMain();
 
@@ -47,8 +55,15 @@ if (releases.length === 0) {
   process.exit(0);
 }
 
-for (const { tag, notes } of releases) {
+for (const { tag, notes, plugin } of releases) {
   if (!notes) fail(`No changelog section for ${tag}. Did the \`pnpm release:version\` PR merge?`);
+  // `claude plugin tag` checks only the Claude manifest. One tag pins every agent's manifest, so a
+  // Codex or Cursor manifest at another version would ship a release that says two things.
+  const drift = versionDrift(plugin.dir, plugin.version);
+  if (drift.length)
+    fail(
+      `${tag}: these manifests are not at ${plugin.version}:\n  ${drift.join("\n  ")}\nRun node scripts/sync-versions.mjs.`,
+    );
 }
 
 for (const { tag, plugin } of releases) {

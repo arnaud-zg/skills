@@ -19,6 +19,9 @@ Long-running work is told to check its remaining credit before opening a unit it
 skill is the instrument that makes the check possible: one command, one word back. It belongs to no
 project and imports no project's vocabulary.
 
+`${CLAUDE_SKILL_DIR}` is this skill's folder. Claude Code sets it; in another agent, use the folder
+that holds this file.
+
 ## Verbs
 
 | Verb        | Does                                                                                 | File               |
@@ -36,6 +39,9 @@ which host wrote them.
 | Port   | Answered by                      |
 | ------ | -------------------------------- |
 | ledger | `adapters/ledger.claude-code.md` |
+
+The only ledger today reads Claude Code's transcripts. In another agent, the meter has nothing to
+read until an adapter for that agent's logs is added beside it.
 
 ## Map
 

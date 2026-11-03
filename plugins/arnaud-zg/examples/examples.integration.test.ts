@@ -22,6 +22,17 @@ const skill = (name: string, script: string) => path.join(SKILLS, name, "scripts
 const example = (relative: string) => path.join(EXAMPLES, relative);
 
 describe("the examples the docs show", () => {
+  test("given install/settings.json, then it turns on arnaud-zg from this marketplace, pinned to a release tag", () => {
+    const settings = JSON.parse(readFileSync(example("install/settings.json"), "utf8")) as {
+      extraKnownMarketplaces: Record<string, { source: { repo: string; ref: string } }>;
+      enabledPlugins: Record<string, boolean>;
+    };
+    const market = settings.extraKnownMarketplaces["arnaud-zg-skills"];
+    expect(market?.source.repo).toBe("arnaud-zg/skills");
+    expect(market?.source.ref).toMatch(/^arnaud-zg--v\d+\.\d+\.\d+$/);
+    expect(settings.enabledPlugins).toEqual({ "arnaud-zg@arnaud-zg-skills": true });
+  });
+
   test("given marketplace/.claude-plugin/plugin.json, then it is a plugin manifest", () => {
     const manifest = JSON.parse(
       readFileSync(example("marketplace/.claude-plugin/plugin.json"), "utf8"),
