@@ -51,9 +51,9 @@ describe("a plugin added to the marketplace", () => {
   });
 
   test("carries the same version in package.json and plugin.json", () => {
-    // Changesets bumps package.json and writes the changelog against it; Claude Code installs and
-    // `claude plugin tag` tags whatever plugin.json says. scripts/sync-versions.mjs copies one into
-    // the other during `pnpm release:version`, so a mismatch means the sync step was skipped.
+    // Changesets bumps package.json and writes the changelog against it; Claude Code installs
+    // whatever plugin.json says. scripts/sync-versions.mjs copies one into the other while shiplane
+    // opens the release PR, so a mismatch means the sync step was skipped.
     for (const name of pluginDirs) {
       const pkg = readJson(path.join(pluginsDir, name, "package.json"));
       const manifest = readJson(path.join(pluginsDir, name, ".claude-plugin", "plugin.json"));
@@ -71,16 +71,16 @@ describe("a plugin added to the marketplace", () => {
 
   test("keeps its version out of the catalogue entry, so plugin.json is the only place it lives", () => {
     // Claude Code reads plugin.json's version before the entry's, so a version here is ignored at
-    // install time and can only go stale — and a stale one makes `claude plugin tag` refuse to tag.
+    // install time and can only go stale.
     for (const entry of marketplace.plugins) {
       expect(entry, `marketplace entry ${entry.name} has a version`).not.toHaveProperty("version");
     }
   });
 
   test("is released through changesets: it has a changelog, or waits at 0.0.0 for a changeset", () => {
-    // A plugin's first version comes from `pnpm release:version` like every later one, so it gets a
+    // A plugin's first version comes from a release PR like every later one, so it gets a
     // changelog and its GitHub release gets real notes. Until then it sits at 0.0.0, which
-    // `pnpm release` never tags, and a pending changeset names it so the next release PR versions it.
+    // shiplane never tags, and a pending changeset names it so the next release PR versions it.
     const pending = readdirSync(path.join(root, ".changeset"))
       .filter((file) => file.endsWith(".md") && file !== "README.md")
       .map((file) => readFileSync(path.join(root, ".changeset", file), "utf8"));

@@ -22,8 +22,8 @@ cap, long output goes to a file returned by path, and mechanical lanes use a che
 ## Releasing
 
 See [docs/release.md](./docs/release.md). `main` is protected by a Lefthook hook, so the version
-bump goes through the PR that `pnpm release:version` opens, then `pnpm release` tags. Don't bump,
-commit or tag directly on `main`.
+bump goes through the release PR that `pnpm release` (shiplane) opens; after the merge, it tags.
+Don't bump, commit or tag directly on `main`.
 
 ## Before committing
 

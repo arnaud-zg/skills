@@ -2,17 +2,18 @@
 
 [📚 Docs home](README.md) › Writing plugins › [🛠️ How-to](how-to.md) › **Release**
 
-Three commands release every plugin. Changesets is the entry point, and you never edit a version, a
+Two commands release every plugin. Changesets is the entry point, and you never edit a version, a
 changelog or a tag by hand.
 
 ```sh
-pnpm changeset          # 1. in the PR that makes the change
-pnpm release:version    # 2. opens the release PR; review and merge it
-pnpm release            # 3. after the merge: tags and creates the GitHub releases
+pnpm changeset    # 1. in the PR that makes the change
+pnpm release      # 2. opens the release PR, waits for its merge, then tags and creates the GitHub releases
 ```
 
-Each plugin has its own version, changelog (`plugins/<name>/CHANGELOG.md`) and `<name>--v<version>`
-tag, and a changeset bumps only the plugins it names.
+`pnpm release` runs [shiplane](https://github.com/arnaud-zg/packages/tree/main/packages/shiplane),
+configured in `shiplane.config.ts`. Each plugin has its own version, changelog
+(`plugins/<name>/CHANGELOG.md`) and `<name>--v<version>` tag, and a changeset bumps only the plugins
+it names.
 
 ## 1. Describe the change
 
@@ -36,44 +37,45 @@ explicitly.
 
 A new plugin starts at `0.0.0` and gets its first version from a changeset too, so it has a
 changelog from day one and its first GitHub release has real notes. Add the changeset in the PR that
-adds the plugin (`minor` for `0.1.0`). `pnpm release` never tags a `0.0.0`, and
-`marketplace.unit.test.ts` fails on a plugin with no changelog and no pending changeset.
+adds the plugin (`minor` for `0.1.0`). shiplane never tags a `0.0.0`, and `marketplace.unit.test.ts`
+fails on a plugin with no changelog and no pending changeset.
 
-## 2. Open the release PR
-
-```sh
-pnpm release:version
-```
-
-Run it with a clean working tree. It switches to an up-to-date `main` and, if any changesets are
-pending, does the rest:
-
-| Step                                | What it does                                                               |
-| ----------------------------------- | -------------------------------------------------------------------------- |
-| `git switch -c release/<timestamp>` | `main` is protected, so versions only reach it through a PR                |
-| `changeset version`                 | consumes `.changeset/*.md`, bumps each plugin's `package.json`, changelogs |
-| `node scripts/sync-versions.mjs`    | copies each plugin's new version into its `plugin.json`                    |
-| `pnpm install --lockfile-only`      | refreshes the lockfile for the bumped workspace versions                   |
-| commit, push, `gh pr create`        | opens the PR, listing every bump                                           |
-
-With no pending changesets it says so and stops. Review the PR, then merge it.
-
-Leave `version` out of the plugin's marketplace entry. Claude Code reads `plugin.json` first, so a
-version there is ignored at install time, can only go stale, and makes `claude plugin tag` refuse to
-tag once it does. `marketplace.unit.test.ts` fails if one appears.
-
-## 3. Release, after the PR merges
+## 2. Release
 
 ```sh
 pnpm release
 ```
 
-It switches to an up-to-date `main` and finds every plugin version that has no GitHub release yet.
-For each one it tags `<name>--v<version>` with `claude plugin tag`, which validates the plugin
-first, pushes the tag, and creates the GitHub release with the plugin's changelog section as its
-notes. Before tagging it stops if the Codex or Cursor manifest is at a different version from the
-Claude one, because `claude plugin tag` checks only the Claude manifest. Every step is safe to
-repeat: fix whatever stopped it and run `pnpm release` again.
+Run it from an up-to-date `main` with a clean working tree; it refuses anything else. It reads where
+things stand first, so each run picks up where the last one stopped:
+
+| Where things stand                | What `pnpm release` does                                                            |
+| --------------------------------- | ----------------------------------------------------------------------------------- |
+| changesets pending, no release PR | shows each plugin's bump, asks, then opens the release PR                           |
+| a release PR is open              | waits for its merge: merge it on GitHub, or press `m` to merge it from the terminal |
+| merged, not tagged yet            | tags each plugin `<name>--v<version>` and creates its GitHub release                |
+| nothing pending                   | says so and stops; `pnpm changeset` queues a change                                 |
+
+Opening the release PR runs:
+
+| Step                                | What it does                                                               |
+| ----------------------------------- | -------------------------------------------------------------------------- |
+| `git switch -c release/<timestamp>` | `main` is protected, so versions only reach it through a PR                |
+| `changeset version`                 | consumes `.changeset/*.md`, bumps each plugin's `package.json`, changelogs |
+| `node scripts/sync-versions.mjs`    | copies each plugin's new version into its agent manifests                  |
+| commit, push, open the PR           | titled `chore(<plugin>): release v<version>`, listing every bump           |
+
+Once it merges, shiplane tags each version on the commit that brought it, pushes the tags, and
+creates each GitHub release with the plugin's changelog section as its notes. A failed step undoes
+what it ran and says so; fix whatever stopped it and run `pnpm release` again. To see where each
+plugin stands without changing anything, run `pnpm shiplane status`.
+
+Run `claude plugin validate . --strict` before merging the release PR. shiplane tags with git, so
+nothing else validates the plugin at release time.
+
+Leave `version` out of the plugin's marketplace entry. Claude Code reads `plugin.json` first, so a
+version there is ignored at install time and can only go stale. `marketplace.unit.test.ts` fails if
+one appears.
 
 The tag format, and how each agent pins a release, are in [tags.md](tags.md).
 
@@ -85,10 +87,10 @@ comparing versions, and it reads the version from `plugin.json` first. Until tha
 `claude plugin update` reports the plugin as already at the latest version, however many commits
 land.
 
-The release PR from step 2 is what ships a plugin: merging it changes the version in `plugin.json`.
-Users then get the new code with `claude plugin update <name>`, or on their next auto-update if they
-turned it on for this marketplace. It is off by default for marketplaces not run by Anthropic.
-Updates apply on restart or `/reload-plugins`.
+The release PR is what ships a plugin: merging it changes the version in `plugin.json`. Users then
+get the new code with `claude plugin update <name>`, or on their next auto-update if they turned it
+on for this marketplace. It is off by default for marketplaces not run by Anthropic. Updates apply
+on restart or `/reload-plugins`.
 
 Two consequences:
 
@@ -99,7 +101,7 @@ Two consequences:
 Catalogue edits in `marketplace.json` (descriptions, categories) carry no version and reach users on
 their next `claude plugin marketplace update`.
 
-The tag from step 3 does a narrower job: it makes the plugin resolvable by a dependency range like
+The tag does a narrower job: it makes the plugin resolvable by a dependency range like
 `ts-base@^1.2.0`, and gives a `git-subdir` entry something to pin.
 
 ## Why plugins carry a package.json
