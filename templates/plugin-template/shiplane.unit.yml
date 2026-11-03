@@ -1,0 +1,3 @@
+# Versioned, tagged <name>--v<version> and given release notes. Nothing deploys it: the
+# marketplace is this repository, so the release PR merging is what ships it.
+module: internal-tool

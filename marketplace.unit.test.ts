@@ -27,6 +27,16 @@ describe("a plugin added to the marketplace", () => {
     }
   });
 
+  test("has a shiplane.unit.yml, so `pnpm shiplane` tags and releases it", () => {
+    // shiplane releases only the folders holding a unit file. Without one, a plugin is versioned by
+    // changesets yet never tagged nor given release notes, and nothing says so.
+    for (const name of pluginDirs) {
+      const unitFile = path.join(pluginsDir, name, "shiplane.unit.yml");
+      expect(existsSync(unitFile), `plugins/${name} has no shiplane.unit.yml`).toBe(true);
+      expect(readFileSync(unitFile, "utf8")).toMatch(/^module: internal-tool$/m);
+    }
+  });
+
   test("is private, so `changeset publish` never pushes it to npm", () => {
     for (const name of pluginDirs) {
       expect(readJson(path.join(pluginsDir, name, "package.json")).private).toBe(true);

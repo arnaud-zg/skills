@@ -25,6 +25,7 @@ skills/
 │       │   └── plugin.json       # the manifest for Codex
 │       ├── .cursor-plugin/
 │       │   └── plugin.json       # the manifest for Cursor
+│       ├── shiplane.unit.yml     # module: internal-tool, so shiplane tags and releases it
 │       ├── skills/<skill>/SKILL.md
 │       ├── agents/<agent>.md
 │       ├── commands/<command>.md
@@ -33,6 +34,7 @@ skills/
 ├── templates/plugin-template/    # not listed in the catalogue; copy to start
 ├── docs/                         # this documentation
 ├── scripts/                      # pnpm release:version and pnpm release
+├── shiplane.config.ts            # how plugins release: tag format, versioning, module
 └── …                             # tooling, all from @arnaud-zg/configs
 ```
 
