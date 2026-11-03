@@ -1,5 +1,11 @@
 # @arnaud-zg/plugin-arnaud-zg
 
+## 0.7.1
+
+### Patch Changes
+
+- Name every test by its layer, so the suite holds the trophy.
+
 ## 0.7.0
 
 ### Minor Changes
