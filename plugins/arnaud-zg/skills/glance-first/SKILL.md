@@ -22,6 +22,9 @@ Everything below the numbers is proof, not required reading. At most 200 words, 
 | 3     | each block's picture  | the first block must have one |
 | 4     | the line it proves    | 15 words                      |
 
+`${CLAUDE_SKILL_DIR}` is this skill's folder. Claude Code sets it; in another agent, use the folder
+that holds this file.
+
 ## Verbs
 
 | Verb        | Does                                                                   | File                                 |

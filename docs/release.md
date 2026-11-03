@@ -71,9 +71,11 @@ pnpm release
 It switches to an up-to-date `main` and finds every plugin version that has no GitHub release yet.
 For each one it tags `<name>--v<version>` with `claude plugin tag`, which validates the plugin
 first, pushes the tag, and creates the GitHub release with the plugin's changelog section as its
-notes. Every step is safe to repeat: fix whatever stopped it and run `pnpm release` again.
+notes. Before tagging it stops if the Codex or Cursor manifest is at a different version from the
+Claude one, because `claude plugin tag` checks only the Claude manifest. Every step is safe to
+repeat: fix whatever stopped it and run `pnpm release` again.
 
-It needs `gh auth login` and the `claude` CLI on your `PATH`. Nothing goes to npm.
+The tag format, and how each agent pins a release, are in [tags.md](tags.md).
 
 ## What a plugin release actually ships
 

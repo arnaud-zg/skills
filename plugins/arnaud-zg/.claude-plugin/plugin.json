@@ -26,7 +26,12 @@
     "process",
     "tldr",
     "summary",
-    "pr-description"
+    "pr-description",
+    "codex",
+    "cursor",
+    "copilot",
+    "gemini-cli",
+    "testing"
   ],
   "dependencies": []
 }

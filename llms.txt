@@ -1,7 +1,8 @@
 # arnaud-zg/skills
 
-> A Claude Code plugin marketplace named arnaud-zg-skills: Agent Skills, subagents, hooks and MCP servers,
-> each linted, tested and versioned. Its first plugin, arnaud-zg, ships the skills listed in its README.
+> An Agent Skills marketplace named arnaud-zg-skills, for Claude Code, Codex, Cursor, GitHub Copilot
+> CLI and any agent that reads SKILL.md. Each skill is linted, tested and versioned. Its first plugin,
+> arnaud-zg, ships the skills listed in its README.
 
 - [Documentation home](https://github.com/arnaud-zg/skills/blob/main/docs/README.md): a map of every page
 
@@ -9,9 +10,12 @@
 
 - [arnaud-zg plugin README](https://github.com/arnaud-zg/skills/blob/main/plugins/arnaud-zg/README.md): every skill, what it does, how to call it, and links to its tutorial, how-to guides, reference, explanation and SKILL.md
 - Install in Claude Code: `/plugin install arnaud-zg --marketplace arnaud-zg/skills`
-- Install in any agent: `npx skills add arnaud-zg/skills --skill <name>`
+- Install in Codex: `codex plugin marketplace add arnaud-zg/skills`, then install arnaud-zg from `/plugins`
+- Install in GitHub Copilot CLI: `copilot plugin marketplace add arnaud-zg/skills`, then `copilot plugin install arnaud-zg@arnaud-zg-skills`
+- Install in Cursor: add arnaud-zg/skills as a plugin marketplace in Cursor's settings (it reads `.cursor-plugin/marketplace.json`)
+- Install in any other agent (Gemini CLI, OpenCode and more): `npx skills add arnaud-zg/skills --skill <name>`
 
-## Writing a Claude Code plugin in this repository
+## Writing a plugin in this repository
 
 - [README](https://github.com/arnaud-zg/skills/blob/main/README.md): the plugins, install, security
 - [Tutorial](https://github.com/arnaud-zg/skills/blob/main/docs/tutorial.md)

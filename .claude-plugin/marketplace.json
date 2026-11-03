@@ -1,7 +1,7 @@
 {
   "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
   "name": "arnaud-zg-skills",
-  "description": "Arnaud Zheng's Claude Code plugins: skills, agents, hooks and MCP servers for day-to-day development.",
+  "description": "Arnaud Zheng's Agent Skills for Claude Code, Codex, Cursor, Copilot CLI and any SKILL.md agent.",
   "owner": {
     "name": "Arnaud Zheng",
     "url": "https://github.com/arnaud-zg"
@@ -22,7 +22,11 @@
         "lint",
         "authoring",
         "documentation",
-        "diataxis"
+        "diataxis",
+        "codex",
+        "cursor",
+        "copilot",
+        "testing"
       ]
     }
   ]

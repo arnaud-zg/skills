@@ -1,4 +1,4 @@
-# 📚 Documentation: Claude Code Agent Skills and plugins
+# 📚 Documentation: Agent Skills and plugins for Claude Code, Codex, Cursor and more
 
 How to use the skills in the `arnaud-zg-skills` marketplace, and how to add your own. The docs
 follow [Diataxis](https://diataxis.fr/): each topic has four pages, one per reader need, so you can
@@ -21,9 +21,9 @@ go straight to the kind of page you want.
 
 These pages cover building and shipping plugins here, not using them.
 
-| 🚀 Tutorial                            | 🛠️ How-to guides                                                                | 📖 Reference                                           | 💡 Explanation                                                                 |
-| -------------------------------------- | ------------------------------------------------------------------------------- | ------------------------------------------------------ | ------------------------------------------------------------------------------ |
-| [Build your first plugin](tutorial.md) | [Add](how-to.md), [test, document](test-and-document.md), [release](release.md) | [Layout, CLI](reference.md), [manifests](manifests.md) | [Skills, plugins, marketplaces](explanation.md), [composition](composition.md) |
+| 🚀 Tutorial                            | 🛠️ How-to guides                                                                | 📖 Reference                                                            | 💡 Explanation                                                                                      |
+| -------------------------------------- | ------------------------------------------------------------------------------- | ----------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- |
+| [Build your first plugin](tutorial.md) | [Add](how-to.md), [test, document](test-and-document.md), [release](release.md) | [Layout, CLI](reference.md), [manifests](manifests.md), [tags](tags.md) | [Skills, plugins, marketplaces](explanation.md), [composition](composition.md), [agents](agents.md) |
 
 A new skill gets one row in its plugin README's skills table, and its own README for the summary.
 [Document a plugin](test-and-document.md#document-a-plugin) says how.

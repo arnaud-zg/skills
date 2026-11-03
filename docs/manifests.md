@@ -1,4 +1,4 @@
-# 📖 Reference: `marketplace.json` and `plugin.json` fields
+# 📖 Reference: `marketplace.json` and `plugin.json` fields, for each agent
 
 [📚 Docs home](README.md) › Writing plugins › [📖 Reference](reference.md) › **Manifests**
 
@@ -90,3 +90,43 @@ Plugins that must be enabled for this plugin to function.
 
 Dependencies are auto-installed and flagged as such; `claude plugin prune` removes auto-installed
 plugins that nothing depends on any more.
+
+## Other agents
+
+Every agent manifest describes the same plugin. `manifests.unit.test.ts` holds `name`, `version`,
+`description`, `license`, `repository` and `keywords` equal to the Claude manifest's, and
+`scripts/sync-versions.mjs` writes the version into all of them.
+
+| Agent       | Catalogue                          | Plugin manifest                       |
+| ----------- | ---------------------------------- | ------------------------------------- |
+| Claude Code | `.claude-plugin/marketplace.json`  | `<plugin>/.claude-plugin/plugin.json` |
+| Copilot CLI | `.claude-plugin/marketplace.json`  | `<plugin>/.claude-plugin/plugin.json` |
+| Codex       | `.agents/plugins/marketplace.json` | `<plugin>/.codex-plugin/plugin.json`  |
+| Cursor      | `.cursor-plugin/marketplace.json`  | `<plugin>/.cursor-plugin/plugin.json` |
+| skills CLI  | `.claude-plugin/marketplace.json`  | every `skills/<skill>/SKILL.md`       |
+
+### Codex `.codex-plugin/plugin.json`
+
+The shared fields, plus:
+
+- `skills` (string): The skills folder, relative to the plugin: `"./skills/"`
+- `interface` (object): How Codex shows the plugin: `displayName`, `shortDescription`,
+  `developerName`, `category`, `capabilities`, `websiteURL`, `composerIcon`, `logo`
+
+### Codex `.agents/plugins/marketplace.json`
+
+- `name` (string): The marketplace id, `arnaud-zg-skills`, the same as Claude Code's
+- `interface.displayName` (string): Shown in `/plugins`
+- `plugins[]`: `{ name, source: { source: "local", path: "./plugins/<name>" }, policy, category }`
+
+### Cursor `.cursor-plugin/plugin.json` and `marketplace.json`
+
+The plugin manifest takes the shared fields plus `displayName`, `logo` and `skills`. Setting
+`skills` replaces Cursor's default folder scan. The catalogue takes `name`, `owner`,
+`metadata.pluginRoot` and `plugins[]` of `{ name, source, description }`, like Claude Code's.
+
+### Skills hidden from the skills CLI
+
+`npx skills add` scans the whole repository for `SKILL.md`. An example or template skill carries
+`metadata: internal: true` in its frontmatter so it stays out of the listing, and
+`agents.integration.test.ts` fails if one under `examples/` does not.

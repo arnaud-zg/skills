@@ -1,8 +1,11 @@
 # arnaud-zg/skills
 
-Claude Code plugin marketplace (`.claude-plugin/marketplace.json`, plugins under `plugins/`). Not
-published to npm. Tooling comes from `@arnaud-zg/configs`. Full docs: [README.md](./README.md) and
-[docs/](./docs/) (Diataxis: tutorial, how-to, reference, explanation).
+Agent Skills marketplace for Claude Code, Codex, Cursor and Copilot CLI (`.claude-plugin/`,
+`.agents/plugins/` and `.cursor-plugin/` catalogues, plugins under `plugins/`). Each plugin carries
+one manifest per agent; keep them in step ([manifests](./docs/manifests.md#other-agents)).
+[AGENTS.md](./AGENTS.md) holds the same rules for other agents. Not published to npm. Tooling comes
+from `@arnaud-zg/configs`. Full docs: [README.md](./README.md) and [docs/](./docs/) (Diataxis:
+tutorial, how-to, reference, explanation).
 
 ## Plugins and skills
 

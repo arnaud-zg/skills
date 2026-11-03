@@ -1,4 +1,4 @@
-# 📖 Reference: Claude Code plugin manifests, layout and CLI
+# 📖 Reference: plugin manifests for each agent, layout and CLI
 
 [📚 Docs home](README.md) › Writing plugins › [🚀 Tutorial](tutorial.md) · [🛠️ How-to](how-to.md) ·
 **📖 Reference** · [💡 Explanation](explanation.md)
@@ -11,11 +11,20 @@ re-check after a major CLI upgrade.
 ```
 skills/
 ├── .claude-plugin/
-│   └── marketplace.json          # the catalogue — this file makes the repo a marketplace
+│   └── marketplace.json          # the catalogue for Claude Code and Copilot CLI
+├── .agents/plugins/
+│   └── marketplace.json          # the catalogue for Codex
+├── .cursor-plugin/
+│   └── marketplace.json          # the catalogue for Cursor
+├── AGENTS.md                     # contributor rules for agents other than Claude Code
 ├── plugins/                      # plugins hosted here (metadata.pluginRoot)
 │   └── <plugin>/
 │       ├── .claude-plugin/
-│       │   └── plugin.json       # the manifest — this file makes the directory a plugin
+│       │   └── plugin.json       # the manifest for Claude Code and Copilot CLI
+│       ├── .codex-plugin/
+│       │   └── plugin.json       # the manifest for Codex
+│       ├── .cursor-plugin/
+│       │   └── plugin.json       # the manifest for Cursor
 │       ├── skills/<skill>/SKILL.md
 │       ├── agents/<agent>.md
 │       ├── commands/<command>.md
@@ -33,7 +42,8 @@ Its tooling (Prettier, ESLint, TypeScript, remark, commitlint, Lefthook) comes f
 
 ## Manifests
 
-Field-by-field tables for `marketplace.json` and `plugin.json` live in [manifests.md](manifests.md).
+Field-by-field tables for `marketplace.json` and `plugin.json`, for each agent, live in
+[manifests.md](manifests.md).
 
 ## Component discovery
 

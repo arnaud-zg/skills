@@ -18,3 +18,6 @@ allowed-tools: Bash(node ${CLAUDE_SKILL_DIR}/scripts/*.mjs *)
 
 Read `domain/rules.md`, then follow `verbs/retro.md`. The three ports it asks, the adapters that
 answer them and how a caller binds its own are in `ports/PORTS.md`.
+
+`${CLAUDE_SKILL_DIR}` is this skill's folder. Claude Code sets it; in another agent, use the folder
+that holds this file.
