@@ -148,13 +148,9 @@ claude plugin uninstall hello-tools
 claude plugin marketplace remove arnaud-zg-skills
 ```
 
-To publish instead, record a changeset, commit the plugin, and open a pull request:
-
-```sh
-pnpm changeset       # pick @arnaud-zg/plugin-hello-tools
-```
-
-After it merges, the release flow versions and tags it (see [the release how-to](./release.md)).
+To publish instead, say what the plugin does under `## 0.1.0` in its `CHANGELOG.md`, commit it, and
+open a pull request. After it merges, `pnpm release` tags it (see
+[the release how-to](./release.md)).
 
 Anyone can then run:
 

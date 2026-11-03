@@ -20,18 +20,14 @@ Commits on the message, and a block on direct commits to `main`.
 ```sh
 git checkout -b my-change
 # ...edit...
-pnpm changeset          # unless the change needs no release
 git commit -m "feat(hexagonal-skill-builder): add a new rule"
 git push -u origin my-change
 gh pr create --fill
 ```
 
-`pnpm changeset` writes a file into `.changeset/` recording which plugins your change affects and
-how much to bump them. Commit it with your work. If the change needs no release at all,
-`pnpm changeset add --empty` says so explicitly.
-
 Commit messages follow Conventional Commits with a mandatory scope: `type(scope): description`.
-Enforced by the `commit-msg` hook.
+Enforced by the `commit-msg` hook. The subject is also the changelog line users read, so write it
+for them ([how](./docs/release.md#1-write-the-commit-subject)).
 
 To add a plugin or a skill, follow [docs/how-to.md](./docs/how-to.md).
 

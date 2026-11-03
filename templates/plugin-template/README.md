@@ -15,6 +15,7 @@ Then work through [docs/tutorial.md](../../docs/tutorial.md).
 | ---------------------------- | ------ | ------------------------------------ |
 | `.claude-plugin/plugin.json` | plugin | never — this file defines the plugin |
 | `shiplane.unit.yml`          | plugin | never — without it, it never ships   |
+| `CHANGELOG.md`               | plugin | never — its first release's notes    |
 | `skills/example-skill/`      | skill  | the plugin ships no skills           |
 | `agents/example-agent.md`    | agent  | the plugin ships no subagents        |
 | `hooks/hooks.json`           | hook   | the plugin ships no hooks            |

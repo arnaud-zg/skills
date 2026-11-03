@@ -77,19 +77,16 @@ describe("a plugin added to the marketplace", () => {
     }
   });
 
-  test("is released through changesets: it has a changelog, or waits at 0.0.0 for a changeset", () => {
-    // A plugin's first version comes from a release PR like every later one, so it gets a
-    // changelog and its GitHub release gets real notes. Until then it sits at 0.0.0, which
-    // shiplane never tags, and a pending changeset names it so the next release PR versions it.
-    const pending = readdirSync(path.join(root, ".changeset"))
-      .filter((file) => file.endsWith(".md") && file !== "README.md")
-      .map((file) => readFileSync(path.join(root, ".changeset", file), "utf8"));
+  test("has a changelog section for its version, so its GitHub release has real notes", () => {
+    // shiplane reads a release's notes from this section. A later release writes it from commits; a
+    // new plugin has none to read, so it carries its own from the template.
     for (const name of pluginDirs) {
-      if (existsSync(path.join(pluginsDir, name, "CHANGELOG.md"))) continue;
       const pkg = readJson(path.join(pluginsDir, name, "package.json"));
-      expect(pkg.version, `plugins/${name} has no changelog, so it is unreleased`).toBe("0.0.0");
-      const named = pending.some((text) => text.includes(`"${pkg.name}":`));
-      expect(named, `no pending changeset names ${pkg.name}`).toBe(true);
+      const changelog = path.join(pluginsDir, name, "CHANGELOG.md");
+      expect(existsSync(changelog), `plugins/${name} has no CHANGELOG.md`).toBe(true);
+      expect(readFileSync(changelog, "utf8"), `plugins/${name} ${pkg.version}`).toContain(
+        `\n## ${pkg.version}\n`,
+      );
     }
   });
 });
@@ -100,9 +97,10 @@ describe("the plugin template", () => {
     expect(existsSync(path.join(root, "templates", "plugin-template", "package.json"))).toBe(true);
   });
 
-  test("starts at 0.0.0, so a plugin copied from it waits for its first changeset", () => {
+  test("starts at 0.1.0 with its changelog, so a plugin copied from it releases as it stands", () => {
     const template = path.join(root, "templates", "plugin-template");
-    expect(readJson(path.join(template, "package.json")).version).toBe("0.0.0");
-    expect(readJson(path.join(template, ".claude-plugin", "plugin.json")).version).toBe("0.0.0");
+    expect(readJson(path.join(template, "package.json")).version).toBe("0.1.0");
+    expect(readJson(path.join(template, ".claude-plugin", "plugin.json")).version).toBe("0.1.0");
+    expect(readFileSync(path.join(template, "CHANGELOG.md"), "utf8")).toContain("\n## 0.1.0\n");
   });
 });

@@ -9,6 +9,9 @@ import { agentPlugin, defineRelease, releaseFlow } from "shiplane";
 export default defineRelease({
   units: ["plugins/*"],
   tag: "plugin",
+  // `pnpm release` alone releases: it writes a changeset from the commits since each plugin's last
+  // tag, and `changeset version` consumes it in the release PR. Every release is a patch.
+  commitsWithoutChangeset: "release",
   flow: releaseFlow({
     sourceControl: gitSourceControl(),
     codeHost: gitHubCodeHost(),

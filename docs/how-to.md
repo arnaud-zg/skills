@@ -25,16 +25,17 @@ cp -R templates/plugin-template plugins/<name>
    `plugin.json` carries it. Add the same plugin to `.agents/plugins/marketplace.json` (Codex,
    `"source": { "source": "local", "path": "./plugins/<name>" }`) and to
    `.cursor-plugin/marketplace.json` (Cursor, `"source": "<name>"`).
-6. `pnpm changeset`: pick `@arnaud-zg/plugin-<name>`, `minor`, and say what the plugin does. The
-   plugin stays at `0.0.0` until the next release PR gives it `0.1.0` and its first changelog entry.
+6. Set the heading of `plugins/<name>/CHANGELOG.md` to the package name, and say what the plugin
+   does under `## 0.1.0`: that is its first release's notes. Once this PR merges, `pnpm release`
+   tags it.
 7. `claude plugin validate . --strict`
 8. `pnpm test`: `marketplace.unit.test.ts` fails if the package name, the manifest name and the
    directory disagree, if the versions drift apart, if `shiplane.unit.yml` is missing, if the
-   catalogue entry carries a version, if the plugin is missing from the catalogue, or if it has no
-   changelog and no pending changeset. Those are the steps that are easy to skip when copying the
-   template. `manifests.unit.test.ts` and `agents.integration.test.ts` fail if an agent's manifest
-   disagrees with the Claude one or does not reach the skills. `pnpm test:e2e` installs every skill
-   through the real skills CLI.
+   catalogue entry carries a version, if the plugin is missing from the catalogue, or if its
+   changelog has no section for its version. Those are the steps that are easy to skip when copying
+   the template. `manifests.unit.test.ts` and `agents.integration.test.ts` fail if an agent's
+   manifest disagrees with the Claude one or does not reach the skills. `pnpm test:e2e` installs
+   every skill through the real skills CLI.
 
 ## Add a skill to an existing plugin
 

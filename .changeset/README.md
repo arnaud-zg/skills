@@ -1,7 +1,6 @@
 # Changesets
 
-This folder holds [changesets](https://github.com/changesets/changesets): one Markdown file per
-unreleased change, describing which plugins it affects and how much to bump them.
-
-Create one with `pnpm changeset` for any change to a plugin worth releasing. Plugins are private
-packages: changesets versions them and writes their changelogs, and never publishes them to npm.
+This folder is shiplane's. `pnpm release` writes a changeset here from the commits since each
+plugin's last tag, and `changeset version` consumes it in the release PR, so it stays empty between
+releases and nothing here is written by hand. Plugins are private packages: changesets versions them
+and writes their changelogs, and never publishes them to npm.
