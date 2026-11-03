@@ -1,3 +1,4 @@
-# Versioned, tagged arnaud-zg--v<version> and given release notes. Nothing deploys it: the
-# marketplace is this repository, so the release PR merging is what ships it.
-module: internal-tool
+# Versioned, its agent manifests moved to each new version in the release PR, tagged
+# arnaud-zg--v<version> and given release notes. Nothing deploys it: the marketplace is this
+# repository, so the release PR merging is what ships it.
+module: agent-plugin
