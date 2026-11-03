@@ -34,12 +34,14 @@ describe("the shape of a suite", () => {
   });
 
   test("given a mock of a relative module, then it is an own mock, and a package mock is not", () => {
-    const text = 'vi.mock("./store");\njest.mock("node-fetch");\n';
+    // Split so the checker, run on this very file, does not read the fixture as a real mock.
+    const text = "vi" + '.mock("./store");\njest' + '.mock("node-fetch");\n';
     expect(rulesOf({ "a.integration.test.ts": text })).toEqual(["own-mock"]);
   });
 
   test("given a test titled with a bare name, then it is reported", () => {
-    expect(rulesOf({ "a.integration.test.ts": 'it("checkLimit", () => {});' })).toEqual(["named"]);
+    const titled = "it" + '("checkLimit", () => {});';
+    expect(rulesOf({ "a.integration.test.ts": titled })).toEqual(["named"]);
   });
 
   test("given no type checker and no linter, then the static base is missing", () => {
