@@ -2,68 +2,62 @@
 
 [📚 Docs home](README.md) › Writing plugins › [🛠️ How-to](how-to.md) › **Release**
 
-Two commands release every plugin. Changesets is the entry point, and you never edit a version, a
-changelog or a tag by hand.
+One command releases every plugin, and you never edit a version, a changelog or a tag by hand.
 
 ```sh
-pnpm changeset    # 1. in the PR that makes the change
-pnpm release      # 2. opens the release PR, waits for its merge, then tags and creates the GitHub releases
+pnpm release    # opens the release PR, waits for its merge, then tags and creates the GitHub releases
 ```
 
 `pnpm release` runs [shiplane](https://github.com/arnaud-zg/packages/tree/main/packages/shiplane),
 configured in `shiplane.config.ts`. Each plugin has its own version, changelog
-(`plugins/<name>/CHANGELOG.md`) and `<name>--v<version>` tag, and a changeset bumps only the plugins
-it names.
+(`plugins/<name>/CHANGELOG.md`) and `<name>--v<version>` tag.
 
-## 1. Describe the change
+## 1. Write the commit subject
 
-Any pull request that should show up in a release carries a changeset:
+Pull requests are squash merged, so a PR's title is its commit subject, and that subject sets the
+release. Only commits touching `plugins/<name>/` count.
 
-```sh
-pnpm changeset
-```
+| Subject                              | Moves the plugin | Changelog line                          |
+| ------------------------------------ | ---------------- | --------------------------------------- |
+| `fix(scope): …`, `perf(scope): …`    | patch            | yes                                     |
+| `feat(scope): …`                     | minor            | yes                                     |
+| `feat(scope)!: …`, any type with `!` | major            | yes                                     |
+| `docs`, `test`, `chore`, `refactor`… | patch            | the latest one, if nothing else has one |
 
-It asks which plugins changed and how much to bump them, then writes a Markdown file into
-`.changeset/`. Commit that file with your work. Plugins appear in the list as
-`@arnaud-zg/plugin-<name>`, because each one has a private `package.json` beside its `plugin.json`
-(see [why](#why-plugins-carry-a-packagejson)). To skip the prompts:
+The biggest move wins. Write the subject for users: without its type and PR number, it is what they
+read. Mark a breaking change with `!`, because a `BREAKING CHANGE:` footer is not read.
+
+When a release needs better words or another bump, add a changeset. It takes over for the plugins it
+names: their commits are skipped.
 
 ```sh
 pnpm changeset add --minor @arnaud-zg/plugin-hello-tools -m "Add the audit-deps skill"
 ```
 
-For a change that needs no release at all, `pnpm changeset add --empty` records that decision
-explicitly.
+Plugins appear as `@arnaud-zg/plugin-<name>`, because each one has a private `package.json` beside
+its `plugin.json` (see [why](#why-plugins-carry-a-packagejson)).
 
-A new plugin starts at `0.0.0` and gets its first version from a changeset too, so it has a
-changelog from day one and its first GitHub release has real notes. Add the changeset in the PR that
-adds the plugin (`minor` for `0.1.0`). shiplane never tags a `0.0.0`, and `marketplace.unit.test.ts`
-fails on a plugin with no changelog and no pending changeset.
+A new plugin is the exception: it starts at `0.0.0` and needs a changeset for its first version, so
+it has a changelog from day one and its first GitHub release has real notes. Add the changeset in
+the PR that adds the plugin (`minor` for `0.1.0`). shiplane never tags a `0.0.0`, and
+`marketplace.unit.test.ts` fails on a plugin with no changelog and no pending changeset.
 
 ## 2. Release
 
-```sh
-pnpm release
-```
+Run `pnpm release` from an up-to-date `main` with a clean working tree; it refuses anything else. It
+reads where things stand first, so each run picks up where the last one stopped:
 
-Run it from an up-to-date `main` with a clean working tree; it refuses anything else. It reads where
-things stand first, so each run picks up where the last one stopped:
+| Where things stand                           | What `pnpm release` does                                                            |
+| -------------------------------------------- | ----------------------------------------------------------------------------------- |
+| commits or changesets pending, no release PR | shows each plugin's bump, asks which to release, then opens the release PR          |
+| a release PR is open                         | waits for its merge: merge it on GitHub, or press `m` to merge it from the terminal |
+| merged, not tagged yet                       | tags each plugin `<name>--v<version>` and creates its GitHub release                |
+| nothing pending                              | says so and stops                                                                   |
 
-| Where things stand                | What `pnpm release` does                                                            |
-| --------------------------------- | ----------------------------------------------------------------------------------- |
-| changesets pending, no release PR | shows each plugin's bump, asks, then opens the release PR                           |
-| a release PR is open              | waits for its merge: merge it on GitHub, or press `m` to merge it from the terminal |
-| merged, not tagged yet            | tags each plugin `<name>--v<version>` and creates its GitHub release                |
-| nothing pending                   | says so and stops; `pnpm changeset` queues a change                                 |
+To hold a plugin back, untick it at that first question: its commits wait for the next release.
 
-Opening the release PR runs:
-
-| Step                                | What it does                                                               |
-| ----------------------------------- | -------------------------------------------------------------------------- |
-| `git switch -c release/<timestamp>` | `main` is protected, so versions only reach it through a PR                |
-| `changeset version`                 | consumes `.changeset/*.md`, bumps each plugin's `package.json`, changelogs |
-| `agentPlugin()` writes              | each plugin's new version into its agent manifests                         |
-| commit, push, open the PR           | titled `chore(<plugin>): release v<version>`, listing every bump           |
+The release PR branches off `main`, because `main` is protected. It holds each plugin's new version,
+in `package.json` and every agent manifest, and its changelog.
 
 Once it merges, shiplane tags each version on the commit that brought it, pushes the tags, and
 creates each GitHub release with the plugin's changelog section as its notes. A failed step undoes

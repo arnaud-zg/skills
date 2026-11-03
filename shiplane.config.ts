@@ -9,6 +9,9 @@ import { agentPlugin, defineRelease, releaseFlow } from "shiplane";
 export default defineRelease({
   units: ["plugins/*"],
   tag: "plugin",
+  // `pnpm release` alone releases: each commit since the last tag sets the bump and its changelog
+  // line. A pending changeset takes over for the plugins it names.
+  commitsWithoutChangeset: "release",
   flow: releaseFlow({
     sourceControl: gitSourceControl(),
     codeHost: gitHubCodeHost(),
