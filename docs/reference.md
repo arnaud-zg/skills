@@ -33,7 +33,7 @@ skills/
 │       └── .mcp.json
 ├── templates/plugin-template/    # not listed in the catalogue; copy to start
 ├── docs/                         # this documentation
-├── scripts/                      # pnpm release:version and pnpm release
+├── scripts/                      # sync-versions.mjs: the version into every agent manifest
 ├── shiplane.config.ts            # how plugins release: tag format, versioning, module
 └── …                             # tooling, all from @arnaud-zg/configs
 ```
