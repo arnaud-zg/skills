@@ -33,7 +33,7 @@ describe("a plugin added to the marketplace", () => {
     for (const name of pluginDirs) {
       const unitFile = path.join(pluginsDir, name, "shiplane.unit.yml");
       expect(existsSync(unitFile), `plugins/${name} has no shiplane.unit.yml`).toBe(true);
-      expect(readFileSync(unitFile, "utf8")).toMatch(/^module: internal-tool$/m);
+      expect(readFileSync(unitFile, "utf8")).toMatch(/^module: agent-plugin$/m);
     }
   });
 
@@ -52,8 +52,8 @@ describe("a plugin added to the marketplace", () => {
 
   test("carries the same version in package.json and plugin.json", () => {
     // Changesets bumps package.json and writes the changelog against it; Claude Code installs
-    // whatever plugin.json says. scripts/sync-versions.mjs copies one into the other while shiplane
-    // opens the release PR, so a mismatch means the sync step was skipped.
+    // whatever plugin.json says. shiplane's agentPlugin() copies one into the other in the release
+    // PR, so a mismatch means a version was edited by hand.
     for (const name of pluginDirs) {
       const pkg = readJson(path.join(pluginsDir, name, "package.json"));
       const manifest = readJson(path.join(pluginsDir, name, ".claude-plugin", "plugin.json"));

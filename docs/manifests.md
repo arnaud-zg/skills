@@ -94,8 +94,8 @@ plugins that nothing depends on any more.
 ## Other agents
 
 Every agent manifest describes the same plugin. `manifests.unit.test.ts` holds `name`, `version`,
-`description`, `license`, `repository` and `keywords` equal to the Claude manifest's, and
-`scripts/sync-versions.mjs` writes the version into all of them.
+`description`, `license`, `repository` and `keywords` equal to the Claude manifest's, and the
+release PR writes the version into all of them (shiplane's `agentPlugin()`).
 
 | Agent       | Catalogue                          | Plugin manifest                       |
 | ----------- | ---------------------------------- | ------------------------------------- |

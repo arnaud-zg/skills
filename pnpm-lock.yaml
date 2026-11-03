@@ -27,14 +27,14 @@ importers:
         specifier: ^4.7.1
         version: 4.7.1(prettier@3.9.10)
       '@shiplane/changesets':
-        specifier: 0.3.0
-        version: 0.3.0(shiplane@0.3.0)
+        specifier: 0.4.0
+        version: 0.4.0(shiplane@0.4.0)
       '@shiplane/git':
-        specifier: 0.3.0
-        version: 0.3.0(shiplane@0.3.0)
+        specifier: 0.4.0
+        version: 0.4.0(shiplane@0.4.0)
       '@shiplane/github':
-        specifier: 0.3.0
-        version: 0.3.0(shiplane@0.3.0)
+        specifier: 0.4.0
+        version: 0.4.0(shiplane@0.4.0)
       '@types/node':
         specifier: ^22.20.5
         version: 22.20.5
@@ -69,8 +69,8 @@ importers:
         specifier: ^7.0.1
         version: 7.0.1
       shiplane:
-        specifier: 0.3.0
-        version: 0.3.0
+        specifier: 0.4.0
+        version: 0.4.0
       typescript:
         specifier: ^6.0.3
         version: 6.0.3
@@ -771,20 +771,20 @@ packages:
     cpu: [x64]
     os: [win32]
 
-  '@shiplane/changesets@0.3.0':
-    resolution: {integrity: sha512-n8qCLBC8MWvPv6aY4wRDJYT41rgbaLKxtSFTuLIkuHbxM5Vy1ltOo3VvyxxyZo+tcw6D+VQF/6mmh1J5Mgsvsw==}
+  '@shiplane/changesets@0.4.0':
+    resolution: {integrity: sha512-QEKYGNVL3JOMHJO8Ew0oQKAj0vyU518xxOxI54hnZtM0c7Oc47TNGZ7cnSWbGXyp4Zz5n0hrOXxZiGXMKx4UPg==}
     peerDependencies:
-      shiplane: 0.3.0
+      shiplane: 0.4.0
 
-  '@shiplane/git@0.3.0':
-    resolution: {integrity: sha512-3hhE0IY7pdSVgUGNq05hkw0Bf0bPbbxb7Lu1y6Idg8HY68xeuhBG+y53rNVvRDczpP+lAvY0y5uFGg/7JLFyzw==}
+  '@shiplane/git@0.4.0':
+    resolution: {integrity: sha512-dSiV5STG9mr2O9pjJ7qDSxTpJGEXhW2xQof2KmczXIuu3beQpQvPQvky+waQ1FLtZvt6oNyPPD9n5UQ/osNGXw==}
     peerDependencies:
-      shiplane: 0.3.0
+      shiplane: 0.4.0
 
-  '@shiplane/github@0.3.0':
-    resolution: {integrity: sha512-aWP3Y4WBKo5ndhESs9ZdScNm7F8AI19l+p4Oxw2OvbORmsQKwJUnQnrBzo15zEccTBWf6BVFNsVZhQP0J6Wbyg==}
+  '@shiplane/github@0.4.0':
+    resolution: {integrity: sha512-7UD5EOb5UFoIjxUrT6fM4SsGQQ+37wDerd2Shxyz2orbDHy1MKD9gUypk0H+PN/Jg2gzZYzdCu/UZ39/fWyOtQ==}
     peerDependencies:
-      shiplane: 0.3.0
+      shiplane: 0.4.0
 
   '@simple-libs/child-process-utils@2.0.0':
     resolution: {integrity: sha512-dvNoRKLijXnD0XoJAz94pbNuB5GQgDr55UhpSPhffDkTT0Cmcqh9jSCOtwfT2d4H6MI9E7c4SgtMuJXZ6F3c6A==}
@@ -2073,8 +2073,8 @@ packages:
     resolution: {integrity: sha512-PcByqNyT/38F2kDNi006HAMRJaULuBzq/FOsw3qdZvX/GA9W/jamDaRskgHjubHiftXK5sIFxLNkvrXUwcof6Q==}
     engines: {node: '>= 0.4'}
 
-  shiplane@0.3.0:
-    resolution: {integrity: sha512-j20JXtlQoDNqwE+D6K1qEGJ6KGnwSMKYkS6XgHB//4AByNCVXJmTZfC1hbTBxQOCde5CFAHfZTnFmoxoWxuOGg==}
+  shiplane@0.4.0:
+    resolution: {integrity: sha512-KCfGW55IssUwGDpHUGi1WA88304JRFkNJxmTgDYGSyJjltWdHtrGwfEIqVmQ7JdeQ+2TYISlVdIAZgBr3PGwyw==}
     hasBin: true
 
   siginfo@2.0.0:
@@ -3091,17 +3091,17 @@ snapshots:
   '@rollup/rollup-win32-x64-msvc@4.66.0':
     optional: true
 
-  '@shiplane/changesets@0.3.0(shiplane@0.3.0)':
+  '@shiplane/changesets@0.4.0(shiplane@0.4.0)':
     dependencies:
-      shiplane: 0.3.0
+      shiplane: 0.4.0
 
-  '@shiplane/git@0.3.0(shiplane@0.3.0)':
+  '@shiplane/git@0.4.0(shiplane@0.4.0)':
     dependencies:
-      shiplane: 0.3.0
+      shiplane: 0.4.0
 
-  '@shiplane/github@0.3.0(shiplane@0.3.0)':
+  '@shiplane/github@0.4.0(shiplane@0.4.0)':
     dependencies:
-      shiplane: 0.3.0
+      shiplane: 0.4.0
 
   '@simple-libs/child-process-utils@2.0.0':
     dependencies:
@@ -4714,7 +4714,7 @@ snapshots:
 
   shell-quote@1.12.0: {}
 
-  shiplane@0.3.0:
+  shiplane@0.4.0:
     dependencies:
       '@clack/prompts': 1.7.0
       jiti: 2.7.0

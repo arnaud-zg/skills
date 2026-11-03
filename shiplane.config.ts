@@ -4,7 +4,7 @@
 import { changesetsVersioning } from "@shiplane/changesets";
 import { gitSourceControl } from "@shiplane/git";
 import { gitHubActionsCiPipeline, gitHubCodeHost } from "@shiplane/github";
-import { defineRelease, internalTool, releaseFlow } from "shiplane";
+import { agentPlugin, defineRelease, releaseFlow } from "shiplane";
 
 export default defineRelease({
   units: ["plugins/*"],
@@ -13,11 +13,9 @@ export default defineRelease({
     sourceControl: gitSourceControl(),
     codeHost: gitHubCodeHost(),
     ciPipeline: gitHubActionsCiPipeline(),
-    // Changesets bumps each plugin's package.json; sync-versions copies the version into its agent
-    // manifests (.claude-plugin, .codex-plugin, .cursor-plugin), which changesets knows nothing of.
-    versioning: changesetsVersioning({
-      version: ["sh", "-c", "pnpm exec changeset version && node scripts/sync-versions.mjs"],
-    }),
+    versioning: changesetsVersioning(),
   }),
-  modules: [internalTool()],
+  // Changesets bumps each plugin's package.json; agentPlugin() writes the new version into its
+  // agent manifests (.claude-plugin, .codex-plugin, .cursor-plugin) in the same release PR.
+  modules: [agentPlugin()],
 });

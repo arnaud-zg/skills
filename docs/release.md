@@ -62,7 +62,7 @@ Opening the release PR runs:
 | ----------------------------------- | -------------------------------------------------------------------------- |
 | `git switch -c release/<timestamp>` | `main` is protected, so versions only reach it through a PR                |
 | `changeset version`                 | consumes `.changeset/*.md`, bumps each plugin's `package.json`, changelogs |
-| `node scripts/sync-versions.mjs`    | copies each plugin's new version into its agent manifests                  |
+| `agentPlugin()` writes              | each plugin's new version into its agent manifests                         |
 | commit, push, open the PR           | titled `chore(<plugin>): release v<version>`, listing every bump           |
 
 Once it merges, shiplane tags each version on the commit that brought it, pushes the tags, and
@@ -108,5 +108,5 @@ The tag does a narrower job: it makes the plugin resolvable by a dependency rang
 
 A plugin's real manifest is `.claude-plugin/plugin.json`. The `package.json` beside it is private,
 never published, and exists only so changesets can see the plugin as a workspace package and version
-it; `scripts/sync-versions.mjs` copies the result across. Keeping two files in step is the price of
-one release flow; the alternative was versioning every plugin by hand.
+it; shiplane's `agentPlugin()` copies the result into every agent manifest in the same release PR,
+so nothing has to keep them in step by hand.
