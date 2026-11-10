@@ -21,6 +21,8 @@ function run(script: string, ...args: string[]) {
 const skill = (name: string, script: string) => path.join(SKILLS, name, "scripts", script);
 const example = (relative: string) => path.join(EXAMPLES, relative);
 
+type Allowed = { allowed: (users: { id: number }[], banned: number[]) => { id: number }[] };
+
 describe("the examples the docs show", () => {
   test("given install/settings.json, then it turns on arnaud-zg from this marketplace, pinned to a release tag", () => {
     const settings = JSON.parse(readFileSync(example("install/settings.json"), "utf8")) as {
@@ -76,6 +78,25 @@ describe("the examples the docs show", () => {
     );
     expect(stdout).toContain("AUDIT OK 1 of 1 finding kept");
     expect(status).toBe(0);
+  });
+
+  test("given big-o-optimizer/before.mjs and after.mjs, then the O(n+m) rewrite returns the same users", async () => {
+    const before = (await import(example("big-o-optimizer/before.mjs"))) as Allowed;
+    const after = (await import(example("big-o-optimizer/after.mjs"))) as Allowed;
+    const users = [{ id: 1 }, { id: 2 }, { id: 2 }, { id: 3 }];
+    for (const banned of [[], [2], [1, 3, 4]]) {
+      expect(after.allowed(users, banned)).toEqual(before.allowed(users, banned));
+    }
+  });
+
+  test("given big-o-optimizer/adapters/extra.eslint.md, then it is an extra adapter that runs after verify", () => {
+    const text = readFileSync(example("big-o-optimizer/adapters/extra.eslint.md"), "utf8");
+    expect(text).toMatch(/^---\nfulfils: extra\nstep: after verify\n---/);
+  });
+
+  test("given big-o-optimizer/adapters/language.rust.md, then it is a language adapter for .rs files", () => {
+    const text = readFileSync(example("big-o-optimizer/adapters/language.rust.md"), "utf8");
+    expect(text).toMatch(/^---\nfulfils: language\nmatches: \.rs\n---/);
   });
 
   test("given radical-simplify/onboarding.md, then it walks the six steps in order", () => {

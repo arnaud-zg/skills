@@ -9,7 +9,7 @@ is linted, tested and versioned.
 
 ## Available skills
 
-Eight Agent Skills ship in the `arnaud-zg` plugin. Pick one by what you want to do; what each needs
+The Agent Skills ship in the `arnaud-zg` plugin. Pick one by what you want to do; what each needs
 and how to call it are in the [plugin's skills table](./plugins/arnaud-zg/README.md#skills).
 
 | When you want to…                                                              | Use                                                                                     |
@@ -17,6 +17,7 @@ and how to call it are in the [plugin's skills table](./plugins/arnaud-zg/README
 | Build an Agent Skill as a hexagon (verbs, domain, ports, adapters) and lint it | [`hexagonal-skill-builder`](./plugins/arnaud-zg/docs/hexagonal-skill-builder/README.md) |
 | Write and check Diataxis docs, with examples a test runs                       | [`doc-compass`](./plugins/arnaud-zg/docs/doc-compass/README.md)                         |
 | Plan, write or audit tests: mostly integration, a few unit and end to end      | [`testing-trophy`](./plugins/arnaud-zg/docs/testing-trophy/README.md)                   |
+| Lower the Big O of slow code, O(n²) to O(n), proven by your tests              | [`big-o-optimizer`](./plugins/arnaud-zg/docs/big-o-optimizer/README.md)                 |
 | Cut a process, product or UI down to its simplest version                      | [`radical-simplify`](./plugins/arnaud-zg/docs/radical-simplify/README.md)               |
 | Turn any work into a one-minute read: TLDR, key numbers, one diagram per point | [`glance-first`](./plugins/arnaud-zg/docs/glance-first/README.md)                       |
 | Get a sceptical review of a doc, plan or PR, with comments ready to paste      | [`glance-audit`](./plugins/arnaud-zg/docs/glance-audit/README.md)                       |

@@ -2,7 +2,7 @@
 
 [arnaud-zg](../../README.md) › **Install**
 
-**Claude Code**, in one step (Claude Code 2.1.275 or later). This installs all eight skills:
+**Claude Code**, in one step (Claude Code 2.1.275 or later). This installs every skill:
 
 ```sh
 /plugin install arnaud-zg --marketplace arnaud-zg/skills
