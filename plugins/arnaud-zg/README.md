@@ -1,11 +1,11 @@
-# arnaud-zg: 9 Agent Skills for docs, tests, skills and reviews, in any coding agent
+# arnaud-zg: Agent Skills for docs, tests, skills and reviews, in any coding agent
 
 `arnaud-zg` is a plugin for [Claude Code](https://claude.com/claude-code),
 [Codex](https://developers.openai.com/codex), [Cursor](https://cursor.com) and GitHub Copilot CLI
-that bundles nine [Agent Skills](https://code.claude.com/docs/en/skills) (`SKILL.md` folders): a
-skill linter, a [Diataxis](https://diataxis.fr/) documentation writer and checker, a
-first-principles simplifier, a Big O optimizer, one-minute briefs, sceptical audits, testing-trophy
-tests, session retros and a usage-window check. They also install in any other agent the
+that bundles [Agent Skills](https://code.claude.com/docs/en/skills) (`SKILL.md` folders): a skill
+linter, a [Diataxis](https://diataxis.fr/) documentation writer and checker, a first-principles
+simplifier, a Big O optimizer, one-minute briefs, sceptical audits, testing-trophy tests, session
+retros and a usage-window check. They also install in any other agent the
 [skills CLI](https://github.com/vercel-labs/skills) supports, such as Gemini CLI and OpenCode. Each
 skill has its own tutorial, how-to guides, reference and explanation. MIT.
 

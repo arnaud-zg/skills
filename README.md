@@ -9,7 +9,7 @@ is linted, tested and versioned.
 
 ## Available skills
 
-Nine Agent Skills ship in the `arnaud-zg` plugin. Pick one by what you want to do; what each needs
+The Agent Skills ship in the `arnaud-zg` plugin. Pick one by what you want to do; what each needs
 and how to call it are in the [plugin's skills table](./plugins/arnaud-zg/README.md#skills).
 
 | When you want to…                                                              | Use                                                                                     |
