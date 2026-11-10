@@ -1,5 +1,11 @@
 # @arnaud-zg/plugin-arnaud-zg
 
+## 0.7.2
+
+### Patch Changes
+
+- Add a skill that lowers the Big O of slow code.
+
 ## 0.7.1
 
 ### Patch Changes
