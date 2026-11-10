@@ -27,21 +27,22 @@
 
 ## Ports
 
-| Port      | Default        | Other built in  | Injected from                       |
-| --------- | -------------- | --------------- | ----------------------------------- |
-| `verify`  | `verify.tests` |                 | `.big-o/adapters/verify.<name>.md`  |
-| `measure` | `measure.read` | `measure.bench` | `.big-o/adapters/measure.<name>.md` |
-| `extra`   | none           |                 | `.big-o/adapters/extra.<name>.md`   |
+| Port       | Default        | Other built in                                                   | Injected from                        |
+| ---------- | -------------- | ---------------------------------------------------------------- | ------------------------------------ |
+| `language` | `language.any` | `javascript` (and TypeScript), `python`, `go`, by file extension | `.big-o/adapters/language.<name>.md` |
+| `verify`   | `verify.tests` |                                                                  | `.big-o/adapters/verify.<name>.md`   |
+| `measure`  | `measure.read` | `measure.bench`                                                  | `.big-o/adapters/measure.<name>.md`  |
+| `extra`    | none           |                                                                  | `.big-o/adapters/extra.<name>.md`    |
 
-Frontmatter: `fulfils` (the port), `step` (`extra` only), `replaces` (an adapter to take the place
-of).
+Frontmatter: `fulfils` (the port), `matches` (`language` only: file extensions), `step` (`extra`
+only), `replaces` (an adapter to take the place of).
 
 ## Patterns
 
-Set or Map lookup, one pass with a seen-Map, bucket grouping, sort once or a heap, binary search,
-prefix sums, sliding window or two pointers, top-k heap, memoize or hoist, join once, index pointer
-instead of `shift`, batched query for N+1, early exit. Each with its before, after and space cost in
-[`domain/patterns.md`](../../skills/big-o-optimizer/domain/patterns.md).
+Hash set or hash map lookup, one pass with a seen-map, bucket grouping, sort once or a heap, binary
+search, prefix sums, sliding window or two pointers, top-k heap, memoize or hoist, join once, index
+pointer instead of `shift`, batched query for N+1, early exit. Each with its before, after and space
+cost in [`domain/patterns.md`](../../skills/big-o-optimizer/domain/patterns.md).
 
 ## Files
 

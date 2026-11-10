@@ -6,6 +6,27 @@
 
 One recipe per need. For a first run, see the [Tutorial](tutorial.md).
 
+## Teach it a language
+
+Any language works with no adapter: the skill maps each pattern to the standard library's own
+structures. To add idioms, costs and pitfalls, drop `.big-o/adapters/language.<name>.md`:
+
+```markdown
+---
+fulfils: language
+matches: .rs
+---
+
+# language · rust
+
+| Generic  | Use                         |
+| -------- | --------------------------- |
+| hash set | `std::collections::HashSet` |
+```
+
+A project adapter wins over a built-in one of the same name, so it can also correct `javascript`,
+`python` or `go`.
+
 ## Get timings, not only the Big O
 
 Ask for them: _optimize this and benchmark it_. The skill switches to `measure.bench`, runs both
@@ -13,7 +34,7 @@ versions at two input sizes, and copies each figure from the command that printe
 
 ## Inject your own step
 
-Drop a Markdown file in `.big-o/adapters/` at the project root, named `<port>.<name>.md`:
+Drop a Markdown file in `.big-o/adapters/` at the project root, named `extra.<name>.md`:
 
 ```markdown
 ---
@@ -41,7 +62,9 @@ Name its file in the request: _optimize src/search.ts with ./perf/verify.snapsho
 ## Example
 
 [`examples/big-o-optimizer/adapters/extra.eslint.md`](../../examples/big-o-optimizer/adapters/extra.eslint.md):
-an injected `extra` adapter. [`before.mjs`](../../examples/big-o-optimizer/before.mjs) and
+an injected `extra` adapter.
+[`language.rust.md`](../../examples/big-o-optimizer/adapters/language.rust.md): an injected
+`language` adapter. [`before.mjs`](../../examples/big-o-optimizer/before.mjs) and
 [`after.mjs`](../../examples/big-o-optimizer/after.mjs): a rewrite
 [`examples.integration.test.ts`](../../examples/examples.integration.test.ts) proves returns the
 same users.

@@ -24,7 +24,8 @@ export function allowed(users, banned) {
 
 ## 3. Read the answer
 
-1. It says which adapters run: `verify.tests` and `measure.read` by default.
+1. It says which adapters run: `language.javascript` for the `.mjs` file, then `verify.tests` and
+   `measure.read`. A `.py`, `.go` or any other file works the same way.
 2. It names the Big O: `includes` scans `banned` (m) for every user (n), so O(n·m).
 3. It picks _search a list inside a loop_ and builds a `Set` once.
 4. With no test reaching `allowed`, it writes one first, from the current behaviour, and runs it
@@ -35,6 +36,8 @@ export function allowed(users, banned) {
 
 The result matches [`examples/big-o-optimizer/after.mjs`](../../examples/big-o-optimizer/after.mjs).
 Duplicates and order are kept, because `filter` still decides.
+
+The same filter in Python, Go or Rust gets the same cut, spelled with that language's set.
 
 ## Next
 

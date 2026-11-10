@@ -94,6 +94,11 @@ describe("the examples the docs show", () => {
     expect(text).toMatch(/^---\nfulfils: extra\nstep: after verify\n---/);
   });
 
+  test("given big-o-optimizer/adapters/language.rust.md, then it is a language adapter for .rs files", () => {
+    const text = readFileSync(example("big-o-optimizer/adapters/language.rust.md"), "utf8");
+    expect(text).toMatch(/^---\nfulfils: language\nmatches: \.rs\n---/);
+  });
+
   test("given radical-simplify/onboarding.md, then it walks the six steps in order", () => {
     const text = readFileSync(example("radical-simplify/onboarding.md"), "utf8");
     const headings = [...text.matchAll(/^## (.+)$/gm)].map((match) => match[1]);
