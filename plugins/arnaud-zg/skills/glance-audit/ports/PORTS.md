@@ -1,7 +1,7 @@
 # Ports
 
 **The judgement is the skill's. What it reads and who renders it are two questions the caller
-answers.**
+answers.** Ports and adapters follow the [shared contract](CONTRACT.md).
 
 | Port      | How many | The one question it answers                        |
 | --------- | -------- | -------------------------------------------------- |
@@ -21,7 +21,7 @@ list:
 
 It never posts, comments, approves, edits or sends anything in the source. Each adapter says what
 goes in each file for its kind of source, which lens does the most work there, and what counts as an
-incident. Another kind of source is another adapter answering the same question.
+incident.
 
 | Kind           | Adapter                                                      |
 | -------------- | ------------------------------------------------------------ |

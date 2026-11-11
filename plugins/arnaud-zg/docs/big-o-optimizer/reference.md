@@ -35,7 +35,8 @@
 | `extra`    | none           |                                                                  | `.big-o/adapters/extra.<name>.md`    |
 
 Frontmatter: `fulfils` (the port), `matches` (`language` only: file extensions), `step` (`extra`
-only), `replaces` (an adapter to take the place of).
+only), `replaces` (an adapter to take the place of). `fulfils` and `replaces` follow the
+[shared port and adapter contract](../../skills/hexagonal-architecture/domain/contract.md).
 
 ## Patterns
 

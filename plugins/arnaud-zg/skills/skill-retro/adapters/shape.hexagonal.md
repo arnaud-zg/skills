@@ -18,6 +18,13 @@ node <plugin-dir>/scripts/check.mjs <skills-folder>/<skill> [--suite <package-sc
 - Pass `--suite` when the project runs its skill tests from one `package.json` script, so a new test
   must be named there too.
 - If the caller binds a second shelf check of its own, run that as well. Both must exit 0.
+- If the skill has layer folders (`verbs/`, `domain/`, `ports/`, `adapters/`), also run the
+  hexagonal-architecture check on it. Exit 1: move the outward link behind a port and run it again.
+  Exit 2 means no layer folder, not a failure:
+
+  ```sh
+  node <hexagonal-architecture-dir>/scripts/check-layers.mjs <skills-folder>/<skill>
+  ```
 
 `small` counts lines only: an entry's body to 150, any other page to 300, a description to 1024
 characters. The plugin counts no tokens and finds no repeated text, which is why this skill carries

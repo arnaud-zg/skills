@@ -1,7 +1,8 @@
 # The ports
 
-**A port is the WHAT. An adapter is the HOW.** The steps name no tool; each thing they depend on is
-a port below.
+**The retro is the skill's. Where feedback comes from, how a fix is checked and how it is booked are
+three ports.** The steps name no tool. Ports, adapters and bindings follow the
+[shared contract](CONTRACT.md).
 
 | Port       | Count | Receives                            | Delivers                                              | Never                                                                             |
 | ---------- | ----- | ----------------------------------- | ----------------------------------------------------- | --------------------------------------------------------------------------------- |
@@ -27,14 +28,9 @@ feature, and no feature waits for a skill fix.
 
 ## Binding
 
-A binding names the adapters for each port, `;` between ports and `,` between adapters. An adapter
-that takes values gets them in parentheses, `key=value` and `,` between:
+The entry's `bind` is the default, in the
+[contract's grammar](CONTRACT.md#binding-the-caller-picks). The `stack` adapter takes keys, such as:
 
 ```text
 feedback=transcript,memory; shape=hexagonal; stack=gh-stack(skills-prefix=skills/, feature-prefix=feat/, base=main)
 ```
-
-The entry's `bind` is the default. A caller passes its own as `--bind "<binding>"` when it fires the
-skill, and each port it names replaces the default for that port. An adapter lists the keys it takes
-in its frontmatter `takes:`. A step that needs a key the binding leaves unset stops there and names
-the key; it never guesses a value.

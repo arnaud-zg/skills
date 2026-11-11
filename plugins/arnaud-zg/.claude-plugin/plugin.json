@@ -31,7 +31,10 @@
     "cursor",
     "copilot",
     "gemini-cli",
-    "testing"
+    "testing",
+    "hexagonal-architecture",
+    "clean-architecture",
+    "ports-and-adapters"
   ],
   "dependencies": []
 }

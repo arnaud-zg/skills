@@ -102,8 +102,8 @@ every script is tested.
 
 ### Why "hexagonal"?
 
-The entry, `SKILL.md`, is the one port a model reads, and every other page sits behind it by layer,
-as in hexagonal architecture. [Why "hexagonal"](explanation.md#why-hexagonal) says more.
+Skills are laid out as hexagons; the layout is
+[hexagonal-architecture](../hexagonal-architecture/README.md)'s, this skill writes and lints them.
 
 ## 🔒 Know what you're installing
 

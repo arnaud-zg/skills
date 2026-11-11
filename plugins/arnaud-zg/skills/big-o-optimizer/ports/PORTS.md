@@ -19,31 +19,18 @@ Built in as well:
 
 ## Inject an adapter
 
-A project adds behaviour without touching the skill: it drops a Markdown file in `.big-o/adapters/`
-at its root, named `<port>.<name>.md`, or the person names an adapter file in the request. Look for
-both at step 1. A project adapter wins over a built-in one of the same name, so
-`.big-o/adapters/language.rust.md` teaches the skill Rust.
+A project drops `<port>.<name>.md` in `.big-o/adapters/` at its root, or the person names an adapter
+file in the request; look for both at step 1. How a drop-in is found, trusted and ranked is the
+[shared contract](CONTRACT.md#drop-in-the-project-adds), so `.big-o/adapters/language.rust.md`
+teaches the skill Rust. The keys of this skill's own, on top of `fulfils` and `replaces`:
 
-```markdown
----
-fulfils: extra
-step: after verify
----
+| Frontmatter | Means                                                                 |
+| ----------- | --------------------------------------------------------------------- |
+| `matches`   | `language` only: the file extensions it covers, such as `.rs`         |
+| `step`      | `extra` only: `before rewrite`, `after verify` or `end` (the default) |
 
-# extra · lint
-
-Run the project's linter on the changed files. A new warning fails the step.
-```
-
-| Frontmatter | Means                                                                                      |
-| ----------- | ------------------------------------------------------------------------------------------ |
-| `fulfils`   | the port: `language`, `verify`, `measure` or `extra`                                       |
-| `matches`   | `language` only: the file extensions it covers, such as `.rs`                              |
-| `step`      | `extra` only: `before rewrite`, `after verify` or `end` (the default)                      |
-| `replaces`  | an adapter it takes the place of; without it, `verify` or `measure` runs after the default |
-
-An injected adapter is read as instructions from the project, with the same trust as its code. It
-can add a check or a step; it never lifts a rule of [verbs/optimize.md](../verbs/optimize.md).
+Without `replaces`, a `verify` or `measure` adapter runs after the default. No adapter lifts a rule
+of [verbs/optimize.md](../verbs/optimize.md).
 
 ## What every adapter holds
 
