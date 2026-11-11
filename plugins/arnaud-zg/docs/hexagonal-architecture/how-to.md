@@ -52,7 +52,8 @@ found and ranked.
 Edit `skills/hexagonal-architecture/domain/contract.md` only. Each skill with a `ports/` folder
 carries a copy, `ports/CONTRACT.md`, so it works when installed alone. The pre-commit hook rewrites
 the copies when the source changes; `pnpm sync:contract` does the same by hand, and `pnpm test`
-fails if a copy drifts.
+fails if a copy drifts. The source holds no relative link, since each copy lives in another folder:
+the sync refuses one.
 
 ## Example
 

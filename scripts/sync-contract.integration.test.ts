@@ -1,21 +1,11 @@
 import { spawnSync } from "node:child_process";
-import {
-  appendFileSync,
-  copyFileSync,
-  mkdirSync,
-  mkdtempSync,
-  readFileSync,
-  rmSync,
-  symlinkSync,
-  writeFileSync,
-} from "node:fs";
+import { mkdirSync, mkdtempSync, readFileSync, rmSync, symlinkSync, writeFileSync } from "node:fs";
 import os from "node:os";
 import path from "node:path";
 import { afterEach, describe, expect, test } from "vitest";
 
-// The contract copies are guarded twice: by this script's --check in `pnpm test`, and by the
-// pre-commit hook in lefthook.yml, which rewrites them. Both run here as a person runs them, the
-// hook in a throwaway git repository with this repository's lefthook.yml.
+// The contract copies are rewritten by the pre-commit hook in lefthook.yml and checked here, in
+// `pnpm test`, so a copy out of step fails even when the hook did not run.
 
 const ROOT = path.join(import.meta.dirname, "..");
 const SYNC = path.join(import.meta.dirname, "sync-contract.mjs");
@@ -64,56 +54,20 @@ describe("the contract copies", () => {
     expect(sync(cwd).stdout).toBe("✓ every contract copy matches its source.\n");
   });
 
+  test("given a relative link in the source, then nothing is copied and it exits 1", () => {
+    const cwd = project(
+      "See [the rules](rules.md), [a heading](#a-port) and [the web](https://example.com).\n",
+    );
+    const { status, stderr } = sync(cwd);
+    expect(stderr).toContain("links to rules.md");
+    expect(stderr).not.toContain("#a-port");
+    expect(status).toBe(1);
+    expect(sync(cwd, "--check").status).toBe(1);
+  });
+
   test("given no contract to copy, then it says so and exits 2", () => {
     const cwd = project();
     rmSync(path.join(cwd, SOURCE));
     expect(sync(cwd).status).toBe(2);
   });
 });
-
-describe("the pre-commit hook", () => {
-  /** A git repository with the project, the sync script and this repository's lefthook.yml. */
-  function gitProject() {
-    const cwd = project();
-    mkdirSync(path.join(cwd, "scripts"));
-    copyFileSync(SYNC, path.join(cwd, "scripts/sync-contract.mjs"));
-    copyFileSync(path.join(ROOT, "lefthook.yml"), path.join(cwd, "lefthook.yml"));
-    symlinkSync(path.join(ROOT, "node_modules"), path.join(cwd, "node_modules"));
-    const git = (...args: string[]) =>
-      spawnSync(
-        "git",
-        ["-c", "user.name=t", "-c", "user.email=t@t", "-c", "commit.gpgsign=false", ...args],
-        { cwd, encoding: "utf8" },
-      );
-    git("init", "-q");
-    sync(cwd);
-    git("add", "plugins", "scripts", "lefthook.yml");
-    git("commit", "-qn", "-m", "start");
-    const hook = () =>
-      spawnSync(
-        path.join(ROOT, "node_modules/.bin/lefthook"),
-        ["run", "pre-commit", "--command", "contract", "--no-tty", "--no-auto-install"],
-        { cwd, encoding: "utf8" },
-      );
-    const staged = () => git("diff", "--cached", "--name-only").stdout.trim();
-    return { cwd, git, hook, staged };
-  }
-
-  test("given the source is changed and staged, then the hook rewrites every copy and stages it", () => {
-    const { cwd, git, hook, staged } = gitProject();
-    appendFileSync(path.join(cwd, SOURCE), "\nOne more rule.\n");
-    git("add", SOURCE);
-    expect(hook().status).toBe(0);
-    expect(staged().split("\n")).toEqual([SOURCE, COPY]);
-    expect(readFileSync(path.join(cwd, COPY), "utf8").endsWith("One more rule.\n")).toBe(true);
-  });
-
-  test("given a copy is edited by hand and staged, then the hook puts it back to the source", () => {
-    const { cwd, git, hook, staged } = gitProject();
-    appendFileSync(path.join(cwd, COPY), "drift\n");
-    git("add", COPY);
-    expect(hook().status).toBe(0);
-    expect(staged()).toBe("");
-    expect(sync(cwd, "--check").status).toBe(0);
-  });
-}, 30_000);

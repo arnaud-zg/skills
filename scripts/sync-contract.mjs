@@ -7,6 +7,7 @@
 //
 // Run from the repository root. Writes each copy that is missing or differs, and names it.
 // With --check it writes nothing and exits 1 if a copy is missing or differs.
+// Exit 1 too when the source holds a relative link, which would break in the copies.
 // Exit 2 when no plugins/*/skills/hexagonal-architecture/domain/contract.md is found.
 import { existsSync, readdirSync, readFileSync, statSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
@@ -40,6 +41,21 @@ const shelves = list("plugins")
 if (shelves.length === 0) {
   console.error(`✗ no plugins/*/skills/${SOURCE} under ${process.cwd()}`);
   process.exit(2);
+}
+
+// The copies land in other folders, so a relative link in the source would point somewhere else
+// from each copy. Only links to a heading on the same page or to a full address are allowed.
+for (const shelf of shelves) {
+  const links = [...readFileSync(join(shelf, SOURCE), "utf8").matchAll(/\]\(([^)\s]+)/g)]
+    .map((match) => match[1] ?? "")
+    .filter((link) => !/^(#|https?:)/.test(link));
+  if (links.length > 0) {
+    console.error(`✗ ${join(shelf, SOURCE)} links to ${links.join(", ")}`);
+    console.error(
+      "→ it is copied into other skills: write the text inline or use a full https:// link",
+    );
+    process.exit(1);
+  }
 }
 
 let stale = 0;
