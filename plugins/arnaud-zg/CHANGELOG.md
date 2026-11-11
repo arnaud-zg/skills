@@ -1,5 +1,11 @@
 # @arnaud-zg/plugin-arnaud-zg
 
+## 0.8.0
+
+### Minor Changes
+
+- Add a ports and adapters skill that every skill's ports link to.
+
 ## 0.7.2
 
 ### Patch Changes
