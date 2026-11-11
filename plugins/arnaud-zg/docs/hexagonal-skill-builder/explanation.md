@@ -48,21 +48,9 @@ a number, an output or an edit script.
 
 ## Why "hexagonal"
 
-The name comes from hexagonal architecture, where a core talks to the world only through ports. A
-skill can be built the same way: the entry is the one port, and every page behind it has one job.
-
-```mermaid
-flowchart LR
-  D["description"] --> E(["SKILL.md<br/>the port: routes"])
-  E --> V["verbs/<br/>what Claude does"]
-  E --> M["domain/<br/>what stays true"]
-  E --> A["adapters/<br/>the tools it touches"]
-  V -.-> S["scripts/"]
-```
-
-The first version enforced that layout as rules. They went, for the reasons above, and the layout
-stayed as a habit the guide suggests: it keeps the entry short and each page easy to find, but a
-skill that puts its pages elsewhere is just as sound.
+Skills are laid out as hexagons: the entry routes, and the pages behind it each have one job. The
+layout, and why it holds, is [hexagonal-architecture](../hexagonal-architecture/explanation.md)'s.
+This skill keeps it a habit, not a rule: the layout rules an earlier version held caught nothing.
 
 ## Every rule has a story
 

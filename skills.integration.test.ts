@@ -36,6 +36,21 @@ describe("the docs this marketplace ships", () => {
 });
 
 describe("the skills this marketplace ships", () => {
+  test("every dependency inside them points inward, by hexagonal-architecture's check", () => {
+    const layers = path.join(
+      root,
+      "plugins/arnaud-zg/skills/hexagonal-architecture/scripts/check-layers.mjs",
+    );
+    const { status, stdout } = spawnSync(
+      process.execPath,
+      [layers, "plugins/arnaud-zg/skills", "--json"],
+      { cwd: root, encoding: "utf8" },
+    );
+    const report = JSON.parse(stdout) as { findings: unknown[] };
+    expect(report.findings).toEqual([]);
+    expect(status).toBe(0);
+  });
+
   test("every one holds the four rules: named, small, resolves, tested", () => {
     const { status, stdout } = run("--json");
     const report = JSON.parse(stdout) as { findings: unknown[] };

@@ -14,7 +14,7 @@ and how to call it are in the [plugin's skills table](./plugins/arnaud-zg/README
 
 | When you want to…                                                                    | Use                                                                                     |
 | ------------------------------------------------------------------------------------ | --------------------------------------------------------------------------------------- |
-| Build an Agent Skill as a hexagon (verbs, domain, ports, adapters) and lint it       | [`hexagonal-skill-builder`](./plugins/arnaud-zg/docs/hexagonal-skill-builder/README.md) |
+| Write an Agent Skill and lint it                                                     | [`hexagonal-skill-builder`](./plugins/arnaud-zg/docs/hexagonal-skill-builder/README.md) |
 | Keep a codebase's core free of its database and tools: hexagonal, clean architecture | [`hexagonal-architecture`](./plugins/arnaud-zg/docs/hexagonal-architecture/README.md)   |
 | Write and check Diataxis docs, with examples a test runs                             | [`doc-compass`](./plugins/arnaud-zg/docs/doc-compass/README.md)                         |
 | Plan, write or audit tests: mostly integration, a few unit and end to end            | [`testing-trophy`](./plugins/arnaud-zg/docs/testing-trophy/README.md)                   |
