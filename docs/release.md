@@ -22,9 +22,9 @@ number, that subject is what users read. Only commits touching `plugins/<name>/`
 | `feat`, `fix`, `perf`                | one line each                           |
 | `docs`, `test`, `chore`, `refactor`… | the latest one, if nothing else has one |
 
-Every release is a patch. `pnpm release` writes a changeset from these commits and
-`changeset version` consumes it in the release PR, so there is never one to create, commit or
-delete.
+The commits set the bump: `feat` is a minor, a subject marked `!` a major (a minor below 1.0), and
+anything else a patch. `pnpm release` turns these commits into a changeset and `changeset version`
+consumes it in the release PR, so there is never one to create, commit or delete.
 
 A new plugin has no commits to read. It starts at `0.1.0` from the template, with a `CHANGELOG.md`
 holding that version's notes, and `marketplace.unit.test.ts` fails on a plugin with no section for
