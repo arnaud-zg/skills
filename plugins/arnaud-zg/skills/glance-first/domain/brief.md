@@ -8,7 +8,7 @@ the form. [scripts/check-brief.mjs](../scripts/check-brief.mjs) holds these limi
 | Field        | Holds                                                                                                  | Limit                                                                       |
 | ------------ | ------------------------------------------------------------------------------------------------------ | --------------------------------------------------------------------------- |
 | `title`      | a name for the work                                                                                    | 4 words                                                                     |
-| `target`     | where it lands, by [ports/PORTS.md](../ports/PORTS.md)                                                 | required                                                                    |
+| `target`     | where it lands: a target the [entry](../SKILL.md#ports) names                                          | required                                                                    |
 | `tldr`       | the answer, first: "Good idea. One thing to fix."                                                      | 25 words                                                                    |
 | `numbers`    | the key figures, each `{value, label}`: `{"value": "3x", "label": "faster cold start"}`                | 4; a digit in each value; label 5 words; `[]` only when the work holds none |
 | `blocks`     | each a `heading`, a `line`, a `picture`, and an optional `copy` list                                   | 1 to 4                                                                      |

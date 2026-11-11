@@ -30,7 +30,10 @@
     "cursor",
     "copilot",
     "gemini-cli",
-    "testing"
+    "testing",
+    "hexagonal-architecture",
+    "clean-architecture",
+    "ports-and-adapters"
   ],
   "displayName": "Arnaud Zheng's skills",
   "logo": ".claude-plugin/icon.png",

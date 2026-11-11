@@ -30,8 +30,8 @@ describe("the examples the docs show", () => {
       enabledPlugins: Record<string, boolean>;
     };
     const market = settings.extraKnownMarketplaces["arnaud-zg-skills"];
-    expect(market?.source.repo).toBe("arnaud-zg/skills");
-    expect(market?.source.ref).toMatch(/^arnaud-zg--v\d+\.\d+\.\d+$/);
+    expect(market.source.repo).toBe("arnaud-zg/skills");
+    expect(market.source.ref).toMatch(/^arnaud-zg--v\d+\.\d+\.\d+$/);
     expect(settings.enabledPlugins).toEqual({ "arnaud-zg@arnaud-zg-skills": true });
   });
 
@@ -134,5 +134,27 @@ describe("the examples the docs show", () => {
     );
     expect(stdout).toContain("TROPHY unit 0 · integration 1 · e2e 0 · static yes");
     expect(status).toBe(0);
+  });
+
+  test("given hexagonal-architecture/before, then the domain importing an adapter is flagged", () => {
+    const { status, stdout } = run(
+      skill("hexagonal-architecture", "check-layers.mjs"),
+      "hexagonal-architecture/before",
+    );
+    expect(stdout).toContain("domain/order.mjs:2  outward");
+    expect(status).toBe(1);
+  });
+
+  test("given hexagonal-architecture/after, then every dependency points inward and the total holds", async () => {
+    const { status, stdout } = run(
+      skill("hexagonal-architecture", "check-layers.mjs"),
+      "hexagonal-architecture/after",
+    );
+    expect(stdout).toContain("LAYERS domain 1 · ports 1 · application 1 · adapters 1");
+    expect(status).toBe(0);
+    const main = (await import(example("hexagonal-architecture/after/main.mjs"))) as {
+      run: () => number;
+    };
+    expect(main.run()).toBe(4);
   });
 });

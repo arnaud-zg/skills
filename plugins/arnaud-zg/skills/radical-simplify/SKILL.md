@@ -43,6 +43,9 @@ screens, settings, rules, notifications, complexity.
 
 **Prefer eliminating a step over making it faster.**
 
+When the target is code, an interface with one implementation and no second in view is a step too:
+see [the port smells](../hexagonal-architecture/domain/smells.md).
+
 ## 3. Simplify
 
 Make everything that remains radically simpler. Minimize clicks, decisions, cognitive load,

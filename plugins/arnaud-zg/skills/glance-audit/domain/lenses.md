@@ -17,7 +17,9 @@ Run all of them. Most find nothing. Keep only what matters.
    does not protect another. Parts released separately can land in the wrong order.
 4. **Premises.** List the facts the design relies on, such as "the registry can serve two versions".
    Check each against the thread, the code or the files. If you cannot, turn it into an Ask.
-5. **Scope and cost.** What is in and what is out? Does the effort match what the design needs?
+5. **Scope and cost.** What is in and what is out? Does the effort match what the design needs? On
+   code, a change that makes the core import a tool, or adds a port with one adapter, is a cost:
+   [the smells](../../hexagonal-architecture/domain/smells.md).
 6. **Gaps.** Alternatives considered, what the thing contains, versioning, a pilot, a success
    measure, behaviour when parts do not match.
 7. **Others.** What the comments and the thread already say. Credit it instead of repeating it.
