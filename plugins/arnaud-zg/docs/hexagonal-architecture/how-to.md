@@ -47,6 +47,13 @@ Write `.<skill>/adapters/<port>.<name>.md` at the project root with `fulfils: <p
 frontmatter. The [contract](../../skills/hexagonal-architecture/domain/contract.md) says how it is
 found and ranked.
 
+## Change the port contract
+
+Edit `skills/hexagonal-architecture/domain/contract.md` only. Each skill with a `ports/` folder
+carries a copy, `ports/CONTRACT.md`, so it works when installed alone. The pre-commit hook rewrites
+the copies when the source changes; `pnpm sync:contract` does the same by hand, and `pnpm test`
+fails if a copy drifts.
+
 ## Example
 
 [`examples/hexagonal-architecture/`](../../examples/hexagonal-architecture/): `before` imports an

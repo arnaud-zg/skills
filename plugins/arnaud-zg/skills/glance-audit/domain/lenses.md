@@ -19,7 +19,7 @@ Run all of them. Most find nothing. Keep only what matters.
    Check each against the thread, the code or the files. If you cannot, turn it into an Ask.
 5. **Scope and cost.** What is in and what is out? Does the effort match what the design needs? On
    code, a change that makes the core import a tool, or adds a port with one adapter, is a cost:
-   [the smells](../../hexagonal-architecture/domain/smells.md).
+   [the smells](../../hexagonal-architecture/domain/smells.md), if installed.
 6. **Gaps.** Alternatives considered, what the thing contains, versioning, a pilot, a success
    measure, behaviour when parts do not match.
 7. **Others.** What the comments and the thread already say. Credit it instead of repeating it.

@@ -51,5 +51,5 @@ A clean check says nothing about the guards.
 - [create.md](create.md): read before creating or editing a skill.
 - [guards.md](guards.md): read before writing what a skill must guard against, which no check sees.
 - [evidence.md](evidence.md): read when asked what a rule or a guard was paid for.
-- [hexagonal-architecture](../hexagonal-architecture/SKILL.md): the layout a skill's pages follow,
-  and the contract its `ports/` page follows.
+- [hexagonal-architecture](../hexagonal-architecture/SKILL.md), if installed: the layout a skill's
+  pages follow, and the contract its `ports/` page follows.

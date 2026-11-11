@@ -2,7 +2,7 @@
 
 **The retro is the skill's. Where feedback comes from, how a fix is checked and how it is booked are
 three ports.** The steps name no tool. Ports, adapters and bindings follow the
-[shared contract](../../hexagonal-architecture/domain/contract.md).
+[shared contract](CONTRACT.md).
 
 | Port       | Count | Receives                            | Delivers                                              | Never                                                                             |
 | ---------- | ----- | ----------------------------------- | ----------------------------------------------------- | --------------------------------------------------------------------------------- |
@@ -29,8 +29,7 @@ feature, and no feature waits for a skill fix.
 ## Binding
 
 The entry's `bind` is the default, in the
-[contract's grammar](../../hexagonal-architecture/domain/contract.md#binding-the-caller-picks). The
-`stack` adapter takes keys, such as:
+[contract's grammar](CONTRACT.md#binding-the-caller-picks). The `stack` adapter takes keys, such as:
 
 ```text
 feedback=transcript,memory; shape=hexagonal; stack=gh-stack(skills-prefix=skills/, feature-prefix=feat/, base=main)

@@ -21,9 +21,8 @@ Built in as well:
 
 A project drops `<port>.<name>.md` in `.big-o/adapters/` at its root, or the person names an adapter
 file in the request; look for both at step 1. How a drop-in is found, trusted and ranked is the
-[shared contract](../../hexagonal-architecture/domain/contract.md#drop-in-the-project-adds), so
-`.big-o/adapters/language.rust.md` teaches the skill Rust. The keys of this skill's own, on top of
-`fulfils` and `replaces`:
+[shared contract](CONTRACT.md#drop-in-the-project-adds), so `.big-o/adapters/language.rust.md`
+teaches the skill Rust. The keys of this skill's own, on top of `fulfils` and `replaces`:
 
 | Frontmatter | Means                                                                 |
 | ----------- | --------------------------------------------------------------------- |

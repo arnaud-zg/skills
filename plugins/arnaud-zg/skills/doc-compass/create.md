@@ -25,7 +25,8 @@
    order of the sections.
 8. **Every "why" goes in the Explanation**, each heading a principle stated as a sentence. A real
    design choice also gets a record in `adr/`, linked from there; an architecture choice (which
-   port, which adapter) is one, see [design](../hexagonal-architecture/verbs/design.md).
+   port, which adapter) is one, see hexagonal-architecture's
+   [design](../hexagonal-architecture/verbs/design.md) if installed.
 9. **Replace every `{placeholder}`.** A page still holding one is not done. Find them with
    `grep -rn '{[A-Za-z]' docs`.
 10. **Open every page glance-first.** Under the title, one line that answers the reader's question,

@@ -31,4 +31,18 @@ describe.skipIf(!process.env.E2E)("installing with the skills CLI", () => {
       .sort();
     expect(found).toEqual(skillsOnDisk);
   }, 120_000);
+
+  test("given one skill with ports added alone, then it carries its own copy of the contract", () => {
+    temp = mkdtempSync(path.join(tmpdir(), "skills-e2e-"));
+    const { status, stdout, stderr } = spawnSync(
+      "pnpm",
+      ["dlx", "skills", "add", root, "--agent", "codex", "--skill", "big-o-optimizer", "-y"],
+      { cwd: temp, env: { ...process.env, HOME: temp }, encoding: "utf8" },
+    );
+    expect(status, stdout + stderr).toBe(0);
+
+    const installed = path.join(temp, ".agents/skills");
+    expect(readdirSync(installed)).toEqual(["big-o-optimizer"]);
+    expect(existsSync(path.join(installed, "big-o-optimizer/ports/CONTRACT.md"))).toBe(true);
+  }, 120_000);
 });

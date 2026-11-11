@@ -36,6 +36,31 @@ describe("the docs this marketplace ships", () => {
 });
 
 describe("the skills this marketplace ships", () => {
+  test("installed alone, every link to another skill is marked optional, or the page says what to do without it", () => {
+    const shelf = path.join(root, "plugins/arnaud-zg/skills");
+    const unmarked: string[] = [];
+    for (const skill of readdirSync(shelf)) {
+      const own = path.join(shelf, skill);
+      for (const file of filesUnder(own).filter((f) => f.endsWith(".md"))) {
+        const text = readFileSync(file, "utf8");
+        const lines = text.split("\n");
+        lines.forEach((line, i) => {
+          for (const match of line.matchAll(/\]\(([^)\s#]+)/g)) {
+            const link = match[1];
+            const target = path.resolve(path.dirname(file), link);
+            if (/^[a-z]+:/i.test(link) || target.startsWith(own + path.sep)) continue;
+            const other = path.relative(shelf, target).split(path.sep)[0] ?? "";
+            const near = lines.slice(Math.max(0, i - 1), i + 2).join(" ");
+            const fallback = new RegExp(`if ${other} is not installed`, "i").test(text);
+            if (!/if\s+installed/i.test(near) && !fallback)
+              unmarked.push(`${path.relative(root, file)}:${String(i + 1)} → ${other}`);
+          }
+        });
+      }
+    }
+    expect(unmarked).toEqual([]);
+  });
+
   test("every dependency inside them points inward, by hexagonal-architecture's check", () => {
     const layers = path.join(
       root,

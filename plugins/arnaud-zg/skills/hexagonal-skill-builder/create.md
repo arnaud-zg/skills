@@ -8,8 +8,8 @@
    when needed, and each thing is said once: a rule restated in three pages drifts in two (why:
    E-01).
 3. **Lay pages out as a hexagon**, by
-   [hexagonal-architecture](../hexagonal-architecture/domain/rules.md#a-skill-is-a-hexagon-too); a
-   `ports/` page follows its contract. A habit, not a rule (why: E-09).
+   [hexagonal-architecture](../hexagonal-architecture/domain/rules.md#a-skill-is-a-hexagon-too) if
+   installed; a `ports/` page follows its contract. A habit, not a rule (why: E-09).
 4. **Link with relative Markdown links**, such as `[the guide](guide.md#steps)`, and run scripts
    through `${CLAUDE_SKILL_DIR}`. The check can follow both.
 5. **A script comes with its test**, in the same change. If the project has a suite, the test goes

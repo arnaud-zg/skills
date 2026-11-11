@@ -8,3 +8,6 @@ pre-commit:
     docs:
       glob: "{docs,plugins/*/docs}/**/*.md"
       run: pnpm lint:docs
+    contract:
+      glob: "plugins/*/skills/hexagonal-architecture/domain/contract.md"
+      run: pnpm sync:contract && git add plugins/*/skills/*/ports/CONTRACT.md

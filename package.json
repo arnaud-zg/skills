@@ -24,6 +24,7 @@
     "lint:md": "remark . --frail --quiet",
     "prepare": "lefthook install",
     "release": "shiplane",
+    "sync:contract": "node scripts/sync-contract.mjs",
     "test": "vitest run",
     "test:e2e": "E2E=1 vitest run install.e2e",
     "typecheck": "tsc --noEmit && tsc -p tsconfig.vitest.json --noEmit"

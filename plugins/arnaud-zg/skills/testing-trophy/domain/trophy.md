@@ -22,9 +22,9 @@ A test file with none of these names is `unlayered`: the check asks for one.
 - **Integration is the widest layer.** More unit files than integration files is an inverted trophy:
   each unit test proves less about what users meet.
 - **Mock only what you do not own**, at a port: the network, the clock, a paid API. How the core is
-  tested through its ports: [in tests](../../hexagonal-architecture/domain/smells.md#in-tests). A
-  mock of the project's own module (`vi.mock("./x")`, `jest.mock("../x")`) tests the mock, not the
-  code.
+  tested through its ports: [in tests](../../hexagonal-architecture/domain/smells.md#in-tests), if
+  installed. A mock of the project's own module (`vi.mock("./x")`, `jest.mock("../x")`) tests the
+  mock, not the code.
 - **Name a test by its behaviour**, "given a zero limit, then every request is refused", never by
   the function it calls ("checkLimit"). The name is what a reader sees when it fails.
 - **A bug gets a failing test first**, at the lowest layer that reproduces it, then the fix, in its

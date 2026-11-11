@@ -1,8 +1,7 @@
 # Ports
 
 **The judgement is the skill's. What it reads and who renders it are two questions the caller
-answers.** Ports and adapters follow the
-[shared contract](../../hexagonal-architecture/domain/contract.md).
+answers.** Ports and adapters follow the [shared contract](CONTRACT.md).
 
 | Port      | How many | The one question it answers                        |
 | --------- | -------- | -------------------------------------------------- |

@@ -10,6 +10,10 @@ extras: the target, named by the caller, and anything that target's adapter asks
 brief and stops; it never draws a page, a body or a file itself. The brief's shape and limits are
 glance-first's, in [its brief page](../../glance-first/domain/brief.md), and so is its check.
 
+**If glance-first is not installed** beside this skill, say so once, and hand the result that
+printed `AUDIT OK` as Markdown instead: the verdict, the findings as a table, then each comment
+under its quote. Nothing else in the audit changes.
+
 ## The target
 
 The caller names it, and it goes into the brief's `target` field as given: one of the targets in
