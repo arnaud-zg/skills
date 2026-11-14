@@ -1,5 +1,11 @@
 # @arnaud-zg/plugin-arnaud-zg
 
+## 0.9.0
+
+### Minor Changes
+
+- Flag links that open a folder listing.
+
 ## 0.8.0
 
 ### Minor Changes
