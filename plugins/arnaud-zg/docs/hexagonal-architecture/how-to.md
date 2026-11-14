@@ -57,7 +57,8 @@ the sync refuses one.
 
 ## Example
 
-[`examples/hexagonal-architecture/`](../../examples/hexagonal-architecture/): `before` imports an
-adapter from the domain, `after` asks a port.
+`examples/hexagonal-architecture/`:
+[`before`](../../examples/hexagonal-architecture/before/domain/order.mjs) imports an adapter from
+the domain, [`after`](../../examples/hexagonal-architecture/after/domain/order.mjs) asks a port.
 [`examples.integration.test.ts`](../../examples/examples.integration.test.ts) runs the check on
 both.

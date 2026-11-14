@@ -85,5 +85,5 @@ Source of truth: [`templates/`](../../skills/doc-compass/templates/README.md). T
 
 ## Example
 
-[`examples/doc-compass/docs/`](../../examples/doc-compass/docs/): a two-page docs set the check
-passes. [`examples.integration.test.ts`](../../examples/examples.integration.test.ts) runs it.
+[`examples/doc-compass/docs/`](../../examples/doc-compass/docs/README.md): a two-page docs set the
+check passes. [`examples.integration.test.ts`](../../examples/examples.integration.test.ts) runs it.

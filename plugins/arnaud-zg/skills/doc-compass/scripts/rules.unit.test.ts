@@ -49,12 +49,12 @@ describe("indexed", () => {
     expect(findingsOf(pages)).toEqual([]);
   });
 
-  test("given a link to a folder, then it reaches that folder's README.md", () => {
+  test("given a link to a folder, then it reaches that folder's README.md but opens a listing", () => {
     const pages = {
       "README.md": "# Docs\n\n[Decisions](adr/)\n",
       "adr/README.md": page("ADRs", "", "[Home](../README.md)"),
     };
-    expect(findingsOf(pages)).toEqual([]);
+    expect(findingsOf(pages)).toEqual([{ rule: "resolves", file: "README.md", line: 3 }]);
   });
 
   test("given a gravestone nobody links, then it is exempt from the index and the frame", () => {
@@ -112,6 +112,20 @@ describe("resolves", () => {
     expect(findingsOf(pages, { exists: () => false })).toEqual([
       { rule: "resolves", file: "a.md", line: 5 },
     ]);
+  });
+
+  test("given a link to a folder outside the pages, then it is reported, and a file in it is not", () => {
+    const body = "[pkg](../packages/x) [readme](../packages/x/README.md)";
+    const pages = { "README.md": indexOf("a.md"), "a.md": page("A", body) };
+    const options = { exists: () => true, isFolder: (path: string) => !path.endsWith(".md") };
+    expect(findingsOf(pages, options)).toEqual([{ rule: "resolves", file: "a.md", line: 5 }]);
+  });
+
+  test("given a GitHub tree URL, then it is reported, and a blob URL is not", () => {
+    const body =
+      "[guides](https://github.com/o/r/tree/main/docs) [how-to](https://github.com/o/r/blob/main/docs/how-to.md)";
+    const pages = { "README.md": indexOf("a.md"), "a.md": page("A", body) };
+    expect(findingsOf(pages)).toEqual([{ rule: "resolves", file: "a.md", line: 5 }]);
   });
 
   test("given an anchor into a page outside, then it is checked against that page's headings", () => {

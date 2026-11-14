@@ -2,6 +2,7 @@
 //
 //   indexed     every page can be reached from the index by following links
 //   resolves    every relative link and heading anchor a page points at exists
+//               and opens a page, never a folder listing
 //   framed      every page but the index links back to the index, or to its section's README,
 //               near its top
 //   superseded  an ADR that says "Superseded by X" is pointed back at by X
@@ -30,6 +31,7 @@ import { posix } from "node:path";
  * @property {string} [index] the index page, `README.md` when left out
  * @property {(path: string) => boolean} [exists] whether a path outside the pages exists: a
  *   file that is not Markdown, a folder, or anything outside the docs folder (`../x`)
+ * @property {(path: string) => boolean} [isFolder] whether a path outside the pages is a folder
  * @property {(path: string) => string | null} [readOutside] a Markdown page outside the docs
  *   folder, to look up its anchors; null when it cannot be read
  * @property {(source: string) => boolean} [sourceExists] whether a generated page's source
@@ -58,6 +60,7 @@ const LINK = /!?\[[^\]\n]*\]\(\s*<?([^)\s>]+)>?(?:\s+"[^"]*")?\s*\)/g;
 const SUPERSEDED = /superseded by\b[^\n]*?\]\(\s*<?([^)\s>]+)>?/gi;
 const GENERATED = /^>?\s*_?generated\b[^\n]*?\bfrom\s+`([^`]+)`/gim;
 const GRAVESTONE = /^#\s+.*\(moved\)\s*$/m;
+const TREE = /^https?:\/\/github\.com\/[^/]+\/[^/]+\/tree\//i;
 
 /** @param {string} text @param {number} index */
 const lineOf = (text, index) => text.slice(0, index).split("\n").length;
@@ -131,8 +134,20 @@ function pageAt(/** @type {Docs} */ docs, /** @type {string} */ target) {
 
 /** @param {Docs} docs @param {Add} add @param {Options} options */
 function resolves(docs, add, options) {
-  const { exists = () => false, readOutside = () => null } = options;
+  const { exists = () => false, readOutside = () => null, isFolder = () => false } = options;
   for (const [file, text] of docs) {
+    const listing = (/** @type {number} */ index, /** @type {string} */ written, fix = "") =>
+      add(
+        "resolves",
+        file,
+        lineOf(text, index),
+        `${written} opens a folder listing`,
+        fix || "link the page itself, or the file to read first",
+      );
+    for (const match of readable(text).matchAll(LINK)) {
+      const written = match[1] ?? "";
+      if (TREE.test(written)) listing(match.index, written);
+    }
     for (const link of linksOf(file, text)) {
       const page = pageAt(docs, link.target);
       const missing = (/** @type {string} */ message) =>
@@ -145,6 +160,14 @@ function resolves(docs, add, options) {
         );
       if (page === null && !exists(link.target)) {
         missing(`${link.written} does not exist`);
+        continue;
+      }
+      if (link.written && page !== null && page !== link.target) {
+        listing(link.index, link.written, `link ${posix.relative(posix.dirname(file), page)}`);
+        continue;
+      }
+      if (page === null && isFolder(link.target)) {
+        listing(link.index, link.written);
         continue;
       }
       if (!link.anchor) continue;

@@ -118,6 +118,6 @@ Keep the entry short (why: E-01).
 
 ## Example
 
-[`examples/hexagonal-skill-builder/release-notes/`](../../examples/hexagonal-skill-builder/release-notes/):
+[`examples/hexagonal-skill-builder/release-notes/`](../../examples/hexagonal-skill-builder/release-notes/SKILL.md):
 a skill that holds all four rules.
 [`examples.integration.test.ts`](../../examples/examples.integration.test.ts) runs it.
