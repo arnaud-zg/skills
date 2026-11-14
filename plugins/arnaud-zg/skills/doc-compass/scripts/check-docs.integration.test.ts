@@ -254,6 +254,21 @@ describe("given an examples folder in doc-compass.json", () => {
     expect(stdout).toContain("hold.");
     expect(status).toBe(0);
   });
+
+  test("when a test runs the example's folder, then a file inside it holds, and the folder link does not", () => {
+    const cwd = projectWith({
+      ...docs,
+      "docs/reference.md": `${home("Reference")}\n[Order](../examples/shop/before/order.ts)\n`,
+      "docs/how-to.md": `${home("How-to")}\n[Shop](../examples/shop/before/)\n`,
+      "docs/README.md": "# Docs\n\n[Reference](reference.md) [How-to](how-to.md)\n",
+      "examples/shop/before/order.ts": "export const order = 1;\n",
+      "examples/shop.test.ts": 'run("shop/before");\n',
+    });
+    const { status, stdout } = check(cwd);
+    expect(stdout).not.toContain("order.ts is not run by any test");
+    expect(stdout).toContain("../examples/shop/before/ opens a folder listing");
+    expect(status).toBe(1);
+  });
 });
 
 describe("given packages that each keep examples beside their docs", () => {

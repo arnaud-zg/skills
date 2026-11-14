@@ -8,9 +8,10 @@ One command releases every plugin, and you never edit a version, a changelog or 
 pnpm release    # opens the release PR, waits for its merge, then tags and creates the GitHub releases
 ```
 
-`pnpm release` runs [shiplane](https://github.com/arnaud-zg/packages/tree/main/packages/shiplane),
-configured in `shiplane.config.ts`. Each plugin has its own version, changelog
-(`plugins/<name>/CHANGELOG.md`) and `<name>--v<version>` tag.
+`pnpm release` runs
+[shiplane](https://github.com/arnaud-zg/packages/blob/main/packages/shiplane/README.md), configured
+in `shiplane.config.ts`. Each plugin has its own version, changelog (`plugins/<name>/CHANGELOG.md`)
+and `<name>--v<version>` tag.
 
 ## 1. Write the commit subject
 

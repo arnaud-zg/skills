@@ -223,8 +223,16 @@ function exampleOptions(
     },
     isTested: (/** @type {string} */ path) => {
       tests ??= testTexts(cwd);
-      const named = fromRoot(path).replace(/\.[^./]+$/, "");
-      return tests.some((text) => text.includes(named));
+      // A test that runs the example's folder (two names deep or more) runs the files in it.
+      const parts = fromRoot(path)
+        .replace(/\.[^./]+$/, "")
+        .split("/");
+      const named = parts
+        .map((_, i) => parts.slice(0, i + 1).join("/"))
+        .filter((name, i) => {
+          return i >= 1 || parts.length === 1;
+        });
+      return tests.some((text) => named.some((name) => text.includes(name)));
     },
   };
 }
@@ -252,6 +260,7 @@ function check(cwd, set, ban, examples) {
     index,
     banned: ban,
     exists: (path) => existsExactly(join(base, path)),
+    isFolder: (path) => existsExactly(join(base, path)) && statSync(join(base, path)).isDirectory(),
     readOutside: (path) => {
       const full = join(base, path);
       return existsExactly(full) && statSync(full).isFile() ? readFileSync(full, "utf8") : null;

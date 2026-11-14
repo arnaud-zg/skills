@@ -48,6 +48,8 @@ usage-runway.
 
 ## Example
 
-[`examples/hexagonal-architecture/`](../../examples/hexagonal-architecture/): `before` fails,
-`after` holds. [`examples.integration.test.ts`](../../examples/examples.integration.test.ts) runs
-the check on both.
+`examples/hexagonal-architecture/`:
+[`before`](../../examples/hexagonal-architecture/before/domain/order.mjs) fails,
+[`after`](../../examples/hexagonal-architecture/after/domain/order.mjs) holds.
+[`examples.integration.test.ts`](../../examples/examples.integration.test.ts) runs the check on
+both.

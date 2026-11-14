@@ -35,5 +35,6 @@ again.
 
 ## Example
 
-[`examples/testing-trophy/suite/`](../../examples/testing-trophy/suite/): a suite that holds.
-[`examples.integration.test.ts`](../../examples/examples.integration.test.ts) runs the check on it.
+[`examples/testing-trophy/suite/`](../../examples/testing-trophy/suite/src/limit.mjs): a suite that
+holds. [`examples.integration.test.ts`](../../examples/examples.integration.test.ts) runs the check
+on it.

@@ -74,3 +74,9 @@ A monorepo's packages each shipped a reference page with pasted snippets. Rewrit
 files run by the tests came with four bug fixes in the same changes, among them a zero limit and a
 failing drain nobody had reported. A snippet rots quietly; an example file a test runs breaks the
 build.
+
+## E-13 · The guides behind a folder listing
+
+Four package READMEs ended with "Full guides" linking the docs folder on GitHub. Every reader landed
+on a file listing and had to pick a page. The check passed, since a folder exists. The same sweep
+found eleven more links to folders, in the root README, the docs and three examples.
