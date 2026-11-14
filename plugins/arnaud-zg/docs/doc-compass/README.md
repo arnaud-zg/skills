@@ -37,5 +37,5 @@ and anchors to nothing, and decisions superseded one way only.
   skill's `allowed-tools`. Writing pages goes through Claude's usual permission prompts.
 
 Read [`SKILL.md`](../../skills/doc-compass/SKILL.md) and
-[`scripts/`](../../skills/doc-compass/scripts/) before installing it. Claude reads `SKILL.md`, not
-this page.
+[`scripts/check-docs.mjs`](../../skills/doc-compass/scripts/check-docs.mjs) before installing it.
+Claude reads `SKILL.md`, not this page.

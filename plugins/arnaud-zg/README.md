@@ -53,8 +53,8 @@ gate CI and commit hooks as they are.
   else asks.
 - **`radical-simplify` is instructions only.** It proposes a redesign and edits nothing.
 
-Read each skill's `SKILL.md` under [`skills/`](skills/) before you install, as you would any
-dependency. The agent reads `SKILL.md`, not this page.
+Read each skill's `SKILL.md` under `skills/` before you install, as you would any dependency. The
+agent reads `SKILL.md`, not this page.
 
 ### In an agent other than Claude Code
 

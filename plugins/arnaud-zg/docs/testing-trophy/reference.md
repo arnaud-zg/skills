@@ -36,6 +36,6 @@ Exit `0` when the suite holds, `1` on a finding, `2` when there is no test file.
 
 ## Example
 
-[`examples/testing-trophy/suite/`](../../examples/testing-trophy/suite/): one integration file and a
-`tsconfig.json`. [`examples.integration.test.ts`](../../examples/examples.integration.test.ts) runs
-the check on it.
+[`examples/testing-trophy/suite/`](../../examples/testing-trophy/suite/src/limit.mjs): one
+integration file and a `tsconfig.json`.
+[`examples.integration.test.ts`](../../examples/examples.integration.test.ts) runs the check on it.

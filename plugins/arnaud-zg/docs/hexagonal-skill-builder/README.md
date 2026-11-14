@@ -114,5 +114,5 @@ Skills are laid out as hexagons; the layout is
   `allowed-tools`, so the check runs without a permission prompt. Everything else asks.
 
 Read [`SKILL.md`](../../skills/hexagonal-skill-builder/SKILL.md) and
-[`scripts/`](../../skills/hexagonal-skill-builder/scripts/) before you install it, as you would any
-dependency. Claude reads `SKILL.md`, not this page.
+[`scripts/check.mjs`](../../skills/hexagonal-skill-builder/scripts/check.mjs) before you install it,
+as you would any dependency. Claude reads `SKILL.md`, not this page.
