@@ -1,5 +1,11 @@
 # @arnaud-zg/plugin-arnaud-zg
 
+## 0.9.1
+
+### Patch Changes
+
+- Link the port contract instead of copying it into each skill.
+
 ## 0.9.0
 
 ### Minor Changes
