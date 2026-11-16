@@ -1,7 +1,8 @@
 # Ports
 
 **The brief is the substance. Where it lands is one question, answered by the caller.** Ports and
-adapters follow the [shared contract](CONTRACT.md).
+adapters follow the [shared contract](../../hexagonal-architecture/domain/contract.md), if
+installed.
 
 | Port     | The one question it answers                   |
 | -------- | --------------------------------------------- |
