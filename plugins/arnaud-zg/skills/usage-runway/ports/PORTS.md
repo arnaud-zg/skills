@@ -6,4 +6,5 @@
 | -------- | --------------------------------------------------------- |
 | `ledger` | where every turn's usage and every limit hit are recorded |
 
-Another host is another adapter, bound in the entry's `bind`, by the [shared contract](CONTRACT.md).
+Another host is another adapter, bound in the entry's `bind`, by the
+[shared contract](../../hexagonal-architecture/domain/contract.md), if installed.
