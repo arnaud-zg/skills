@@ -1,5 +1,14 @@
 # @arnaud-zg/plugin-arnaud-zg
 
+## 0.9.2
+
+### Patch Changes
+
+- Ship a change from branch to stacked pull request by your house rules.
+- Add optional mutation testing rules.
+- Version forced to 0.9.2 instead of 0.10.0: Adding a new skill, stack-and-ship: commit, open and
+  stack pull requests by a project's house rules
+
 ## 0.9.1
 
 ### Patch Changes
