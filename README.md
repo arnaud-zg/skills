@@ -24,6 +24,7 @@ and how to call it are in the [plugin's skills table](./plugins/arnaud-zg/README
 | Get a sceptical review of a doc, plan or PR, with comments ready to paste            | [`glance-audit`](./plugins/arnaud-zg/docs/glance-audit/README.md)                       |
 | After a session, find what made the skills slow or costly and fix them               | [`skill-retro`](./plugins/arnaud-zg/docs/skill-retro/README.md)                         |
 | Check if the next job fits in your Claude usage window: GO or PARK                   | [`usage-runway`](./plugins/arnaud-zg/docs/usage-runway/README.md)                       |
+| Commit, open and stack pull requests by your project's rules, never force-pushing    | [`stack-and-ship`](./plugins/arnaud-zg/docs/stack-and-ship/README.md)                   |
 
 ## Install
 

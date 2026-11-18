@@ -33,7 +33,10 @@
     "testing",
     "hexagonal-architecture",
     "clean-architecture",
-    "ports-and-adapters"
+    "ports-and-adapters",
+    "git",
+    "pull-requests",
+    "stacked-prs"
   ],
   "skills": "./skills/",
   "interface": {
