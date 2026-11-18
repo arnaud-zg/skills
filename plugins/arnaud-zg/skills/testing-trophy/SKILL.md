@@ -23,7 +23,8 @@ The trophy has four layers, bottom to top:
 | integration | modules together, real I/O where cheap | the most  |
 | end to end  | the product as a user drives it        | a handful |
 
-Why each layer and what counts as which: [domain/trophy.md](domain/trophy.md).
+Why each layer and what counts as which: [domain/trophy.md](domain/trophy.md). When the project runs
+mutation testing, follow [domain/mutation.md](domain/mutation.md) too.
 
 `${CLAUDE_SKILL_DIR}` is this skill's folder. Claude Code sets it; in another agent, use the folder
 that holds this file.

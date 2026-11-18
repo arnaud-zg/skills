@@ -12,4 +12,5 @@
    database. Mock only what the project does not own.
 6. **For a bug, write the failing test first**, run it, see it fail for the reason the bug gives,
    then fix the code in its own change.
-7. **Run the suite and the check**; stop when both pass.
+7. **Run the suite and the check**; stop when both pass. If the project runs mutation testing, its
+   survivors are the next tests to write, by [domain/mutation.md](../domain/mutation.md).
