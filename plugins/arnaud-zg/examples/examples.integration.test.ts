@@ -127,6 +127,22 @@ describe("the examples the docs show", () => {
     expect(status).toBe(0);
   });
 
+  test("given stack-and-ship/body.md and Acme's adapter, then the PR holds every house rule", () => {
+    const { status, stdout } = run(
+      skill("stack-and-ship", "check-pr.mjs"),
+      "--title",
+      "fix(cart): [S30-04] totals round once, so the cart and the receipt agree",
+      "--branch",
+      "fix/S30-04-totals-round-once",
+      "--body",
+      example("stack-and-ship/body.md"),
+      "--project",
+      example("stack-and-ship/project.acme.md"),
+    );
+    expect(stdout).toContain("✓ the PR holds every house rule this script checks");
+    expect(status).toBe(0);
+  });
+
   test("given testing-trophy/suite, then the suite holds the trophy", () => {
     const { status, stdout } = run(
       skill("testing-trophy", "check-trophy.mjs"),
