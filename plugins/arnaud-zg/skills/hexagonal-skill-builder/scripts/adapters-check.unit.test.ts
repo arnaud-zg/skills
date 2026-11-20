@@ -17,6 +17,7 @@ const PORTS = [
 const skills = new Map<string, string | null>([
   ["stack-and-ship", PORTS],
   ["no-ports", null],
+  ["big-o-optimizer", PORTS],
 ]);
 
 const adapter = (
@@ -101,6 +102,10 @@ describe("a project's adapters", () => {
       "one .agents/adapters/stack-and-ship/project.a.md",
       "one .agents/adapters/stack-and-ship/project.b.md",
     ]);
+  });
+
+  test("given a legacy folder named for no known skill, such as a tool's own, then it is not flagged", () => {
+    expect(checks([], [".storybook/adapters"])).toEqual([]);
   });
 
   test("given a legacy folder, then it is flagged with the skill it belongs to, an old alias resolved", () => {

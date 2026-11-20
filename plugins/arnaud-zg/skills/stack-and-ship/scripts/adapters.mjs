@@ -66,57 +66,77 @@ export function projectRoot(cwd = process.cwd()) {
   return git.status === 0 && git.stdout.trim() !== "" ? git.stdout.trim() : cwd;
 }
 
-/** The `<port>.<name>.md` files of one port in a folder, sorted by name. */
-function inFolder(
-  /** @type {string} */ dir,
-  /** @type {string} */ port,
-  /** @type {Source} */ from,
-) {
-  if (!existsSync(dir) || !statSync(dir).isDirectory()) return [];
-  return readdirSync(dir)
-    .sort()
-    .flatMap((file) => {
-      const parsed = parseAdapterName(file);
-      return parsed?.port === port ? [{ ...parsed, path: join(dir, file), from }] : [];
-    });
+/**
+ * The `<port>.<name>.md` files of one port in a folder, sorted by name, and a warning for each
+ * `<port>.*.md` whose name breaks the grammar, so a file the old lookup took is never lost quietly.
+ * @param {string} dir @param {string} port @param {Source} from
+ * @returns {{ adapters: Adapter[], skipped: string[] }}
+ */
+function inFolder(dir, port, from) {
+  if (!existsSync(dir) || !statSync(dir).isDirectory()) return { adapters: [], skipped: [] };
+  const files = readdirSync(dir).sort();
+  /** @type {Adapter[]} */
+  const adapters = files.flatMap((file) => {
+    const parsed = parseAdapterName(file);
+    return parsed?.port === port ? [{ ...parsed, path: join(dir, file), from }] : [];
+  });
+  const skipped = files
+    .filter((file) => file.startsWith(`${port}.`) && file.endsWith(".md"))
+    .filter((file) => parseAdapterName(file) === null)
+    .map(
+      (file) =>
+        `${join(dir, file)} is skipped: rename it to ${port}.<name>.md, lowercase words joined by hyphens`,
+    );
+  return { adapters, skipped };
 }
 
 /**
- * Every level that holds an adapter for the port, in the order they win.
+ * Every level that holds an adapter for the port, in the order they win, and the warnings about
+ * files that were looked at and left out.
  * @param {Query} query
- * @returns {{ from: Source, adapters: Adapter[], warnings: string[] }[]}
+ * @returns {{ found: { from: Source, adapters: Adapter[], warnings: string[] }[], skipped: string[] }}
  */
 function levels({ root, skill, port, named = [], builtIn }) {
-  /** @type {Adapter[]} */
-  const given = named.map((path) => ({
-    port,
-    name: parseAdapterName(path)?.name ?? basename(path, ".md"),
-    path,
-    from: "named",
-  }));
-  const legacy = legacyHomes(root, skill).map((dir) => {
-    const adapters = inFolder(dir, port, "legacy");
-    const warning = `legacy adapter folder ${dir}: move it to ${adapterHome(root, skill)} with ${MIGRATE}`;
-    return {
-      from: /** @type {Source} */ ("legacy"),
-      adapters,
-      warnings: adapters.length > 0 ? [warning] : [],
-    };
+  const other = named.filter((path) => {
+    const parsed = parseAdapterName(path);
+    return parsed !== null && parsed.port !== port;
   });
-  return [
+  /** @type {Adapter[]} */
+  const given = named
+    .filter((path) => !other.includes(path))
+    .map((path) => ({
+      port,
+      name: parseAdapterName(path)?.name ?? basename(path, ".md"),
+      path,
+      from: "named",
+    }));
+  const home = inFolder(adapterHome(root, skill), port, "home");
+  const legacy = legacyHomes(root, skill).map((dir) => {
+    const inside = inFolder(dir, port, "legacy");
+    const warning = `legacy adapter folder ${dir}: move it to ${adapterHome(root, skill)} with ${MIGRATE}`;
+    const used = inside.adapters.length > 0 || inside.skipped.length > 0;
+    return { from: /** @type {Source} */ ("legacy"), ...inside, warnings: used ? [warning] : [] };
+  });
+  const builtInside =
+    builtIn === undefined ? { adapters: [], skipped: [] } : inFolder(builtIn, port, "built-in");
+  const found = [
     { from: /** @type {Source} */ ("named"), adapters: given, warnings: [] },
-    {
-      from: /** @type {Source} */ ("home"),
-      adapters: inFolder(adapterHome(root, skill), port, "home"),
-      warnings: [],
-    },
+    { from: /** @type {Source} */ ("home"), adapters: home.adapters, warnings: [] },
     ...legacy,
-    {
-      from: /** @type {Source} */ ("built-in"),
-      adapters: builtIn === undefined ? [] : inFolder(builtIn, port, "built-in"),
-      warnings: [],
-    },
-  ].filter((level) => level.adapters.length > 0);
+    { from: /** @type {Source} */ ("built-in"), adapters: builtInside.adapters, warnings: [] },
+  ];
+  const skipped = [
+    ...other.map((path) => `${path} is skipped: it is named for another port than ${port}`),
+    ...home.skipped,
+    ...legacy.flatMap((level) => level.skipped),
+  ];
+  const legacyOnlySkipped = legacy
+    .filter((level) => level.adapters.length === 0)
+    .flatMap((level) => level.warnings);
+  return {
+    found: found.filter((level) => level.adapters.length > 0),
+    skipped: [...legacyOnlySkipped, ...skipped],
+  };
 }
 
 /**
@@ -130,7 +150,8 @@ export function findAdapters(query) {
   const byName = new Map();
   /** @type {string[]} */
   const warnings = [];
-  for (const level of levels(query)) {
+  const { found, skipped } = levels(query);
+  for (const level of found) {
     warnings.push(...level.warnings);
     for (const adapter of level.adapters) {
       const winner = byName.get(adapter.name);
@@ -143,18 +164,20 @@ export function findAdapters(query) {
     }
   }
   const adapters = [...byName.values()].sort((a, b) => (a.name < b.name ? -1 : 1));
-  return { adapters, warnings: [...new Set(warnings)] };
+  return { adapters, warnings: [...new Set([...warnings, ...skipped])] };
 }
 
 /**
- * The one adapter for a port that takes one: the first level that has any wins, and a level
- * holding several stops, listing them. Null when no level has one.
+ * The one adapter for a port picked by its file alone: one adapter, no default, such as `project`.
+ * A port with a default is picked by the binding instead, so never call this for one. The first
+ * level that has any wins, and a level holding several stops, listing them. Null when none has one.
  * @param {Query} query
  * @returns {{ adapter: Adapter | null, warnings: string[] }}
  */
 export function findOneAdapter(query) {
-  const [first, ...rest] = levels(query);
-  if (first === undefined) return { adapter: null, warnings: [] };
+  const { found, skipped } = levels(query);
+  const [first, ...rest] = found;
+  if (first === undefined) return { adapter: null, warnings: skipped };
   const ignored = rest
     .filter((level) => level.from === "legacy")
     .flatMap((level) => level.adapters)
@@ -165,5 +188,8 @@ export function findOneAdapter(query) {
       `Expected one ${query.port} adapter, found ${String(first.adapters.length)}: ${paths}. Keep one, or name it.`,
     );
   }
-  return { adapter: first.adapters[0] ?? null, warnings: [...first.warnings, ...ignored] };
+  return {
+    adapter: first.adapters[0] ?? null,
+    warnings: [...new Set([...first.warnings, ...ignored, ...skipped])],
+  };
 }

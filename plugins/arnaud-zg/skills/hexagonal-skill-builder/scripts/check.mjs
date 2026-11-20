@@ -6,7 +6,7 @@
 //   node check.mjs --adapters [root] [--skills <folder>] [--json]
 //
 // Exit 0 when every skill holds, 1 when one does not, 2 when there is nothing to check.
-import { existsSync, readFileSync } from "node:fs";
+import { existsSync, readFileSync, statSync } from "node:fs";
 import { join, resolve } from "node:path";
 
 import { CHECKS, inspectAdapters, knownSkills, scanAdapters } from "./adapters-check.mjs";
@@ -140,7 +140,7 @@ function print(shelves) {
 function checkAdapters(options) {
   if (options.paths.length > 1) stop(`--adapters takes one root.\n\n${USAGE}`);
   const root = options.paths[0] === undefined ? projectRoot() : resolve(options.paths[0]);
-  if (!existsSync(root)) stop(`${root} does not exist.`);
+  if (!existsSync(root) || !statSync(root).isDirectory()) stop(`${root} is not a folder.`);
   const scan = scanAdapters(root);
   if (scan.files.length === 0 && scan.legacy.length === 0)
     stop(`No adapters under ${root}: none in ${HOME}/, and no .<skill>/adapters/ folder.`);

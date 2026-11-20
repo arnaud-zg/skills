@@ -25,7 +25,8 @@ import {
 import { dirname, join, resolve } from "node:path";
 import { pathToFileURL } from "node:url";
 
-import { ALIASES, HOME, KEBAB, projectRoot } from "./adapters.mjs";
+import { knownSkills } from "./adapters-check.mjs";
+import { ALIASES, HOME, KEBAB, parseAdapterName, projectRoot } from "./adapters.mjs";
 
 const USAGE = `Usage: node migrate-adapters.mjs [root] [--skill <name> ...] [--write] [--json]
 
@@ -44,7 +45,8 @@ const SKIPPED = new Set(["node_modules", ".git"]);
  * @typedef {{ file: string, line: number, text: string }} Mention
  * @typedef {{ folder: string, skill: string }} Legacy
  * @typedef {{ root: string, legacy: Legacy[], moves: Move[], rewrites: Rewrite[],
- *   byHand: Mention[], collisions: string[] }} Plan
+ *   byHand: Mention[], collisions: string[], left: string[], skipped: string[],
+ *   unmatched: string[] }} Plan
  */
 
 const isDir = (/** @type {string} */ path) => existsSync(path) && statSync(path).isDirectory();
@@ -106,19 +108,37 @@ function textFiles(/** @type {string} */ root) {
 }
 
 /**
- * The migration for a project, read from the disk and changing nothing.
+ * The migration for a project, read from the disk and changing nothing. A dot-folder is a legacy
+ * adapter folder only when it is named for a known skill, or for one the caller names, so a tool's
+ * own `.storybook/adapters/` is never touched.
  * @param {string} root
- * @param {string[]} [only] the skills to migrate; every one with a legacy folder when empty
+ * @param {string[]} [only] the skills to migrate, by name or old alias; every known one when empty
+ * @param {Set<string>} [known] the skills installed for this project
  * @returns {Plan}
  */
-export function planMigration(root, only = []) {
-  const legacy = readdirSync(root)
+export function planMigration(root, only = [], known = new Set()) {
+  const wanted = only.map(skillOf);
+  const candidates = readdirSync(root)
     .sort()
     .filter(
       (name) => LEGACY.test(name) && name !== ".agents" && isDir(join(root, name, "adapters")),
     )
-    .map((folder) => ({ folder, skill: skillOf(folder.slice(1)) }))
-    .filter(({ skill }) => only.length === 0 || only.includes(skill));
+    .map((folder) => ({ folder, skill: skillOf(folder.slice(1)) }));
+  const legacy = candidates.filter(({ skill }) =>
+    wanted.length > 0 ? wanted.includes(skill) : known.has(skill),
+  );
+  const skipped =
+    wanted.length > 0
+      ? []
+      : candidates
+          .filter((candidate) => !legacy.includes(candidate))
+          .map(
+            ({ folder, skill }) =>
+              `${folder}/adapters/: no installed skill is named ${skill}; pass --skill ${skill} to move it`,
+          );
+  const unmatched = wanted.filter((skill) => !candidates.some((c) => c.skill === skill));
+  /** @type {string[]} */
+  const left = [];
 
   /** @type {Move[]} */
   const moves = [];
@@ -127,6 +147,10 @@ export function planMigration(root, only = []) {
   for (const { folder, skill } of legacy) {
     for (const file of readdirSync(join(root, folder, "adapters")).sort()) {
       const from = `${folder}/adapters/${file}`;
+      if (isDir(join(root, from)) || parseAdapterName(file) === null) {
+        left.push(from);
+        continue;
+      }
       const to = `${HOME}/${skill}/${file}`;
       if (existsSync(join(root, to))) {
         const same =
@@ -150,15 +174,12 @@ export function planMigration(root, only = []) {
       if (!/adapters/.test(line)) return;
       for (const { folder } of legacy) {
         const name = folder.slice(1);
-        if (
-          new RegExp(`["'\`/]\\.?${escaped(name)}["'\`/]`).test(line) &&
-          !line.includes(`${HOME}/`)
-        )
+        if (new RegExp(`["'\`]\\.?${escaped(name)}["'\`]`).test(line) && !line.includes(`${HOME}/`))
           byHand.push({ file: moved.get(file) ?? file, line: index + 1, text: line.trim() });
       }
     });
   }
-  return { root, legacy, moves, rewrites, byHand, collisions };
+  return { root, legacy, moves, rewrites, byHand, collisions, left, skipped, unmatched };
 }
 
 /** Moves a file, by `git mv` when git tracks it so its history follows. */
@@ -211,6 +232,7 @@ function print(plan, written) {
   const say = (/** @type {string} */ text = "") => process.stdout.write(`${text}\n`);
   if (plan.legacy.length === 0) {
     say(`Nothing to migrate: no .<skill>/adapters/ folder under ${plan.root}.`);
+    for (const note of plan.skipped) say(`  skipped  ${note}`);
     return;
   }
   say(written ? "Migrated:" : "Plan (nothing written; pass --write to apply):");
@@ -224,6 +246,12 @@ function print(plan, written) {
     say("Check by hand, the old folder is named in a way no rewrite is sure of:");
     for (const { file, line, text } of plan.byHand) say(`  ${file}:${String(line)}  ${text}`);
   }
+  if (plan.left.length > 0) {
+    say();
+    say("Left in place, not <port>.<name>.md (move or delete them by hand):");
+    for (const file of plan.left) say(`  ${file}`);
+  }
+  for (const note of plan.skipped) say(`  skipped  ${note}`);
   for (const collision of plan.collisions) say(`  refused  ${collision}`);
 }
 
@@ -257,7 +285,14 @@ function main() {
     process.stderr.write(`${root} is not a folder.\n`);
     return 2;
   }
-  const plan = planMigration(root, only);
+  const own = join(import.meta.dirname, "..", "..");
+  const plan = planMigration(root, only, new Set(knownSkills(root, [own]).keys()));
+  if (plan.unmatched.length > 0) {
+    process.stderr.write(
+      `No .<skill>/adapters/ folder for ${plan.unmatched.join(", ")} under ${root}.\n`,
+    );
+    return 2;
+  }
   const write = args.includes("--write") && plan.collisions.length === 0;
   if (write) applyMigration(plan);
   if (args.includes("--json"))

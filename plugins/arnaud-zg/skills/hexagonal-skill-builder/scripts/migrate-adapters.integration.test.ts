@@ -122,6 +122,38 @@ describe("given a project with an adapter folder per skill at its root", () => {
     );
   });
 
+  test("when a tool's own dot-folder holds adapters/ and a skill folder holds a README, then neither is touched and both are said", () => {
+    const root = legacyProject();
+    mkdirSync(path.join(root, ".storybook/adapters"), { recursive: true });
+    writeFileSync(path.join(root, ".storybook/adapters/msw.md"), "# msw\n");
+    writeFileSync(path.join(root, ".domain-first/adapters/README.md"), "# notes\n");
+    const { status, stdout } = run(MIGRATE, root, "--write");
+
+    expect(status).toBe(0);
+    expect(existsSync(path.join(root, ".storybook/adapters/msw.md"))).toBe(true);
+    expect(existsSync(path.join(root, ".domain-first/adapters/README.md"))).toBe(true);
+    expect(stdout).toContain(
+      "skipped  .storybook/adapters/: no installed skill is named storybook",
+    );
+    expect(stdout).toContain("  .domain-first/adapters/README.md");
+    expect(run(CHECK, root, "--adapters").status).toBe(0);
+  });
+
+  test("when --skill names an old alias, then it maps to the skill; when it names no folder, then it exits 2", () => {
+    const root = legacyProject();
+    mkdirSync(path.join(root, ".big-o/adapters"), { recursive: true });
+    writeFileSync(
+      path.join(root, ".big-o/adapters/language.rust.md"),
+      "---\nfulfils: language\n---\n",
+    );
+    expect(run(MIGRATE, root, "--skill", "big-o").stdout).toContain(
+      "move     .big-o/adapters/language.rust.md → .agents/adapters/big-o-optimizer/language.rust.md",
+    );
+    const missing = run(MIGRATE, root, "--skill", "domain-frist");
+    expect(missing.stderr).toContain("No .<skill>/adapters/ folder for domain-frist");
+    expect(missing.status).toBe(2);
+  });
+
   test("when it runs a second time, then there is nothing left to do", () => {
     const root = legacyProject();
     run(MIGRATE, root, "--write");
@@ -149,6 +181,20 @@ describe("given a project with an adapter folder per skill at its root", () => {
     expect(stdout.match(/ {2}legacy$/gm)).toHaveLength(SKILLS.length);
     expect(stdout).toContain("migrate-adapters.mjs --write");
     expect(status).toBe(1);
+  });
+});
+
+describe("given a migrated project with files that sit beside its adapters", () => {
+  test("when the adapters check runs, then a .DS_Store and a README pass, and a root that is a file exits 2", () => {
+    const root = legacyProject();
+    run(MIGRATE, root, "--write");
+    writeFileSync(path.join(root, ".agents/adapters/stack-and-ship/.DS_Store"), "");
+    writeFileSync(path.join(root, ".agents/adapters/README.md"), "# Adapters\n");
+
+    expect(run(CHECK, root, "--adapters").status).toBe(0);
+    const file = run(CHECK, root, "--adapters", "CLAUDE.md");
+    expect(file.stderr).toContain("is not a folder");
+    expect(file.status).toBe(2);
   });
 });
 

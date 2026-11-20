@@ -119,6 +119,36 @@ describe("given a port that takes one adapter", () => {
   });
 });
 
+describe("given files the lookup cannot take", () => {
+  test("when a legacy project file breaks the name grammar, then it is skipped with a warning naming the rename, never dropped quietly", () => {
+    const cwd = projectWith([".stack-and-ship/adapters/project.my_repo.md"]);
+    const { adapter, warnings } = findOneAdapter({
+      root: cwd,
+      skill: "stack-and-ship",
+      port: "project",
+    });
+    expect(adapter).toBeNull();
+    expect(warnings).toEqual([
+      expect.stringContaining("legacy adapter folder"),
+      expect.stringContaining("project.my_repo.md is skipped: rename it to project.<name>.md"),
+    ]);
+  });
+
+  test("when a named file is written for another port, then it is left out of this port and said so", () => {
+    const cwd = projectWith(["mine/extra.lint.md", "mine/language.zig.md"]);
+    const found = findAdapters({
+      root: cwd,
+      skill: "big-o-optimizer",
+      port: "language",
+      named: [path.join(cwd, "mine/extra.lint.md"), path.join(cwd, "mine/language.zig.md")],
+    });
+    expect(names(found)).toEqual(["named:zig"]);
+    expect(found.warnings).toEqual([
+      expect.stringContaining("extra.lint.md is skipped: it is named for another port"),
+    ]);
+  });
+});
+
 describe("given a folder outside any repository", () => {
   test("when its root is asked for, then the folder itself is the root", () => {
     const cwd = projectWith([]);

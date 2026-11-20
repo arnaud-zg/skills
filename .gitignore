@@ -144,3 +144,6 @@ vite.config.ts.timestamp-*
 
 # Claude Code plugin eval runs
 plugins/*/evals/results/
+
+# Swift Package Manager cache, written by editor tooling
+.build/

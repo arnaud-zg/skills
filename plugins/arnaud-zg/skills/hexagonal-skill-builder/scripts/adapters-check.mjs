@@ -7,7 +7,7 @@
 //   skill    the folder is named for a skill this project, or this skill's own shelf, holds
 //   port     the port is a row of that skill's ports/PORTS.md
 //   one      a port that takes one adapter and has no default holds one file, never several
-//   legacy   no `.<skill>/adapters/` folder is left at the root
+//   legacy   no `.<skill>/adapters/` folder of a known skill is left at the root
 //
 // `inspectAdapters` is pure; `scanAdapters` and `knownSkills` read the disk for it.
 
@@ -28,6 +28,8 @@ export const CHECKS = /** @type {const} */ (["name", "fulfils", "skill", "port",
  */
 
 const MIGRATE = "node <hexagonal-skill-builder>/scripts/migrate-adapters.mjs --write";
+/** Files that sit beside adapters without being one: dotfiles (.DS_Store, .gitkeep) and READMEs. */
+const IGNORED = /^\.|^readme\.md$/i;
 const LEGACY = new RegExp(`^\\.(${KEBAB})$`);
 const isDir = (/** @type {string} */ path) => existsSync(path) && statSync(path).isDirectory();
 
@@ -183,6 +185,7 @@ export function inspectAdapters(scan, skills) {
     const folder = dir.split("/")[0] ?? dir;
     const old = folder.slice(1);
     const skill = Object.keys(ALIASES).find((name) => ALIASES[name]?.includes(old)) ?? old;
+    if (!skills.has(skill)) continue;
     add(
       "legacy",
       dir,
@@ -206,6 +209,7 @@ function filesUnder(/** @type {string} */ root, /** @type {string} */ dir) {
   /** @type {string[]} */
   const found = [];
   for (const name of readdirSync(join(root, dir)).sort()) {
+    if (IGNORED.test(name)) continue;
     const path = `${dir}/${name}`;
     if (isDir(join(root, path))) found.push(...filesUnder(root, path));
     else found.push(path);
