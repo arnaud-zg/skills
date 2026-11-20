@@ -1,5 +1,12 @@
 # @arnaud-zg/plugin-arnaud-zg
 
+## 0.10.0
+
+### Minor Changes
+
+- Add optional performance budget rules.
+- Keep every project adapter in .agents/adapters/<skill>/.
+
 ## 0.9.2
 
 ### Patch Changes
