@@ -38,6 +38,9 @@ node ${CLAUDE_SKILL_DIR}/scripts/check.mjs [path ...] [--suite <script>] [--json
 - With no path it looks in `.claude/skills`, `.agents/skills`, `skills/` and `plugins/*/skills`
   under the current folder. A path can be a skills folder or one skill's folder.
 - `--suite <script>` also requires every test to be named in that `package.json` script.
+- `--adapters [root]` checks the project's `.agents/adapters/<skill>/<port>.<name>.md` files
+  instead: named, `fulfils` their port, for a skill and a port that exist, one where one is taken,
+  and no legacy `.<skill>/adapters/` left. `scripts/migrate-adapters.mjs [--write]` moves those.
 - It exits 0 when every skill holds, 1 on a finding, and 2 when there is nothing to check.
 
 Show the findings as printed: every one has a file, a line and an arrow with its fix. Make each fix,

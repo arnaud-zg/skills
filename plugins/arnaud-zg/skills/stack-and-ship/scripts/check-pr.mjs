@@ -1,10 +1,12 @@
 #!/usr/bin/env node
 // Checks a PR title, branch and body against the house rules; usage in ../SKILL.md#check.
-import { existsSync, readdirSync, readFileSync } from "node:fs";
-import { join } from "node:path";
+import { readFileSync } from "node:fs";
 import { pathToFileURL } from "node:url";
 
-export const DROP_IN = ".stack-and-ship/adapters";
+import { adapterHome, findOneAdapter, HOME, projectRoot } from "./adapters.mjs";
+
+const SKILL = "stack-and-ship";
+export const DROP_IN = `${HOME}/${SKILL}`;
 const TYPES = ["feat", "fix", "test", "refactor", "chore", "docs", "perf"];
 const NO_PHASE = "(?!)";
 const MERMAID = /```mermaid\n([\s\S]*?)```/g;
@@ -32,17 +34,19 @@ const branchPattern = (project) =>
 /** @param {string} text */
 const escaped = (text) => text.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 
-/** The one `project.<name>.md` of a repository's drop-in folder. @param {string} [root] */
-export const findProjectFile = (root = process.cwd()) => {
-  const folder = join(root, DROP_IN);
-  const found = existsSync(folder)
-    ? readdirSync(folder).filter((file) => /^project\..+\.md$/.test(file))
-    : [];
-  if (found.length !== 1)
+/**
+ * The one `project.<name>.md` of a repository, by the contract's lookup: the home first, then the
+ * legacy `.stack-and-ship/adapters/`, whose use is warned about on stderr.
+ * @param {string} [root]
+ */
+export const findProjectFile = (root = projectRoot()) => {
+  const { adapter, warnings } = findOneAdapter({ root, skill: SKILL, port: "project" });
+  for (const warning of warnings) console.warn(`warning: ${warning}`);
+  if (adapter === null)
     throw new Error(
-      `Expected one project.<name>.md in ${folder}: write it from ports/PORTS.md, or pass --project <file>`,
+      `Expected one project.<name>.md in ${adapterHome(root, SKILL)}: write it from ports/PORTS.md, or pass --project <file>`,
     );
-  return join(folder, found[0]);
+  return adapter.path;
 };
 
 /** A project adapter's values: its one fenced JSON block. @param {string} file @returns {Project} */

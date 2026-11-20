@@ -27,11 +27,12 @@ how to work inside them.
 that holds this file.
 
 The method belongs to no project and no host. Before the first command, read the project adapter:
-the one `project.<name>.md` in `.stack-and-ship/adapters/` at the repository root, or the file
-passed with `--project`. It holds the repository, the commands, the checks, the board ids and the
-traps of this one. With none, say so, and stop at the first step that needs one of its keys, naming
-the key. Issues, pull requests and stacks go through the `forge` port, the board through the `board`
-port. [ports/PORTS.md](ports/PORTS.md) names their adapters and what a project adapter holds.
+the one `project.<name>.md` in `.agents/adapters/stack-and-ship/` at the repository root, or the
+file passed with `--project`. It holds the repository, the commands, the checks, the board ids and
+the traps of this one. With none, say so, and stop at the first step that needs one of its keys,
+naming the key. Issues, pull requests and stacks go through the `forge` port, the board through the
+`board` port. [ports/PORTS.md](ports/PORTS.md) names their adapters and what a project adapter
+holds.
 
 ## Pick the verb
 

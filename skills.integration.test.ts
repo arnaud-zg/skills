@@ -1,5 +1,5 @@
 import { spawnSync } from "node:child_process";
-import { readdirSync, readFileSync, statSync } from "node:fs";
+import { existsSync, readdirSync, readFileSync, statSync } from "node:fs";
 import path from "node:path";
 import { describe, expect, test } from "vitest";
 
@@ -74,6 +74,20 @@ describe("the skills this marketplace ships", () => {
     const report = JSON.parse(stdout) as { findings: unknown[] };
     expect(report.findings).toEqual([]);
     expect(status).toBe(0);
+  });
+
+  test("every copy of the adapter lookup is hexagonal-architecture's, byte for byte, so each skill finds the same files", () => {
+    const shelf = path.join(root, "plugins/arnaud-zg/skills");
+    const source = readFileSync(
+      path.join(shelf, "hexagonal-architecture/scripts/adapters.mjs"),
+      "utf8",
+    );
+    const copies = readdirSync(shelf)
+      .map((skill) => path.join(shelf, skill, "scripts/adapters.mjs"))
+      .filter((file) => existsSync(file));
+    expect(copies.length).toBeGreaterThan(1);
+    for (const copy of copies)
+      expect(readFileSync(copy, "utf8"), path.relative(root, copy)).toBe(source);
   });
 
   test("every one holds the four rules: named, small, resolves, tested", () => {

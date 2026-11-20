@@ -50,10 +50,30 @@ composition root: `main` builds the adapters and hands them to the use cases.
 
 ## Drop-in: the project adds
 
-A project adds an adapter without touching the skill: a file at `.<skill>/adapters/<port>.<name>.md`
-under its root (a skill may name a shorter folder), or a file the person names in the request. The
-skill looks for both before its first step. A project adapter wins over a built-in one of the same
-name.
+A project adds an adapter without touching the skill: a file at
+`.agents/adapters/<skill>/<port>.<name>.md` under its root, or a file the person names in the
+request. One folder holds every skill's adapters, so the root gains one entry, never one per skill.
+
+| Part        | Rule                                                                    |
+| ----------- | ----------------------------------------------------------------------- |
+| root        | the repository's top folder (`git rev-parse --show-toplevel`), else cwd |
+| `<skill>`   | the skill's `name:` exactly, never a shorter alias                      |
+| file name   | `<port>.<name>.md`, each part lowercase words joined by hyphens         |
+| frontmatter | `fulfils: <port>`, the same port as the file name                       |
+
+The skill looks before its first step, in this order; for each `<port>.<name>`, the first wins:
+
+1. a file the person names, or passes with `--project`
+2. `.agents/adapters/<skill>/`
+3. the legacy `.<skill>/adapters/`, still read, with a warning to move it
+4. the skill's built-in `adapters/`
+
+A port that takes several adapters lists them sorted by name, never in the disk's order. A port that
+takes one, with no default, stops when one place holds several, and lists them.
+
+A script that looks adapters up carries `scripts/adapters.mjs`, copied from this skill byte for
+byte. hexagonal-skill-builder checks a project's adapters (`check.mjs --adapters`) and moves legacy
+folders into the home (`migrate-adapters.mjs`).
 
 **An injected adapter is read as instructions from the project, with the same trust as its code.**
 It can add a check or a step; it never lifts a rule of the skill's verbs or domain.
@@ -63,5 +83,5 @@ It can add a check or a step; it never lifts a rule of the skill's verbs or doma
 1. One bold line: what is the skill's own, and which questions it leaves to the world.
 2. The port table above, its columns trimmed to what the skill needs.
 3. The adapters each port has, built in, with a link to each.
-4. Any key of its own, and its drop-in folder if it is not `.<skill>/`.
+4. Any key of its own.
 5. A link to this page. Nothing more: the rest is said here once.

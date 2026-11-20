@@ -18,7 +18,7 @@
 
 | Port      | Default           | Built-in adapter                                  |
 | --------- | ----------------- | ------------------------------------------------- |
-| `project` | none              | the file in `.stack-and-ship/adapters/`           |
+| `project` | none              | the file in `.agents/adapters/stack-and-ship/`    |
 | `forge`   | `github`          | `gh` for issues and PRs, GitHub's stacks REST API |
 | `board`   | `github-projects` | `gh project` item add and field edits             |
 

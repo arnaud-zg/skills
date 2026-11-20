@@ -15,24 +15,24 @@
 
 ## Steps
 
-| Step             | Does                                                                     |
-| ---------------- | ------------------------------------------------------------------------ |
-| 1 Load adapters  | the defaults, then `.big-o/adapters/` and any named in the request       |
-| 2 Read           | the target and every function it calls in a loop                         |
-| 3 Name the Big O | each term, quoted from its lines, with what `n` is                       |
-| 4 Pick           | a pattern for the worst term, or stop when none pays                     |
-| 5–7 Verify       | before, rewrite the smallest piece, verify after                         |
-| 8 Measure        | by `measure`, then each `extra` at its step                              |
-| 9 Hand over      | path, before, after, pattern, verified; space cost; what was not checked |
+| Step             | Does                                                                                |
+| ---------------- | ----------------------------------------------------------------------------------- |
+| 1 Load adapters  | the defaults, then `.agents/adapters/big-o-optimizer/` and any named in the request |
+| 2 Read           | the target and every function it calls in a loop                                    |
+| 3 Name the Big O | each term, quoted from its lines, with what `n` is                                  |
+| 4 Pick           | a pattern for the worst term, or stop when none pays                                |
+| 5–7 Verify       | before, rewrite the smallest piece, verify after                                    |
+| 8 Measure        | by `measure`, then each `extra` at its step                                         |
+| 9 Hand over      | path, before, after, pattern, verified; space cost; what was not checked            |
 
 ## Ports
 
-| Port       | Default        | Other built in                                                   | Injected from                        |
-| ---------- | -------------- | ---------------------------------------------------------------- | ------------------------------------ |
-| `language` | `language.any` | `javascript` (and TypeScript), `python`, `go`, by file extension | `.big-o/adapters/language.<name>.md` |
-| `verify`   | `verify.tests` |                                                                  | `.big-o/adapters/verify.<name>.md`   |
-| `measure`  | `measure.read` | `measure.bench`                                                  | `.big-o/adapters/measure.<name>.md`  |
-| `extra`    | none           |                                                                  | `.big-o/adapters/extra.<name>.md`    |
+| Port       | Default        | Other built in                                                   | Injected from                                         |
+| ---------- | -------------- | ---------------------------------------------------------------- | ----------------------------------------------------- |
+| `language` | `language.any` | `javascript` (and TypeScript), `python`, `go`, by file extension | `.agents/adapters/big-o-optimizer/language.<name>.md` |
+| `verify`   | `verify.tests` |                                                                  | `.agents/adapters/big-o-optimizer/verify.<name>.md`   |
+| `measure`  | `measure.read` | `measure.bench`                                                  | `.agents/adapters/big-o-optimizer/measure.<name>.md`  |
+| `extra`    | none           |                                                                  | `.agents/adapters/big-o-optimizer/extra.<name>.md`    |
 
 Frontmatter: `fulfils` (the port), `matches` (`language` only: file extensions), `step` (`extra`
 only), `replaces` (an adapter to take the place of). `fulfils` and `replaces` follow the

@@ -9,7 +9,8 @@ One recipe per need. For a first run, see the [Tutorial](tutorial.md).
 ## Teach it a language
 
 Any language works with no adapter: the skill maps each pattern to the standard library's own
-structures. To add idioms, costs and pitfalls, drop `.big-o/adapters/language.<name>.md`:
+structures. To add idioms, costs and pitfalls, drop
+`.agents/adapters/big-o-optimizer/language.<name>.md`:
 
 ```markdown
 ---
@@ -34,7 +35,8 @@ versions at two input sizes, and copies each figure from the command that printe
 
 ## Inject your own step
 
-Drop a Markdown file in `.big-o/adapters/` at the project root, named `extra.<name>.md`:
+Drop a Markdown file in `.agents/adapters/big-o-optimizer/` at the project root, named
+`extra.<name>.md`:
 
 ```markdown
 ---

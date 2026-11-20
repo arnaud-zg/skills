@@ -49,9 +49,9 @@ Leave `phaseId` out. Titles read `fix(cart): totals round once` and branches
 
 ## Use another forge or board
 
-Write `.stack-and-ship/adapters/forge.gitlab.md` with `fulfils: forge` and the commands for each
-step, then bind it: `--bind "forge=gitlab"`. With no board, bind none and the board steps say they
-are skipped.
+Write `.agents/adapters/stack-and-ship/forge.gitlab.md` with `fulfils: forge` and the commands for
+each step, then bind it: `--bind "forge=gitlab"`. With no board, bind none and the board steps say
+they are skipped.
 
 ## Stack a phase
 

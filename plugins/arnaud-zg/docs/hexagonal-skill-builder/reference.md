@@ -24,6 +24,31 @@ node scripts/check.mjs [path ...] [--suite <script>] [--json]
 Colour is on in a terminal, and off in a pipe or when `NO_COLOR` is set. `FORCE_COLOR=1` turns it
 on.
 
+## Project adapters
+
+```text
+node scripts/check.mjs --adapters [root] [--skills <folder>] [--json]
+node scripts/migrate-adapters.mjs [root] [--write] [--json]
+```
+
+`--adapters` checks the files in `.agents/adapters/<skill>/` under the root (the repository's top
+folder when left out) instead of skills. `--skills` adds a folder of skills an adapter may be for;
+the shelf this skill is installed on is always read. Exit `0` clean, `1` on a finding, `2` when the
+project has no adapters at all.
+
+| Check     | Fails when                                                 |
+| --------- | ---------------------------------------------------------- |
+| `name`    | a file is not `<skill>/<port>.<name>.md`                   |
+| `fulfils` | its frontmatter has no `fulfils`, or names another port    |
+| `skill`   | its folder names no skill found here                       |
+| `port`    | its port is not a row of the skill's `ports/PORTS.md`      |
+| `one`     | a port with count `1` and default `none` has several files |
+| `legacy`  | a `.<skill>/adapters/` folder is left at the root          |
+
+`migrate-adapters.mjs` prints the plan and writes nothing without `--write`. With it, it moves each
+legacy file by `git mv`, rewrites the old folder's mentions in tracked text files, and removes the
+emptied folders. Exit `1` when a different file already sits at a target; nothing is written then.
+
 ## Where it looks
 
 ```mermaid
