@@ -16,7 +16,7 @@ before it is opened.
 
 ## 2. Describe your project
 
-Create `.stack-and-ship/adapters/project.acme.md` at the root of your repository. Start from
+Create `.agents/adapters/stack-and-ship/project.acme.md` at the root of your repository. Start from
 [`project.acme.md`](../../examples/stack-and-ship/project.acme.md): a made-up shop whose phases are
 `S30`, `S30-04`, and whose PR bodies keep a commented Ticket line.
 

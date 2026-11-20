@@ -3,20 +3,27 @@
 // line and fix. It needs Node only, and changes nothing.
 //
 //   node check.mjs [path ...] [--suite <package.json script>] [--json]
+//   node check.mjs --adapters [root] [--skills <folder>] [--json]
 //
 // Exit 0 when every skill holds, 1 when one does not, 2 when there is nothing to check.
-import { existsSync, readFileSync } from "node:fs";
-import { join } from "node:path";
+import { existsSync, readFileSync, statSync } from "node:fs";
+import { join, resolve } from "node:path";
 
+import { CHECKS, inspectAdapters, knownSkills, scanAdapters } from "./adapters-check.mjs";
+import { HOME, projectRoot } from "./adapters.mjs";
 import { inspectShelf, RULES } from "./rules.mjs";
 import { fromRoot, placesFor, readShelf } from "./shelf.mjs";
 
 const USAGE = `Usage: node check.mjs [path ...] [--suite <script>] [--json]
+       node check.mjs --adapters [root] [--skills <folder>] [--json]
 
-  path            a skills folder, or one skill's folder. Without one, it looks in
-                  .claude/skills, .agents/skills, skills and plugins/*/skills
-  --suite <name>  also require every test to be named in that package.json script
-  --json          print the findings as JSON
+  path              a skills folder, or one skill's folder. Without one, it looks in
+                    .claude/skills, .agents/skills, skills and plugins/*/skills
+  --suite <name>    also require every test to be named in that package.json script
+  --adapters [root] check the project's ${HOME}/<skill>/<port>.<name>.md files instead;
+                    root is the repository's top folder when left out
+  --skills <folder> with --adapters, another folder of skills the adapters may be for
+  --json            print the findings as JSON
 
 Exit 0 when every skill holds, 1 when one does not, 2 when there is nothing to check.`;
 
@@ -45,8 +52,8 @@ function stop(message) {
 
 /** @param {string[]} args */
 function parse(args) {
-  /** @type {{ paths: string[], suiteName: string | null, json: boolean }} */
-  const parsed = { paths: [], suiteName: null, json: false };
+  /** @type {{ paths: string[], suiteName: string | null, json: boolean, adapters: boolean, skills: string[] }} */
+  const parsed = { paths: [], suiteName: null, json: false, adapters: false, skills: [] };
   for (let index = 0; index < args.length; index += 1) {
     const arg = args[index] ?? "";
     if (arg === "--help" || arg === "-h") {
@@ -54,6 +61,8 @@ function parse(args) {
       process.exit(0);
     }
     if (arg === "--json") parsed.json = true;
+    else if (arg === "--adapters") parsed.adapters = true;
+    else if (arg === "--skills") parsed.skills.push(args[++index] ?? stop(USAGE));
     else if (arg === "--suite") parsed.suiteName = args[++index] ?? stop(USAGE);
     else if (arg.startsWith("-")) stop(`Unknown option ${arg}.\n\n${USAGE}`);
     else parsed.paths.push(arg);
@@ -127,7 +136,46 @@ function print(shelves) {
   );
 }
 
+/** Checks a project's adapters, prints the findings, and exits. @param {ReturnType<typeof parse>} options */
+function checkAdapters(options) {
+  if (options.paths.length > 1) stop(`--adapters takes one root.\n\n${USAGE}`);
+  const root = options.paths[0] === undefined ? projectRoot() : resolve(options.paths[0]);
+  if (!existsSync(root) || !statSync(root).isDirectory()) stop(`${root} is not a folder.`);
+  const scan = scanAdapters(root);
+  if (scan.files.length === 0 && scan.legacy.length === 0)
+    stop(`No adapters under ${root}: none in ${HOME}/, and no .<skill>/adapters/ folder.`);
+  const ownShelf = join(import.meta.dirname, "..", "..");
+  const skills = knownSkills(root, [...options.skills.map((dir) => resolve(dir)), ownShelf]);
+  const findings = inspectAdapters(scan, skills);
+  if (options.json) {
+    say(
+      JSON.stringify(
+        { root, files: scan.files.map((file) => file.path), legacy: scan.legacy, findings },
+        null,
+        2,
+      ),
+    );
+  } else {
+    say(
+      `Checking ${plural(scan.files.length, "adapter")} in ${HOME} against ${CHECKS.join(", ")}\n`,
+    );
+    for (const finding of findings) {
+      say(`  ${bold(`${finding.path}:${String(finding.line)}`)}  ${dim(finding.check)}`);
+      say(`  ${finding.message}`);
+      say(`  ${dim("→")} ${finding.fix}`);
+      say();
+    }
+    say(
+      findings.length === 0
+        ? green(`✓ every adapter holds.`)
+        : red(`✗ ${plural(findings.length, "finding")}.`),
+    );
+  }
+  process.exit(findings.length === 0 ? 0 : 1);
+}
+
 const options = parse(process.argv.slice(2));
+if (options.adapters) checkAdapters(options);
 const shelves = inspect(process.cwd(), options);
 const findings = shelves.flatMap((shelf) => shelf.findings);
 

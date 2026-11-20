@@ -35,7 +35,7 @@ flowchart LR
 - **How do I call it?** Ask _ship this_, _open the PR_, _stack these PRs_, or type
   `/arnaud-zg:stack-and-ship`
 - **What does it need?** Git, Node.js, and the GitHub CLI `gh` for the built-in forge and board
-  adapters. One project adapter, `.stack-and-ship/adapters/project.<name>.md`
+  adapters. One project adapter, `.agents/adapters/stack-and-ship/project.<name>.md`
 
 ## Which page do I need?
 

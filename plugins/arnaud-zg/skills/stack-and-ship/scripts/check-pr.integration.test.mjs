@@ -157,7 +157,7 @@ describe("check-pr", () => {
 
     assert.throws(
       () => findProjectFile(empty),
-      /\.stack-and-ship\/adapters: write it from ports\/PORTS\.md/,
+      /\.agents\/adapters\/stack-and-ship: write it from ports\/PORTS\.md/,
     );
   });
 
@@ -169,7 +169,20 @@ describe("check-pr", () => {
     });
 
     assert.equal(result.status, 2);
-    assert.match(result.stderr, /\.stack-and-ship\/adapters/);
+    assert.match(result.stderr, /\.agents\/adapters\/stack-and-ship/);
+  });
+
+  it("given a project adapter left in the legacy folder, when looked for, then it is still found and the move is asked for", () => {
+    const root = mkdtempSync(join(tmpdir(), "legacy-"));
+    mkdirSync(join(root, ".stack-and-ship/adapters"), { recursive: true });
+    copyFileSync(FIXTURE, join(root, ".stack-and-ship/adapters/project.acme.md"));
+    const result = spawnSync(process.execPath, [SCRIPT, "--title", PR.title], {
+      cwd: root,
+      encoding: "utf8",
+    });
+
+    assert.notEqual(result.status, 2);
+    assert.match(result.stderr, /warning: legacy adapter folder .*migrate-adapters\.mjs/);
   });
 
   it("given a project adapter in the drop-in folder, when looked for, then it is found and read", () => {

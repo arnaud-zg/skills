@@ -27,9 +27,10 @@ installed:
 forge=github; board=github-projects
 ```
 
-The `project` adapter is found in the drop-in folder `.stack-and-ship/adapters/project.<name>.md` at
-the repository root, or passed with `--project <file>`. With none, the steps that need one of its
-keys stop and name the key.
+The `project` adapter is found in the drop-in folder
+`.agents/adapters/stack-and-ship/project.<name>.md` at the repository root, or passed with
+`--project <file>`. The legacy `.stack-and-ship/adapters/` is still read, with a warning. With none,
+the steps that need one of its keys stop and name the key.
 
 ## The `project` adapter
 

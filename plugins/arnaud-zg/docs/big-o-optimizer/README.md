@@ -34,7 +34,7 @@ a lint, are adapters a project can inject as a file.
 - **It is instructions only.** No script, no hook, no MCP server, no `allowed-tools`. Running your
   tests goes through Claude's usual permission prompts.
 - **An injected adapter is instructions too**, read with the same trust as your code. Review
-  `.big-o/adapters/` as you would a script.
+  `.agents/adapters/big-o-optimizer/` as you would a script.
 
 Read [`SKILL.md`](../../skills/big-o-optimizer/SKILL.md) before installing it. Claude reads
 `SKILL.md`, not this page.

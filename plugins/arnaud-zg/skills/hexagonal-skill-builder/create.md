@@ -20,6 +20,10 @@
 
 Then run the check, and on a skill with layer folders, hexagonal-architecture's check too.
 
+A skill whose script looks up project adapters copies `scripts/adapters.mjs` from
+hexagonal-architecture as it is, and never writes its own lookup: every skill then finds the same
+files in `.agents/adapters/<skill>/`, in the same order.
+
 For `create <name>`, make `<shelf>/<name>/SKILL.md`, where the shelf is the project's skills folder
 (`.claude/skills` when unsure), with this frontmatter, then follow the steps above:
 
