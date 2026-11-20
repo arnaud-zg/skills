@@ -6,7 +6,7 @@
 // and rewrites every mention of the old folder in the project's tracked text files. It prints the
 // plan and changes nothing unless given --write. A second run finds nothing to do.
 //
-//   node migrate-adapters.mjs [root] [--write] [--json]
+//   node migrate-adapters.mjs [root] [--skill <name> ...] [--write] [--json]
 //
 // Exit 0 when the plan is clean (or applied), 1 when it refuses (a file would be overwritten),
 // 2 on a usage error.
@@ -27,11 +27,12 @@ import { pathToFileURL } from "node:url";
 
 import { ALIASES, HOME, KEBAB, projectRoot } from "./adapters.mjs";
 
-const USAGE = `Usage: node migrate-adapters.mjs [root] [--write] [--json]
+const USAGE = `Usage: node migrate-adapters.mjs [root] [--skill <name> ...] [--write] [--json]
 
-  root     the project's top folder; the repository's when left out
-  --write  apply the plan; without it, only print it
-  --json   print the plan as JSON`;
+  root            the project's top folder; the repository's when left out
+  --skill <name>  migrate only this skill's folder; repeat it for several. Every skill when left out
+  --write         apply the plan; without it, only print it
+  --json          print the plan as JSON`;
 
 const LEGACY = new RegExp(`^\\.(${KEBAB})$`);
 const TEXT = /\.(?:md|mdx|[cm]?[jt]sx?|json|jsonc|ya?ml|toml)$/;
@@ -107,15 +108,17 @@ function textFiles(/** @type {string} */ root) {
 /**
  * The migration for a project, read from the disk and changing nothing.
  * @param {string} root
+ * @param {string[]} [only] the skills to migrate; every one with a legacy folder when empty
  * @returns {Plan}
  */
-export function planMigration(root) {
+export function planMigration(root, only = []) {
   const legacy = readdirSync(root)
     .sort()
     .filter(
       (name) => LEGACY.test(name) && name !== ".agents" && isDir(join(root, name, "adapters")),
     )
-    .map((folder) => ({ folder, skill: skillOf(folder.slice(1)) }));
+    .map((folder) => ({ folder, skill: skillOf(folder.slice(1)) }))
+    .filter(({ skill }) => only.length === 0 || only.includes(skill));
 
   /** @type {Move[]} */
   const moves = [];
@@ -230,9 +233,22 @@ function main() {
     process.stdout.write(`${USAGE}\n`);
     return 0;
   }
-  const unknown = args.find((arg) => arg.startsWith("-") && arg !== "--write" && arg !== "--json");
-  const paths = args.filter((arg) => !arg.startsWith("-"));
-  if (unknown !== undefined || paths.length > 1) {
+  /** @type {string[]} */
+  const only = [];
+  /** @type {string[]} */
+  const paths = [];
+  let unknown = false;
+  for (let index = 0; index < args.length; index += 1) {
+    const arg = args[index] ?? "";
+    if (arg === "--skill") {
+      const name = args[++index];
+      if (name === undefined || name.startsWith("-")) unknown = true;
+      else only.push(name);
+    } else if (arg === "--write" || arg === "--json") continue;
+    else if (arg.startsWith("-")) unknown = true;
+    else paths.push(arg);
+  }
+  if (unknown || paths.length > 1) {
     process.stderr.write(`${USAGE}\n`);
     return 2;
   }
@@ -241,7 +257,7 @@ function main() {
     process.stderr.write(`${root} is not a folder.\n`);
     return 2;
   }
-  const plan = planMigration(root);
+  const plan = planMigration(root, only);
   const write = args.includes("--write") && plan.collisions.length === 0;
   if (write) applyMigration(plan);
   if (args.includes("--json"))

@@ -110,6 +110,18 @@ describe("given a project with an adapter folder per skill at its root", () => {
     expect(check.status).toBe(0);
   });
 
+  test("when it runs with --skill, then only that skill's folder moves and the others stay untouched", () => {
+    const root = legacyProject();
+    expect(run(MIGRATE, root, "--skill", "domain-first", "--write").status).toBe(0);
+
+    expect(existsSync(path.join(root, ".agents/adapters/domain-first/project.acme.md"))).toBe(true);
+    expect(existsSync(path.join(root, ".domain-first"))).toBe(false);
+    expect(existsSync(path.join(root, ".stack-and-ship/adapters/project.acme.md"))).toBe(true);
+    expect(readFileSync(path.join(root, "CLAUDE.md"), "utf8")).toContain(
+      ".stack-and-ship/adapters/",
+    );
+  });
+
   test("when it runs a second time, then there is nothing left to do", () => {
     const root = legacyProject();
     run(MIGRATE, root, "--write");

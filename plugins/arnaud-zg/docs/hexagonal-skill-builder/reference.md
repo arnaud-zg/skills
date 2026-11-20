@@ -28,7 +28,7 @@ on.
 
 ```text
 node scripts/check.mjs --adapters [root] [--skills <folder>] [--json]
-node scripts/migrate-adapters.mjs [root] [--write] [--json]
+node scripts/migrate-adapters.mjs [root] [--skill <name> ...] [--write] [--json]
 ```
 
 `--adapters` checks the files in `.agents/adapters/<skill>/` under the root (the repository's top
@@ -47,7 +47,8 @@ project has no adapters at all.
 
 `migrate-adapters.mjs` prints the plan and writes nothing without `--write`. With it, it moves each
 legacy file by `git mv`, rewrites the old folder's mentions in tracked text files, and removes the
-emptied folders. Exit `1` when a different file already sits at a target; nothing is written then.
+emptied folders. `--skill <name>` limits it to that skill's folder, for a project that moves one
+skill at a time. Exit `1` when a different file already sits at a target; nothing is written then.
 
 ## Where it looks
 

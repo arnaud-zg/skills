@@ -1,17 +1,17 @@
-// Finds the adapters a project drops in for a skill, by the contract's one convention:
-//
-//   <root>/.agents/adapters/<skill>/<port>.<name>.md
-//
-// Every skill whose script looks adapters up carries this file byte for byte, since a skill may be
-// installed alone and cannot import a sibling. The source is hexagonal-architecture's copy; a test
-// at the marketplace root fails when another copy drifts. It reads the disk only: no network, no
-// writes.
-//
-// Order, first match wins for each `<port>.<name>`:
-//   1. a file the caller names (`--project`, `--adapter`, or a path in the request)
-//   2. the home, `.agents/adapters/<skill>/`
-//   3. the legacy folder, `.<skill>/adapters/` (or a skill's old alias), read with a warning
-//   4. the skill's built-in `adapters/`
+// Copied byte for byte into each skill that looks adapters up; a skill alone cannot import one.
+
+/**
+ * Finds the adapters a project drops in for a skill, at `<root>/.agents/adapters/<skill>/<port>.<name>.md`.
+ * The source is hexagonal-architecture's copy; a test at the marketplace root fails when another
+ * copy drifts. It reads the disk only: no network, no writes.
+ *
+ * Order, first match wins for each `<port>.<name>`:
+ *   1. a file the caller names (`--project`, `--adapter`, or a path in the request)
+ *   2. the home, `.agents/adapters/<skill>/`
+ *   3. the legacy folder, `.<skill>/adapters/` (or a skill's old alias), read with a warning
+ *   4. the skill's built-in `adapters/`
+ * @module
+ */
 
 import { spawnSync } from "node:child_process";
 import { existsSync, readdirSync, statSync } from "node:fs";
@@ -134,8 +134,11 @@ export function findAdapters(query) {
     warnings.push(...level.warnings);
     for (const adapter of level.adapters) {
       const winner = byName.get(adapter.name);
-      if (winner === undefined) byName.set(adapter.name, adapter);
-      else if (adapter.from === "legacy")
+      if (winner === undefined) {
+        byName.set(adapter.name, adapter);
+        continue;
+      }
+      if (adapter.from === "legacy")
         warnings.push(`${adapter.path} is shadowed by ${winner.path}: delete the legacy copy`);
     }
   }
