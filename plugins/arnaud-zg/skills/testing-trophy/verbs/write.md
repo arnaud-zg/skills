@@ -13,4 +13,6 @@
 6. **For a bug, write the failing test first**, run it, see it fail for the reason the bug gives,
    then fix the code in its own change.
 7. **Run the suite and the check**; stop when both pass. If the project runs mutation testing, its
-   survivors are the next tests to write, by [domain/mutation.md](../domain/mutation.md).
+   survivors are the next tests to write, by [domain/mutation.md](../domain/mutation.md). If it
+   holds performance budgets, a change on a hot path keeps or lowers its budget, by
+   [domain/performance.md](../domain/performance.md).
