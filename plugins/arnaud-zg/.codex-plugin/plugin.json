@@ -36,7 +36,10 @@
     "ports-and-adapters",
     "git",
     "pull-requests",
-    "stacked-prs"
+    "stacked-prs",
+    "plain-language",
+    "ste",
+    "writing"
   ],
   "skills": "./skills/",
   "interface": {

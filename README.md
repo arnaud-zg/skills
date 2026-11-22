@@ -22,6 +22,7 @@ and how to call it are in the [plugin's skills table](./plugins/arnaud-zg/README
 | Cut a process, product or UI down to its simplest version                            | [`radical-simplify`](./plugins/arnaud-zg/docs/radical-simplify/README.md)               |
 | Turn any work into a one-minute read: TLDR, key numbers, one diagram per point       | [`glance-first`](./plugins/arnaud-zg/docs/glance-first/README.md)                       |
 | Get a sceptical review of a doc, plan or PR, with comments ready to paste            | [`glance-audit`](./plugins/arnaud-zg/docs/glance-audit/README.md)                       |
+| Write any output in plain language, after Simplified Technical English (STE)         | [`plain-language`](./plugins/arnaud-zg/docs/plain-language/README.md)                   |
 | After a session, find what made the skills slow or costly and fix them               | [`skill-retro`](./plugins/arnaud-zg/docs/skill-retro/README.md)                         |
 | Check if the next job fits in your Claude usage window: GO or PARK                   | [`usage-runway`](./plugins/arnaud-zg/docs/usage-runway/README.md)                       |
 | Commit, open and stack pull requests by your project's rules, never force-pushing    | [`stack-and-ship`](./plugins/arnaud-zg/docs/stack-and-ship/README.md)                   |

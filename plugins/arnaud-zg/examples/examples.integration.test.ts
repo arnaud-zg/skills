@@ -70,6 +70,25 @@ describe("the examples the docs show", () => {
     expect(status).toBe(0);
   });
 
+  test("given plain-language/before.md, then the strict check finds 4 findings, and after.md holds", () => {
+    const before = run(
+      skill("plain-language", "check-plain.mjs"),
+      "--level",
+      "strict",
+      example("plain-language/before.md"),
+    );
+    expect(before.stdout).toContain("PLAIN 4 findings (strict, en)");
+    expect(before.status).toBe(1);
+    const after = run(
+      skill("plain-language", "check-plain.mjs"),
+      "--level",
+      "strict",
+      example("plain-language/after.md"),
+    );
+    expect(after.stdout).toContain("PLAIN OK 4 sentences, longest 5/20 words (strict, en)");
+    expect(after.status).toBe(0);
+  });
+
   test("given glance-audit/audit.json and its source, then the audit is OK", () => {
     const { status, stdout } = run(
       skill("glance-audit", "check-audit.mjs"),
