@@ -118,7 +118,7 @@ reached script names is reached too.
 ## Files
 
 - `SKILL.md`: the entry: the rules, the check, how to create a skill (read by: Claude)
-- `guards.md`: seven mistakes no script can see (read by: Claude)
+- `guards.md`: eight mistakes no script can see (read by: Claude)
 - `evidence.md`: the story behind each rule and guard (read by: Claude)
 - `scripts/check.mjs`: the command line (read by: Node)
 - `scripts/rules.mjs`: the four rules, pure functions (read by: Node)

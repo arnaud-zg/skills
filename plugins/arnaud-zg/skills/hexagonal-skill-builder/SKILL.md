@@ -2,7 +2,7 @@
 name: hexagonal-skill-builder
 description:
   Writes Agent Skills and checks them against four rules a script can hold (named, small, resolves,
-  tested), printing the file, line and fix for anything that breaks one, plus seven guards for what
+  tested), printing the file, line and fix for anything that breaks one, plus eight guards for what
   no script can see. Use when creating a skill, editing a SKILL.md, or asked "is this skill well
   built", "check the skills" or "lint my skills".
 argument-hint: "[check|create] [<path or name>]"

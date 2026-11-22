@@ -76,7 +76,7 @@ gate a commit hook or a CI job as it is.
 | `tested`   | every script under `scripts/` is reached by a test; with `--suite`, every test is in it |
 
 Each one is there because a skill once broke it and a model followed it anyway. The stories are in
-[`evidence.md`](../../skills/hexagonal-skill-builder/evidence.md), and seven mistakes no script can
+[`evidence.md`](../../skills/hexagonal-skill-builder/evidence.md), and eight mistakes no script can
 see are in [`guards.md`](../../skills/hexagonal-skill-builder/guards.md).
 
 ## Questions
