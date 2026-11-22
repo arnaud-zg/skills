@@ -44,6 +44,11 @@ occurs once in the source text. `text` is 4 sentences at most.
 (an unreadable file or bad JSON is one), 2 when a path is missing. Every problem prints its field,
 the problem and the fix.
 
+When plain-language is installed beside it, an audit that holds also prints one `plain:` line per
+note: the verdict and the good points at `standard` level, the comments at `light`. A note never
+changes the exit code. Without plain-language, it prints
+`plain-language not installed, style not checked`.
+
 ## Files
 
 | File                                                                           | Role                              |

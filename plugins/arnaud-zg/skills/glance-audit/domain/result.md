@@ -21,6 +21,13 @@ is left out. The severity is `critical`, `medium` or `low`, and the tag `already
 `can wait`. Which findings are listed and which are kept is
 [the keep rule in lenses.md](lenses.md#the-keep-rule); the check holds it.
 
+## The words
+
+Write the verdict, the good points and the findings at **standard** level. Write the comments at
+**light** level: a comment may ask a question and be polite. Both levels are in
+[plain-language](../../plain-language/domain/levels.md), if installed. Without it, keep each
+sentence under 25 words, with one idea and no filler.
+
 ## The verdict
 
 One line, answer first, in the reader's words. "Good idea. One thing to fix." "Sound, but the
