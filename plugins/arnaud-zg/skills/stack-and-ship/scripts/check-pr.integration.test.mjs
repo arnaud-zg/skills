@@ -1,6 +1,13 @@
 import assert from "node:assert/strict";
 import { spawnSync } from "node:child_process";
-import { copyFileSync, existsSync, mkdirSync, mkdtempSync } from "node:fs";
+import {
+  copyFileSync,
+  existsSync,
+  mkdirSync,
+  mkdtempSync,
+  realpathSync,
+  writeFileSync,
+} from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { describe, it } from "node:test";
@@ -203,5 +210,58 @@ describe("check-pr", () => {
       assert.ok(rule && fix, `${rule} is incomplete`);
       assert.doesNotThrow(() => new RegExp(pattern));
     }
+  });
+
+  it("given a body with a wordy sentence, when checked, then it holds and a plain-language note names its line", () => {
+    const dir = mkdtempSync(join(tmpdir(), "check-pr-plain-"));
+    const bodyFile = join(dir, "body.md");
+    writeFileSync(
+      bodyFile,
+      BODY.replace("Agents ship from one skill.", "Agents basically ship from one skill."),
+    );
+    const result = spawnSync(
+      process.execPath,
+      [
+        SCRIPT,
+        "--project",
+        FIXTURE,
+        "--title",
+        PR.title,
+        "--branch",
+        PR.branch,
+        "--body",
+        bodyFile,
+      ],
+      { encoding: "utf8" },
+    );
+    assert.equal(result.status, 0);
+    assert.match(result.stdout, /^ {2}plain: body:5: filler: "basically" .+ → .+$/m);
+  });
+
+  it("given no plain-language skill beside it, when a body is checked, then it says the style was not checked", () => {
+    // The real path: on macOS the temp folder is a link, and the script runs only when it is the entry.
+    const alone = join(realpathSync(mkdtempSync(join(tmpdir(), "check-pr-alone-"))), "scripts");
+    mkdirSync(alone, { recursive: true });
+    for (const name of ["check-pr.mjs", "adapters.mjs"])
+      copyFileSync(fileURLToPath(new URL(name, import.meta.url)), join(alone, name));
+    const bodyFile = join(alone, "body.md");
+    writeFileSync(bodyFile, BODY);
+    const result = spawnSync(
+      process.execPath,
+      [
+        join(alone, "check-pr.mjs"),
+        "--project",
+        FIXTURE,
+        "--title",
+        PR.title,
+        "--branch",
+        PR.branch,
+        "--body",
+        bodyFile,
+      ],
+      { encoding: "utf8" },
+    );
+    assert.equal(result.status, 0);
+    assert.match(result.stdout, /^ {2}plain-language not installed, style not checked$/m);
   });
 });

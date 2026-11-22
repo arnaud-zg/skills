@@ -58,6 +58,10 @@ Patterns are case-insensitive; `shown` matches only the text outside HTML commen
 Types without `types`: `feat`, `fix`, `test`, `refactor`, `chore`, `docs`, `perf`. Exit 0 when the
 PR holds, 1 on a finding, 2 when no project adapter is found.
 
+When plain-language is installed beside it, the check also prints one `plain: body:<line>:` note per
+sentence of the body that breaks a `standard` rule. A note never changes the exit code. Without
+plain-language, it prints `plain-language not installed, style not checked`.
+
 ## Files
 
 | File                                                                       | Role                             |
