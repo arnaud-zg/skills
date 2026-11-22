@@ -48,22 +48,22 @@ function main(args) {
     lang: /** @type {import("./plain.mjs").Lang | "auto"} */ (lang),
   });
   if (options.json) {
-    console.log(JSON.stringify({ level, ...report }, null, 2));
+    console.info(JSON.stringify({ level, ...report }, null, 2));
     return report.findings.length > 0 ? 1 : 0;
   }
   const where = `(${level}, ${report.lang})`;
   const { findings, hints } = report;
   if (findings.length > 0) {
-    console.log(`PLAIN ${findings.length} finding${findings.length === 1 ? "" : "s"} ${where}`);
+    console.info(`PLAIN ${findings.length} finding${findings.length === 1 ? "" : "s"} ${where}`);
     findings.forEach(({ line, rule, message, fix }) =>
-      console.log(`  ${line}: ${rule}: ${message} → ${fix}`),
+      console.info(`  ${line}: ${rule}: ${message} → ${fix}`),
     );
   } else {
     const size = `${report.sentences} sentences, longest ${report.longest}/${report.limit} words`;
-    console.log(`PLAIN OK ${size} ${where}`);
+    console.info(`PLAIN OK ${size} ${where}`);
   }
   hints.forEach(({ line, rule, message, fix }) =>
-    console.log(`  hint ${line}: ${rule}: ${message} → ${fix}`),
+    console.info(`  hint ${line}: ${rule}: ${message} → ${fix}`),
   );
   return findings.length > 0 ? 1 : 0;
 }

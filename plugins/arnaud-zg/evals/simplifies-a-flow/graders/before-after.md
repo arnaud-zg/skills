@@ -1,6 +1,6 @@
 ---
 type: regex
-pattern: "(?i)before\\s*(→|->)\\s*after"
+pattern: "[Bb][Ee][Ff][Oo][Rr][Ee]\\s*(→|->)\\s*[Aa][Ff][Tt][Ee][Rr]"
 match: contains
 target: last_message
 ---
