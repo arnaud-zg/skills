@@ -36,7 +36,10 @@
     "ports-and-adapters",
     "git",
     "pull-requests",
-    "stacked-prs"
+    "stacked-prs",
+    "plain-language",
+    "ste",
+    "writing"
   ],
   "displayName": "Arnaud Zheng's skills",
   "logo": ".claude-plugin/icon.png",

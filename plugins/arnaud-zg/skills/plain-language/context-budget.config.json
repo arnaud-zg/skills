@@ -1,0 +1,10 @@
+{
+  "root": {
+    "file": "SKILL.md",
+    "referencePattern": "\\]\\(([a-z-]+\\.md)(?:#[^)]*)?\\)",
+    "threshold": 1200
+  },
+  "references": { "threshold": 2000, "failOnExceed": true },
+  "subdir": { "dirs": [] },
+  "planningDir": ".none"
+}
