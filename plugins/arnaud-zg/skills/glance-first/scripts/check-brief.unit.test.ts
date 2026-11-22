@@ -2,7 +2,7 @@
 // exit code a caller can branch on.
 import assert from "node:assert/strict";
 import { spawnSync } from "node:child_process";
-import { mkdtempSync, rmSync, writeFileSync } from "node:fs";
+import { copyFileSync, mkdirSync, mkdtempSync, realpathSync, rmSync, writeFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
@@ -76,5 +76,27 @@ describe("checking a brief file", () => {
     const { code, err } = run();
     assert.equal(code, 2);
     assert.match(err, /usage: .*check-brief\.mjs <brief\.json>/);
+  });
+
+  it("given a wordy TLDR, then the brief still holds and a plain-language note names it", () => {
+    const wordy = { ...good, tldr: "It is basically a good idea. One thing to fix." };
+    const { code, out } = run(fileWith("wordy.json", JSON.stringify(wordy)));
+    assert.equal(code, 0);
+    assert.match(out, /^ {2}plain: tldr: filler: "basically" .+ → .+$/m);
+  });
+
+  it("given no plain-language skill beside it, then it says the style was not checked and holds", () => {
+    // The real path: on macOS the temp folder is a link, and the script runs only when it is the entry.
+    const alone = join(realpathSync(folder), "alone", "glance-first", "scripts");
+    mkdirSync(alone, { recursive: true });
+    for (const name of ["check-brief.mjs", "brief.mjs", "visible.mjs"])
+      copyFileSync(join(dirname(SCRIPT), name), join(alone, name));
+    const result = spawnSync(
+      process.execPath,
+      [join(alone, "check-brief.mjs"), fileWith("alone.json", JSON.stringify(good))],
+      { encoding: "utf8" },
+    );
+    assert.equal(result.status, 0);
+    assert.match(result.stdout, /^ {2}plain-language not installed, style not checked$/m);
   });
 });

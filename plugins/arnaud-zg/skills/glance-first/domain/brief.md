@@ -91,6 +91,11 @@ snippets and the fold.
 
 ## The level
 
+Write the TLDR, the headings and the lines at **standard** level, by
+[plain-language](../../plain-language/domain/levels.md) if installed: 25 words per sentence at most,
+one idea each, no filler. After `BRIEF OK`, fix each `plain:` note the check prints. A note never
+fails the check.
+
 | Too much                                   | Right level                          |
 | ------------------------------------------ | ------------------------------------ |
 | a summary of every section                 | the answer, then only what proves it |
