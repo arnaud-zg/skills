@@ -72,7 +72,9 @@ whose title ends with `(moved)` is a gravestone, exempt from `indexed` and `fram
 ## Templates
 
 Source of truth: [`templates/`](../../skills/doc-compass/templates/README.md). They form a whole
-`docs/` folder, and hold as copied.
+`docs/` folder, and hold as copied. The Tutorial and how-to steps are written at the `strict` level
+of plain-language (one action, a verb first, 20 words at most), the Reference and the Explanation at
+`standard`, when that skill is installed.
 
 - `README.md`: the index, a routing table, and every page with its time
 - `tutorial.md`: one path, each step with "You should see"
