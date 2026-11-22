@@ -4,7 +4,7 @@
 [🚀 Tutorial](tutorial.md) · **🛠️ How-to** · [📖 Reference](reference.md) ·
 [💡 Explanation](explanation.md)
 
-**One `--bind` swaps any port; the rest keep their default.**
+**One `--bind` swaps any port. The rest keep their default.**
 
 | Ask for…            | Binding change                          |
 | ------------------- | --------------------------------------- |

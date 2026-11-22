@@ -54,10 +54,10 @@ node scripts/check-plain.mjs [--level strict|standard|light] [--lang en|fr|auto]
 
 ## Languages
 
-| Code | Filler words, for example                      |
-| ---- | ---------------------------------------------- |
-| `en` | really, just, basically, leverage, in order to |
-| `fr` | vraiment, en effet, il convient de, afin de    |
+| Code | Filler words, for example                                |
+| ---- | -------------------------------------------------------- |
+| `en` | `really`, `just`, `basically`, `leverage`, `in order to` |
+| `fr` | `vraiment`, `en effet`, `il convient de`, `afin de`      |
 
 The full lists live in `LANGUAGES` in `scripts/plain.mjs`.
 

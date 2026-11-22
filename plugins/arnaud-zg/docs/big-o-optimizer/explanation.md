@@ -25,11 +25,11 @@ a speed-up.
 
 ## The method is language-agnostic
 
-A nested membership test is O(n·m) in every language, and a hash set fixes it in every language.
-What changes is the spelling and the traps: an object key that turns `1` into `"1"`, a Go map that
-iterates in random order, a Python list that cannot be a dict key. So the patterns are written once,
-generically, and each language's spelling and traps live in a `language` adapter. Without one, the
-skill reads the standard library's documented costs instead.
+A nested membership test is O(n·m) in every language. A hash set fixes it in every language. What
+changes is the spelling and the traps. One trap is an object key that turns `1` into `"1"`. Another
+is a Go map that iterates in random order. A third is a Python list that cannot be a dict key. So
+the patterns are written once, generically, and each language's spelling and traps live in a
+`language` adapter. Without one, the skill reads the standard library's documented costs instead.
 
 ## Why adapters
 

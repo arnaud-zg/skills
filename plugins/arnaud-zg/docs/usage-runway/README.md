@@ -2,9 +2,9 @@
 
 [📚 Docs home](../../../../docs/README.md) › [arnaud-zg](../../README.md) › **⏳ usage-runway**
 
-A skill that tells you how much of Claude Code's usage window is left, when it resets, and whether
-the next piece of work fits before it does, in one word: **GO** or **PARK**. It answers from the
-clock and from any limit already hit, and never guesses a token ceiling.
+A skill that tells you how much of Claude Code's usage window is left and when it resets. It also
+says whether the next piece of work fits before it does. It answers in one word: **GO** or **PARK**.
+It reads the clock and any limit already hit. It never guesses a token ceiling.
 
 **1 command** · **1 word back** · **5h window** · **x 1.5 margin**
 
@@ -28,7 +28,7 @@ flowchart LR
     GO  3h49 of window against 45m needed
   ```
 
-  One real reading, trimmed; yours will differ.
+  One real reading, trimmed. Yours will differ.
 
 - **How do I install it?** `/plugin install arnaud-zg --marketplace arnaud-zg/skills`, or
   `npx skills add arnaud-zg/skills --skill usage-runway` for any agent
@@ -50,7 +50,7 @@ flowchart LR
 
 - **It reads, and writes nothing.** `scripts/credit.mjs` reads the session records Claude Code keeps
   under `~/.claude/projects/` and prints a report. No network, no dependency.
-- **It never waits for you.** It prints the reset time; parking is the caller's to do.
+- **It never waits for you.** It prints the reset time. Parking is the caller's to do.
 
 Read [`SKILL.md`](../../skills/usage-runway/SKILL.md) before installing it. Claude reads `SKILL.md`,
 not this page.

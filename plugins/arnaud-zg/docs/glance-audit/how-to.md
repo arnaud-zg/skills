@@ -25,12 +25,12 @@ uses only reading commands: it never comments, approves, labels, merges or pushe
 ## Check a status report
 
 Hand over the report and the read-only commands it may run. Every number is copied again from what
-prints it; one that needs a long job or a writing command becomes an Ask.
+prints it. One that needs a long job or a writing command becomes an Ask.
 
 ## Choose where the result lands
 
 Name the target: an artifact page, a pull request description, the terminal or a Markdown file. It
-goes to [glance-first](../glance-first/README.md) as given; if none is named, glance-first asks.
+goes to [glance-first](../glance-first/README.md) as given. If none is named, glance-first asks.
 
 ## Answer questions addressed to you
 

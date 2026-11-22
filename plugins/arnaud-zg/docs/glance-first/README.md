@@ -3,8 +3,9 @@
 [📚 Docs home](../../../../docs/README.md) › [arnaud-zg](../../README.md) › **👁️ glance-first**
 
 A skill that presents any piece of work so a reader gets the key information in under one minute.
-The answer comes first, then the key numbers, then at most four blocks that each open on a diagram,
-chart, table or screenshot marking what changed. A script checks the brief before anything is drawn.
+The answer comes first, then the key numbers. Then come at most four blocks that each open on a
+diagram, chart, table or screenshot marking what changed. A script checks the brief before anything
+is drawn.
 
 **Under 1 minute** · **200 words max** · **4 blocks max** · **4 targets**
 
@@ -38,7 +39,7 @@ flowchart LR
 
 - **The check reads one file and writes nothing.** `scripts/check-brief.mjs` reads the brief you
   point it at and prints its findings. No network, no dependency.
-- **It never posts.** A pull request body is printed or written to a file you name; posting it is
+- **It never posts.** A pull request body is printed or written to a file you name. Posting it is
   yours to do.
 
 Read [`SKILL.md`](../../skills/glance-first/SKILL.md) before installing it. Claude reads `SKILL.md`,

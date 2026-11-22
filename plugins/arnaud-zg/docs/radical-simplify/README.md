@@ -3,7 +3,7 @@
 [📚 Docs home](../../../../docs/README.md) › [arnaud-zg](../../README.md) › **✂️ radical-simplify**
 
 A skill that rebuilds a process, product or UI into its simplest, fastest, clearest version. It
-works strictly in six steps, Question, Remove, Simplify, Reimagine, Accelerate, Automate, so nothing
+works strictly in six steps: Question, Remove, Simplify, Reimagine, Accelerate, Automate. So nothing
 gets optimized that should have been removed, and nothing gets automated that should have been
 simplified.
 
@@ -32,8 +32,8 @@ simplified.
 
 - **It is instructions only.** No script, no hook, no MCP server, no `allowed-tools`. Reading the
   files you point it at goes through Claude's usual permission prompts.
-- **It proposes; it does not edit.** The result is a written redesign, and it changes code only if
-  you ask for that afterwards.
+- **It proposes and does not edit.** The result is a written redesign. It changes code only if you
+  ask for that afterwards.
 
 Read [`SKILL.md`](../../skills/radical-simplify/SKILL.md) before installing it. Claude reads
 `SKILL.md`, not this page.

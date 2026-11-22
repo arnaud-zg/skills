@@ -14,18 +14,18 @@ Source of truth: [`scripts/check-docs.mjs`](../../skills/doc-compass/scripts/che
 node scripts/check-docs.mjs [<folder> [--index <page>]] [--ban <text>]... [--json]
 ```
 
-| Option           | Default                                     | Effect                                                                   |
-| ---------------- | ------------------------------------------- | ------------------------------------------------------------------------ |
-| `<folder>`       | the sets in `doc-compass.json`, else `docs` | one folder to check, read recursively, instead of the config's sets      |
-| `--index <page>` | `README.md`                                 | that folder's index, from inside it; may sit above it, as `../README.md` |
-| `--ban <text>`   | none                                        | a string no page may hold outside code; adds to the config's             |
-| `--json`         | off                                         | print `{ sets: [{ docs, pages }], findings }` instead of text            |
-| `-h`, `--help`   |                                             | print the usage                                                          |
+| Option           | Default                                     | Effect                                                                      |
+| ---------------- | ------------------------------------------- | --------------------------------------------------------------------------- |
+| `<folder>`       | the sets in `doc-compass.json`, else `docs` | one folder to check, read recursively, instead of the config's sets         |
+| `--index <page>` | `README.md`                                 | that folder's index, from inside it. It may sit above it, as `../README.md` |
+| `--ban <text>`   | none                                        | a string no page may hold outside code. It adds to the config's             |
+| `--json`         | off                                         | print `{ sets: [{ docs, pages }], findings }` instead of text               |
+| `-h`, `--help`   |                                             | print the usage                                                             |
 
 It skips `node_modules`, `.git`, `dist` and `.cache`. It gives the same report on every machine for
-the same files: pages are read in sorted order, findings are sorted by rule, file and line without
-the locale, and a path only exists when every name in it matches the disk's spelling exactly, even
-on a case-insensitive disk.
+the same files. Pages are read in sorted order. Findings are sorted by rule, file and line without
+the locale. A path only exists when every name in it matches the disk's spelling exactly, even on a
+case-insensitive disk.
 
 ## `doc-compass.json`
 
@@ -39,10 +39,10 @@ says what is wrong.
 }
 ```
 
-- `docs`: the docs sets to check, in order, at least one; each a folder, or a
+- `docs`: the docs sets to check, in order, at least one. Each is a folder, or a
   `{ "folder", "index" }` object
-- `ban`: optional; strings no page may hold outside code, each non-empty
-- `examples`: optional; the folder, from the project root, that holds example files, `examples` when
+- `ban`: optional. Strings no page may hold outside code, each non-empty
+- `examples`: optional. The folder, from the project root, that holds example files, `examples` when
   left out
 
 ## Exit codes
@@ -57,7 +57,7 @@ Source of truth: [`scripts/rules.mjs`](../../skills/doc-compass/scripts/rules.mj
 
 | Rule         | Reports                                                                                             |
 | ------------ | --------------------------------------------------------------------------------------------------- |
-| `indexed`    | a page no chain of links reaches from the index; a link to a folder reaches its `README.md`         |
+| `indexed`    | a page no chain of links reaches from the index. A link to a folder reaches its `README.md`         |
 | `resolves`   | a relative link to nothing, or an anchor no heading makes, with GitHub's slugs                      |
 | `framed`     | a page with no link to the index, or to the `README.md` of a folder above it, in its first 10 lines |
 | `superseded` | a line with "Superseded by" and a link, whose target never links back                               |
@@ -72,9 +72,9 @@ whose title ends with `(moved)` is a gravestone, exempt from `indexed` and `fram
 ## Templates
 
 Source of truth: [`templates/`](../../skills/doc-compass/templates/README.md). They form a whole
-`docs/` folder, and hold as copied. The Tutorial and how-to steps are written at the `strict` level
-of plain-language (one action, a verb first, 20 words at most), the Reference and the Explanation at
-`standard`, when that skill is installed.
+`docs/` folder. They hold as copied. When plain-language is installed, the Tutorial and how-to steps
+are written at its `strict` level (one action, a verb first, 20 words at most). The Reference and
+the Explanation are written at `standard`.
 
 - `README.md`: the index, a routing table, and every page with its time
 - `tutorial.md`: one path, each step with "You should see"

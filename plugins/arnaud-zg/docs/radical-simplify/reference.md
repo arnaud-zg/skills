@@ -18,14 +18,14 @@ stops.
 
 Strictly in this order. Each step works only on what survived the one before.
 
-| Step         | Does                                                                         |
-| ------------ | ---------------------------------------------------------------------------- |
-| 1 Question   | challenges every requirement, rule, step, field, screen, approval            |
-| 2 Remove     | deletes what creates no meaningful value; prefers deleting to speeding up    |
-| 3 Simplify   | smart defaults, progressive disclosure, one primary action, simple language  |
-| 4 Reimagine  | rebuilds the experience from scratch, aiming for 10×; asks what can vanish   |
-| 5 Accelerate | cuts waiting, clicks, handoffs, data entry and transitions                   |
-| 6 Automate   | automates repetitive, predictable, error-prone work, invisibly, and only now |
+| Step         | Does                                                                          |
+| ------------ | ----------------------------------------------------------------------------- |
+| 1 Question   | challenges every requirement, rule, step, field, screen, approval             |
+| 2 Remove     | deletes what creates no meaningful value, and prefers deleting to speeding up |
+| 3 Simplify   | smart defaults, progressive disclosure, one primary action, simple language   |
+| 4 Reimagine  | rebuilds the experience from scratch, aiming for 10×. It asks what can vanish |
+| 5 Accelerate | cuts waiting, clicks, handoffs, data entry and transitions                    |
+| 6 Automate   | automates repetitive, predictable, error-prone work, invisibly, and only now  |
 
 ## Rules
 

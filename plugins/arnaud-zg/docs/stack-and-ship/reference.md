@@ -36,7 +36,7 @@ rules, one fenced JSON block:
 | `required`      | `{ rule, pattern, fix, shown? }` a body holds | none                     |
 | `banned`        | `{ rule, pattern, fix, shown? }` it may not   | none                     |
 
-Patterns are case-insensitive; `shown` matches only the text outside HTML comments.
+Patterns are case-insensitive. `shown` matches only the text outside HTML comments.
 
 ## Check
 

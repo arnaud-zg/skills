@@ -10,27 +10,27 @@
 
 1. the TLDR, 25 words
 2. the key numbers, at most 4, a digit in each value, labels of 5 words
-3. each block's picture; the first block must carry one
+3. each block's picture. The first block must carry one
 4. the line the picture proves, 15 words
 
 ## Plain-language notes
 
 When plain-language is installed beside it, a brief that holds also prints one `plain:` line per
-note on the TLDR and each block's line, at `standard` level. A note never changes the exit code.
-Without plain-language, it prints `plain-language not installed, style not checked`.
+note. It covers the TLDR and each block's line, at `standard` level. A note never changes the exit
+code. Without plain-language, it prints `plain-language not installed, style not checked`.
 
 ## Brief fields
 
-| Field        | Limit                                                            |
-| ------------ | ---------------------------------------------------------------- |
-| `title`      | 4 words                                                          |
-| `target`     | `artifact`, `pr-description`, `terminal` or `markdown`           |
-| `tldr`       | 25 words                                                         |
-| `numbers`    | 0 to 4 `{value, label}`; `[]` only when the work holds no figure |
-| `blocks`     | 1 to 4, each `heading` (6 words), `line` (15), `picture`, `copy` |
-| `fold`       | 2 entries, outside the minute                                    |
-| `sources`    | `read`, `notRead`, `notTested`, all three                        |
-| `convention` | optional: `lead`, `headings`, `picture`, `banned`, `footer`      |
+| Field        | Limit                                                                |
+| ------------ | -------------------------------------------------------------------- |
+| `title`      | 4 words                                                              |
+| `target`     | `artifact`, `pr-description`, `terminal` or `markdown`               |
+| `tldr`       | 25 words                                                             |
+| `numbers`    | 0 to 4 `{value, label}`. Use `[]` only when the work holds no figure |
+| `blocks`     | 1 to 4, each `heading` (6 words), `line` (15), `picture`, `copy`     |
+| `fold`       | 2 entries, outside the minute                                        |
+| `sources`    | `read`, `notRead`, `notTested`, all three                            |
+| `convention` | optional: `lead`, `headings`, `picture`, `banned`, `footer`          |
 
 The read is at most 200 words: title, TLDR, numbers, headings, lines and table cells. Chart source,
 images, copy snippets and the fold are looked at, not read.

@@ -4,7 +4,7 @@
 hexagonal-architecture**
 
 A skill that designs, audits and refactors code and Agent Skills by hexagonal architecture (ports
-and adapters, clean architecture): every dependency points inward, from adapters to the domain. A
+and adapters, clean architecture). Every dependency points inward, from adapters to the domain. A
 script reads imports and Markdown links and flags each one that points outward. It also holds the
 one port and adapter contract every other skill in this plugin follows.
 

@@ -18,7 +18,7 @@
 | `questions` | `{asked, answer}`, both filled                                         |
 | `sources`   | `read` (list), `notRead` (list, `[]` when nothing), `notTested` (text) |
 
-Severity is `critical`, `medium` or `low`; a tag is `already raised` or `can wait`.
+Severity is `critical`, `medium` or `low`. A tag is `already raised` or `can wait`.
 
 ## Keep rule
 
@@ -35,8 +35,8 @@ one left out.
 | `reply`       | Reply              | one per entry in `questions`        |
 | `more`        | Ask                | none                                |
 
-A `quote` is copied exactly (only spacing may differ), holds at least 4 words or 20 characters, and
-occurs once in the source text. `text` is 4 sentences at most.
+A `quote` is copied exactly (only spacing may differ). It holds at least 4 words or 20 characters.
+It occurs once in the source text. `text` is 4 sentences at most.
 
 ## Check
 
@@ -45,8 +45,8 @@ occurs once in the source text. `text` is 4 sentences at most.
 the problem and the fix.
 
 When plain-language is installed beside it, an audit that holds also prints one `plain:` line per
-note: the verdict and the good points at `standard` level, the comments at `light`. A note never
-changes the exit code. Without plain-language, it prints
+note. It checks the verdict and the good points at `standard` level, the comments at `light`. A note
+never changes the exit code. Without plain-language, it prints
 `plain-language not installed, style not checked`.
 
 ## Files

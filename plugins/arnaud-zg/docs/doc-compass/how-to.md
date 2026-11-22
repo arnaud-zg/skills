@@ -15,8 +15,8 @@ in the [Reference](reference.md).
 
 ## Fail a build when the docs break
 
-Copy the skill into the project with the skills CLI, list the docs in `doc-compass.json` at the
-project root, then run the check with no arguments where it always runs: a commit hook, and the
+Copy the skill into the project with the skills CLI. List the docs in `doc-compass.json` at the
+project root. Then run the check with no arguments where it always runs: a commit hook, and the
 verify script CI calls. A check only CI runs by hand never fails.
 
 ```json

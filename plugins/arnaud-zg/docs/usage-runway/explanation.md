@@ -16,9 +16,9 @@ flowchart TB
 
 ## A rule nobody can follow is not a rule
 
-Long work had always been told to check its credit before starting a unit it could not finish, and
-there was nothing to check it with. So the check was skipped and a limit landed mid-plan. The meter
-is one command and one word, so the rule can be kept.
+Long work had always been told to check its credit before starting a unit it could not finish. There
+was nothing to check it with. So the check was skipped and a limit landed mid-plan. The meter is one
+command and one word, so the rule can be kept.
 
 ## A ceiling that spread elevenfold is not one to park on
 
@@ -28,11 +28,11 @@ reading, and the verdict comes from the reset time, which is exact when a limit 
 
 ## The window is not "the last five hours"
 
-The first version anchored the window at the oldest turn of the last five hours, and told a session
+The first version anchored the window at the oldest turn of the last five hours. It told a session
 with four hours left to park at once. A rolling window opens on the first turn after five idle hours
 and advances in whole windows from there.
 
 ## A limit may land between units, never inside one
 
-An estimate is what the work should take; the x 1.5 margin is what it takes when something goes
+An estimate is what the work should take. The x 1.5 margin is what it takes when something goes
 wrong. Checking before every unit, with that margin, puts the limit at a boundary.

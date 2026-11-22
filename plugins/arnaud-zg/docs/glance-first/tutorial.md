@@ -42,7 +42,7 @@ BRIEF OK 142/200 words, 3/4 blocks, target artifact
 
 Open the page. Read only the first line: you know the answer. Glance at the numbers under it: you
 know how big it is. Look at the first diagram: you see what changed, marked `NEW:`. Stop there if
-you like; the rest is proof.
+you like. The rest is proof.
 
 ## Next
 

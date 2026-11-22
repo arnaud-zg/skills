@@ -3,9 +3,9 @@
 [📚 Docs home](../../../../docs/README.md) › [arnaud-zg](../../README.md) › **🧭 doc-compass**
 
 A skill that writes [Diataxis](https://diataxis.fr/) documentation and keeps it true. It starts a
-docs set from templates, sorts content into the right quadrant, says what to update after a code
-change, and checks the docs for the breaks that make them go stale: pages no index reaches, links
-and anchors to nothing, and decisions superseded one way only.
+docs set from templates. It sorts content into the right quadrant. It says what to update after a
+code change. It checks the docs for the breaks that make them go stale. These are pages no index
+reaches, links and anchors to nothing, and decisions superseded one way only.
 
 ## At a glance
 

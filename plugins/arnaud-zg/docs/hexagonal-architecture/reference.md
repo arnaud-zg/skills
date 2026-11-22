@@ -26,7 +26,7 @@ folder.
 | 3    | `adapters`    | `adapters`, `infrastructure`, `infra`           |
 
 A file may depend on its own rank or a lower one. `PORTS.md`, `main.*`, `composition*` and any file
-outside the layer folders are wiring, and may point anywhere.
+outside the layer folders are wiring. Wiring may point anywhere.
 
 ## What is read
 

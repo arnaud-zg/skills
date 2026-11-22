@@ -2,8 +2,8 @@
 
 [📚 Docs home](../../../../docs/README.md) › [arnaud-zg](../../README.md) › **🔁 skill-retro**
 
-A skill that finds what made a session's skills slow, wrong or expensive in tokens, ranks it by
-cost, trims each skill and books every fix as its own draft pull request in a skills stack beside
+A skill that finds what made a session's skills slow, wrong or expensive in tokens. It ranks it by
+cost and trims each skill. It books every fix as its own draft pull request in a skills stack beside
 the feature stack.
 
 **5 steps** · **3 ports** · **8 adapters** · **1 draft PR per fix**

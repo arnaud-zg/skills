@@ -21,8 +21,8 @@ comes last, after the process has been questioned, cut, simplified, redesigned a
 ## Simple is designed around intent
 
 Most complexity mirrors how an organisation is built, one screen per team, one approval per
-department. The Simplify and Reimagine steps redraw the flow around what the user is trying to do,
-which is why the skill favours defaults, context and one primary action over options.
+department. The Simplify and Reimagine steps redraw the flow around what the user is trying to do.
+This is why the skill favours defaults, context and one primary action over options.
 
 ## Why a fixed output
 
@@ -37,5 +37,5 @@ says how much simpler, and anyone can check it.
 
 ## Why it proposes and does not edit
 
-A redesign is a decision for a person. The skill writes it; changing the code is a separate request
+A redesign is a decision for a person. The skill writes it. Changing the code is a separate request
 once you agree.

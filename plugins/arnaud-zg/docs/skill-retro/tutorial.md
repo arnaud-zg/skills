@@ -5,7 +5,7 @@
 
 **4 steps: install, measure, ask, read the report.**
 
-At the end of a working session, you will see what the skills cost, ask for a retro, and read the
+At the end of a working session, you see what the skills cost and ask for a retro. Then you read the
 draft pull requests it books.
 
 ## 1. Install the plugin
@@ -37,7 +37,7 @@ In the session you want to learn from, type:
 retro
 ```
 
-Claude reads the transcript, idle time, spend and memory notes, writes one `FINDING` line per
+Claude reads the transcript, idle time, spend and memory notes. It writes one `FINDING` line per
 friction, ranks them, then trims, checks and books each fix in turn.
 
 ## 4. Read the report
@@ -50,7 +50,7 @@ BOOKED  <pull request> <skill> <one line> <before -> after>
 DROPPED <skill> <why>
 ```
 
-Open each `BOOKED` pull request. Merge the ones you agree with; the next session reads the fix.
+Open each `BOOKED` pull request. Merge the ones you agree with. The next session reads the fix.
 
 ## Next
 

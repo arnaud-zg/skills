@@ -86,7 +86,7 @@ The shape is in the [reference](reference.md#json-output).
 ## Create a skill
 
 Ask Claude to **create a skill** that does what you need. It writes `SKILL.md` with a description
-that says when to use it, keeps the entry short, and runs the check before it says it is done.
+that says when to use it. It keeps the entry short and runs the check before it says it is done.
 
 ## Split a long entry
 
