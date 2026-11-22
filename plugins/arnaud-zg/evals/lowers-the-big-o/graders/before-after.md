@@ -1,6 +1,6 @@
 ---
 type: regex
-pattern: "(?i)O\\(n\\s*[·*x]\\s*m\\).*O\\(n\\s*\\+\\s*m\\)"
+pattern: "[Oo]\\(n\\s*[·*xX]\\s*m\\)[\\s\\S]*[Oo]\\(n\\s*\\+\\s*m\\)"
 match: contains
 target: last_message
 ---

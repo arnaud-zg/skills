@@ -1,6 +1,6 @@
 ---
 type: regex
-pattern: "(?s)0\\.6.*(\\+-|\\|)"
+pattern: "0\\.6[\\s\\S]*(\\+-|\\|)"
 match: contains
 target: last_message
 ---
