@@ -6,11 +6,11 @@
 
 At the repository root, in `.claude-plugin/`.
 
-- `name` (string, required): Marketplace id used in `plugin@marketplace`. Kebab-case; no spaces,
+- `name` (string, required): Marketplace id used in `plugin@marketplace`. Kebab-case, no spaces,
   path separators or `..`. Cannot impersonate an official Anthropic marketplace. Reserved: `inline`,
   `builtin`, `skills-dir`, `synced`.
 - `owner` (object, required): `{ name, email?, url? }`
-- `plugins` (array, required): Catalogue entries; may be empty
+- `plugins` (array, required): Catalogue entries, may be empty
 - `description` (string): Shown when browsing marketplaces
 - `metadata.pluginRoot` (string): Base directory for bare `source` names, e.g. `"./plugins"` makes
   `"source": "formatter"` resolve to `./plugins/formatter`. Sources already starting with `./` are
@@ -25,7 +25,7 @@ At the repository root, in `.claude-plugin/`.
 - `forceRemoveDeletedPlugins` (boolean): When true, plugins removed from the catalogue are
   uninstalled from users and flagged
 - `renames` (map): Append-only `old name → current name`, or `null` when removed. Followed on
-  plugin-not-found; migrates user settings.
+  plugin-not-found. Migrates user settings.
 
 ### Catalogue entry
 
@@ -56,14 +56,14 @@ At the repository root, in `.claude-plugin/`.
 }
 ```
 
-Pin third-party entries with both `ref` and `sha`. A tag can be moved; a SHA cannot.
+Pin third-party entries with both `ref` and `sha`. A tag can be moved. A SHA cannot.
 
 ## `plugin.json`
 
 In the plugin's `.claude-plugin/` directory.
 
 - `name` (string, required): Unique id, used for namespacing. Kebab-case, no spaces.
-- `displayName` (string): Human-readable name shown in the UI; may contain spaces and casing. Not
+- `displayName` (string): Human-readable name shown in the UI, may contain spaces and casing. Not
   used for lookup.
 - `version` (string): Semver. Claude Code compares it with the installed version to decide whether
   an update exists: until it changes, users keep their cached copy. Set by the release flow here,
@@ -85,17 +85,17 @@ In the plugin's `.claude-plugin/` directory.
 Plugins that must be enabled for this plugin to function.
 
 - `"ts-base"`: Resolved against the declaring plugin's own marketplace
-- `"ts-base@other"`: From marketplace `other`; requires `allowCrossMarketplaceDependenciesOn`
+- `"ts-base@other"`: From marketplace `other`, requires `allowCrossMarketplaceDependenciesOn`
 - `"ts-base@^1.2.0"`: Version constraint, resolved against the dependency's git tags
 
-Dependencies are auto-installed and flagged as such; `claude plugin prune` removes auto-installed
+Dependencies are auto-installed and flagged as such. `claude plugin prune` removes auto-installed
 plugins that nothing depends on any more.
 
 ## Other agents
 
 Every agent manifest describes the same plugin. `manifests.unit.test.ts` holds `name`, `version`,
-`description`, `license`, `repository` and `keywords` equal to the Claude manifest's, and the
-release PR writes the version into all of them (shiplane's `agentPlugin()`).
+`description`, `license`, `repository` and `keywords` equal to the Claude manifest's. The release PR
+writes the version into all of them (shiplane's `agentPlugin()`).
 
 | Agent       | Catalogue                          | Plugin manifest                       |
 | ----------- | ---------------------------------- | ------------------------------------- |
@@ -128,5 +128,5 @@ The plugin manifest takes the shared fields plus `displayName`, `logo` and `skil
 ### Skills hidden from the skills CLI
 
 `npx skills add` scans the whole repository for `SKILL.md`. An example or template skill carries
-`metadata: internal: true` in its frontmatter so it stays out of the listing, and
+`metadata: internal: true` in its frontmatter so it stays out of the listing.
 `agents.integration.test.ts` fails if one under `examples/` does not.

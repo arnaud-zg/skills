@@ -5,8 +5,8 @@
 
 **5 minutes, 4 steps: install, ask, read, act.**
 
-Five minutes. You will ask whether a 30-minute job fits, read the meter's report line by line, and
-act on its last word.
+Five minutes. You will ask whether a 30-minute job fits and read the meter's report line by line.
+Then you act on its last word.
 
 ## 1. Install the plugin
 

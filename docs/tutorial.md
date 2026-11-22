@@ -33,7 +33,7 @@ name:
 }
 ```
 
-Delete `dependencies` and `keywords` for now; both are optional.
+Delete `dependencies` and `keywords` for now. Both are optional.
 
 Then set the matching name in `plugins/hello-tools/package.json`:
 
@@ -73,7 +73,7 @@ description:
 ```
 
 The `description` is the part that decides whether this ever runs. Write it as trigger conditions,
-including phrases a user would really type.
+including phrases a user would type.
 
 Delete the parts of the template you are not using:
 
@@ -134,7 +134,7 @@ claude plugin details hello-tools
 ```
 
 `details` shows the component inventory and the projected token cost: how much context this plugin
-occupies in every conversation. Watch that number; it is the running cost of the skill descriptions.
+occupies in every conversation. Watch that number. It is the running cost of the skill descriptions.
 
 Start a new session and ask for a repo tour. The skill should fire on its own. If it does not, the
 `description` is the thing to fix.

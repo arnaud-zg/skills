@@ -5,7 +5,7 @@
 
 **10 minutes, 4 steps: install, describe the project, write a body, check it.**
 
-You will give the skill your project's rules in one file, then check a pull request against them
+You will give the skill your project's rules in one file. Then you check a pull request against them
 before it is opened.
 
 ## 1. Install the plugin

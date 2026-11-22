@@ -35,8 +35,8 @@ node ${CLAUDE_SKILL_DIR}/scripts/credit.mjs --need 120
 
 ## Park a long run and resume it
 
-Check before every unit of work, not once at the start. On **PARK**, stop at that boundary, print
-the reset time you are waiting for, and once you resume, say how long you waited.
+Check before every unit of work, not once at the start. On **PARK**, stop at that boundary and print
+the reset time you are waiting for. Once you resume, say how long you waited.
 
 ## Wait out a limit already hit
 

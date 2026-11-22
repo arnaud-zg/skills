@@ -73,7 +73,7 @@ node <skill folder>/scripts/check.mjs --suite test
 
 A test the script never names is a finding, with its path to add. Use it when the script lists its
 test files, like `node --test a.test.mjs b.test.mjs`. A runner that finds tests on its own, such as
-Vitest or Jest, already runs them all, so it needs no `--suite`.
+Vitest or Jest, already runs them all. So it needs no `--suite`.
 
 ## Use the results in another tool
 

@@ -21,7 +21,7 @@ Ask _plan the tests for `<package>`_. You get a table: behaviour, layer, file, r
 ## Plan from a user story
 
 Paste the story or its acceptance criteria and ask _plan the tests_. Each criterion becomes a given
-/ when / then scenario, placed on a layer: most land in integration, one or two in end to end.
+/ when / then scenario. It is placed on a layer: most land in integration, one or two in end to end.
 
 ## Write a failing test for a bug
 

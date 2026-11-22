@@ -3,8 +3,8 @@
 [📚 Docs home](../../../../docs/README.md) › [⚡ big-o-optimizer](README.md) › **🚀 Tutorial** ·
 [🛠️ How-to](how-to.md) · [📖 Reference](reference.md) · [💡 Explanation](explanation.md)
 
-Five minutes. You will hand the skill a slow filter, read its before → after table, and check the
-rewrite returns the same users.
+Five minutes. You will hand the skill a slow filter and read its before → after table. Then you
+check that the rewrite returns the same users.
 
 ## 1. Install the plugin
 
@@ -24,13 +24,14 @@ export function allowed(users, banned) {
 
 ## 3. Read the answer
 
-1. It says which adapters run: `language.javascript` for the `.mjs` file, then `verify.tests` and
+1. Note which adapters run: `language.javascript` for the `.mjs` file, then `verify.tests` and
    `measure.read`. A `.py`, `.go` or any other file works the same way.
-2. It names the Big O: `includes` scans `banned` (m) for every user (n), so O(n·m).
-3. It picks _search a list inside a loop_ and builds a `Set` once.
+2. Read the Big O it names: `includes` scans `banned` (m) for every user (n), so O(n·m).
+3. See that it picks _search a list inside a loop_ and builds a `Set` once.
 4. With no test reaching `allowed`, it writes one first, from the current behaviour, and runs it
    before and after.
-5. It hands back a table: O(n·m) → O(n+m), the pattern, the test count, and the price, O(m) space.
+5. Read the table it hands back: O(n·m) → O(n+m), the pattern, the test count, and the price, O(m)
+   space.
 
 ## 4. Check the rewrite
 

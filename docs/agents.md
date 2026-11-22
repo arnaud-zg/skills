@@ -11,10 +11,10 @@ version into all of them.
 
 Agents without a plugin system, such as Gemini CLI and OpenCode, install through the skills CLI. It
 reads the Claude catalogue and copies each skill folder where that agent looks. A native Gemini
-extension was left out on purpose: Gemini finds updates by the repository's latest GitHub release,
-which in a repository of several independently released plugins points at whichever shipped last.
+extension was left out on purpose. Gemini finds updates by the repository's latest GitHub release.
+In a repository of several independently released plugins, that release is whichever shipped last.
 
-The rules are tested, not trusted: `manifests.unit.test.ts` compares the manifests,
-`agents.integration.test.ts` follows each catalogue to the skills, and `pnpm test:e2e` installs them
+The rules are tested, not trusted. `manifests.unit.test.ts` compares the manifests.
+`agents.integration.test.ts` follows each catalogue to the skills. `pnpm test:e2e` installs them
 through the real skills CLI. The fields are in [manifests.md](manifests.md#other-agents) and the tag
 format in [tags.md](tags.md).

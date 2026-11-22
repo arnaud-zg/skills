@@ -43,8 +43,8 @@ A case is a directory under `evals/` inside the plugin. `prompt.md` is the promp
 with `type: llm` and a `weight` in its frontmatter. Start from the two or three prompts that should
 trigger the skill.
 
-By default every case also runs without the plugin, and the report shows the score difference, so
-you can tell whether the skill changes anything. Results land in `evals/results/<timestamp>/`; don't
+By default every case also runs without the plugin. The report shows the score difference, so you
+can tell whether the skill changes anything. Results land in `evals/results/<timestamp>/`. Don't
 commit them.
 
 Evals run on your machine, as you. Only evaluate plugins you trust.
@@ -64,17 +64,18 @@ plugins/<name>/
     └── explanation.md   # understanding: why it is shaped this way, trade-offs, history
 ```
 
-1. Write the tutorial first, and run every command in it. It has one path, no choices and no theory;
-   a reader who follows it ends with something that works.
+1. Write the tutorial first, and run every command in it. It has one path, no choices and no theory.
+   A reader who follows it ends with something that works.
 2. Title each how-to with the task it solves ("Fail a build when a skill breaks"), not a topic
    ("CI"). Start from the goal, skip what the tutorial taught, link to reference for details.
 3. Organise the reference like the thing it describes: by command, by field, by rule. Keep it dry,
    complete and free of advice.
 4. Put every "why" in the explanation, and nowhere else. When a how-to needs a reason, link to it.
-5. Open each page with one line that says what kind of page it is and who it is for, and link to the
+5. Open each page with one line that says what kind of page it is and who it is for. Link to the
    sibling page a reader probably wanted instead.
 6. Keep `README.md` and `docs/` outside the skill folder: the agent loads the skill, people read the
    docs, and neither should pay for the other's text.
-7. `pnpm lint:md` checks the Markdown, and `pnpm lint:docs` runs this repo's own
-   [doc-compass](../plugins/arnaud-zg/docs/doc-compass/README.md) check: every page reachable from
-   its index, every link and anchor resolving, a breadcrumb on every page, and no em dash.
+7. `pnpm lint:md` checks the Markdown. `pnpm lint:docs` runs this repo's own
+   [doc-compass](../plugins/arnaud-zg/docs/doc-compass/README.md) check. It wants every page
+   reachable from its index, every link and anchor resolving, a breadcrumb on every page, and no em
+   dash.

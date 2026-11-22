@@ -25,16 +25,20 @@ cp -R templates/plugin-template plugins/<name>
    `plugin.json` carries it. Add the same plugin to `.agents/plugins/marketplace.json` (Codex,
    `"source": { "source": "local", "path": "./plugins/<name>" }`) and to
    `.cursor-plugin/marketplace.json` (Cursor, `"source": "<name>"`).
-6. Set the heading of `plugins/<name>/CHANGELOG.md` to the package name, and say what the plugin
-   does under `## 0.1.0`: that is its first release's notes. Once this PR merges, `pnpm release`
-   tags it.
+6. Set the heading of `plugins/<name>/CHANGELOG.md` to the package name. Say what the plugin does
+   under `## 0.1.0`. That is its first release's notes. Once this PR merges, `pnpm release` tags it.
 7. `claude plugin validate . --strict`
-8. `pnpm test`: `marketplace.unit.test.ts` fails if the package name, the manifest name and the
-   directory disagree, if the versions drift apart, if `shiplane.unit.yml` is missing, if the
-   catalogue entry carries a version, if the plugin is missing from the catalogue, or if its
-   changelog has no section for its version. Those are the steps that are easy to skip when copying
-   the template. `manifests.unit.test.ts` and `agents.integration.test.ts` fail if an agent's
-   manifest disagrees with the Claude one or does not reach the skills. `pnpm test:e2e` installs
+8. Run `pnpm test`. `marketplace.unit.test.ts` fails in these cases:
+   - The package name, the manifest name and the directory disagree.
+   - The versions drift apart.
+   - `shiplane.unit.yml` is missing.
+   - The catalogue entry carries a version.
+   - The plugin is missing from the catalogue.
+   - Its changelog has no section for its version.
+
+   Those are the steps that are easy to skip when copying the template. `manifests.unit.test.ts` and
+   `agents.integration.test.ts` fail in two cases. One is an agent manifest that disagrees with the
+   Claude one. The other is a manifest that does not reach the skills. `pnpm test:e2e` installs
    every skill through the real skills CLI.
 
 ## Add a skill to an existing plugin
@@ -137,9 +141,9 @@ that marketplace at the root:
 To constrain the version, append a range: `"ts-base@^1.2.0"`. It resolves against the dependency's
 git tags, so the dependency must be tagged (see below).
 
-Changesets does not see these ranges (they live in `plugin.json`, not `package.json`), so a major
-bump of `ts-base` neither updates nor warns the plugins that depend on `^1.x`. Update their ranges
-by hand in the same release.
+Changesets does not see these ranges, because they live in `plugin.json`, not `package.json`. So a
+major bump of `ts-base` neither updates nor warns the plugins that depend on `^1.x`. Update their
+ranges by hand in the same release.
 
 ## Test, evaluate and document
 

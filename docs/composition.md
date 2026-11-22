@@ -31,5 +31,5 @@ So composition happens twice, and it is worth being deliberate about which one y
 - **You compose** by declaring `dependencies` on a base. Best when a plugin is meaningless without
   the base: shared conventions, a shared reference document, a shared hook.
 
-Prefer the first. A dependency is a constraint you impose on every consumer; splitting into
+Prefer the first. A dependency is a constraint you impose on every consumer. Splitting into
 independent plugins leaves the choice with them.

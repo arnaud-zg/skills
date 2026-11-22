@@ -16,8 +16,8 @@
 ## Write a pull request description
 
 Ask _write the PR description for this branch_. The skill reads the repository's pull request
-template and its agent instructions file, writes their sections, banned characters and footer into
-the brief's `convention`. The check holds them. It prints the body. Posting it is yours.
+template and its agent instructions file. It writes their sections, banned characters and footer
+into the brief's `convention`. The check holds them. It prints the body. Posting it is yours.
 
 ## Publish a page
 
@@ -26,7 +26,7 @@ republishes to the same address.
 
 ## Print it in the terminal
 
-Ask for it _in the terminal_. Charts are refused there, so each picture is a table that fits 100
+Ask for it _in the terminal_. Charts are refused there. So each picture is a table that fits 100
 columns, and the numbers sit on one line.
 
 ## Write a Markdown file

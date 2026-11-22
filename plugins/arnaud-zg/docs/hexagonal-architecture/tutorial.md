@@ -34,5 +34,5 @@ LAYERS domain 1 · ports 1 · application 1 · adapters 1
 ✓ every dependency points inward.
 ```
 
-The domain takes the price as a function, the use case asks the `PriceList` port, and `main.mjs`
-wires an in-memory adapter to it. Next, the [How-to guides](how-to.md) do the same to your code.
+The domain takes the price as a function. The use case asks the `PriceList` port. `main.mjs` wires
+an in-memory adapter to it. Next, the [How-to guides](how-to.md) do the same to your code.
