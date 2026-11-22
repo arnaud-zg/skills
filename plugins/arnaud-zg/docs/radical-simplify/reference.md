@@ -45,6 +45,10 @@ Strictly in this order. Each step works only on what survived the one before.
 | Automate   | what runs on its own, and its trigger                               |
 | Closing    | a before → after count (counted, never estimated), the first change |
 
+Written at the `standard` level of plain-language, and each list of actions at `strict`, when that
+skill is installed. Without it: sentences under 25 words, actions under 20, each action starting
+with a verb.
+
 ## Files
 
 | File                                                                 | Role                           |

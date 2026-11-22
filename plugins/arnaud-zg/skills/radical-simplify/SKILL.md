@@ -91,7 +91,11 @@ work from the user without adding complexity.
 
 ## Output
 
-One section per step, in order, each short:
+Write it at **standard** level, and every list of actions at **strict** level, by
+[plain-language](../plain-language/SKILL.md) if installed. Without it, keep each sentence under 25
+words, each action under 20, and start each action with a verb.
+
+One section per step, in order:
 
 1. **Question**: a table of every element, with its reason to exist and the verdict (keep, remove,
    challenge with its owner).
@@ -104,5 +108,5 @@ One section per step, in order, each short:
 Close with a **before → after** line: steps, screens, fields, clicks or decisions, counted from the
 original you read and from your own proposal, never estimated. Then the one change to make first.
 
-The result should feel **obvious, effortless, extremely simple, fast and exceptionally well
-designed.**
+Judge the result by that count, not by adjectives. Never call it "effortless", "elegant" or
+"delightful": show the steps it removed.

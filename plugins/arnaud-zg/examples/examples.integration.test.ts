@@ -131,6 +131,17 @@ describe("the examples the docs show", () => {
     ]);
   });
 
+  test("given radical-simplify/onboarding.md, then its output holds the plain-language standard level", () => {
+    const { status, stdout } = run(
+      skill("plain-language", "check-plain.mjs"),
+      "--level",
+      "standard",
+      example("radical-simplify/onboarding.md"),
+    );
+    expect(stdout).toContain("PLAIN OK");
+    expect(status).toBe(0);
+  });
+
   test("given skill-retro/session.jsonl, then the 45 minute silence is an IDLE line", () => {
     const { status, stdout } = run(
       skill("skill-retro", "gaps.mjs"),
