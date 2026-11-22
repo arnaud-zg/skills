@@ -38,7 +38,7 @@ flowchart LR
 
 - **The check reads two files and writes nothing.** `scripts/check-audit.mjs` reads the result and
   the source text you point it at and prints its findings. No network, no dependency.
-- **It never posts.** It never comments, approves, edits or sends anything in the source; pasting
+- **It never posts.** It never comments, approves, edits or sends anything in the source. Pasting
   the drafted comments is yours to do.
 
 Read [`SKILL.md`](../../skills/glance-audit/SKILL.md) before installing it. Claude reads `SKILL.md`,

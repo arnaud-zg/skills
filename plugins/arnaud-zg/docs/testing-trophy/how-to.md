@@ -25,7 +25,7 @@ Paste the story or its acceptance criteria and ask _plan the tests_. Each criter
 
 ## Write a failing test for a bug
 
-Ask _write a failing test for this bug_. It lands at the lowest layer that reproduces it; the fix
+Ask _write a failing test for this bug_. It lands at the lowest layer that reproduces it. The fix
 goes in its own change.
 
 ## Fix an inverted trophy

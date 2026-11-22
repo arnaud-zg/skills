@@ -21,9 +21,9 @@ after it is proof they may skip.
 
 ## A figure says how much, faster than a sentence
 
-"The build is faster" asks to be believed; "`12 → 3` minutes" does not. The numbers sit right under
-the answer so the size of the change is the second thing seen. A digit is required in every value so
-a word like "many" cannot pass as a figure, and an empty list must be written on purpose.
+"The build is faster" asks to be believed. "`12 → 3` minutes" does not. The numbers sit right under
+the answer. The size of the change is the second thing seen. A digit is required in every value. A
+word like "many" cannot pass as a figure. An empty list must be written on purpose.
 
 ## The eye goes to a picture before it reads
 

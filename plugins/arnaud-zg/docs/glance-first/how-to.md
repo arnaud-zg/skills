@@ -17,7 +17,7 @@
 
 Ask _write the PR description for this branch_. The skill reads the repository's pull request
 template and its agent instructions file, writes their sections, banned characters and footer into
-the brief's `convention`, and the check holds them. It prints the body; posting it is yours.
+the brief's `convention`. The check holds them. It prints the body. Posting it is yours.
 
 ## Publish a page
 

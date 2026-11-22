@@ -23,7 +23,7 @@
 | 4 Pick           | a pattern for the worst term, or stop when none pays                                |
 | 5–7 Verify       | before, rewrite the smallest piece, verify after                                    |
 | 8 Measure        | by `measure`, then each `extra` at its step                                         |
-| 9 Hand over      | path, before, after, pattern, verified; space cost; what was not checked            |
+| 9 Hand over      | path, before, after, pattern, verified, space cost, what was not checked            |
 
 ## Ports
 
@@ -34,14 +34,15 @@
 | `measure`  | `measure.read` | `measure.bench`                                                  | `.agents/adapters/big-o-optimizer/measure.<name>.md`  |
 | `extra`    | none           |                                                                  | `.agents/adapters/big-o-optimizer/extra.<name>.md`    |
 
-Frontmatter: `fulfils` (the port), `matches` (`language` only: file extensions), `step` (`extra`
-only), `replaces` (an adapter to take the place of). `fulfils` and `replaces` follow the
+Frontmatter has four keys. The key `fulfils` is the port. The key `matches` applies to `language`
+only and holds file extensions. The key `step` applies to `extra` only. The key `replaces` is an
+adapter to take the place of. Both `fulfils` and `replaces` follow the
 [shared port and adapter contract](../../skills/hexagonal-architecture/domain/contract.md).
 
 ## Patterns
 
 Hash set or hash map lookup, one pass with a seen-map, bucket grouping, sort once or a heap, binary
-search, prefix sums, sliding window or two pointers, top-k heap, memoize or hoist, join once, index
+search, prefix sums. Sliding window or two pointers, top-k heap, memoize or hoist, join once, index
 pointer instead of `shift`, batched query for N+1, early exit. Each with its before, after and space
 cost in [`domain/patterns.md`](../../skills/big-o-optimizer/domain/patterns.md).
 

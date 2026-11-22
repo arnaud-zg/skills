@@ -8,7 +8,7 @@ Why the skill works the way it does. To get something done, see the [How-to guid
 
 ## The core changes for business reasons, the edges for technical ones
 
-A price rule changes when the business does; a database driver changes when a vendor does. Pointing
+A price rule changes when the business does. A database driver changes when a vendor does. Pointing
 every dependency inward keeps the second kind of change at the edge.
 
 ## The core owns its ports

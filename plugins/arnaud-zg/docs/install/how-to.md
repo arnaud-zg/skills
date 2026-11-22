@@ -44,6 +44,6 @@ names this marketplace and pins a release tag.
 
 ## Why are the skills called `/arnaud-zg:<skill>`?
 
-Claude Code names a plugin's skills `<plugin>:<skill>`; other agents may call them by `<skill>`
+Claude Code names a plugin's skills `<plugin>:<skill>`. Other agents may call them by `<skill>`
 alone. The plugin is `arnaud-zg`, which holds every skill from this marketplace. Installed with the
-skills CLI, a skill is just `/<skill>`.
+skills CLI, a skill is `/<skill>`.

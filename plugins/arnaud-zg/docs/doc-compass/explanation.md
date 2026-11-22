@@ -26,23 +26,24 @@ why the skill splits such pages rather than adding headings to them.
 
 ## Docs rot by omission, not by mistake
 
-The docs this skill was built from were written with care. They went stale because a page was added
-and the index was not, a heading was renamed and its links were not, a decision was reversed and the
-old record still read as current. Each is something nobody did. The check looks for exactly these,
-because they are the ones a careful writer misses.
+The docs this skill was built from were written with care. They went stale for three reasons. A page
+was added and the index was not. A heading was renamed and its links were not. A decision was
+reversed and the old record still read as current. Each is something nobody did. The check looks for
+exactly these, because they are the ones a careful writer misses.
 
 ## Why seven rules, and why these
 
-Each rule stands for a failure seen in a real docs set, written up in the skill's
-[`evidence.md`](../../skills/doc-compass/evidence.md). A rule nobody has paid for would pass on
-every project and prove nothing. What a script cannot see, such as a tutorial with a fork in it or a
-number written from memory, stays in `guards.md` as guidance, until someone finds a way to check it.
+Each rule stands for a failure seen in a real docs set. The skill writes each one up. You can read
+them in [`evidence.md`](../../skills/doc-compass/evidence.md). A rule nobody has paid for would pass
+on every project and prove nothing. A script cannot see some things, such as a tutorial with a fork
+in it or a number written from memory. These stay in `guards.md` as guidance until someone finds a
+way to check them.
 
 ## Rewrite, never annotate
 
 A page that carries "Updated in v3" callouts asks the reader to merge two versions in their head.
-The skill rewrites the page to say what is true now, and keeps history where readers look for it:
-the CHANGELOG for what changed, and decision records for why.
+The skill rewrites the page to say what is true now. It keeps history where readers look for it: the
+CHANGELOG for what changed, and decision records for why.
 
 ## Gravestones instead of deletions
 
@@ -52,6 +53,6 @@ default whenever something cites the old path.
 
 ## Why the docs live outside the skill
 
-The skill folder is loaded by the model on every call; these pages are read by people. Keeping them
-apart means neither pays for the other's text, the same choice
+The skill folder is loaded by the model on every call. People read these pages. Keeping them apart
+means neither pays for the other's text. This is the same choice
 [hexagonal-skill-builder](../hexagonal-skill-builder/explanation.md) makes.

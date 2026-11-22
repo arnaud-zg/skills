@@ -21,7 +21,7 @@ delivers, never, default) and the folder tree.
 
 ## Audit a codebase or a skill
 
-Ask _audit the architecture of `<folder>`_. The check runs first; the smells it cannot see come
+Ask _audit the architecture of `<folder>`_. The check runs first. The smells it cannot see come
 after, ranked, each with its file and fix.
 
 ## Pull the database out of the domain
@@ -61,11 +61,11 @@ node <hexagonal-skill-builder>/scripts/migrate-adapters.mjs          # prints th
 node <hexagonal-skill-builder>/scripts/migrate-adapters.mjs --write  # moves with git mv, rewrites links
 ```
 
-It moves each `<port>.<name>.md` of an installed skill to `.agents/adapters/<skill>/`, rewrites
+It moves each `<port>.<name>.md` of an installed skill to `.agents/adapters/<skill>/`. It rewrites
 every mention of the old folder in the tracked text files, and removes the emptied folders. It
-refuses when a different file already sits at a target, and a second run finds nothing to do. Lines
-that name the old folder in pieces, such as `join(root, ".domain-first", "adapters")`, are listed
-for you to fix by hand. `--skill <name>` limits it to one skill, for a project that moves one at a
+refuses when a different file already sits at a target. A second run finds nothing to do. Lines that
+name the old folder in pieces, such as `join(root, ".domain-first", "adapters")`, are listed for you
+to fix by hand. `--skill <name>` limits it to one skill. Use it for a project that moves one at a
 time. Run the check after.
 
 ## Change the port contract

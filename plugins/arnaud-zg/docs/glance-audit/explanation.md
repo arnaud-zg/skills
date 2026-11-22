@@ -16,14 +16,14 @@ flowchart TB
 
 ## Many lenses, few findings
 
-Seven lenses look everywhere so nothing is missed; most find nothing. The three tests then drop the
+Seven lenses look everywhere so nothing is missed. Most find nothing. The three tests then drop the
 hunch, the point the source already answers, and the point a reviewer already made, credited instead
 of repeated.
 
 ## One point leads
 
 A list of equals makes the reader rank it. So every critical point is kept, and otherwise only the
-most severe; the rest is folded as _can wait_, never lost. Nothing is rated up to fill the page.
+most severe. The rest is folded as _can wait_, never lost. Nothing is rated up to fill the page.
 
 ## A quote the reader can place
 
@@ -35,4 +35,4 @@ The check holds it against the source text, never the context, so a comment alwa
 The judgement is the skill's, the form is [glance-first](../glance-first/README.md)'s, and posting
 is the reader's. Keeping those apart is what lets it read a pull request without ever touching it.
 
-doc-compass audits a doc set's structure; glance-audit challenges what one source claims.
+doc-compass audits a doc set's structure. glance-audit challenges what one source claims.

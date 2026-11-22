@@ -45,7 +45,7 @@ A project that wants the keyword moves the same pattern to `required`.
 ## Ship without phases
 
 Leave `phaseId` out. Titles read `fix(cart): totals round once` and branches
-`fix/totals-round-once`; a `[S30]` in a title is then refused.
+`fix/totals-round-once`. A `[S30]` in a title is then refused.
 
 ## Use another forge or board
 

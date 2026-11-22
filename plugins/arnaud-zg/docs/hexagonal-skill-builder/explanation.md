@@ -43,8 +43,8 @@ version of this builder held twelve rules. Eight of them enforced a folder layou
 rewrites, and are recorded catching nothing. They went.
 
 What a script cannot see is written down instead, as eight guards with the story behind each one. A
-clean check says nothing about them, which is why the skill tells Claude to read them before writing
-a number, an output or an edit script.
+clean check says nothing about them. So the skill tells Claude to read them before writing a number,
+an output or an edit script.
 
 ## Why "hexagonal"
 
@@ -62,8 +62,8 @@ nobody can explain is the first one to be relaxed. A rule with its story stays.
 
 The check only reports. It changes no file, needs only Node, and opens no connection. So it is safe
 to pre-approve, which the skill does for that one command. It can gate a commit or a CI job without
-a second tool, and you can run it on a skill you have not decided to trust yet. Fixing is the
-author's job, or Claude's, with the finding's `→` as the instruction.
+a second tool. You can run it on a skill you have not decided to trust yet. Fixing is the author's
+job, or Claude's, with the finding's `→` as the instruction.
 
 ## Why `README.md` and `docs/` sit outside the skill
 

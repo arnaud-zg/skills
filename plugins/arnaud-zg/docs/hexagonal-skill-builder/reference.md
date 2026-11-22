@@ -12,7 +12,7 @@ What the check reads, what it looks for, and what it prints.
 node scripts/check.mjs [path ...] [--suite <script>] [--json]
 ```
 
-- `path`: a folder of skills, or one skill's folder; several are allowed
+- `path`: a folder of skills, or one skill's folder. Several are allowed
 - `--suite <name>`: also require every test to be named in that `package.json` script
 - `--json`: print the result as JSON instead of text
 - `-h`, `--help`: print the usage
@@ -32,8 +32,8 @@ node scripts/migrate-adapters.mjs [root] [--skill <name> ...] [--write] [--json]
 ```
 
 `--adapters` checks the files in `.agents/adapters/<skill>/` under the root (the repository's top
-folder when left out) instead of skills; dotfiles and READMEs beside them are skipped. `--skills`
-adds a folder of skills an adapter may be for; the shelf this skill is installed on is always read.
+folder when left out) instead of skills. Dotfiles and READMEs beside them are skipped. `--skills`
+adds a folder of skills an adapter may be for. The shelf this skill is installed on is always read.
 Exit `0` clean, `1` on a finding, `2` when the project has no adapters at all.
 
 | Check     | Fails when                                                              |
@@ -46,12 +46,12 @@ Exit `0` clean, `1` on a finding, `2` when the project has no adapters at all.
 | `legacy`  | a `.<skill>/adapters/` folder of an installed skill is left at the root |
 
 `migrate-adapters.mjs` prints the plan and writes nothing without `--write`. It takes a
-`.<x>/adapters/` folder only when `x` is an installed skill or its old alias, or is named with
-`--skill`, and moves only `<port>.<name>.md` files; anything else is left in place and listed. With
-it, it moves each legacy file by `git mv`, rewrites the old folder's mentions in tracked text files,
-and removes the emptied folders. `--skill <name>` limits it to that skill's folder, for a project
-that moves one skill at a time. Exit `1` when a different file already sits at a target; nothing is
-written then.
+`.<x>/adapters/` folder in two cases. One is when `x` is an installed skill or its old alias. The
+other is when `x` is named with `--skill`. It moves only `<port>.<name>.md` files. Anything else is
+left in place and listed. With `--write`, it moves each legacy file by `git mv`. It rewrites the old
+folder's mentions in tracked text files, and removes the emptied folders. `--skill <name>` limits it
+to that skill's folder. Use it for a project that moves one skill at a time. Exit `1` when a
+different file already sits at a target. Nothing is written then.
 
 ## Where it looks
 
@@ -67,9 +67,9 @@ MB are skipped.
 
 ## The rules
 
-- `named`: no frontmatter; `name` not the folder's; a name not lowercase-hyphen words (limit: 64
+- `named`: no frontmatter, `name` not the folder's, or a name not lowercase-hyphen words (limit: 64
   characters)
-- : no `description`; a description without "use" or "when"; a description too long (limit: 1024
+- : no `description`, a description without "use" or "when", or a description too long (limit: 1024
   characters)
 - `small`: a `SKILL.md` body (frontmatter not counted) over the limit (limit: 150 lines)
 - : any other `.md` page over the limit (limit: 300 lines)

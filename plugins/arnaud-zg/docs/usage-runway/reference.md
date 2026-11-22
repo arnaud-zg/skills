@@ -8,7 +8,7 @@
 
 ## Command
 
-`node scripts/credit.mjs [--need <minutes>] [--json]`. It exits 0 on GO and on PARK; the verdict is
+`node scripts/credit.mjs [--need <minutes>] [--json]`. It exits 0 on GO and on PARK. The verdict is
 the last line, or the `verdict` field.
 
 | Flag               | Does                                                       |
@@ -22,7 +22,7 @@ the last line, or the `verdict` field.
 | Verdict  | When                                                                          |
 | -------- | ----------------------------------------------------------------------------- |
 | **GO**   | the window has `need x 1.5` left and no limit is in flight, or no `--need`    |
-| **PARK** | it does not, or a limit was hit and has not lifted; the reset time is printed |
+| **PARK** | it does not, or a limit was hit and has not lifted. The reset time is printed |
 
 ## Report lines
 
@@ -41,9 +41,9 @@ the last line, or the `verdict` field.
 
 ## What it reads
 
-Every `.jsonl` under `~/.claude/projects/`, every project, up to three directories deep; files not
+Every `.jsonl` under `~/.claude/projects/`, every project, up to three directories deep. Files not
 touched for a week are skipped. Billed is
-`input_tokens + output_tokens + cache_creation_input_tokens`; cache reads are not counted. A limit
+`input_tokens + output_tokens + cache_creation_input_tokens`. Cache reads are not counted. A limit
 hit is a line carrying `quotaLimits`, `five_hour` or `seven_day`.
 
 ## Files

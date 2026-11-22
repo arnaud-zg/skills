@@ -8,8 +8,8 @@ A linter and writing guide for [Agent Skills](https://code.claude.com/docs/en/sk
 say, and check them against four rules a script can hold. Every finding comes with its file, its
 line and its fix.
 
-A skill is a set of instructions a model follows to the letter, so how it is organised is how it
-behaves. A link to a page that moved sends it nowhere, a long entry is paid for on every call, and a
+A skill is a set of instructions a model follows to the letter. So how it is organised is how it
+behaves. A link to a page that moved sends it nowhere. A long entry is paid for on every call. A
 script nobody tests was only ever watched.
 
 ## At a glance
@@ -63,7 +63,7 @@ Checking 2 skills against named, small, resolves, tested
 ✗ 2 findings in 1 of 2 skills.
 ```
 
-It exits 0 when every skill holds, 1 on a finding, and 2 when there is nothing to check, so it can
+It exits 0 when every skill holds, 1 on a finding, and 2 when there is nothing to check. So it can
 gate a commit hook or a CI job as it is.
 
 ## The four rules
@@ -73,7 +73,7 @@ gate a commit hook or a CI job as it is.
 | `named`    | `SKILL.md` is named for its folder in lowercase-hyphen words, and says when to use it   |
 | `small`    | the entry's body fits in 150 lines, and every other page in 300                         |
 | `resolves` | every relative link, heading anchor, `${CLAUDE_SKILL_DIR}` path and cited story exists  |
-| `tested`   | every script under `scripts/` is reached by a test; with `--suite`, every test is in it |
+| `tested`   | every script under `scripts/` is reached by a test. With `--suite`, every test is in it |
 
 Each one is there because a skill once broke it and a model followed it anyway. The stories are in
 [`evidence.md`](../../skills/hexagonal-skill-builder/evidence.md), and eight mistakes no script can
@@ -102,8 +102,8 @@ every script is tested.
 
 ### Why "hexagonal"?
 
-Skills are laid out as hexagons; the layout is
-[hexagonal-architecture](../hexagonal-architecture/README.md)'s, this skill writes and lints them.
+Skills are laid out as hexagons. The layout is
+[hexagonal-architecture](../hexagonal-architecture/README.md)'s. This skill writes and lints them.
 
 ## 🔒 Know what you're installing
 

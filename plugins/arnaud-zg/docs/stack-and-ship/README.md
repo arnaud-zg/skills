@@ -2,9 +2,10 @@
 
 [📚 Docs home](../../../../docs/README.md) › [arnaud-zg](../../README.md) › **🚢 stack-and-ship**
 
-A skill that ships a change from a branch to a stacked pull request by your project's house rules:
-branch and commit names that say the value, one commit per TDD step, the checks before a push, a PR
-body a script checks, the board, and one stack per phase that never force-pushes.
+A skill that ships a change from a branch to a stacked pull request by your project's house rules.
+The rules cover branch and commit names that say the value and one commit per TDD step. They also
+cover the checks before a push, a PR body a script checks, the board, and one stack per phase that
+never force-pushes.
 
 **3 verbs** · **1 project file** · **1 check script** · **0 force-pushes**
 

@@ -35,6 +35,6 @@ project adopts the skill by writing that file, never by editing the steps.
 
 ## A title says the value, not the action
 
-`fix(cart): totals round once` tells a reviewer and the changelog what changed for a user;
+`fix(cart): totals round once` tells a reviewer and the changelog what changed for a user.
 `fix(cart): add round helper` tells neither. The check refuses the shape, not the words: wording is
 the author's.

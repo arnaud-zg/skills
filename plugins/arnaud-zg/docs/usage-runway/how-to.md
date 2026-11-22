@@ -42,7 +42,7 @@ the reset time you are waiting for, and once you resume, say how long you waited
 
 If a limit was hit, the meter answers PARK whatever the window says, with
 `a limit was hit; it lifts at <time>`. A weekly one reads `the weekly limit was hit` and can lift
-days later; wait for its time, not the five-hour reset.
+days later. Wait for its time, not the five-hour reset.
 
 ## Feed the report to another script
 
