@@ -47,7 +47,9 @@ Each fix touches one skill, with one exception: a repeat across skills is fixed 
 ## 5. Book
 
 Hand the fix to the `stack` adapter: one draft pull request, its body the findings with their
-evidence and the before and after. Then take the next fix back to Trim. After the last, report:
+evidence and the before and after. Write the body and each report line at standard level, by
+[plain-language](../../plain-language/SKILL.md) if installed. Then take the next fix back to Trim.
+After the last, report:
 
 ```text
 RETRO   <n> findings, <m> booked, <k> dropped

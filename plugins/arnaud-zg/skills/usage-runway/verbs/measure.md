@@ -33,4 +33,6 @@ the machine counts**, because the limit belongs to the account.
 
 ## Ends
 
-On the verdict line, which is the last line printed. The caller takes it in the same breath.
+On the verdict line, which is the last line printed. The caller takes it in the same breath. Any
+sentence you add around the screen is at standard level, by
+[plain-language](../../plain-language/SKILL.md) if installed: "GO. 2h10 left. The run needs 1h."
