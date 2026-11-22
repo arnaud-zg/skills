@@ -14,7 +14,7 @@ One screen: a name field and a start button.
 
 ## Reimagine
 
-Start in a sample workspace; ask for the account when they save.
+Start in a sample workspace. Ask for the account when they save.
 
 ## Accelerate
 

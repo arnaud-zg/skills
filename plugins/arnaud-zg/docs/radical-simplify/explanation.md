@@ -31,6 +31,10 @@ visible, so you can see what was questioned and removed, not only the final desi
 count is read from the original and the proposal, never estimated, so the claimed gain can be
 checked.
 
+The output used to close on "obvious, effortless, exceptionally well designed". Those words carry no
+fact, and the words a skill asks for are the words its output carries. The count replaces them: it
+says how much simpler, and anyone can check it.
+
 ## Why it proposes and does not edit
 
 A redesign is a decision for a person. The skill writes it; changing the code is a separate request
