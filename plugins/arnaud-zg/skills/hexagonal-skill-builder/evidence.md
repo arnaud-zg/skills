@@ -56,3 +56,10 @@ people, and nothing the model reads depends on it.
 An earlier version of this builder held twelve rules. Eight of them enforced a folder layout, cost
 dozens of commits and several rewrites to keep, and are recorded catching nothing. The four kept are
 the ones a failure above stands behind.
+
+## E-10 · An output step that asked for adjectives
+
+A skill's output step asked for a result that "should feel obvious, effortless, extremely simple,
+fast and exceptionally well designed". Nothing set how long a sentence could be, so each run chose.
+A measure of eleven skills' own pages found 12% to 37% of their sentences over 20 words. The words a
+skill asks for are the words its output carries.

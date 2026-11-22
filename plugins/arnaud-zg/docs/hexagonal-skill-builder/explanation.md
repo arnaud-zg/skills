@@ -42,7 +42,7 @@ A rule is kept only if a script can check it **and** a skill once failed because
 version of this builder held twelve rules. Eight of them enforced a folder layout, cost dozens of
 rewrites, and are recorded catching nothing. They went.
 
-What a script cannot see is written down instead, as seven guards with the story behind each one. A
+What a script cannot see is written down instead, as eight guards with the story behind each one. A
 clean check says nothing about them, which is why the skill tells Claude to read them before writing
 a number, an output or an edit script.
 
