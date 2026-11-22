@@ -16,4 +16,5 @@ a rewrite; this changes only where the code lives.
 7. **Run the check.** The import is gone; stop, or pick the next dependency.
 
 Each step is its own commit, so any one can be reverted alone. Hand back the ports added, the files
-moved, and the check's counts before and after, each copied from its output.
+moved, and the check's counts before and after, each copied from its output. Write it at standard
+level, by [plain-language](../../plain-language/SKILL.md) if installed.

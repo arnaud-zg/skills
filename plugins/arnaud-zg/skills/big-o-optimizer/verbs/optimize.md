@@ -27,7 +27,8 @@ would cost more readability than it saves time.
    | `fn` L12 | O(n·m) | O(n+m) | lookup → set | 14 tests pass |
 
    Then the memory cost of the change (a hash set costs `O(m)` space), and what was not verified or
-   measured, with why. "Not measured" is written, never shown as a blank or a zero.
+   measured, with why. "Not measured" is written, never shown as a blank or a zero. Write the prose
+   at standard level, by [plain-language](../../plain-language/SKILL.md) if installed.
 
 ## Never
 

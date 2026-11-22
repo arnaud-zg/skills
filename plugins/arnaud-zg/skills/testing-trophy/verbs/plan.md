@@ -10,5 +10,6 @@
 4. **Name the seams**: what is real (files, a local database) and what is mocked (only what the
    project does not own).
 5. **Hand over the plan as a table**: behaviour, layer, file, real or mocked. Write nothing yet.
+   Write it at standard level, by [plain-language](../../plain-language/SKILL.md) if installed.
 6. **If the project holds performance budgets**, name the one north star the package serves, by
    [domain/performance.md](../domain/performance.md), or none.

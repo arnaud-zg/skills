@@ -7,7 +7,8 @@
    ```
 
 2. **Report the layer counts as printed**, then each finding with its file and line. Never round or
-   recall a count.
+   recall a count. Write each finding at standard level and each fix at strict, by
+   [plain-language](../../plain-language/SKILL.md) if installed.
 3. **Read for what the check cannot see**, by
    [domain/trophy.md](../domain/trophy.md#what-the-check-cannot-see): tests that assert nothing,
    integration tests that mock every seam.

@@ -19,7 +19,8 @@ framework.
 7. **Write it, then run the check** on the folder. Fix each finding by moving the dependency behind
    a port.
 
-Hand back the use cases, the ports table and the folder tree, each new file marked.
+Hand back the use cases, the ports table and the folder tree, each new file marked. Write them at
+standard level, by [plain-language](../../plain-language/SKILL.md) if installed.
 
 An architecture choice a team will want to remember, such as "the store is a port", is a decision
 record: write it as one (the doc-compass skill has the template).
