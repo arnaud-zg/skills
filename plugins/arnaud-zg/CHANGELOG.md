@@ -1,5 +1,19 @@
 # @arnaud-zg/plugin-arnaud-zg
 
+## 0.11.0
+
+### Minor Changes
+
+- Write status reports in plain language.
+- Write reports in plain language.
+- Write tutorial and how-to steps at plain-language strict level.
+- Write commit subjects and PR bodies at plain-language standard level.
+- Write the TLDR and each line at plain-language standard level.
+- Write verdicts at plain-language standard level and comments at light.
+- Write the redesign in plain language and judge it by the count.
+- Guard that each output step names its plain-language level.
+- Write any output in plain language, after Simplified Technical English.
+
 ## 0.10.0
 
 ### Minor Changes
