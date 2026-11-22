@@ -3,7 +3,7 @@
 // really holds. Then the same check as a person runs it, a file in and an exit code out.
 import assert from "node:assert/strict";
 import { spawnSync } from "node:child_process";
-import { mkdtempSync, rmSync, writeFileSync } from "node:fs";
+import { copyFileSync, mkdirSync, mkdtempSync, realpathSync, rmSync, writeFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { dirname, join } from "node:path";
 import { after, describe, it } from "node:test";
@@ -410,5 +410,27 @@ describe("checking an audit file against its source", () => {
     const { code, err } = run(fileWith("good3.json", JSON.stringify(good)));
     assert.equal(code, 2);
     assert.match(err, /usage: node check-audit\.mjs <audit\.json> <source\.txt>/);
+  });
+
+  it("given a wordy verdict, then it still holds and prints a plain-language note for it", () => {
+    const wordy = withAudit({ verdict: "It is basically a good idea. One thing to fix." });
+    const { code, out } = run(fileWith("wordy.json", JSON.stringify(wordy)), sourceFile);
+    assert.equal(code, 0);
+    assert.match(out, /^AUDIT OK /m);
+    assert.match(out, /^ {2}plain: verdict: filler: "basically" .+ → .+$/m);
+  });
+
+  it("given no plain-language skill beside it, then it says the style was not checked and holds", () => {
+    // The real path: on macOS the temp folder is a link, and the script runs only when it is the entry.
+    const alone = join(realpathSync(folder), "alone", "glance-audit", "scripts");
+    mkdirSync(alone, { recursive: true });
+    copyFileSync(SCRIPT, join(alone, "check-audit.mjs"));
+    const result = spawnSync(
+      process.execPath,
+      [join(alone, "check-audit.mjs"), fileWith("alone.json", JSON.stringify(good)), sourceFile],
+      { encoding: "utf8" },
+    );
+    assert.equal(result.status, 0);
+    assert.match(result.stdout, /^ {2}plain-language not installed, style not checked$/m);
   });
 });

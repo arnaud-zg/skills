@@ -37,12 +37,14 @@ If the kind of source is unclear from what was handed, ask one question. Never g
    ```
 
    It prints `AUDIT OK` with what was kept, or one line per problem with its field and its fix. Make
-   every fix in one pass and run it again. Stop at `AUDIT OK`.
+   every fix in one pass and run it again. Stop at `AUDIT OK`. Then fix each `plain:` note it
+   prints. A note never fails the check.
 
 7. **Present** by the `present` adapter, from the checked result and nothing else.
-8. **Hand over** in five lines or fewer: where the result is, the critical point in one sentence,
-   what it holds, the limits (not read, not tested), and any decision the reader must make. Say that
-   nothing was posted.
+8. **Hand over** at standard level, by [plain-language](../../plain-language/SKILL.md) if installed,
+   in five lines or fewer: where the result is, the critical point in one sentence, what it holds,
+   the limits (not read, not tested), and any decision the reader must make. Say that nothing was
+   posted.
 
 ## Before you hand over
 

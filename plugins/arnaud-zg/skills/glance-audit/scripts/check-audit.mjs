@@ -12,6 +12,10 @@
 // The source text is what a comment can be posted on, saved apart from the context that was only
 // read. Exit 0 when the audit holds, 1 on anything to fix (an unreadable file or bad JSON is one),
 // and 2 when a path is missing.
+//
+// When the plain-language skill is installed beside this one, an audit that holds also prints its
+// plain-language notes: the verdict and the good points at standard level, the comments at light.
+// A note never changes the exit code.
 import { readFileSync } from "node:fs";
 import { pathToFileURL } from "node:url";
 
@@ -312,8 +316,50 @@ function summary(audit) {
   return `AUDIT OK ${kept} of ${findings} kept, ${comments}, every quote found`;
 }
 
+/**
+ * The plain-language check, when that skill is installed beside this one; null when it is not.
+ * @returns {Promise<((text: string, options: { level: string }) => { findings: { rule: string, message: string, fix: string }[] }) | null>}
+ */
+async function loadPlain() {
+  const url = new URL("../../plain-language/scripts/plain.mjs", import.meta.url);
+  try {
+    return (await import(url.href)).checkText;
+  } catch {
+    return null;
+  }
+}
+
+/**
+ * Each plain-language note on the words a reader sees, as `field: rule: message → fix`.
+ * @param {{ verdict?: string, good?: string[], comments: Comment[] }} audit
+ * @param {NonNullable<Awaited<ReturnType<typeof loadPlain>>>} checkText
+ */
+function plainNotes(audit, checkText) {
+  /** @type {[string, string | undefined, string][]} */
+  const texts = [
+    ["verdict", audit.verdict, "standard"],
+    ...listOf(audit.good).map(
+      (text, i) => /** @type {[string, string, string]} */ ([`good[${i}]`, text, "standard"]),
+    ),
+    ...audit.comments.flatMap(
+      (comment, i) =>
+        /** @type {[string, string | undefined, string][]} */ ([
+          [`comments[${i}].text`, comment.text, "light"],
+          [`comments[${i}].after`, comment.after, "light"],
+        ]),
+    ),
+  ];
+  return texts.flatMap(([field, text, level]) =>
+    isText(text)
+      ? checkText(text, { level }).findings.map(
+          (f) => `${field}: ${f.rule}: ${f.message} → ${f.fix}`,
+        )
+      : [],
+  );
+}
+
 /** @param {string[]} args */
-function main(args) {
+async function main(args) {
   const [auditPath, sourcePath] = args;
   if (!auditPath || !sourcePath) {
     console.error("usage: node check-audit.mjs <audit.json> <source.txt>");
@@ -332,9 +378,12 @@ function main(args) {
     return 1;
   }
   console.log(summary(audit.value));
+  const checkText = await loadPlain();
+  if (!checkText) console.log("  plain-language not installed, style not checked");
+  else plainNotes(audit.value, checkText).forEach((note) => console.log(`  plain: ${note}`));
   return 0;
 }
 
 if (import.meta.url === pathToFileURL(process.argv[1] ?? "").href) {
-  process.exitCode = main(process.argv.slice(2));
+  process.exitCode = await main(process.argv.slice(2));
 }
