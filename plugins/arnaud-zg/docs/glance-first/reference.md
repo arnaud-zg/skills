@@ -13,6 +13,12 @@
 3. each block's picture; the first block must carry one
 4. the line the picture proves, 15 words
 
+## Plain-language notes
+
+When plain-language is installed beside it, a brief that holds also prints one `plain:` line per
+note on the TLDR and each block's line, at `standard` level. A note never changes the exit code.
+Without plain-language, it prints `plain-language not installed, style not checked`.
+
 ## Brief fields
 
 | Field        | Limit                                                            |

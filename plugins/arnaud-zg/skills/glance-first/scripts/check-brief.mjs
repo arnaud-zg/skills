@@ -6,6 +6,10 @@
 //
 // Exit 0 when the brief holds, 1 on a finding (an unreadable file or bad JSON is one), and 2 when
 // no path was given.
+//
+// When the plain-language skill is installed beside this one, a brief that holds also prints its
+// plain-language notes on the TLDR and each block's line, at standard level. A note never changes
+// the exit code.
 import { readFileSync } from "node:fs";
 import { pathToFileURL } from "node:url";
 
@@ -28,8 +32,43 @@ function readBrief(path) {
   }
 }
 
+/**
+ * The plain-language check, when that skill is installed beside this one; null when it is not.
+ * @returns {Promise<((text: string, options: { level: string }) => { findings: { rule: string, message: string, fix: string }[] }) | null>}
+ */
+async function loadPlain() {
+  const url = new URL("../../plain-language/scripts/plain.mjs", import.meta.url);
+  try {
+    return (await import(url.href)).checkText;
+  } catch {
+    return null;
+  }
+}
+
+/**
+ * Each plain-language note on the sentences a reader reads, as `field: rule: message → fix`.
+ * @param {any} brief
+ * @param {NonNullable<Awaited<ReturnType<typeof loadPlain>>>} checkText
+ */
+function plainNotes(brief, checkText) {
+  /** @type {[string, unknown][]} */
+  const texts = [
+    ["tldr", brief.tldr],
+    .../** @type {any[]} */ (brief.blocks).map(
+      (block, i) => /** @type {[string, unknown]} */ ([`blocks[${i}].line`, block?.line]),
+    ),
+  ];
+  return texts.flatMap(([field, text]) =>
+    typeof text === "string"
+      ? checkText(text, { level: "standard" }).findings.map(
+          (f) => `${field}: ${f.rule}: ${f.message} → ${f.fix}`,
+        )
+      : [],
+  );
+}
+
 /** @param {string[]} args */
-function main(args) {
+async function main(args) {
   const [path] = args;
   if (!path) {
     console.error("usage: node check-brief.mjs <brief.json>");
@@ -46,9 +85,12 @@ function main(args) {
   const words = `${readWords(brief)}/${LIMITS.read} words`;
   const blocks = `${brief.blocks.length}/${LIMITS.blocks} blocks`;
   console.log(`BRIEF OK ${words}, ${blocks}, target ${brief.target}`);
+  const checkText = await loadPlain();
+  if (!checkText) console.log("  plain-language not installed, style not checked");
+  else plainNotes(brief, checkText).forEach((note) => console.log(`  plain: ${note}`));
   return 0;
 }
 
 if (import.meta.url === pathToFileURL(process.argv[1] ?? "").href) {
-  process.exitCode = main(process.argv.slice(2));
+  process.exitCode = await main(process.argv.slice(2));
 }
