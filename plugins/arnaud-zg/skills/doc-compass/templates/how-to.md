@@ -7,7 +7,8 @@ One task per section. New here? Start with the [Tutorial](tutorial.md). Every op
 in the [Reference](reference.md).
 
 <!-- Each heading is a task the reader already wants, as an imperative verb: "Rotate the API key",
-     never a topic like "API keys". Keep the list below in the order of the sections. -->
+     never a topic like "API keys". Keep the list below in the order of the sections.
+     Each step is one action that starts with a verb, in 20 words or fewer. -->
 
 - [Do the first task](#do-the-first-task)
 - [Do the second task](#do-the-second-task)

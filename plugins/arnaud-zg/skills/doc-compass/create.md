@@ -20,7 +20,10 @@
    is read from its source, and the table names that source. Every "You should see" in the Tutorial
    is copied from a real run (why: E-08).
 6. **Write the Tutorial first, with one path.** It is the page that proves the product works, and
-   writing it finds what the other pages must cover.
+   writing it finds what the other pages must cover. Write the Tutorial and the how-to steps at
+   strict level, the Reference and the Explanation at standard, by
+   [plain-language](../plain-language/SKILL.md) if installed. Without it: one action per step, a
+   verb first, 20 words at most.
 7. **Title every how-to as a task** ("Rotate the API key"), and keep the list at the top in the
    order of the sections.
 8. **Every "why" goes in the Explanation**, each heading a principle stated as a sentence. A real

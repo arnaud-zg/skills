@@ -6,7 +6,8 @@
 New here? Do this once, in order. {About N minutes.}
 
 <!-- A lesson, not a manual. One path, no options, no "or you could". Every step ends with what
-     the reader should see, copied from a real run. Options belong in the how-to guides. -->
+     the reader should see, copied from a real run. Options belong in the how-to guides.
+     Each step is one action that starts with a verb, in 20 words or fewer. -->
 
 You will:
 
