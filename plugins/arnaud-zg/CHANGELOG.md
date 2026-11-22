@@ -1,5 +1,15 @@
 # @arnaud-zg/plugin-arnaud-zg
 
+## 0.12.0
+
+### Minor Changes
+
+- Print plain-language notes on docs with "plain": true.
+
+### Patch Changes
+
+- Score the five regex graders that never ran.
+
 ## 0.11.0
 
 ### Minor Changes
