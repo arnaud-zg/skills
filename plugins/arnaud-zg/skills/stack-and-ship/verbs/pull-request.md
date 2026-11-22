@@ -10,7 +10,8 @@
    way the adapter says, written for the person using it.
 4. **Push** from the branch itself: `git switch <branch>`, then `git push -u origin <branch>`. Ask
    the person first unless they approved pushing for this run. Never force.
-5. **Write the body** from the project's PR template into a file, never a blank body:
+5. **Write the body** from the project's PR template into a file, never a blank body, at standard
+   level by [plain-language](../../plain-language/SKILL.md), if installed:
    - the value first, then what changed with concrete numbers (tests, lines, timings), shaped by the
      adapter's PR body section and by the `glance-first` skill, if installed;
    - the issue linked the way the adapter's PR rules require;
@@ -23,6 +24,8 @@
    ```sh
    node ${CLAUDE_SKILL_DIR}/scripts/check-pr.mjs --title "<title>" --branch <branch> --body <file>
    ```
+
+   Fix each `plain:` note it prints under the result. A note never fails the check.
 
 7. **Register it** through the `board` port: the PR with the issue's estimate, the issue to In
    review ([board.md](../domain/board.md)); in a phase, append it to the stack

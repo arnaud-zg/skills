@@ -44,6 +44,16 @@ refactor(search): [S1] extract image validation into a value object
 A docs-only or skill-only change has no Red step. A bug found on the way gets a failing test, then
 its own `fix`.
 
+## The words
+
+Commit subjects become the changelog, so write them for the person who uses the change. Write the
+subject and the PR body at **standard** level, by
+[plain-language](../../plain-language/domain/levels.md) if installed: one idea per sentence, 25
+words at most, no filler.
+
+- ✅ `fix(import): an empty line no longer stops the import`
+- ❌ `fix(import): updated the parser so that empty lines are now handled correctly`
+
 ## Pull request title
 
 The same format as a commit; for an issue, the issue's title.

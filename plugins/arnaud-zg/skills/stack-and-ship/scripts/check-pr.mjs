@@ -1,5 +1,7 @@
 #!/usr/bin/env node
 // Checks a PR title, branch and body against the house rules; usage in ../SKILL.md#check.
+// When the plain-language skill is installed beside this one, it also prints a `plain:` note for each
+// sentence of the body that breaks a standard-level rule. A note never changes the exit code.
 import { readFileSync } from "node:fs";
 import { pathToFileURL } from "node:url";
 
@@ -157,12 +159,33 @@ const option = (args, flag) => {
   return index === -1 ? undefined : args[index + 1];
 };
 
+/**
+ * The plain-language notes on a PR body, or one line saying the style was not checked.
+ * @param {string} body @returns {Promise<string[]>}
+ */
+const plainNotes = async (body) => {
+  const url = new URL("../../plain-language/scripts/plain.mjs", import.meta.url);
+  /** @type {((text: string, options: { level: string }) => { findings: { line: number, rule: string, message: string, fix: string }[] }) | undefined} */
+  let checkText;
+  try {
+    checkText = (await import(url.href)).checkText;
+  } catch {
+    return ["plain-language not installed, style not checked"];
+  }
+  return /** @type {NonNullable<typeof checkText>} */ (checkText)(withoutComments(body), {
+    level: "standard",
+  }).findings.map(
+    ({ line, rule, message, fix }) => `plain: body:${line}: ${rule}: ${message} → ${fix}`,
+  );
+};
+
 const isMain =
   process.argv[1] !== undefined && import.meta.url === pathToFileURL(process.argv[1]).href;
 
 if (isMain) {
   const args = process.argv.slice(2);
   const bodyFile = option(args, "--body");
+  const body = bodyFile === undefined ? undefined : readFileSync(bodyFile, "utf8");
   let project;
   try {
     project = readProject(option(args, "--project") ?? findProjectFile());
@@ -174,10 +197,11 @@ if (isMain) {
     {
       title: option(args, "--title"),
       branch: option(args, "--branch"),
-      body: bodyFile === undefined ? undefined : readFileSync(bodyFile, "utf8"),
+      body,
     },
     project,
   );
   for (const line of printCheck(findings)) console.info(line);
+  if (body !== undefined) for (const note of await plainNotes(body)) console.info(`  ${note}`);
   process.exit(findings.length === 0 ? 0 : 1);
 }
