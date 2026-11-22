@@ -44,6 +44,10 @@ says what is wrong.
 - `ban`: optional. Strings no page may hold outside code, each non-empty
 - `examples`: optional. The folder, from the project root, that holds example files, `examples` when
   left out
+- `plain`: optional, `false` when left out. With `true`, the check also prints a `plain:` note per
+  sentence that breaks a plain-language rule, when that skill is installed. Tutorials and how-to
+  guides use the `strict` level, the other pages `standard`. A note never changes the exit code.
+  With `--json`, the notes are a `notes` list beside `findings`
 
 ## Exit codes
 

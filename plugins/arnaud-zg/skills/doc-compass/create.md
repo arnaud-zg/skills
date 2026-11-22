@@ -41,7 +41,8 @@
 12. **Wire the check where it runs.** List the docs folders and banned strings in
     `doc-compass.json`, with `"examples": "<folder>"` when examples do not live in `examples/`, then
     call the check with no arguments from a commit hook or the project's verify script, not only
-    from CI nobody triggers (why: E-07). Run it, and stop at exit 0.
+    from CI nobody triggers (why: E-07). Run it, and stop at exit 0. Add `"plain": true` to also
+    print [plain-language](../plain-language/SKILL.md) notes, if installed. A note never fails it.
 
 ## Rebuild a messy set
 
