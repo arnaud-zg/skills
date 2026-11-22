@@ -3,8 +3,8 @@
 [📚 Docs home](../../../../docs/README.md) › [🧭 doc-compass](README.md) › **🚀 Tutorial** ·
 [🛠️ How-to](how-to.md) · [📖 Reference](reference.md) · [💡 Explanation](explanation.md)
 
-Ten minutes. You will copy the templates into a project, break the docs twice, watch the check find
-both, fix them, and end with a clean result.
+Ten minutes. You will copy the templates into a project and break the docs twice. You watch the
+check find both, fix them, and end with a clean result.
 
 You will:
 

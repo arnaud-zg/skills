@@ -62,16 +62,16 @@ node <hexagonal-skill-builder>/scripts/migrate-adapters.mjs --write  # moves wit
 ```
 
 It moves each `<port>.<name>.md` of an installed skill to `.agents/adapters/<skill>/`. It rewrites
-every mention of the old folder in the tracked text files, and removes the emptied folders. It
+every mention of the old folder in the tracked text files. It removes the emptied folders. It
 refuses when a different file already sits at a target. A second run finds nothing to do. Lines that
-name the old folder in pieces, such as `join(root, ".domain-first", "adapters")`, are listed for you
-to fix by hand. `--skill <name>` limits it to one skill. Use it for a project that moves one at a
-time. Run the check after.
+name the old folder in pieces are listed for you to fix by hand. One example is
+`join(root, ".domain-first", "adapters")`. `--skill <name>` limits it to one skill. Use it for a
+project that moves one at a time. Run the check after.
 
 ## Change the port contract
 
 Edit `skills/hexagonal-architecture/domain/contract.md`. Each skill with a `ports/` folder links it
-from its `ports/PORTS.md`, marked "if installed", so there is nothing to copy or sync.
+from its `ports/PORTS.md`, marked "if installed". So there is nothing to copy or sync.
 
 ## Example
 

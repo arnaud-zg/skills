@@ -298,3 +298,38 @@ describe("given a project holding a link to nothing", () => {
     expect(check(cwd).status).toBe(0);
   });
 });
+
+describe('given "plain": true in doc-compass.json', () => {
+  const files = (plain: unknown) => ({
+    "doc-compass.json": JSON.stringify({ docs: ["docs"], plain }),
+    "docs/README.md": "# Docs\n\n[Tutorial](tutorial.md)\n",
+    "docs/tutorial.md": `${home("Tutorial")}\n1. The step is basically skipped; then run it.\n`,
+  });
+
+  test("when a tutorial step breaks a strict rule, then a plain note names it and the docs still hold", () => {
+    const { status, stdout } = check(projectWith(files(true)));
+    expect(stdout).toMatch(/plain: docs\/tutorial\.md:5: joined: .+ → .+/);
+    expect(stdout).toMatch(/plain: docs\/tutorial\.md:5: filler: "basically" .+ → .+/);
+    expect(stdout).toMatch(/plain: docs\/tutorial\.md:5: step: .+ → .+/);
+    expect(stdout).toContain("✓ 2 pages in docs hold.");
+    expect(status).toBe(0);
+  });
+
+  test("when --json is given, then the notes are a list beside the findings", () => {
+    const { stdout } = check(projectWith(files(true)), "--json");
+    const report = JSON.parse(stdout) as { findings: unknown[]; notes: { rule: string }[] };
+    expect(report.findings).toEqual([]);
+    expect(report.notes.map((note) => note.rule)).toEqual(["joined", "filler", "step"]);
+  });
+
+  test("when plain is left out, then no note is printed", () => {
+    const { stdout } = check(projectWith(files(false)));
+    expect(stdout).not.toContain("plain:");
+  });
+
+  test("when plain is not true or false, then it says so and exits 2", () => {
+    const { status, stderr } = check(projectWith(files("yes")));
+    expect(stderr).toContain('"plain" must be true or false');
+    expect(status).toBe(2);
+  });
+});

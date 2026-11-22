@@ -25,13 +25,13 @@ matches: .rs
 | hash set | `std::collections::HashSet` |
 ```
 
-A project adapter wins over a built-in one of the same name, so it can also correct `javascript`,
+A project adapter wins over a built-in one of the same name. So it can also correct `javascript`,
 `python` or `go`.
 
 ## Get timings, not only the Big O
 
-Ask for them: _optimize this and benchmark it_. The skill switches to `measure.bench`, runs both
-versions at two input sizes, and copies each figure from the command that printed it.
+Ask for them: _optimize this and benchmark it_. The skill switches to `measure.bench` and runs both
+versions at two input sizes. It copies each figure from the command that printed it.
 
 ## Inject your own step
 
@@ -63,10 +63,11 @@ Name its file in the request: _optimize src/search.ts with ./perf/verify.snapsho
 
 ## Example
 
-[`examples/big-o-optimizer/adapters/extra.eslint.md`](../../examples/big-o-optimizer/adapters/extra.eslint.md):
-an injected `extra` adapter.
-[`language.rust.md`](../../examples/big-o-optimizer/adapters/language.rust.md): an injected
-`language` adapter. [`before.mjs`](../../examples/big-o-optimizer/before.mjs) and
-[`after.mjs`](../../examples/big-o-optimizer/after.mjs): a rewrite
-[`examples.integration.test.ts`](../../examples/examples.integration.test.ts) proves returns the
-same users.
+- [`examples/big-o-optimizer/adapters/extra.eslint.md`](../../examples/big-o-optimizer/adapters/extra.eslint.md):
+  an injected `extra` adapter.
+- [`language.rust.md`](../../examples/big-o-optimizer/adapters/language.rust.md): an injected
+  `language` adapter.
+- [`before.mjs`](../../examples/big-o-optimizer/before.mjs): the original.
+- [`after.mjs`](../../examples/big-o-optimizer/after.mjs): its rewrite.
+- [`examples.integration.test.ts`](../../examples/examples.integration.test.ts): proves the rewrite
+  returns the same users.

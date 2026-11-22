@@ -55,7 +55,7 @@ they are skipped.
 
 ## Stack a phase
 
-Ask _stack these PRs_. Each step branches from the previous one, its PR is based on it, and the
+Ask _stack these PRs_. Each step branches from the previous one, and its PR is based on it. The
 stack is registered through the forge's calls that never push. A fix to a lower PR is merged up into
 every branch above, never rebased.
 

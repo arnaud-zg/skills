@@ -7,6 +7,10 @@
 //   node check-docs.mjs <folder> [--index <page>] [--ban <text>]...
 //
 // Exit 0 when the docs hold, 1 on a finding, 2 when there is nothing to check.
+//
+// With "plain": true in doc-compass.json and the plain-language skill installed beside this one, it
+// also prints plain-language notes: tutorials and how-to guides at strict level, the other pages at
+// standard. A note never changes the exit code.
 import { existsSync, readdirSync, readFileSync, statSync } from "node:fs";
 import { dirname, join, parse as parsePath, relative, resolve, sep } from "node:path";
 
@@ -26,10 +30,12 @@ const USAGE = `Usage: node check-docs.mjs [<folder> [--index <page>]] [--ban <te
 ${CONFIG}, beside package.json:
 
   { "ban": ["—"], "docs": ["docs", { "folder": "packages/cli/docs", "index": "../README.md" }],
-    "examples": "examples" }
+    "examples": "examples", "plain": true }
 
 "examples" is the folder, from the project root, that holds example files, for every docs set or
 in one "docs" entry. Left out, each docs set reads the examples/ folder beside it. A test runs an example when a test file names its path from that folder.
+
+"plain": true prints plain-language notes when that skill is installed. They never fail the check.
 
 Exit 0 when the docs hold, 1 on a finding, 2 when there is nothing to check.`;
 
@@ -97,11 +103,13 @@ function readConfig(/** @type {string} */ path) {
     docs,
     ban = [],
     examples = null,
+    plain = false,
     ...rest
   } = /** @type {Record<string, unknown>} */ (config);
   const unknown = Object.keys(rest);
   if (unknown.length > 0)
-    bad(`unknown key ${unknown.join(", ")}; the keys are "docs", "ban" and "examples"`);
+    bad(`unknown key ${unknown.join(", ")}; the keys are "docs", "ban", "examples" and "plain"`);
+  if (typeof plain !== "boolean") bad('"plain" must be true or false');
   if (examples !== null && (typeof examples !== "string" || examples === "")) {
     bad('"examples" must be a folder name');
   }
@@ -135,6 +143,7 @@ function readConfig(/** @type {string} */ path) {
     sets: /** @type {DocsSet[]} */ (sets),
     ban: /** @type {string[]} */ (ban),
     examples: /** @type {string | null} */ (examples),
+    plain: /** @type {boolean} */ (plain),
   };
 }
 
@@ -237,8 +246,28 @@ function exampleOptions(
   };
 }
 
-/** One docs set's pages and findings. @param {string} cwd @param {DocsSet} set @param {string[]} ban @param {string | null} examples */
-function check(cwd, set, ban, examples) {
+/** @typedef {(text: string, options: { level: string }) => { findings: { line: number, rule: string, message: string, fix: string }[] }} CheckText */
+
+/** The plain-language check, when that skill is installed beside this one; null when it is not. */
+async function loadPlain() {
+  const url = new URL("../../plain-language/scripts/plain.mjs", import.meta.url);
+  try {
+    return /** @type {CheckText} */ ((await import(url.href)).checkText);
+  } catch {
+    return null;
+  }
+}
+
+/** Tutorials and how-to guides are followed step by step, so they are held to the strict level. */
+const levelOf = (/** @type {string} */ page) =>
+  /(?:^|\/)(?:tutorial|how-to)[^/]*\.md$/.test(page) ? "strict" : "standard";
+
+/**
+ * One docs set's pages, findings and plain-language notes.
+ * @param {string} cwd @param {DocsSet} set @param {string[]} ban @param {string | null} examples
+ * @param {CheckText | null} checkText
+ */
+function check(cwd, set, ban, examples, checkText) {
   const folder = resolve(cwd, set.folder);
   const shown = posixOf(relative(cwd, folder)) || ".";
   if (!existsExactly(folder) || !statSync(folder).isDirectory()) stop(`${shown} is not a folder.`);
@@ -268,7 +297,15 @@ function check(cwd, set, ban, examples) {
     sourceExists: (source) => existsExactly(resolve(cwd, source)),
     ...exampleOptions(cwd, base, examples),
   }).map((finding) => ({ ...finding, path: posixOf(join(relative(cwd, base), finding.file)) }));
-  return { docs: shown, pages: pages.size, findings };
+  const notes = checkText
+    ? [...pages].flatMap(([page, text]) =>
+        checkText(text, { level: levelOf(page) }).findings.map((note) => ({
+          ...note,
+          path: posixOf(join(relative(cwd, base), page)),
+        })),
+      )
+    : [];
+  return { docs: shown, pages: pages.size, findings, notes };
 }
 
 /** @param {ReturnType<typeof check>} result */
@@ -279,6 +316,12 @@ function print(result) {
     say(`  ${finding.message}`);
     say(`  ${dim("→")} ${finding.fix}\n`);
   }
+  for (const note of result.notes) {
+    say(
+      `  ${dim(`plain: ${note.path}:${String(note.line)}: ${note.rule}: ${note.message} → ${note.fix}`)}`,
+    );
+  }
+  if (result.notes.length > 0) say();
   const broken = new Set(result.findings.map((finding) => finding.file)).size;
   say(
     result.findings.length === 0
@@ -304,12 +347,17 @@ const ban = [...new Set([...(config?.ban ?? []), ...args.ban])];
 const examplesOf = (/** @type {DocsSet} */ set) =>
   set.examples ?? config?.examples ?? posixOf(join(dirname(set.folder), "examples"));
 
-const results = sets.map((set) => check(cwd, set, ban, examplesOf(set)));
+const checkText = config?.plain ? await loadPlain() : null;
+if (config?.plain && !checkText && !args.json)
+  say("plain-language not installed, style not checked\n");
+
+const results = sets.map((set) => check(cwd, set, ban, examplesOf(set), checkText));
 const findings = results.flatMap((result) => result.findings);
 
 if (args.json) {
   const checked = results.map(({ docs, pages }) => ({ docs, pages }));
-  say(JSON.stringify({ sets: checked, findings }, null, 2));
+  const notes = results.flatMap((result) => result.notes);
+  say(JSON.stringify({ sets: checked, findings, ...(config?.plain ? { notes } : {}) }, null, 2));
 } else {
   results.forEach(print);
 }

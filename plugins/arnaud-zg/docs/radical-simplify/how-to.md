@@ -40,8 +40,8 @@ it kept and names who owns it, instead of removing it.
 
 ## Get it to fire without the slash command
 
-Ask in words it listens for: _make this radically simpler_, _streamline this flow_, _cut the steps_,
-_make it 10x simpler_, _rethink this from first principles_.
+Ask in words it listens for. Examples: _make this radically simpler_, _streamline this flow_, _cut
+the steps_, _make it 10x simpler_, _rethink this from first principles_.
 
 ## Example
 

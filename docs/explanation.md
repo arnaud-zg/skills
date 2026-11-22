@@ -44,10 +44,10 @@ description: Use when the user asks to review, check or sanity-check a database 
 2. …
 ```
 
-The body is a prompt addressed to Claude. The `description` is the trigger: Claude reads every
+The body is a prompt addressed to Claude. The `description` is the trigger. Claude reads every
 installed skill's `name` and `description` at all times, and loads the body only when a request
-matches. That asymmetry is the whole design: descriptions are cheap and always resident, bodies are
-expensive and loaded on demand. A vague description means the skill never fires; a body stuffed with
+matches. That asymmetry is the whole design. Descriptions are cheap and always resident. Bodies are
+expensive and loaded on demand. A vague description means the skill never fires. A body stuffed with
 reference material means every firing costs you context.
 
 Two flavours, distinguished only by frontmatter:
@@ -57,7 +57,7 @@ Two flavours, distinguished only by frontmatter:
   command `/name`. The user decides when to use it.
 
 A skill directory can hold more than `SKILL.md`: reference documents, scripts, templates. Claude
-reads those only if the skill body tells it to, which is how you ship a large capability without
+reads those only if the skill body tells it to. That is how you ship a large capability without
 paying for it in every conversation.
 
 ### Plugin: the unit of distribution
@@ -91,14 +91,14 @@ plugins. It is the thing a user adds once:
 /plugin marketplace add arnaud-zg/skills
 ```
 
-From then on they can install any plugin it lists; `claude plugin marketplace update` refreshes the
+From then on they can install any plugin it lists. `claude plugin marketplace update` refreshes the
 list, and `claude plugin update` installs a plugin's newer version. Trust is granted at this level,
-not per plugin: adding a marketplace means accepting whatever its maintainer lists, now and later.
+not per plugin. Adding a marketplace means accepting whatever its maintainer lists, now and later.
 That is why cross-marketplace dependencies require an explicit allowlist (see below): adding one
 marketplace must not silently pull code from another.
 
 A marketplace does not have to host the plugins it lists. Entries can point at subdirectories of
-other repositories, pinned to a tag and a commit SHA, which is how the official catalogue lists
+other repositories, pinned to a tag and a commit SHA. That is how the official catalogue lists
 third-party plugins it does not own.
 
 ## Composition: base plugins and dependencies
@@ -107,20 +107,21 @@ How a plugin builds on a base, and why: [composition.md](composition.md).
 
 ## Why the docs follow Diataxis
 
-A reader arrives with one of four needs: to learn, to get a task done, to look something up, or to
-understand. A page that tries to serve two of them serves neither: a tutorial that stops to explain
-loses the learner, a reference full of advice is slow to scan, a how-to that teaches from zero
+A reader arrives with one of four needs. They want to learn, get a task done, look something up, or
+understand. A page that tries to serve two of them serves neither. A tutorial that stops to explain
+loses the learner. A reference full of advice is slow to scan. A how-to that teaches from zero
 wastes the expert's time. [Diataxis](https://diataxis.fr/) names the four needs and gives each its
-own page, so a reader knows where to look and a writer knows where a paragraph belongs.
+own page. A reader knows where to look, and a writer knows where a paragraph belongs.
 
-This repository applies it twice: `docs/` documents the marketplace itself (writing and shipping
-plugins), and each `plugins/<name>/docs/` documents one plugin for the people who use it. Both have
-the same four pages, so moving between them costs nothing.
+This repository applies it twice. `docs/` documents the marketplace itself (writing and shipping
+plugins). Each `plugins/<name>/docs/` documents one plugin for the people who use it. Both have the
+same four pages, so moving between them costs nothing.
 
 ## One plugin, many agents
 
 Codex, Cursor and Copilot CLI read the same skills through their own manifests.
-[agents.md](agents.md) explains why the skills live once and the manifests sit beside them.
+[agents.md](agents.md) explains why the skills live once. It also says why the manifests sit beside
+them.
 
 ## What this is not
 
@@ -136,10 +137,10 @@ Codex, Cursor and Copilot CLI read the same skills through their own manifests.
 
 | Approach                   | Versioned | Shareable | Good for                        |
 | -------------------------- | --------- | --------- | ------------------------------- |
-| `~/.claude/skills/<name>/` | no        | no        | drafting; personal one-offs     |
+| `~/.claude/skills/<name>/` | no        | no        | drafting, personal one-offs     |
 | Project `.claude/skills/`  | via git   | via repo  | conventions for one codebase    |
 | Plugin in a marketplace    | yes       | yes       | anything you want others to use |
 
-The first is not a lesser version of the third: it is where you draft. A directory under
+The first is not a lesser version of the third. It is where you draft. A directory under
 `~/.claude/skills/` auto-loads as its own plugin (`<name>@skills-dir`) with no manifest and no
-install step, so you can iterate on a skill in a live session and only package it once it earns it.
+install step. You can iterate on a skill in a live session and package it once it earns it.

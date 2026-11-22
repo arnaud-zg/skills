@@ -4,8 +4,8 @@ How to use the skills in the `arnaud-zg-skills` marketplace, and how to add your
 follow [Diataxis](https://diataxis.fr/): each topic has four pages, one per reader need, so you can
 go straight to the kind of page you want.
 
-- **[Find and use a skill](../plugins/arnaud-zg/README.md#skills)**: the one list of skills; each
-  links its tutorial, how-to guides, reference and explanation.
+- **[Find and use a skill](../plugins/arnaud-zg/README.md#skills)**: the one list of skills, each
+  linking its tutorial, how-to guides, reference and explanation.
 - **[Write a plugin](#write-a-plugin-in-this-repository)**: add your own skill to this marketplace.
 
 ## Which page do I need?

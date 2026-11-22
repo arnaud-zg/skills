@@ -3,8 +3,8 @@
 [📚 Docs home](README.md) › Writing plugins › [🚀 Tutorial](tutorial.md) · [🛠️ How-to](how-to.md) ·
 **📖 Reference** · [💡 Explanation](explanation.md)
 
-Field-by-field. Verified against Claude Code `2.1.263` manifest schemas and `claude plugin --help`;
-re-check after a major CLI upgrade.
+Field-by-field. Verified against Claude Code `2.1.263` manifest schemas and `claude plugin --help`.
+Re-check after a major CLI upgrade.
 
 ## Repository layout
 
@@ -52,24 +52,24 @@ Field-by-field tables for `marketplace.json` and `plugin.json`, for each agent, 
 You normally write none of these keys: the directories are found by name. The manifest keys exist
 only to point somewhere non-standard, and **their override semantics differ**:
 
-- Skills: at `skills/<name>/SKILL.md`; key `skills`; when the key is set loaded **in addition** to
+- Skills: at `skills/<name>/SKILL.md`, key `skills`. When the key is set, loaded **in addition** to
   `skills/`
-- Subagents: at `agents/*.md`; key `agents`; when the key is set `agents/` is **no longer**
+- Subagents: at `agents/*.md`, key `agents`. When the key is set, `agents/` is **no longer**
   auto-loaded
-- Commands: at `commands/*.md` (legacy); key `commands`; when the key is set `commands/` is **no
+- Commands: at `commands/*.md` (legacy), key `commands`. When the key is set, `commands/` is **no
   longer** auto-loaded
-- Hooks: at `hooks/hooks.json`; key `hooks`; if set, loaded **in addition** to `hooks/hooks.json`
-- MCP servers: at `.mcp.json`; key `mcpServers`; when the key is set loaded **in addition** to
+- Hooks: at `hooks/hooks.json`, key `hooks`. If set, loaded **in addition** to `hooks/hooks.json`
+- MCP servers: at `.mcp.json`, key `mcpServers`. When the key is set, loaded **in addition** to
   `.mcp.json`
-- Output styles: at `output-styles/`; key `outputStyles`; when the key is set `output-styles/` is
+- Output styles: at `output-styles/`, key `outputStyles`. When the key is set, `output-styles/` is
   **no longer** auto-loaded
-- LSP servers: manifest key `lspServers`; if set, declaration only
+- LSP servers: manifest key `lspServers`. If set, declaration only
 
-`skills` accepts `"."` or `"./"` to mean the plugin root itself, which is how a plugin can be a
+`skills` accepts `"."` or `"./"` to mean the plugin root itself. That is how a plugin can be a
 single skill with `SKILL.md` at its top level.
 
 `${CLAUDE_PLUGIN_ROOT}` expands to the installed plugin directory. Use it in every hook command and
-script path, never a relative or hard-coded path, and quote it, since the expanded path can contain
+script path. Never use a relative or hard-coded path. Quote it, since the expanded path can contain
 spaces: `"command": "\"${CLAUDE_PLUGIN_ROOT}/hooks-handlers/x.sh\""`.
 `claude plugin validate --strict` fails on an unquoted one.
 
@@ -83,8 +83,8 @@ description: When Claude should use this, in the words a user would type.
 ```
 
 - `name`: Required. Becomes `/<plugin>:<name>` for user-invoked skills.
-- `description`: Required. The trigger. Always resident in context; the body is not.
-- `argument-hint`: Makes it a slash command; shown in `/help`, e.g. `<file> [--fix]`
+- `description`: Required. The trigger. Always resident in context. The body is not.
+- `argument-hint`: Makes it a slash command, shown in `/help`, e.g. `<file> [--fix]`
 - `allowed-tools`: Restricts tools while the skill runs, e.g. `[Read, Glob, Grep]`
 - `version`: Optional
 
@@ -95,7 +95,7 @@ what surfaces it as a slash command.
 
 - `claude plugin marketplace add <source>`: Add a marketplace: `owner/repo`, a URL, or a local path
 - `claude plugin marketplace list`: List configured marketplaces
-- `claude plugin marketplace update [name]`: Pull latest; all marketplaces if no name
+- `claude plugin marketplace update [name]`: Pull latest. All marketplaces if no name
 - `claude plugin marketplace remove <name>`: Remove a marketplace
 - `claude plugin install <plugin>[@market]`: Install
 - `claude plugin list`: List installed plugins
@@ -104,9 +104,9 @@ what surfaces it as a slash command.
 - `claude plugin update <name>`: Update (applies on restart)
 - `claude plugin uninstall <name>`: Remove
 - `claude plugin prune`: Remove auto-installed dependencies nothing needs
-- `claude plugin validate <path> [--strict]`: Validate a plugin or marketplace; `--strict` fails on
+- `claude plugin validate <path> [--strict]`: Validate a plugin or marketplace. `--strict` fails on
   warnings. Use it in CI
-- `claude plugin init <name> [--with …]`: Scaffold into `~/.claude/skills/<name>/`; components:
+- `claude plugin init <name> [--with …]`: Scaffold into `~/.claude/skills/<name>/`. Components:
   `skills agents hooks mcp lsp output-style channel`
 - `claude plugin tag [path]`: Create `<name>--v<version>` git tag, checking manifests agree
 - `claude plugin eval [target]`: Run eval cases against a plugin
@@ -120,7 +120,7 @@ restarting.
 - `~/.claude/plugins/marketplaces/<name>/`: Cloned marketplace repository
 - `~/.claude/skills/<name>/`: Unpackaged local plugins, loaded as `<name>@skills-dir`
 
-Installed plugin directories are recorded per-install; `claude plugin list` and
+Installed plugin directories are recorded per-install. `claude plugin list` and
 `claude plugin details <name>` report the resolved paths.
 
 ## Example

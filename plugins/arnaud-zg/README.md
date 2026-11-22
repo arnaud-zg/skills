@@ -1,13 +1,13 @@
 # arnaud-zg: Agent Skills for docs, tests, skills and reviews, in any coding agent
 
 `arnaud-zg` is a plugin for [Claude Code](https://claude.com/claude-code),
-[Codex](https://developers.openai.com/codex), [Cursor](https://cursor.com) and GitHub Copilot CLI
-that bundles [Agent Skills](https://code.claude.com/docs/en/skills) (`SKILL.md` folders): a skill
-linter, a [Diataxis](https://diataxis.fr/) documentation writer and checker, a first-principles
-simplifier, a Big O optimizer, one-minute briefs, sceptical audits, testing-trophy tests, session
-retros, a usage-window check and hexagonal architecture. They also install in any other agent the
-[skills CLI](https://github.com/vercel-labs/skills) supports, such as Gemini CLI and OpenCode. Each
-skill has its own tutorial, how-to guides, reference and explanation. MIT.
+[Codex](https://developers.openai.com/codex), [Cursor](https://cursor.com) and GitHub Copilot CLI.
+It bundles [Agent Skills](https://code.claude.com/docs/en/skills) (`SKILL.md` folders). They are a
+skill linter, a [Diataxis](https://diataxis.fr/) docs writer and checker, a simplifier and a Big O
+optimizer. The rest cover one-minute briefs, sceptical audits, testing-trophy tests, session retros,
+a usage-window check, hexagonal architecture and plain-language output. They also install in any
+other agent the [skills CLI](https://github.com/vercel-labs/skills) supports, such as Gemini CLI and
+OpenCode. Each skill has its own tutorial, how-to guides, reference and explanation. MIT.
 
 ```sh
 /plugin install arnaud-zg --marketplace arnaud-zg/skills
@@ -21,7 +21,7 @@ See [Install](#install) to pin a version or enable the plugin for a whole team.
 | Skill                                                                  | What it does                                                              | Call it                                                 | Needs                      |
 | ---------------------------------------------------------------------- | ------------------------------------------------------------------------- | ------------------------------------------------------- | -------------------------- |
 | [🧩 `hexagonal-skill-builder`](docs/hexagonal-skill-builder/README.md) | Writes and lints skills: named, small, resolves, tested                   | _check the skills_                                      | Node, read-only            |
-| [⬡ `hexagonal-architecture`](docs/hexagonal-architecture/README.md)    | Keeps the core free of its tools; flags outward imports                   | _use hexagonal architecture_                            | Node, read-only            |
+| [⬡ `hexagonal-architecture`](docs/hexagonal-architecture/README.md)    | Keeps the core free of its tools, flags outward imports                   | _use hexagonal architecture_                            | Node, read-only            |
 | [🧭 `doc-compass`](docs/doc-compass/README.md)                         | Writes Diataxis docs, checks links and stale decisions                    | _check the docs_, `/arnaud-zg:doc-compass audit docs`   | Node, read-only            |
 | [✂️ `radical-simplify`](docs/radical-simplify/README.md)               | Rebuilds a process, product or UI in six steps, from Question to Automate | _make this radically simpler_                           | Nothing, instructions only |
 | [⚡ `big-o-optimizer`](docs/big-o-optimizer/README.md)                 | Lowers the Big O, proven by your tests                                    | _make this O(n)_                                        | Nothing, instructions only |
@@ -33,7 +33,7 @@ See [Install](#install) to pin a version or enable the plugin for a whole team.
 | [🚢 `stack-and-ship`](docs/stack-and-ship/README.md)                   | Commits, opens and stacks PRs by your rules, never force-pushed           | _ship this_, `/arnaud-zg:stack-and-ship`                | Node, `gh`                 |
 | [🏆 `testing-trophy`](docs/testing-trophy/README.md)                   | Plans, writes and audits tests by the testing trophy                      | _audit the tests_, `/arnaud-zg:testing-trophy`          | Node, read-only            |
 
-The checkers print every finding with its file, line and fix, and exit `1` on a finding, so they
+The checkers print every finding with its file, line and fix. They exit `1` on a finding, so they
 gate CI and commit hooks as they are.
 
 ## Install
@@ -60,5 +60,5 @@ agent reads `SKILL.md`, not this page.
 
 ### In an agent other than Claude Code
 
-`${CLAUDE_SKILL_DIR}` means the skill's own folder; each `SKILL.md` that uses it says so.
-`usage-runway` reads Claude Code's transcripts only, so elsewhere it has nothing to measure yet.
+`${CLAUDE_SKILL_DIR}` means the skill's own folder. Each `SKILL.md` that uses it says so.
+`usage-runway` reads Claude Code's transcripts only. Elsewhere it has nothing to measure yet.

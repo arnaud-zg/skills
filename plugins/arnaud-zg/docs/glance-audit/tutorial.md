@@ -5,8 +5,8 @@
 
 **5 minutes, 4 steps: install, ask, check, read.**
 
-Five minutes. You will hand the skill a plan, watch its result get checked against the plan, and
-read the verdict glance-first draws.
+Five minutes. You will hand the skill a plan and watch its result get checked against the plan. Then
+you read the verdict glance-first draws.
 
 ## 1. Install the plugin
 
@@ -24,8 +24,8 @@ Audit plan.md and challenge its claims. Show it in the terminal.
 
 ## 3. Watch the result get checked
 
-Claude saves the plan as the source text, writes a JSON result in a scratch folder and runs the
-check on both. A first run often prints a quote that is not word for word:
+Claude saves the plan as the source text and writes a JSON result in a scratch folder. Then it runs
+the check on both. A first run often prints a quote that is not word for word:
 
 ```text
 AUDIT 1 to fix

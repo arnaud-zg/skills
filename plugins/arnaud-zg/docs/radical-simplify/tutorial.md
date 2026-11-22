@@ -27,8 +27,8 @@ approves anything over 50 euros, and the employee hears back about three weeks l
 The answer has one section per step:
 
 1. **Question**: a table of every element (each field, the print, the signature, the re-typing, the
-   second approval) with why it exists and a verdict. Expect most to be marked legacy, and the tax
-   rules to be kept, with finance named as their owner.
+   second approval). Each gets why it exists and a verdict. Expect most to be marked legacy. Expect
+   the tax rules to be kept, with finance named as their owner.
 2. **Remove**: printing, scanning and re-typing go. It says what breaks if anything does.
 3. **Simplify**: the form shrinks to what a receipt cannot tell you.
 4. **Reimagine**: a new flow, as steps or an ASCII sketch, for example a photo of the receipt and
@@ -41,8 +41,8 @@ Notice that automation comes last. Nothing that was removed in step 2 gets autom
 
 ## 4. Check the count and pick the first change
 
-The answer ends with a **before → after** line, counted from your description and from the proposal,
-and the one change to make first. Start there.
+The answer ends with a **before → after** line, counted from your description and from the proposal.
+It also names the one change to make first. Start there.
 
 ## Next
 

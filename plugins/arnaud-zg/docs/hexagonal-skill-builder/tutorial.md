@@ -4,8 +4,8 @@
 Tutorial** · [🛠️ How-to](how-to.md) · [📖 Reference](reference.md) ·
 [💡 Explanation](explanation.md)
 
-Ten minutes. You will write a skill with two mistakes in it, watch the check find both, fix them,
-and get a clean result.
+Ten minutes. You will write a skill with two mistakes in it and watch the check find both. Then you
+fix them and get a clean result.
 
 ```mermaid
 flowchart LR
