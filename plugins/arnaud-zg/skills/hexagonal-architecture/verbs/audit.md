@@ -15,4 +15,6 @@
 5. **Rank the findings**: an outward import first, then a smell that blocks swapping an adapter,
    then the rest. Each gets its file, its line and its fix.
 
-Hand back the check's counts line, the ranked findings, and the one change to make first.
+Hand back the check's counts line, the ranked findings, and the one change to make first. Write the
+findings at standard level and the change at strict, by
+[plain-language](../../plain-language/SKILL.md) if installed.
