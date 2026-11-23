@@ -1,7 +1,8 @@
 #!/usr/bin/env node
 // Checks an audit result against the source it audits, before it is presented. A finding is kept
 // only when it passes the three tests, every critical one is kept, only the most severe lead, and
-// every comment quotes one passage the source text holds. `domain/result.md` is the page these
+// every comment quotes one passage the source text holds and says how sure the audit is of it.
+// `domain/result.md` is the page these
 // rules hold, and `domain/lenses.md` owns the keep rule.
 //
 //   node ${CLAUDE_SKILL_DIR}/scripts/check-audit.mjs <audit.json> <source.txt>
@@ -27,20 +28,26 @@ export const TYPES = ["Challenge", "Ask", "Suggest", "Reply"];
 export const GROUPS = ["post first", "good to ask", "reply", "more"];
 /** @type {(string | undefined)[]} */
 export const TAGS = ["already raised", "can wait"];
+export const PARTS = ["Problem", "Proposal", "Example"];
 export const LIMITS = {
   keptWithoutCritical: 2,
   goodToAsk: 3,
   good: 3,
   sentences: 4,
+  partSentences: 2,
   quoteWords: 4,
   quoteCharacters: 20,
+  confidenceMin: 1,
+  confidenceMax: 10,
+  confidenceWhySentences: 3,
 };
 
 /**
  * @typedef {{ field: string, message: string, fix: string }} Finding
  * @typedef {{ real?: boolean, covered?: boolean, raised?: boolean }} Tests
  * @typedef {{ title?: string, severity?: string, evidence?: string, tests?: Tests, kept?: boolean, tag?: string }} Item
- * @typedef {{ type?: string, group?: string, quote?: string, text?: string, after?: string }} Comment
+ * @typedef {{ score?: number, why?: string }} Confidence
+ * @typedef {{ type?: string, group?: string, quote?: string, text?: string, after?: string, confidence?: Confidence }} Comment
  * @typedef {{ asked?: string, answer?: string }} Question
  * @typedef {{ verdict?: string, findings?: Item[], comments?: Comment[], good?: string[], questions?: Question[] }} Audit
  */
@@ -191,23 +198,69 @@ function groupFindings(comment, field) {
   return [finding(`${field}.group`, "post first holds a challenge and its edit", "move it")];
 }
 
-/** @param {unknown} text @param {string} field @returns {Finding[]} */
-function textFindings(text, field) {
+// A Challenge or an Ask has three lines, so a reader sees the problem, the fix and a case at once.
+// A Suggest shows its own before and after, and a Reply answers first, so both keep the short rule.
+/** @param {string} text @param {string} field @returns {Finding[]} */
+function partsFindings(text, field) {
+  const lines = text
+    .split("\n")
+    .map((line) => line.trim())
+    .filter(Boolean);
+  const labels = lines.map((line) => line.split(":")[0]);
+  if (
+    labels.join() !== PARTS.join() ||
+    lines.some((line) => !isText(line.split(":").slice(1).join(":")))
+  ) {
+    const fix = `write ${PARTS.map((part) => `"${part}: ..."`).join(", then ")}, one per line`;
+    return [finding(field, `must be ${PARTS.join(", ")} in that order`, fix)];
+  }
+  const long = lines.filter((line) => sentencesIn(line) > LIMITS.partSentences);
+  return long.length > 0
+    ? [finding(field, `has a part over ${LIMITS.partSentences} sentences`, "cut it")]
+    : [];
+}
+
+/** @param {unknown} text @param {string | undefined} type @param {string} field @returns {Finding[]} */
+function textFindings(text, type, field) {
   if (!isText(text)) return [finding(field, "is missing", "write the comment")];
+  if (type === "Challenge" || type === "Ask") return partsFindings(text, field);
   if (sentencesIn(text) <= LIMITS.sentences) return [];
   return [finding(field, `is over ${LIMITS.sentences} sentences`, "cut it")];
+}
+
+// Every comment says how sure the audit is of it: a score from 1 to 10 in halves, and the reason,
+// which names what was checked and what holds the score back.
+/** @param {Confidence | undefined} confidence @param {string} field @returns {Finding[]} */
+function confidenceFindings(confidence, field) {
+  const { confidenceMin: min, confidenceMax: max, confidenceWhySentences: most } = LIMITS;
+  const { score, why } = confidence ?? {};
+  const fits =
+    typeof score === "number" && score >= min && score <= max && Number.isInteger(score * 2);
+  return [
+    ...(fits
+      ? []
+      : [
+          finding(`${field}.score`, `must be ${min} to ${max}, in halves`, "rate how sure you are"),
+        ]),
+    ...(isText(why)
+      ? sentencesIn(why) > most
+        ? [finding(`${field}.why`, `is over ${most} sentences`, "cut it")]
+        : []
+      : [finding(`${field}.why`, "is missing", "say what was checked and what holds it back")]),
+  ];
 }
 
 /** @param {Comment | undefined} comment @param {number} index @param {string} source @returns {Finding[]} */
 function commentFindings(comment, index, source) {
   const field = `comments[${index}]`;
   return [
+    ...confidenceFindings(comment?.confidence, `${field}.confidence`),
     ...(TYPES.includes(comment?.type)
       ? []
       : [finding(`${field}.type`, `must be one of ${TYPES.join(", ")}`, "pick its kind")]),
     ...groupFindings(comment, field),
     ...quoteFindings(comment?.quote, source, `${field}.quote`),
-    ...textFindings(comment?.text, `${field}.text`),
+    ...textFindings(comment?.text, comment?.type, `${field}.text`),
     ...(comment?.type === "Suggest" && !isText(comment?.after)
       ? [finding(`${field}.after`, "is missing", "write the new wording")]
       : []),

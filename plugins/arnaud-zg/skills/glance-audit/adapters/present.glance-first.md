@@ -51,7 +51,7 @@ elsewhere it is drawn as text to select.
 
 - A comment's `copy` label is its type and the start of its quote:
   `Challenge, on "makes a breaking change"`. Its text is the comment, and for a Suggest, "Before:"
-  the quote and "After:" the new wording.
+  the quote and "After:" the new wording. Its `score` and `why` are the comment's `confidence`.
 - A fold entry's text joins its items with semicolons. The fold is proof: a point the reader must
   act on is a block, never folded.
 

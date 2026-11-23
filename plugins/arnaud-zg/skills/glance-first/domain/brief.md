@@ -15,7 +15,7 @@ the form. [scripts/check-brief.mjs](../scripts/check-brief.mjs) holds these limi
 | `heading`    | what the block is about                                                                                | 6 words                                                                     |
 | `line`       | the one sentence the picture proves                                                                    | 15 words                                                                    |
 | `picture`    | `{kind: "mermaid", source}`, `{kind: "table", rows}`, `{kind: "image", src, alt}`, or `{kind: "none"}` | tables: 3 columns; images: `alt`; never `none` in the first block           |
-| `copy`       | `{label, text}` snippets a reader may want to paste                                                    | both fields filled                                                          |
+| `copy`       | `{label, text}` snippets a reader may want to paste, plus `score` and `why` when the author is rated   | both fields filled; `score` 1 to 10 in halves, always with its `why`        |
 | `fold`       | `{heading, text}` entries, collapsed, outside the minute                                               | 2 entries                                                                   |
 | `sources`    | `read` (a list, not empty), `notRead` (a list, `[]` when nothing), `notTested` (text)                  | all three                                                                   |
 | `convention` | optional: a caller's own format, held on top of the brief (below)                                      | its sections fit the blocks                                                 |

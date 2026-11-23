@@ -14,7 +14,7 @@
 | `verdict`   | one line, answer first                                                 |
 | `good`      | 3 at most                                                              |
 | `findings`  | `{title, severity, evidence, tests, kept}`, plus `tag` when left out   |
-| `comments`  | `{type, group, quote, text}`, plus `after` for a Suggest               |
+| `comments`  | `{type, group, quote, text, confidence}`, plus `after` for a Suggest   |
 | `questions` | `{asked, answer}`, both filled                                         |
 | `sources`   | `read` (list), `notRead` (list, `[]` when nothing), `notTested` (text) |
 
@@ -36,7 +36,8 @@ one left out.
 | `more`        | Ask                | none                                |
 
 A `quote` is copied exactly (only spacing may differ). It holds at least 4 words or 20 characters.
-It occurs once in the source text. `text` is 4 sentences at most.
+It occurs once in the source text. A Challenge or an Ask has three lines, `Problem:`, `Proposal:`
+and `Example:`, two sentences at most each. A Suggest or a Reply is 4 sentences at most.
 
 ## Check
 

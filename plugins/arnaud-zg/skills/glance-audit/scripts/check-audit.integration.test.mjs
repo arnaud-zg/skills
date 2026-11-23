@@ -52,7 +52,15 @@ const good = {
       type: "Challenge",
       group: "post first",
       quote: "makes a breaking change between the two apps impossible",
-      text: "Does this hold when the two apps are released on different days? Both incidents broke at release.",
+      text: [
+        "Problem: Both incidents broke at release, after this check had passed.",
+        "Proposal: Compare against the version live in production, before each release.",
+        "Example: App A ships on Monday and app B on Thursday, so Monday's check never sees B's change.",
+      ].join("\n"),
+      confidence: {
+        score: 8.5,
+        why: "Both incidents show it. Nobody has run the check at release.",
+      },
     },
     {
       type: "Suggest",
@@ -60,12 +68,14 @@ const good = {
       quote: "compares their schemas before merge",
       text: "Say which version the check compares against.",
       after: "compares their schemas with the version live in production, before each release",
+      confidence: { score: 7, why: "The wording fixes the gap. It was not tried on a release." },
     },
     {
       type: "Reply",
       group: "reply",
       quote: "could the reader say whether the registry keeps two versions?",
       text: "It keeps two. Not checked on our setup.",
+      confidence: { score: 6, why: "Read in the registry docs, not tried on our setup." },
     },
   ],
   questions: [{ asked: "Does the registry keep two versions?", answer: "Yes, two" }],
@@ -279,31 +289,101 @@ describe("the comments", () => {
     assert.deepEqual(fieldsOf(findings), ["comments[0].text"]);
   });
 
+  it("given a comment with no confidence, then the score and the reason are asked for", () => {
+    const findings = validateAudit(withComment({ confidence: undefined }), source);
+    assert.deepEqual(fieldsOf(findings), [
+      "comments[0].confidence.score",
+      "comments[0].confidence.why",
+    ]);
+  });
+
+  it("given a score outside 1 to 10, or not in halves, then it is asked for again", () => {
+    for (const score of [0, 11, 7.3, "high", undefined]) {
+      const findings = validateAudit(
+        withComment({ confidence: { score, why: "Checked." } }),
+        source,
+      );
+      assert.deepEqual(fieldsOf(findings), ["comments[0].confidence.score"], String(score));
+    }
+  });
+
+  it("given a score in halves from 1 to 10, then it holds", () => {
+    for (const score of [1, 5.5, 8.5, 10]) {
+      const findings = validateAudit(
+        withComment({ confidence: { score, why: "Checked." } }),
+        source,
+      );
+      assert.deepEqual(findings, [], String(score));
+    }
+  });
+
+  it("given a score with no reason, then the reason is asked for", () => {
+    const findings = validateAudit(withComment({ confidence: { score: 8, why: "" } }), source);
+    assert.deepEqual(fieldsOf(findings), ["comments[0].confidence.why"]);
+  });
+
+  it("given a reason of four sentences, then it is cut to three", () => {
+    const why = "One. Two. Three. Four.";
+    const findings = validateAudit(withComment({ confidence: { score: 8, why } }), source);
+    assert.deepEqual(fieldsOf(findings), ["comments[0].confidence.why"]);
+  });
+
+  it("given a challenge that is not Problem, Proposal, Example in order, then the three parts are asked for", () => {
+    for (const text of [
+      "Does this hold when the apps ship apart?",
+      "Proposal: Compare in production.\nProblem: It breaks.\nExample: Monday.",
+      "Problem: It breaks.\nProposal: Compare in production.",
+      "Problem: It breaks.\nProposal:\nExample: Monday.",
+    ]) {
+      const findings = validateAudit(withComment({ text }), source);
+      assert.deepEqual(fieldsOf(findings), ["comments[0].text"], text);
+    }
+  });
+
+  it("given an ask with the three parts, then it holds", () => {
+    const text = "Problem: It breaks.\nProposal: Compare in production.\nExample: Monday.";
+    const audit = withComment({ type: "Ask", group: "good to ask", text });
+    assert.deepEqual(validateAudit(audit, source), []);
+  });
+
+  it("given a part of three sentences, then it is cut to two", () => {
+    const text = "Problem: One. Two. Three.\nProposal: Fix it.\nExample: Monday.";
+    assert.deepEqual(fieldsOf(validateAudit(withComment({ text }), source)), ["comments[0].text"]);
+  });
+
+  it("given a suggest in free text, then it keeps the short rule and holds", () => {
+    const findings = validateAudit(withComment({ text: "Name the version." }, 1), source);
+    assert.deepEqual(findings, []);
+  });
+
   it("given a comment in no known group, then it names where it belongs", () => {
     const findings = validateAudit(withComment({ group: "later" }), source);
     assert.deepEqual(fieldsOf(findings), ["comments[0].group"]);
   });
 
-  it("given a comment of five sentences, then it is cut to four", () => {
-    const findings = validateAudit(withComment({ text: "One. Two. Three. Four. Five." }), source);
-    assert.deepEqual(fieldsOf(findings), ["comments[0].text"]);
+  it("given a reply of five sentences, then it is cut to four", () => {
+    const findings = validateAudit(
+      withComment({ text: "One. Two. Three. Four. Five." }, 2),
+      source,
+    );
+    assert.deepEqual(fieldsOf(findings), ["comments[2].text"]);
   });
 
   it("given five sentences split by line breaks, then they still count as five", () => {
-    const findings = validateAudit(withComment({ text: "One\nTwo\nThree\nFour\nFive" }), source);
-    assert.deepEqual(fieldsOf(findings), ["comments[0].text"]);
+    const findings = validateAudit(withComment({ text: "One\nTwo\nThree\nFour\nFive" }, 2), source);
+    assert.deepEqual(fieldsOf(findings), ["comments[2].text"]);
   });
 
   it("given five sentences ending in an ellipsis character, then they still count as five", () => {
     const text = "One… Two… Three… Four… Five…";
-    const findings = validateAudit(withComment({ text }), source);
-    assert.deepEqual(fieldsOf(findings), ["comments[0].text"]);
+    const findings = validateAudit(withComment({ text }, 2), source);
+    assert.deepEqual(fieldsOf(findings), ["comments[2].text"]);
   });
 
   it("given five sentences ending inside quotes or brackets, then they still count as five", () => {
     const text = 'It says "one." It says "two." It says (three.) It says four. It says five.';
-    const findings = validateAudit(withComment({ text }), source);
-    assert.deepEqual(fieldsOf(findings), ["comments[0].text"]);
+    const findings = validateAudit(withComment({ text }, 2), source);
+    assert.deepEqual(fieldsOf(findings), ["comments[2].text"]);
   });
 
   it("given an ask under post first, then post first holds only a challenge and its edit", () => {

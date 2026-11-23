@@ -58,6 +58,21 @@ This page owns it, and [scripts/check-audit.mjs](../scripts/check-audit.mjs) hol
 - A kept point is never less severe than one that passed and was left out.
 - Every other point that passed is left out with the tag _can wait_.
 
+## Confidence
+
+Every comment carries a score the reader can use to choose what to post. Score the comment, not the
+finding: how sure are you that it is right and not already answered?
+
+| Score | When                                                                   |
+| ----- | ---------------------------------------------------------------------- |
+| 9-10  | verified by a document, a run or a test you did; nothing left to check |
+| 7-8   | follows from the source text; one premise is untested                  |
+| 5-6   | your judgement, or a part you did not read could answer it             |
+| 1-4   | a hunch: drop the comment, or turn it into an Ask                      |
+
+The `why` names what was checked and what holds the score back, such as an unread comment or an
+untested premise. A score is never higher than the evidence in the finding it comes from.
+
 ## Proof
 
 - Every claim in the result traces to a source you read, or says it is your judgement.

@@ -16,7 +16,11 @@
       "type": "Challenge",
       "group": "post first",
       "quote": "makes a breaking change between the two apps impossible",
-      "text": "Does this hold when the two apps are released on different days?"
+      "text": "Problem: The check runs at merge, but both incidents broke at release. I am not sure it would have stopped them.\nProposal: I think we could compare against the version live in production before each release.\nExample: App A ships on Monday and app B on Thursday. Monday's check never sees B's change, so users get a broken page on Thursday.",
+      "confidence": {
+        "score": 8.5,
+        "why": "Both incidents show it. The check was not run at release."
+      }
     }
   ],
   "questions": [],

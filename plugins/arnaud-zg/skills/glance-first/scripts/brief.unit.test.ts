@@ -94,6 +94,32 @@ describe("the shape of the read", () => {
   });
 });
 
+describe("a copy snippet's confidence", () => {
+  const snippet = (over = {}) => ({ label: "Reply", text: "Not today.", ...over });
+  const check = (copy) => fields(validateBrief(brief({ blocks: [block({ copy: [copy] })] })));
+
+  it("given a score from 1 to 10 in halves and its reason, then there is no finding", () => {
+    for (const score of [1, 5.5, 8.5, 10]) {
+      assert.deepEqual(check(snippet({ score, why: "Checked in the docs." })), [], String(score));
+    }
+  });
+
+  it("given a score outside 1 to 10, or not in halves, then the score is named", () => {
+    for (const score of [0, 11, 7.3, "high"]) {
+      const found = check(snippet({ score, why: "Checked." }));
+      assert.deepEqual(found, ["blocks[0].copy[0].score"], String(score));
+    }
+  });
+
+  it("given a score with no reason, then the reason is named", () => {
+    assert.deepEqual(check(snippet({ score: 8 })), ["blocks[0].copy[0].why"]);
+  });
+
+  it("given a reason with no score, then the score is named", () => {
+    assert.deepEqual(check(snippet({ why: "Checked." })), ["blocks[0].copy[0].score"]);
+  });
+});
+
 describe("the target", () => {
   it("given no target, then it asks the caller to name one rather than guessing", () => {
     const finding = findingFor(validateBrief(brief({ target: undefined })), "target");
