@@ -87,7 +87,7 @@ function blockTexts(block, index) {
     [`${field}.heading`, block?.heading],
     [`${field}.line`, block?.line],
     ...pictureTexts(block?.picture, `${field}.picture`),
-    ...pairTexts(block?.copy, `${field}.copy`, ["label", "text"]),
+    ...pairTexts(block?.copy, `${field}.copy`, ["label", "text", "why"]),
   ];
 }
 

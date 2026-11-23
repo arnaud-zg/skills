@@ -47,8 +47,10 @@ help." The kept point is presented as the one worth raising, never as a fix that
 | Suggest   | reword the one sentence that is wrong     | the quote is the before; `after` holds the new wording       |
 | Reply     | answer a question addressed to the reader | the answer first, then one limit: "not checked on our setup" |
 
-A comment is `{type, group, quote, text}`, plus `after` for a Suggest. Group them so the reader
-never ranks them:
+A comment is `{type, group, quote, text, confidence}`, plus `after` for a Suggest. The `confidence`
+is `{score, why}`: the score is 1 to 10 in halves, and the `why` is three sentences at most. It
+names what was checked and what holds the score back, as in [lenses.md](lenses.md#confidence). Group
+the comments so the reader never ranks them:
 
 | Group         | Holds                                                        | Limit                                  |
 | ------------- | ------------------------------------------------------------ | -------------------------------------- |
@@ -63,14 +65,21 @@ Rules for every comment, all held by the check:
   punctuation. Only line breaks and spacing may differ.
 - The passage is at least 4 words or 20 characters, and occurs once in the source text, so the
   reader can place it. If it occurs twice, quote more of it.
-- `text` is four sentences at most: the question or claim, why it matters, what you suggest. A line
-  break ends a sentence too.
+- A Challenge or an Ask is three lines, one per part, in this order: `Problem:` what is wrong and
+  why it matters, `Proposal:` what to do instead, `Example:` one concrete case with real values.
+  Each line is two sentences at most.
+- A Suggest or a Reply is four sentences at most. A Suggest shows its own before and after, and a
+  Reply answers first. A line break ends a sentence too.
 
 And for the words:
 
 - Challenge the claim, not the author. Ask for a walk-through or evidence instead of "this is
   wrong".
 - Write in the source's own words. If you use simpler names, say so.
+- Write a comment as the author talking to a teammate: first person ("I think we could", "I am not
+  sure"), short sentences, plain words. Hedge when the audit is unsure; the score says how much.
+- Write the `Example` from the product's side: what a person sees, with numbers, such as the figure
+  on a screen or what a user gets. Never the internals of how the system works.
 
 ## An example
 
@@ -96,7 +105,11 @@ because it compares their schemas before merge.", this result prints `AUDIT OK`:
       "type": "Challenge",
       "group": "post first",
       "quote": "makes a breaking change between the two apps impossible",
-      "text": "Does this hold when the two apps are released on different days?"
+      "text": "Problem: The check runs at merge, but both incidents broke at release. I am not sure it would have stopped them.\nProposal: I think we could compare against the version live in production before each release.\nExample: App A ships on Monday and app B on Thursday. Monday's check never sees B's change, so users get a broken page on Thursday.",
+      "confidence": {
+        "score": 8.5,
+        "why": "Both incidents show it. The check was not run at release."
+      }
     }
   ],
   "questions": [],

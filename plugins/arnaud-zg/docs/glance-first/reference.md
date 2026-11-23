@@ -21,16 +21,17 @@ code. Without plain-language, it prints `plain-language not installed, style not
 
 ## Brief fields
 
-| Field        | Limit                                                                |
-| ------------ | -------------------------------------------------------------------- |
-| `title`      | 4 words                                                              |
-| `target`     | `artifact`, `pr-description`, `terminal` or `markdown`               |
-| `tldr`       | 25 words                                                             |
-| `numbers`    | 0 to 4 `{value, label}`. Use `[]` only when the work holds no figure |
-| `blocks`     | 1 to 4, each `heading` (6 words), `line` (15), `picture`, `copy`     |
-| `fold`       | 2 entries, outside the minute                                        |
-| `sources`    | `read`, `notRead`, `notTested`, all three                            |
-| `convention` | optional: `lead`, `headings`, `picture`, `banned`, `footer`          |
+| Field        | Limit                                                                 |
+| ------------ | --------------------------------------------------------------------- |
+| `title`      | 4 words                                                               |
+| `target`     | `artifact`, `pr-description`, `terminal` or `markdown`                |
+| `tldr`       | 25 words                                                              |
+| `numbers`    | 0 to 4 `{value, label}`. Use `[]` only when the work holds no figure  |
+| `blocks`     | 1 to 4, each `heading` (6 words), `line` (15), `picture`, `copy`      |
+| `copy`       | `{label, text}`, plus `score` (1 to 10, in halves) and `why` together |
+| `fold`       | 2 entries, outside the minute                                         |
+| `sources`    | `read`, `notRead`, `notTested`, all three                             |
+| `convention` | optional: `lead`, `headings`, `picture`, `banned`, `footer`           |
 
 The read is at most 200 words: title, TLDR, numbers, headings, lines and table cells. Chart source,
 images, copy snippets and the fold are looked at, not read.

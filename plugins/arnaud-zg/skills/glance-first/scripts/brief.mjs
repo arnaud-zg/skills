@@ -172,6 +172,31 @@ function pairFindings(entries, field, first, second) {
   );
 }
 
+// A copy snippet may say how sure its author is: a score from 1 to 10 in halves, and the reason.
+/** @param {any} entries @param {string} field @returns {Finding[]} */
+function copyFindings(entries, field) {
+  return [
+    ...pairFindings(entries, field, "label", "text"),
+    ...listOf(entries).flatMap((entry, index) => {
+      const at = `${field}[${index}]`;
+      const hasScore = entry?.score !== undefined;
+      if (!hasScore && entry?.why === undefined) return [];
+      const fits = Number.isInteger(entry?.score * 2) && entry.score >= 1 && entry.score <= 10;
+      return [
+        ...(hasScore && !fits
+          ? [finding(`${at}.score`, "must be 1 to 10, in halves", "rate it, such as 8.5")]
+          : []),
+        ...(hasScore && !isText(entry?.why)
+          ? [finding(`${at}.why`, "is missing", "say what was checked and what holds it back")]
+          : []),
+        ...(!hasScore
+          ? [finding(`${at}.score`, "is missing", "give the score, or drop the why")]
+          : []),
+      ];
+    }),
+  ];
+}
+
 // A heading a convention requires is the caller's wording, so the word cap does not apply to it.
 /** @param {any} heading @param {string} field @param {Set<string>} required */
 function headingFindings(heading, field, required) {
@@ -186,7 +211,7 @@ function blockFindings(block, target, index, required) {
     ...headingFindings(block?.heading, `${field}.heading`, required),
     ...wordLimit(`${field}.line`, block?.line, LIMITS.line),
     ...pictureFindings(block, target, `${field}.picture`),
-    ...pairFindings(block?.copy, `${field}.copy`, "label", "text"),
+    ...copyFindings(block?.copy, `${field}.copy`),
   ];
 }
 
